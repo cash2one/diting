@@ -1,0 +1,293 @@
+{% extends "web/success_layout.html" %}
+{% block style %}
+<style>
+	.layui-layer-Treaty .layui-layer-content{
+		height:300px;
+	}
+	.layui-layer-Treaty .layui-layer-content h4{
+		color:#00C4C2
+	}
+	.layui-layer-Treaty .layui-layer-content p{
+		text-indent: 1em;
+	}
+	.layui-layer-Treaty .layui-layer-btn {
+		text-align: center;padding:10px;
+	}
+</style>
+{% endblock %}
+{% block main %}
+			<!--左侧菜单栏-->
+		<menu class="left_menu" style="height: 740px;">
+			<span>
+		       
+		        <div id="_menu">
+		            <ul class="menu">
+
+	                    <li class="basic_data">
+	                    	<a href="/company-info"><span>账户设置</span></a>
+	                    </li>
+
+		                <li class="pwd_reset">
+		                	<a href="/pwd-change"><span>密码重置</span></a>
+	                    </li>
+
+		                <li class="station-message">
+		                	<a href="/station-message"><span>站内消息</span></a>
+	                    </li>
+
+						<li class="aboutTransaction">
+		                	<a href="/aboutTransaction"><span>交易管理</span></a>
+	                    </li>
+						<li><a href="/questions/answers/statistics"><span>用户管理</span></a></li>
+						<li>
+							<a {% if loginInfo.shortDomainName == None %} href="/robot-company/{{ loginInfo.uniqueId }}" {% else %} href="/r/{{ loginInfo.shortDomainName }}"{% endif %} ><span>我的机器人</span></a>
+						</li>
+
+		            </ul>
+		        </div>
+		    </span>    
+	    </menu>
+		<!--==右侧内容区==============-->
+		<div class="mains" style="overflow-y: auto">
+			<div style="height: 700px;">
+				<div id="form" class="form" style="margin: 40px 60px;width: 630px;">
+					<div class="transNav">
+						<input id="point0" style="background: #00c4c2;" type="button" value="点数充值" onclick="point0Trans()"/>
+						<input id="order0" type="button" value="订单记录" onclick="order0Trans()"/>
+						<input id="transfer0" type="button" value="转让平行人" onclick="transfer0Trans()"/>
+						<div style="clear: both"></div>
+					</div>
+					<!--点数充值-->
+					<div id="payNav0" >
+						<div style="display: none">
+							<input id="body0" type="text" readonly value="充值商品一">
+							<input id="order_price0" type="text" readonly value="200">
+							<input id="order_dian0" type="text" readonly value="20000">
+
+						</div>
+						<p class="transP">剩余点数：<span >{{ loginInfo.balance }}</span></p>
+						<p class="transP">充值套餐</p>
+						<div class="transRadio0">
+							<div class="transRadio">
+								<input type="radio" id="pay200" checked="checked" alt="充值商品一" name="pay" data-dian="20000" value="200">
+								<label name="pay200" for="pay200">20000点/200元</label>
+							</div>
+							<div>
+								<input type="radio" id="pay2000" name="pay"  alt="充值商品二" data-dian="400000" value="2000">
+								<label name="pay2000" for="pay2000">400000点/2000元</label>
+							</div>
+							<div>
+								<input type="radio" id="pay20001" name="pay"  alt="充值商品三" data-dian="4000000点" value="10000">
+								<label name="pay20001" for="pay20001">4000000点/10000元</label>
+							</div>
+							<div>
+								<input type="radio" id="pay20002" name="pay"  alt="充值商品四" data-dian="30000000" value="50000">
+								<label name="pay20002" for="pay20002">30000000点/50000元</label>
+							</div>
+							<div>
+								<input type="radio" id="pay20003" name="pay"  alt="充值商品五" data-dian="100000000" value="100000">
+								<label name="pay20003" for="pay20003">100000000点/100000元</label>
+							</div><div style="clear: both"></div>
+						</div>
+						<p class="transP">应付金额：<b id="payMoney">200元</b></p>
+						<p class="transP">支付方式：<img src="static/images/weixinicon.png" style=" display: inline-block;width: 45px;"></p>
+						<p ><input style=" width: 16px;height: 16px;" type="checkbox" checked="checked" data="unselected" id="checkbox" alt="selected"><a href="javascript:void(0);" onclick="layer.alert('充值点数1点=0.02元<br/>1.点数可以用来购买北京谛听机器人科技有限公司的所有服务。<br/>2.点数仅能用于北京谛听机器人科技有限公司直接运营的产品和服务，不能兑换成现金，不能进行转账交易，不能用于北京谛听机器人科技有限公司体系外的产品和服务。<br/>3.点数充值业务不支持退货服务。',{title:'服务条款'})">服务条款</a></p>
+						<p style="color: red;font-size: 12px;margin-top: 10px;">充值即同意服务条款</p>
+						<input id="btn_reg0" type="button" value="充值" onclick="payTransWX()"/>
+					</div>
+					<!--订单记录-->
+					<div id="payOrderNav0" style="display: none">
+						<br/>
+						<div >
+							<input type="button" value="交易时间查询" style="padding: 5px 17px;color: #fff; background: #999; border: 1px solid #999;"><input style="width: 176px;padding: 5px" class=" date-picker" type="text" id="orderDate" name="orderDate" readonly="readonly" value="">
+							<input type="button" value="订单号查询" style="margin-left:-5px;padding: 5px 35px;color: #fff;background: #999; border: 1px solid #999;"><input style="width: 176px;padding: 5px" class="orderNumber" type="text" id="orderNumber" name="orderNumber" value="">
+						</div>
+						<div style="display: none;">
+							<input type="text" id="pageNo" value="" />
+						</div>
+						<br/>
+						<!--===============-->
+						<div style="overflow-y:auto;height: 445px;overflow-x: hidden; ">
+							<table border="1" cellpadding="0" cellspacing="0" id="orders0" >
+								<tr>
+									<th style="width: 90px;">交易日期</th>
+									<th style="width: 90px;">交易类型</th>
+									<th style="width: 90px;">支付方式</th>
+									<th style="width: 100px;">收款方</th>
+									<th style="width: 100px;">付款金额</th>
+									<th >订单号</th>
+								</tr>
+								<tr>
+									<td>2017/3/7</td>
+									<td>充值点数</td>
+									<td>微信支付</td>
+									<td>北京谛听机器人科技有限公司</td>
+									<td>¥100000</td>
+									<td>1456654654564654654564654654456</td>
+								</tr>
+								<tr>
+									<td>2017/3/7</td>
+									<td>充值点数</td>
+									<td>微信支付</td>
+									<td>北京谛听机器人科技有限公司</td>
+									<td>¥100000</td>
+									<td>1456654654564654654564654654456</td>
+								</tr><tr>
+								<td>2017/3/7</td>
+								<td>充值点数</td>
+								<td>微信支付</td>
+								<td>北京谛听机器人科技有限公司</td>
+								<td>¥100000</td>
+								<td>1456654654564654654564654654456</td>
+							</tr><tr>
+								<td>2017/3/7</td>
+								<td>充值点数</td>
+								<td>微信支付</td>
+								<td>北京谛听机器人科技有限公司</td>
+								<td>¥100000</td>
+								<td>1456654654564654654564654654456</td>
+							</tr><tr>
+								<td>2017/3/7</td>
+								<td>充值点数</td>
+								<td>微信支付</td>
+								<td>北京谛听机器人科技有限公司</td>
+								<td>¥100000</td>
+								<td>1456654654564654654564654654456</td>
+							</tr><tr>
+								<td>2017/3/7</td>
+								<td>充值点数</td>
+								<td>微信支付</td>
+								<td>北京谛听机器人科技有限公司</td>
+								<td>¥100000</td>
+								<td>1456654654564654654564654654456</td>
+							</tr><tr>
+								<td>2017/3/7</td>
+								<td>充值点数</td>
+								<td>微信支付</td>
+								<td>北京谛听机器人科技有限公司</td>
+								<td>¥100000</td>
+								<td>1456654654564654654564654654456</td>
+							</tr><tr>
+								<td>2017/3/7</td>
+								<td>充值点数</td>
+								<td>微信支付</td>
+								<td>北京谛听机器人科技有限公司</td>
+								<td>¥100000</td>
+								<td>1456654654564654654564654654456</td>
+							</tr><tr>
+								<td>2017/3/7</td>
+								<td>充值点数</td>
+								<td>微信支付</td>
+								<td>北京谛听机器人科技有限公司</td>
+								<td>¥100000</td>
+								<td>1456654654564654654564654654456</td>
+							</tr><tr>
+								<td>2017/3/7</td>
+								<td>充值点数</td>
+								<td>微信支付</td>
+								<td>北京谛听机器人科技有限公司</td>
+								<td>¥100000</td>
+								<td>1456654654564654654564654654456</td>
+							</tr><tr>
+								<td>2017/3/7</td>
+								<td>充值点数</td>
+								<td>微信支付</td>
+								<td>北京谛听机器人科技有限公司</td>
+								<td>¥100000</td>
+								<td>1456654654564654654564654654456</td>
+							</tr><tr>
+								<td>2017/3/7</td>
+								<td>充值点数</td>
+								<td>微信支付</td>
+								<td>北京谛听机器人科技有限公司</td>
+								<td>¥100000</td>
+								<td>1456654654564654654564654654456</td>
+							</tr><tr>
+								<td>2017/3/7</td>
+								<td>充值点数</td>
+								<td>微信支付</td>
+								<td>北京谛听机器人科技有限公司</td>
+								<td>¥100000</td>
+								<td>1456654654564654654564654654456</td>
+							</tr><tr>
+								<td>2017/3/7</td>
+								<td>充值点数</td>
+								<td>微信支付</td>
+								<td>北京谛听机器人科技有限公司</td>
+								<td>¥100000</td>
+								<td>1456654654564654654564654654456</td>
+							</tr>
+							</table>
+						</div>
+						<div id="shopss">
+							<div id="red" style="width: 625px;border:1px solid #ccc;" class="pager red" >
+
+								<ul id="pages">
+									<li>
+										<a id="1" class="red normal active" href="javascript:void(0)">1</a>
+									</li>
+									<li>
+										<a id="2" class="red normal" href="javascript:void(0)">2</a>
+									</li>
+									<li>
+										<a id="3" class="red normal" href="javascript:void(0)">3</a>
+									</li>
+									<li>
+										<a id="4" class="red normal" href="javascript:void(0)">4</a>
+									</li>
+								</ul>
+								<!--<div class="btn disabled">首页</div>-->
+								<div class="btn disabled">上一页</div>
+								<div class="btn">下一页</div>
+								<!--<div class="btn">尾页</div>-->
+								<div class="short"><input type="text"><input type="button" value="跳转" class="btn"></div>
+							</div>
+						</div>
+					</div>
+					<!--平行人转让-->
+					<div id="robotTransfer0" style="display: none">
+						<p class="transP">官方估价：<i style="background: url('/static/images/YearRankbj3.png') no-repeat;background-size: 33px;width: 40px;height: 28px; display: -webkit-inline-box;"></i><b style="margin-right: 100px">{{ loginInfo.robotVal }}</b>卖方自估：<i style="background: url(/static/images/YearRankbj3.png) no-repeat;background-size: 33px;width: 40px;height: 28px; display: -webkit-inline-box;"></i><input type="text" id="" value="" style="width: 100px;height: 36px;"/> </p>
+						<p class="transP">联系方式：<input type="text" placeholder="微信号、手机号" value="" style="width: 364px;height: 36px;text-indent: 1em;"></p>
+						<p>注：1.我的估价金额高低不得超越官方估价50%。<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.请保留好线下交易截图，收付款方式、到账情况及对话信息。<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.每日只能估价三次。
+						</p>
+						<p class="transP"><input id="Treaty" style="width: 16px;height: 16px;" type="checkbox" checked/><a href="javascript:void(0)" onclick="showTreaty()">服务条款</a><input class="transBtn" type="button" value="提交"/></p>
+						<div style="width: 625px;height: 300px;overflow-y: auto;background: #fff;border: 1px solid #ccc;">
+
+						</div>
+						<p>注：选择买家信息条目，点击转让可最终完成交易。</p>
+						<input class="transBtn" type="button" value="转让" onclick="showTreaty()"/>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="/static/js/company.js{{ _suffix_ }}"></script>
+<script type="text/javascript">
+	window.onload=function () {
+//点数充值
+		$("input[type='radio']").click(function(){
+			//找出和当前name一样的单选按钮对应的label，并去除选中的样式的class
+			$("input[type='radio'][name='"+$(this).attr('name')+"']").parent().removeClass("transRadio")
+			//给自己对应的label
+			$(this).parent().addClass("transRadio");
+			$('#payMoney').html($(this).val()+"元")
+			$("#body0").val($(this).attr("alt"))
+			$("#order_price0").val($(this).val())
+			$("#order_dian0").val($(this).attr("data-dian"))
+		});
+//订单记录
+		//日期框
+		$('.date-picker').datepicker({autoclose: true,todayHighlight: true});
+		$('input[name=orderDate]').change(function() {
+			var orderDate = $("#orderDate").val();
+		});
+
+	};
+</script>
+{% endblock %}
+
+

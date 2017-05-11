@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.CustomerSynonymMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.CustomerSynonym">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="word_old" property="word_old" jdbcType="VARCHAR"/>
+        <result column="word_new" property="word_new" jdbcType="VARCHAR"/>
+        <result column="account_id" property="account_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.CustomerSynonym">
+        INSERT
+        INTO customer_synonym (owner,
+        owner_type,
+        deleted,
+        created_by,
+        created_time,
+        update_by,
+        update_time,
+        word_old,
+        word_new,
+        account_id
+        )
+        VALUES (#{owner},
+        #{ownerType},
+        #{deleted},
+        #{createdBy},
+        #{createdTime},
+        #{updatedBy},
+        #{updatedTime},
+        #{word_old},
+        #{word_new},
+        #{account_id})
+    </insert>
+    <select id="searchForPage" parameterType="com.diting.model.options.CustomerSynonymOptions"
+            resultMap="defaultResultMap">
+        SELECT *
+        FROM customer_synonym
+        WHERE account_id = #{accountId}
+        AND deleted = 0
+        <if test="keywords!=null and keywords!=''">
+            AND
+            (
+            word_old LIKE CONCAT(CONCAT('%',#{keywords}),'%')
+            OR
+            word_new LIKE CONCAT(CONCAT('%',#{keywords}),'%')
+            )
+        </if>
+        ORDER BY update_time DESC
+    </select>
+
+    <select id="get" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+        *
+        FROM
+        customer_synonym
+        WHERE id = #{customerSynonymId}
+        LIMIT 1
+    </select>
+
+    <select id="getCustomerSynonymByUserId" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+        *
+        FROM
+        customer_synonym
+        WHERE account_id = #{accountId}
+    </select>
+
+    <update id="update" parameterType="com.diting.model.CustomerSynonym">
+        UPDATE
+        customer_synonym
+        SET
+        word_old = #{word_old},
+        word_new = #{word_new},
+        account_id = #{account_id}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="com.diting.model.CustomerSynonym">
+        DELETE FROM
+        customer_synonym
+        WHERE id = #{customerSynonymId}
+    </delete>
+
+    <select id="getCustomerSynonym" resultMap="defaultResultMap">
+        SELECT
+        *
+        FROM
+        customer_synonym
+    </select>
+
+</mapper>

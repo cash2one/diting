@@ -1,0 +1,57 @@
+{% extends "web/antushengPc1.0/ats_layout.html" %}
+{% block head %}
+	<title>谛听客服机器人-注册</title>
+{% endblock %}
+{% block style %}
+    <script>
+        window.onload=function () {
+            textCode0()
+        }
+    </script>
+{% endblock %}
+{% block content %}
+    <div>
+			<div class="logo">
+				<img src="/static/images/antusheng/web/LOGO.png" alt="" />
+			</div>
+			<div class="content">
+				<div class="tit">
+					<span style="color: #23b6ff;line-height:60px;">代理商申请 >>></span>
+					<a href="/atsLogin" style="background:#23b6ff;color:white;padding:5px 8px;border-radius:4px;float:right;margin-top: 18px;">已有账户登录</a>
+				</div>
+				<div class="inputs">
+					<span style="display:block;width:8%;text-align:center;background: white;margin: -10px auto">注册</span>
+					<div class="wrapInput1">
+						<input id="phone" type="text" placeholder="手机号" required="required" maxlength="11" name="USERNAME" onblur="oPhonetest()"/>
+						<span id="phone_ts">请输入正确手机号</span>
+					</div>
+					<div class="wrapInput1">
+						<input id="txcode" name="txcode" required="required" maxlength="4" type="text" placeholder="校验码" style="width: 62%;"/>
+						<input type="button"  id="btnTxCode"   class="yzm" onclick="textCode0()"/>
+						<span  id="txcode_ts">请先正确填写校正码</span>
+					</div>
+                    <div class="wrapInput1">
+						<input class="_input3" id="telcode" name="telcode" required="required" maxlength="20" type="text" placeholder="验证码" style="width: 62%;" />
+						<b class="yzm _send" id="btnCode" onclick="code_if()">发送验证码</b>
+						<span  id="yzm_ts">NO MESSAGE</span>
+					</div>
+					<div class="wrapInput1">
+						<input id="pwd" type="password" name="PASSWORD" placeholder="密码" required="required" maxlength="16" onblur="pwdtest()"/>
+						<span  id="pwd_ts">请输入8~16位密码，区分大小写</span>
+					</div>
+					<div class="wrapInput1">
+						<input id="pwd2" type="password" name="requrePassword" placeholder="确认密码" required="required" maxlength="16" onblur="pwdtest2()"/>
+						<span  id="pwd2_ts">两次密码需要一致</span>
+					</div>
+					<div class="wrapInput1" style="display: none">
+						<input id="phone" type="text" placeholder="邀请码"/>
+						<span>NO　MESSAGE</span>
+					</div>
+					<div class="wrapInput1">
+						<input id="btn_reg0"   type="button" value="注册" style="background: #23b6ff; border: none; color: white;" onclick="atsRegister()"/>
+						<a href=""><i style="position: absolute;bottom: -4px;left: 0;font-size:12px;color:#999999;font-style: normal;">《<i style="color: red;font-style: normal;">谛听服务协议</i>》</i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}

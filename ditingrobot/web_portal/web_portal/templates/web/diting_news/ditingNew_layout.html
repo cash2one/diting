@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="shortcut icon" href="/static/images/favicon.ico">
+		<meta charset="UTF-8">
+		{% block head %}{% endblock %}
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<link rel="stylesheet" href="/static/css/news_style.css{{ _suffix_ }}" />
+		<script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js"></script>
+		
+		<script type="text/javascript">
+			document.onscroll = function(){
+				console.log($(document).scrollTop())
+				var bottom=$("#footer").offset().top-$(".newArticleRight").outerHeight();
+			//	alert(bottom);
+				if($(document).scrollTop()>237){$(".newArticleRight").addClass("detail-fixed");}else{$(".newArticleRight").removeClass("detail-fixed")};
+				if($(document).scrollTop()>bottom){$(".newArticleRight").addClass("detail-bottom");}else{$(".newArticleRight").removeClass("detail-bottom")};	
+			};
+		</script> 
+	</head>
+	<body>
+		<!--页首-->
+		<div class="new_container">
+			<div class="naver">
+				<div class="new_logo"><a href="/" title="谛听机器人|北京谛听机器人科技有限公司"><img src="/static/images/logo3.png" alt="谛听机器人|北京谛听机器人科技有限公司" /></a></div>
+				<div class="topbanner"><a href="/login" target="_blank"><img src="/static/images/new_img/topbanner.jpg" alt="谛听机器人|北京谛听机器人科技有限公司"/></a></div>
+				<div class="telCompany"><img src="/static/images/new_img/tel.jpg"></div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+		<div class="news_bg">
+		  <div class="news_bg1"><img src="/static/images/new_img/news-1.jpg" class="img" /></div>
+		</div>
+		
+		<!--文章部分-->
+		<div class="newArticle">
+  <div class="newArticle1">
+    <div class="newArticleLeft">
+      <div class="article">
+		  <!--文章题目开始到下一篇文章结束-->
+		  {% block article %}{% endblock %}
+	  </div>
+      <div class="sharebtn"> <strong>一起分享吧</strong>
+        <div class="bdsharebuttonbox bdshare-button-style0-32" data-bd-bind="1482823726299">
+        	<a href="http://www.ditingai.com" class="bds_more" data-cmd="more"></a>
+        	<a title="分享到QQ空间" href="http://www.ditingai.com" class="bds_qzone" data-cmd="qzone"></a>
+        	<a title="分享到新浪微博" href="http://www.ditingai.com" class="bds_tsina" data-cmd="tsina"></a>
+        	<a title="分享到腾讯微博" href="http://www.ditingai.com" class="bds_tqq" data-cmd="tqq"></a>
+        	<a title="分享到人人网" href="http://www.ditingai.com" class="bds_renren" data-cmd="renren"></a>
+        	<a title="分享到微信" href="http://www.ditingai.com" class="bds_weixin" data-cmd="weixin"></a>
+        </div>
+        <script>
+        window._bd_share_config = {
+			"common": {
+				"bdSnsKey": {},
+				"bdText": "",
+				"bdMini": "2",
+				"bdMiniList": false,
+				"bdPic": "",
+				"bdStyle": "0",
+				"bdSize": "32"
+			},
+			"share": {},
+			"image": {
+				"viewList": ["qzone", "tsina", "tqq", "renren", "weixin"],
+				"viewText": "分享到：",
+				"viewSize": "16"
+			},
+			"selectShare": {
+				"bdContainerClass": null,
+				"bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]
+			}
+		};
+		with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() * 36e5)];
+        </script>
+      </div>
+    </div>
+    <div class="newArticleRight">
+      <p><a href="/new0">read more &gt;&gt;</a></p>
+      <ul>
+        <!--<li><a href="/new14">关于谛听机器人正式收费的...</a></li>-->
+		<li><a href="/new13">问答知识库建设说明...</a></li>
+		<li><a href="/new12">谛听机器人操作指南...</a></li>
+		<li><a href="/new11">呼吁｜把机器人的工作还给...</a></li>
+		<li><a href="/new10">谛听举办“劲爆八月•春晚机...</a></li>
+
+      </ul>
+    
+      <br>
+      <p align="center"><img src="/static/images/new_img/ewm.jpg"  ><br>
+        微信公众账号<br>
+        添加"谛听机器人"</p>
+    </div><div style="clear: both;"></div>
+   
+  </div>
+</div>
+	<footer id="footer">
+		<div>
+			<div>
+				<ul>
+					<li><a href="/agreement" target="_blank">用户协议</a></li>
+					<li><a href="/cooperative_partner" target="_blank">合作伙伴</a></li>
+					<li><a href="/about" target="_blank">关于我们</a></li>
+					<li><a href="/contact_us" target="_blank">联系我们</a></li>
+					<li class="wxgzh"><a style="position: relative;">微信订阅号</a>
+						<!--底部二维码-->
+						<div class="WXerweima">
+							<img src="/static/images/diting1.0/pc/dingyuehaoEVM4-19.jpg" />
+						</div>
+					</li>
+					<li class="wxgzh" style="border-left: 1px solid #999;">
+						<a style="position: relative;">客服微信号
+							<div class="WXerweima">
+								<img src="/static/images/diting1.0/pc/kefuEVM4-19.jpg" />
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<p> Copyright ©2016 谛听机器人 All Rights Reserved 京ICP备16026036号-1<br/>增值电信业务经营许可证：京B2-20170408</p>
+
+		</div>
+	</footer>
+</body>
+</html>

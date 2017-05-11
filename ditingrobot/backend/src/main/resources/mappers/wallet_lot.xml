@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.diting.dao.WalletLotMapper">
+
+    <resultMap id="defaultResultMap" type="com.diting.model.WalletLot">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="salt" property="salt" jdbcType="BIGINT"/>
+        <result column="sign" property="sign" jdbcType="VARCHAR"/>
+        <result column="wallet_id" property="walletId" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="balance" property="balance" jdbcType="DECIMAL"/>
+        <result column="priority" property="priority" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.WalletLot">
+        INSERT
+            INTO wallet_lot (
+                    owner,
+                    owner_type,
+                    deleted,
+                    created_by,
+                    created_time,
+                    update_by,
+                    update_time,
+                    salt,
+                    sign,
+                    wallet_id,
+                    type,
+                    balance,
+                    priority
+                    )
+            VALUES (#{owner},
+                    #{ownerType},
+                    #{deleted},
+                    #{createdBy},
+                    #{createdTime},
+                    #{updatedBy},
+                    #{updatedTime},
+                    #{salt},
+                    #{sign},
+                    #{walletId},
+                    #{type},
+                    #{balance},
+                    #{priority})
+    </insert>
+
+    <update id="update" parameterType="com.diting.model.WalletLot">
+        UPDATE
+            wallet_lot
+        SET
+            update_by = #{updatedBy},
+            update_time = #{updatedTime},
+            salt = #{salt},
+            sign = #{sign},
+            balance = #{balance}
+        WHERE id = #{id}
+    </update>
+
+    <select id="getByWalletIdAndType" resultMap="defaultResultMap">
+        select
+            *
+        from wallet_lot
+          where wallet_id = #{walletId}
+            and type = #{type}
+    </select>
+
+    <select id="getByWalletId" resultMap="defaultResultMap">
+        select
+             *
+        from wallet_lot
+        where wallet_id = #{walletId}
+        order by priority DESC
+    </select>
+</mapper>

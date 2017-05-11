@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <!-- task -->
+    <bean id="paymentTask" class="com.diting.job.task.PaymentTask"/>
+
+    <bean id="paymentJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <ref bean="paymentTask"/>
+        </property>
+
+        <property name="targetMethod">
+            <value>execute</value>
+        </property>
+    </bean>
+
+    <bean id="paymentTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="paymentJobDetail"></property>
+        <property name="cronExpression" value="0 0 9 * * ?"></property>
+        <!-- excute At nine o 'clock every day  -->
+    </bean>
+
+ <!--backend worker -->
+    <bean name="baseWorker" class="com.diting.job.worker.BaseWorker" abstract="true"></bean>
+
+    <bean name="demoWorker" class="com.diting.job.worker.DemoWorker"
+          parent="baseWorker">
+        <property name="workerName" value="DemoWorker"/>
+        <property name="enabled" value="${worker.demo.enabled}"/>
+        <property name="interval" value="${worker.demo.interval}"/>
+    </bean>
+
+
+</beans>

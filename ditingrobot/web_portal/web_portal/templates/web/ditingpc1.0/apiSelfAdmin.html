@@ -1,0 +1,261 @@
+{% extends "web/ditingpc1.0/success_layout.html" %}
+{% block head %}
+<style type="text/css">
+    .apiStoreAdminTable table,
+    .apiStoreAdminTable td {
+        font: 100% Arial, Helvetica, sans-serif;
+    }
+    .apiStoreAdminTable {
+        border-collapse: collapse;width: 100%;min-width: 1000px;
+    }
+    .apiStoreAdminTable th,.apiStoreAdminTable td {
+        text-align: center;
+        padding: .5em;
+        border-bottom: 1px solid #fafafa;
+    }
+    .apiStoreAdminTable th {
+        background: #fff;
+        height:50px;
+        text-align: center;
+        border-top: 1px solid #fafafa;
+    }
+    input[type=checkbox]{
+        width:16px;
+        height:16px;
+    }
+    .enable{
+        width: 65px;
+        height: 30px;
+        border: 0;
+    }
+    .apiStoreAdminTable td {
+        background: #fff;
+    }
+    /* tablecloth styles */
+    .apiStoreAdminTable td:hover{
+        background: #fafafa;
+    }
+    table.imagetable {
+        font-family: verdana, arial, sans-serif;
+        font-size: 11px;
+        color: #333333;
+        border: 1px #999999;
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+
+    table.imagetable th {
+        padding: 8px;
+        text-align: right;
+    }
+
+    table.imagetable td {
+        padding: 8px;
+    }
+
+    .btn0_0{
+        border: none;
+        background: #02b4da;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #fff;
+        cursor: pointer;
+        padding: 8px 22px;
+        float: left;
+    }
+
+    #deleteStore:hover,#btn0_all:hover{
+        background: #8aC4FF;
+    }
+    /*input[type="text"]{*/
+        /*height: 30px;*/
+        /*width: 100%;*/
+        /*line-height: 20px;*/
+        /*border-radius: 15px;*/
+        /*text-indent: 1em;*/
+    /*}*/
+    input[type="text"]{
+        height: 30px;
+        width: 100%;
+        border: 0;
+        line-height: 20px;
+        border-bottom: 1px solid #fafafa;
+        text-indent: 1em;
+    }
+    textarea{
+        width:566px;height: 94px;overflow-y:auto;font-size: 13px;resize:none;outline:none;border-radius: 5px;text-indent: 1em;
+    }
+    .layui-layer-storeTC{
+        width: inherit;
+    }
+    #deleteStore{
+        border: none;
+        background: #02b4da;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #fff;
+        cursor: pointer;
+        padding: 8px 18px;
+        float: right;
+
+    }
+    .layui-layer-btn a.layui-layer-btn0 {
+        border-color: #00c4c2;
+        background-color: #00c4c2;
+        color: #fff;
+    }
+</style>
+{% endblock %}
+{% block main %}
+
+<div class="mains" style="padding: 10px;background: #fff;">
+    <h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_myYY.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;我的应用管理</h3>
+
+    <div style="height:475px ;">
+        <table class="apiStoreAdminTable">
+            <tbody id="apiStoreAdminTable">
+            <tr> <th>序号</th> <th>应用名称</th> <th>开发商名称</th> <th>场景</th> <th>详情</th> <th>审批进程</th><th>应用状态</th> <th>勾选操作</th> </tr>
+
+            </tbody>
+        </table>
+
+     </div>
+    <input type="button" value="删除选中应用" id="deleteStore" onclick="dataupidDEL()"/>
+    <br/>
+    <p style="margin-left: 60px">注：1.每位用户最多可保留10个应用自用，且场景不能重复。状态栏可选择启用/关闭应用。</p>
+    <p style="margin-left: 84px">2.此页面内应用均可进行公共应用提交，审批结果将以系统消息形式告知。（不可与现有公共应用场景冲突）</p>
+    <br/>
+    <div style="margin:0 auto;width: 125px;">
+
+        <input id="btn0_all" class="btn0_0" type="button" title="公共应用提交" value="公共应用提交" onclick="test0All()">
+        <div style="clear: both;"></div>
+    </div>
+
+</div>
+<div style="display: none">
+    <input type="text" readonly id="adminAgree"  value=""/>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+
+    csh_storeAdmin()
+    //初始化管理员第三方应用页面
+    function csh_storeAdmin() {
+        $.ajaxSetup({cache:false})  //禁止ie浏览器读取缓存的ajax
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: "/apis/personal/find-store"
+        }).done(function (data) {
+            var data = JSON.parse(data);
+
+            console.log(data)
+            var str = ' <tr> <th style="min-width: 60px;">序号</th> <th style="min-width: 180px;">应用名称</th> <th style="min-width: 180px;">开发商名称</th> <th style="min-width: 160px;">场景</th> <th style="min-width: 100px;">查看详情</th> <th style="min-width: 80px;">应用状态</th> <th style="min-width: 60px;">操作</th> </tr>';
+            for (var i = 0; i < data.length; i++) {
+                if(data[i].enable==0){
+                    var enable = '<option value="0">关闭</option> <option value="1">启用</option>'
+                }else {
+                    var enable = '<option value="1">启用</option> <option value="0">关闭</option>'
+                }
+                str += '<tr> <td style="text-align: center;">'+ (i+1) +'</td> <td>'+ data[i].name +'</td> <td>'+ data[i].providerName +'</td> <td style="text-align: center;">'+ data[i].scene +'</td> <td class="allmore" style="text-align: center;color: rebeccapurple;cursor: pointer;" data-providerName="' +data[i].providerName + '" data-providerEnName="' +data[i].providerEnName + '" data-mobile="' +data[i].mobile + '" data-email="' +data[i].email + '" data-address="' +data[i].address + '" data-serverName="' +data[i].serverName + '" data-serverEnName="' +data[i].serverEnName + '" data-scene="' +data[i].scene + '" data-description="' +data[i].description + '" data-name="' +data[i].name + '" data-enName="' +data[i].enName + '" data-keywords="' +data[i].keywords + '" data-url="' +data[i].url + '" data-version="' +data[i].version + '">应用详情</td> <td style="text-align: center;"><select name="enable" class="enable" style="outline:none;margin: auto" data-id="'+ data[i].id +'"> '+ enable +'</select></td> <td style="text-align: center;"><input type="checkbox" name="checkbox2" value="' + data[i].id + '"/></td> </tr>';
+
+            }
+            $('#apiStoreAdminTable').html(str)
+            successStoreAdmin()
+        }).fail(function (data) {
+            console.log(data);
+
+        });
+    }
+function successStoreAdmin() {
+    $('.allmore').click(function () { //应用详情
+        layer.open({
+            skin: 'layui-layer-storeTC',
+            btn: ['关闭'], //按钮
+            title: "应用详情",
+            area: ['740px', '80%'],
+            content: '<table class="imagetable"> <tbody> <tr> <th>开发商名称：</th><td style="width: 220px;"><input id="fwsName" readonly placeholder="此项必填！" maxlength="20" type="text" value="'+ $(this).attr('data-providerName') +'"/></td><th>应用名称：</th><td style="width: 220px;"><input id="fwName" placeholder="此项必填！" readonly maxlength="15" type="text" value="'+ $(this).attr("data-serverName") +'"/></td></tr><tr><th>联系电话：</th><td><input id="telephone" placeholder="此项必填！" readonly maxlength="11" type="text" value="'+ $(this).attr("data-mobile") +'"/></td><th>联系邮箱：</th><td><input id="email" readonly type="text" value="'+ $(this).attr("data-email") +'" maxlength="32"/></td></tr><tr><th>联系地址：</th><td colspan="3"><input id="findPlace" readonly  type="text" value="'+ $(this).attr("data-address") +'" /></td></tr><tr><th>场景设置：</th><td colspan="3"><input id="scene" placeholder="此项必填！" readonly maxlength="20" type="text" value="'+ $(this).attr("data-scene") +'" /></td></tr><tr><th>功能描述：</th><td colspan="3"><input type="text" placeholder="此项必填！" readonly maxlength="240" name="" required="required" title="" id="fwDepict" value="'+ $(this).attr("data-description") +'"/></td></tr><tr><th>关键词：</th><td colspan="3"><input type="text" placeholder="此项必填！每个关键词以“，”分隔。" readonly maxlength="240" name="" required="required" title="" id="keywords" value="'+ $(this).attr("data-keywords") +'"/></td></tr><tr><th>API名称：</th><td style="width: 220px;"><input id="APIName" placeholder="此项必填！" readonly maxlength="20" type="text" value="'+ $(this).attr("data-name") +'" /></td><th >版本号：</th><td style="width: 216px;"><input id="version" type="text" value="'+ $(this).attr("data-version") +'" readonly /></td></tr><tr><th>访问链接：</th><td colspan="3"><input id="APILink" type="text" value="'+ $(this).attr("data-url") +'" placeholder="此项必填！"  readonly/></td></tr><tr><th>请求方式：</th><td colspan="3"><input type="radio" name="ral" checked="checked" value="POST" style="margin-left: 10px"/>POST</td></tr></tbody></table>'
+        })
+    });
+    $('.enable').change(function(){
+        var id1 = $(this).attr("data-id");
+        var status = $(this).val();
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: '/api/personal/switch/update',
+            data: JSON.stringify({'apiPersonalStoreId': id1, 'status': status})
+        }).done(function (data) {
+         console.log(data)
+        }).fail(function (data) {
+            var message = JSON.parse(data.responseText).message;
+            layer.msg(message, {icon: 5});
+        });
+    })
+}
+    function dataupidDEL() {//批量删除
+        var checkedNum = $("input[name='checkbox2']:checked").length;
+        if (checkedNum == 0) {
+            layer.msg("请选择至少一项！")
+            return;
+        }
+        layer.confirm('确定要删除所选项目？', {
+            btn: ['确定', '再考虑一下'] //按钮
+        }, function () {
+            var checkedList = new Array();
+            $("input[name='checkbox2']:checked").each(function () {
+                checkedList.push($(this).val());
+            });
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: '/apis/personal/batchdelete',
+                data: JSON.stringify({'ids': checkedList.toString()})
+            }).done(function (data) {
+                layer.msg(data.message, {time: 500, icon: 6}, function () {
+                    parent.window.location.reload(false);
+                })
+            }).fail(function (data) {
+                var message = JSON.parse(data.responseText).message;
+                layer.msg(message, {icon: 5})
+            });
+        }, function () {
+
+        });
+    }
+
+    function test0All() {//批量提交公共应用
+        var checkedNum = $("input[name='checkbox2']:checked").length;
+        if (checkedNum == 0) {
+            layer.msg("请选择至少一项！")
+            return;
+        }
+        layer.confirm('审批通过后应用可被所有用户使用，请确认。', {
+            btn: ['确定', '取消'] //按钮
+        }, function () {
+            var checkedList = new Array();
+            $("input[name='checkbox2']:checked").each(function () {
+                checkedList.push($(this).val());
+            });
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: '/apis/personal/batchsubmit',
+                data: JSON.stringify({'ids': checkedList.toString()})
+            }).done(function (data) {
+                layer.msg(data.message, {time: 500, icon: 6}, function () {
+                    parent.window.location.reload(false);
+                })
+            }).fail(function (data) {
+                var message = JSON.parse(data.responseText).message;
+                layer.msg(message, {icon: 5})
+            });
+        }, function () {
+
+        });
+    }
+</script>
+{% endblock %}

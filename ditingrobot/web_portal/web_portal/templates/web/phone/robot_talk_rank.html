@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="/static/images/favicon.ico">
+	<title> 谛听客服机器人平台 - 问答量排行</title>
+	<meta name="keywords" content="谛听客服机器人,问答机器人">
+	<meta name="description" content="谛听客服机器人提供微信客服机器人，web客服机器人，让用户可以自建知识库。机器人可以按照设定好的问题和答案回答。支持一个问题的多种问法，支持语义场景和上下文处理。">
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js" ></script>
+	<script type="text/javascript" src="/static/js/phone-common.js{{ _suffix_ }}"></script>
+	<script type="text/javascript" src="/static/js/diting-common.js{{ _suffix_ }}"></script>
+	<script type="text/javascript" src="/static/js/talk.js{{ _suffix_ }}"></script>
+	<script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+	<link rel="stylesheet" type="text/css" href="/static/css/phone/common-style-phone.css{{ _suffix_ }}" />
+
+	<style type="text/css">
+
+		.reg{width: 100%;height:0.5rem;line-height: 0.5rem;}
+		.searchRank{
+			width: 100%;margin: 0 auto;font-size: 0.2rem;display: block;
+		}
+		.SearchK{
+			width: 4.5rem;
+			height: 0.4rem;
+			line-height: 0.4rem;
+			font-size: 0.14rem;
+			margin: 0 auto;
+			border: 1px solid #ccc;
+			border-radius: 0.05rem;
+			background: #fff;
+		}
+		#cominput0{
+			height: 0.40rem;
+			border: none;
+			width: 3.8rem;
+			background: none;
+			margin: 0;
+			margin-left: 0.08rem;
+			font-size: 0.18rem;
+		}
+		.searchF{
+			vertical-align: middle;
+			display: initial;
+			height: 0.30rem;
+			cursor: pointer;
+			float: right;
+			margin-right: 0.06rem;
+			margin-top: 0.05rem;
+		}
+		.search_bottom{
+			border: 1px #ccc solid;
+			border-top: 0px;
+			width: 4.46rem;
+			position: fixed;
+			left: 0.95rem;
+			top: 0.7rem;
+			background: #fff;
+			max-height: 5.76rem;
+			overflow: hidden;
+			margin-left: 0;
+			margin-top: 0;
+			z-index: 101;
+		}
+		.ques_ranks a{
+
+			padding: 0.1rem;
+		}
+	</style>
+</head>
+<body>
+<div id="searchBoxZ" style="position: fixed;left: 0;top: 0;z-index: 100;display: none;width: 100%;height:100%; background-color: #000;opacity: 0.3;" >
+
+</div>
+<div id="searchBoxZZ" style="display: none;">
+	<div style="width: 100%;background: #333;;padding: 0.26rem 0;;position: fixed;z-index: 101">
+		<div class="SearchK">
+			<input  id="cominput0" type="text" name="keywords" maxlength="20" value="" placeholder="可以搜索平行人哦！"/>
+			<img class="searchF" src="/static/images/search_tip.png" onclick="search_comssPhone()">
+		</div>
+		<a href="/m/claim" style="display: block;position: absolute; right: 0.1rem;top: 0.2rem;font-size: 0.22rem;padding: 0.1rem 0.05rem;color: #fff;">平行人</a>
+	</div>
+	<div class="search_bottom" >
+		<table style="width: 100%;text-align: right;" class="ques_ranks" id="search_bottom" >
+
+		</table>
+	</div>
+</div>
+
+
+<div class="searchRank">
+	<!--搜索公司机器人-->
+	<div style="width:100%;background: #333;height: 0.76rem;color: #fff;line-height: 0.76rem;font-size: 0.3rem;padding:0.1rem 0;text-align: center;">
+		问答量排行
+		<a href="javascript:void(0)" style="position: absolute; right: 0.1rem;top: 0.2rem;font-size: 0.22rem;padding: 0.1rem;color: #fff;border-left: 1px solid #000;"><img id="imgSearchBlock" class="searchF" src="/static/images/search_tip.png" ></a>
+	</div>
+
+
+	<table style="width: 100%;text-align: center;font-size: 0.16rem" class="ques_ranks" id="ques_ranks">
+
+
+	</table>
+</div>
+</body>
+
+<script type="text/javascript">
+
+	window.onload=function () {
+		yesterloadALL();
+		$('#robotProfileP').html($('#profile').val());
+		//robot_talk页搜索
+//回车键搜索功能
+		$("#cominput0").keydown(function entersearch_comss(e){
+			e = e||event;
+			if(e.keyCode == 13) {
+				search_comssPhone()
+			}
+			return;
+		})
+		//昨日问答量排行
+		function yesterloadALL() {
+			$.ajax({
+				type: "GET",
+				contentType: "application/json",
+				url: "/api/company/yesterday/questions_rank"
+//                url:"/api/company/all/questions_rank"
+			}).done(function (data) {
+				var data = JSON.parse(data);
+				console.log(data)
+				var arr = ['YearRankHead1.gif','YearRankHead2.gif','/YearRankHead3.gif','YearRankHead1.gif','YearRankHead2.gif','/YearRankHead3.gif']
+				var iNum01 = getRandom(1, 4)
+				var iNum02 = getRandom(1, 4)
+				var iNum03 = getRandom(1, 4)
+				if(data[0].profile == null||data[0].profile == ""){
+					var profile0 = "我的主人有点懒，没有给本宝宝写介绍！";
+				}else {
+					var profile0 = data[0].profile;
+				}
+				if(data[1].profile == null||data[1].profile == ""){
+					var profile1 = "我的主人有点懒，没有给本宝宝写介绍！";
+				}else {
+					var profile1 = data[1].profile;
+				}
+				if(data[2].profile == null||data[2].profile == ""){
+					var profile2 = "我的主人有点懒，没有给本宝宝写介绍！";
+				}else {
+					var profile2 = data[2].profile;
+				}
+
+				if(data[0].headImgUrl == null||data[0].headImgUrl == ""){
+					var headImgUrl0 = '/static/images/'+arr[iNum01] ;
+				}else {
+					var headImgUrl0 = data[0].headImgUrl;
+				}
+				if(data[1].headImgUrl == null||data[1].headImgUrl == ""){
+					var headImgUrl1 = '/static/images/'+arr[iNum02] ;
+				}else {
+					var headImgUrl1 = data[1].headImgUrl;
+				}
+				if(data[2].headImgUrl == null||data[2].headImgUrl == ""){
+					var headImgUrl2 = '/static/images/'+arr[iNum03] ;
+				}else {
+					var headImgUrl2 = data[2].headImgUrl;
+				}
+
+
+
+				var str = '<tr id="rankFirst"> <td style="border-bottom: 1px solid #fee9f5;padding: 0 0.1rem;"><div style="width: 0.4rem;text-align: center;color: #fff;font-size: 0.26rem;background: #f33;line-height: 0.4rem;margin-top: -0.5rem;">1</div></td> <td style="padding: 0.2rem 0;width: 1rem;border-bottom: 1px solid #fee9f5;"><img style="width: 100%;border-radius: 50%;" src="'+ headImgUrl0 +'"/></td><td> <p style="text-align: left"><a style="font-size:0.26rem;" class="comA" href="/robot-company/'+ data[0].app_key +'" target="_blank"> '+ data[0].companyName +' </a></p><p style="color: #999;text-align: left;background: url(/static/images/phone/RankJSbj2.png) no-repeat right bottom;background-size: 0.14rem;display:inherit"><span style="background: url(/static/images/phone/RankJSbj1.png) no-repeat left top;background-size: 0.14rem;display: inherit; padding: 0.05rem 0.1rem;">'+ profile0 +'</span></p></td> </tr>';
+				str += '<tr > <td style="border-bottom: 1px solid #fee9f5;padding: 0 0.1rem;"><div style=" width: 0.4rem;text-align: center;color: #fff;font-size: 0.26rem;background: #f33;line-height: 0.4rem;margin-top: -0.5rem;">2</div></td> <td style="padding: 0.2rem 0;width:1rem;border-bottom: 1px solid #fee9f5;"> <img style="width: 100%;border-radius: 50%;" src="'+ headImgUrl1 +'"/></td><td><p style="text-align: left"><a style="font-size:0.26rem;" class="comA" href="/robot-company/'+ data[1].app_key +'" target="_blank"> '+ data[1].companyName +' </a></p><p style="color: #999;text-align: left;background: url(/static/images/phone/RankJSbj2.png) no-repeat right bottom;background-size: 0.14rem;display:inherit"><span style="background: url(/static/images/phone/RankJSbj1.png) no-repeat left top;background-size: 0.14rem;display: inherit; padding: 0.05rem 0.1rem;">'+ profile1 +'</span></p></td> </tr>';
+				str += '<tr > <td style="border-bottom: 1px solid #fee9f5;padding: 0 0.1rem;"><div style=" width: 0.4rem;text-align: center;color: #fff;font-size: 0.26rem;background: #f33;line-height: 0.4rem;margin-top: -0.5rem;">3</div></td> <td style="padding: 0.2rem 0;width: 1rem;;border-bottom: 1px solid #fee9f5;"> <img style="width: 100%;border-radius: 50%;" src="'+ headImgUrl2 +'"/></td><td><p style="text-align: left"><a style="font-size:0.26rem;" class="comA" href="/robot-company/'+ data[2].app_key +'" target="_blank"> '+ data[2].companyName +' </a> </p><p style="color: #999;text-align: left;background: url(/static/images/phone/RankJSbj2.png) no-repeat right bottom;background-size: 0.14rem;display:inherit"><span style="background: url(/static/images/phone/RankJSbj1.png) no-repeat left top;background-size: 0.14rem;display: inherit; padding: 0.05rem 0.1rem;">'+ profile2 +'</span></p></td> </tr>';
+
+				for (var i = 3; i < data.length; i++) {
+					var n = (i + 1);
+					if(data[i].profile == null||data[i].profile == ""){
+						var profile = "我的主人有点懒，没有给本宝宝写介绍！";
+					}else {
+						var profile = data[i].profile;
+					}
+					var iNum2 = getRandom(1, 4)
+					if(data[i].headImgUrl == null||data[i].headImgUrl == ""){
+						var headImgUrl = '/static/images/'+arr[iNum2] ;
+					}else {
+						var headImgUrl = data[i].headImgUrl;
+					}
+
+					str += '<tr > <td style="border-bottom: 1px solid #fee9f5;padding: 0 0.1rem;"><div style="width: 0.4rem;text-align: center;color: #fff;font-size: 0.26rem;background: #ccc;line-height: 0.4rem;margin-top: -0.5rem;">'+ n +'</div></td> <td style="padding: 0.2rem 0;width: 1rem;border-bottom: 1px solid #fee9f5;"> <img style="width: 100%;border-radius: 50%;" src="'+ headImgUrl +'"/></td><td><p style="text-align: left"><a style="font-size:0.26rem;" class="comA" href="/robot-company/'+ data[i].app_key +'" target="_blank"> '+ data[i].companyName +' </a></p> <p style="color: #999;text-align: left;background: url(/static/images/phone/RankJSbj2.png) no-repeat right bottom;background-size: 0.14rem;display:inherit"><span style="background: url(/static/images/phone/RankJSbj1.png) no-repeat left top;background-size: 0.14rem;display: inherit; padding: 0.05rem 0.1rem;">'+ profile +'</span></p></td> </tr>';
+
+					$('#ques_ranks').html(str)
+				}
+			}).fail(function (data) {
+				console.log(data);
+
+			});
+		}
+		$('#imgSearchBlock').click(function (){
+			$('#searchBoxZ').css('display','block')
+			$('#searchBoxZZ').css('display','block')
+		})
+		$('#searchBoxZ').click(function (){
+			$('#searchBoxZ').css('display','none')
+			$('#searchBoxZZ').css('display','none')
+		})
+	};
+</script>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>黑图-首页</title>
+        <meta name="keywords" content="机器人,谛听机器人,自动应答程序,客服机器人,问答机器人,招聘机器人">
+        <meta name="description" content="谛听机器人能通过注册获得自己的问答机器人。该机器人可以捆绑在自己公众号，可以部署在自己网站上，可以通过我们提供的API 进行二次开发，接入各类软件。用户可以通过我们提供的管理后台增加和编辑机器人的问答知识，将机器人用于客服、销售、招聘，机器人会自动按照用户添加的问题和答案回答提问。我们善于做上下文处理，对语义的理解更加精准。">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<title></title>
+        <script src="/static/js/lib/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/static/js/loveAutoLogin.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+
+        </script>
+		<style type="text/css">
+            input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; }
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			a{
+				text-decoration: none;
+                outline: none;
+			}
+			ul,ol,li{
+				list-style: none;
+			}
+			html,body{
+				width: 100%;
+				height: 100%;
+				font-family: "Hiragino Sans GB";
+				font-size: 62.5%;
+                background: #f3f2f2;
+			}
+            button{
+                outline: none;
+            }
+			#wrapper{
+				width: 100%;
+				height: auto;
+				position: relative;
+				top: 0;
+				left: 0;
+				overflow: hidden;
+				background: #f3f2f2;
+			}
+			#scroller{
+				width: 100%;
+				position: absolute;
+				top: 8%;
+			}
+			#head{
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 998;
+				height: 8%;
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				background: #333333;
+			}
+			#nav{
+				width: 100%;
+				height: 92%;
+				position: fixed;
+				top: 8%;
+				left: -100%;
+                z-index: 999;
+			}
+			#navLeft{
+				width: 50%;
+				height: 100%;
+				float: left;
+				background: white;
+			}
+			.item{
+				width: 45%;
+            	position: relative;
+            	margin:10px 1% 5px 3%;
+            	float: left;
+                color: black;
+                background: white;
+                padding-bottom:10px ;
+			}
+			#pullNav{
+				background: url(/static/images/phone/caidan.png) 10% 10% no-repeat ;
+				height: 80%;
+				width:4rem ;
+				border: none;
+				margin-top:2%;
+				margin-left:5px;
+				outline: none;
+                background-size: 70% 70%;
+			}
+			#addQuestion{
+                display: block;
+				background: url(/static/images/phone/tiwen.png)  no-repeat;
+				border: none;
+				height: 80%;
+				width:4rem ;
+				margin-top:3%;
+				outline: none;
+                background-size: 70% 70%;
+			}
+			.wrapSearch{
+				border: 1px solid #CCC;
+				height: 2rem;
+				margin-top: 3rem;
+				border-radius: 5px;
+				width: 80%;
+				margin-left: 5%;
+			}
+            .wrapImg{
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+            }
+            #countP{
+                position: absolute;
+                bottom: 2px;
+                right: 4px;
+                color: #333333;
+                display: none;
+            }
+            .itemImg{
+                width: 100%;
+            }
+
+            .itemImgX{
+                border-radius: 100%;
+                width: 30px;
+                height: 30px;
+                float: left;
+            }
+            .itemHead{
+                display: inline-block;
+                font-size: 14px;
+                height: 30px;
+                line-height: 30px;
+                margin-left: 5px;
+                float: left;
+            }
+            .itemSex{
+                height: 50%;
+                width: 10%;
+                margin-top: 5%;
+            }
+            .itemName{
+                display: inline-block;
+                width: 20%;
+
+            }
+            .itemTime{
+                display: inline-block;
+                margin-right: 0px;
+                margin-top: 0.6rem;
+                color: #999999;
+                font-size: 12px;
+                position: absolute;
+                bottom: 0;
+                left: 5px;
+            }
+            .quesDiv{
+                width: 90%;
+                height: 20px;
+                line-height: 24px;
+                border-top:1px solid #f3f2f2;
+                margin-left: 5%;
+                margin-top: 2px;
+                padding-top: 0.5rem;
+                font-size: 14px;
+                color: #666666;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            .cap{
+                border: none;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top:0;
+                left: 0;
+                z-index: 99;
+                background:url(/static/images/phone/capv.png) no-repeat;
+                background-size: 100% ;
+            }
+		</style>
+	</head>
+	<body>
+
+
+            <div id="head">
+				<button id="pullNav"></button>
+				<div style="display: flex;justify-content: space-between; font-size: 16px; width: 10rem; margin-top: 3%;">
+                    <a>
+                        <button style="color: white;border: none;background:#333333;font-size: 16px; ">首页</button>
+                    </a>
+                    <a href="/m/newYearMoney_rank">
+                        <button style="color: #666;border: none;background: #333333;font-size: 16px;">排行榜</button>
+                    </a>
+				</div>
+                <a id="addQuestion" href="/m/askModule">
+
+                </a>
+			</div>
+
+			<div id="scroller"></div>
+
+
+
+		<div id="nav">                              <!--菜单页-->
+			<div id="navLeft" >
+				<div class="wrapSearch">
+					<input id="cominput0" type="text" name="keywords" maxlength="20" value="" placeholder="搜索机器人账号" style="border: none;outline: none;height: 100%;width: 78%;padding-left: 0.2rem" />
+					<span id="searchBtn"  style="display: inline-block;">搜索</span>
+				</div>
+
+				<div class="messBox" style="margin-top: 2rem;height: 30%">
+					<div style="height: 48px">
+                        <img id="xxhead" alt="头像" src="{{ account.headImgUrl }} " onerror="javascript:this.src='/static/images/phone/error1.png'" style=" height: 4rem;width: 4rem;border-radius:100%;margin-left:1rem;float: left"/>
+					    <ul style="float:left;margin-left:2rem;">
+						    <li id="robotDeName" style="height:24px;font-size: 18px;line-height: 24px;margin-top: 1rem;">{{ robot.name }}</li>
+						    <li style=""></li>
+					    </ul>
+                    </div>
+
+                    <a href="/m/messModule">
+                        <div style="color: black;height:4rem;margin-top:2rem;border-bottom:1px solid #eeeeee;border-top:1px solid #eeeeee;">
+                            <span style="display:block;width:4rem;height:4rem;float: left;background: url(/static/images/phone/isHaveMess.png) 0 3px no-repeat;background-size: 80% 80%"></span>
+                            <span style="display:block;height: 4rem;width:7rem;line-height: 4rem;float: left;font-size: 14px ">消息通知</span>
+                            <span id="isHaveMess" style="float: right;display:block;width: 3rem;height: 4rem;background: url(/static/images/phone/isRed.png) no-repeat 45% 45%"></span>
+                        </div>
+                    </a>
+
+				</div>
+			</div>
+			<div id="navRight" style="width: 50%;height:100%;float: right;background: rgba(0,0,0,0.3);">
+
+			</div>
+		</div>
+
+	<script type="text/javascript">
+         autoLogin();
+		var eventObj = {
+			"pullNav":$("#pullNav"),
+			"nav":$("#nav"),
+			"navRight":$("#navRight"),
+            "searchBtn":$("#searchBtn"),
+			"navIn":function(){
+				$("#nav").css({
+					"left":"0",
+					"transition": "left 1s"
+				})
+			},
+			"navOut":function(){
+				$("#nav").css({
+					"left":"-100%",
+					"transition": "left 1s"
+				})
+			},
+			"init":function(){
+                if($("#robotDeName").html()==""||$("#robotDeName").html()==null){
+                    $("#robotDeName").html("游客")
+                    $("#xxhead").attr("src","/static/images/phone/error1.png")
+                }else{
+
+                }
+                    localStorage.setItem("xxhead",$("#xxhead").attr("src"));
+			        this.showAllProblem();
+			        this.isShowRed();
+				    var flag = true;
+				    this.pullNav.on("click",function(){
+					    if(flag){
+						    this.navIn();
+						    flag = !flag;
+					    }else{
+						    this.navOut();
+						    flag = !flag;
+					    }
+				    }.bind(this))
+
+				    this.navRight.on("click",function(){
+					    this.navOut();
+					    flag = true;
+				    }.bind(this));
+
+				    this.searchBtn.on("click",function () {
+                        this.search();
+                    }.bind(this))
+			},
+            "showAllProblem":function () {
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json",
+                    url: '/love/findAll',
+                    success:function (data) {
+                        var allQuestion = JSON.parse(data);
+                        //console.log(allQuestion)
+                        $.each(allQuestion,function (index,value) {
+                            var time2 = transTime(value.createdTime);
+                            //console.log(value.id)
+                            //var count = ansCount(value.id)
+                            var sexS = value.sex;
+                            if(sexS==null||sexS==undefined){
+                                sexS= 1;
+                            }
+                            var str = "<div class='item'><a href='/m/newYearRobot/"+value.uniqueId+"?quesid="+value.id+"'><button class='cap'></button></a>"
+                                str+="<div class='wrapImg'><img class='itemImg' src='"+value.imageUrl+"'/><b class='itemTime'>"+time2+"</b><span id='countP'>12人回答</span></div>"
+                                str+="<div class='wrapN' style='height:30px;padding:4% 0.6rem;'>"
+                                str+="<img class='itemImgX' src='"+value.headImgUrl+"' onerror=\"javascript:this.src='/static/images/phone/error"+sexS+".png'\" /><p class='itemHead'>"+value.robotName+"</p><img class='itemSex' src='/static/images/phone/"+sexS+".png' />"
+                                str+="<span><span></div>"
+                                str+="<div class='quesDiv'>"+value.question+"</div>"
+                                str+="</div>"
+                                $(".wrapImg").height($(".wrapImg").width())
+                                $("#scroller").html($("#scroller").html()+str);
+                        })
+                    }
+                })
+            },
+            "search":function () {
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json",
+                    url: "/api/company/search-for-keyword?keyword=" + encodeURI($('#cominput0').val()),
+                    success:function(data){
+                        console.log(data)
+                    }
+                })
+            },
+            "isShowRed":function () {
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json",
+                    url: "/loveMessageLog/selectCountByUserId",
+                    success:function(data){
+                        //console.log(data)
+                        if(data=="0"){
+                             $("#isHaveMess").css({
+                                "background":"#FFF"
+                            })
+                        }else{
+                            $("#isHaveMess").css({
+                                "background":"url(/static/images/phone/isRed.png) no-repeat 45% 45%"
+                            })
+                        }
+                    }
+                })
+            }
+
+		}
+		window.onload=function () {
+            eventObj.init();
+        }
+
+
+		//function saveId(mess,event){
+		    //event = event ? event : window.event;
+           // sessionStorage.setItem("answerId",mess);
+            //var deAns_headImg = $(event.target).parent().parent().children(".wrapN").children(".itemImgX").attr("src");
+            //sessionStorage.setItem("deAns_headImg",deAns_headImg);
+       // }
+        function transTime(sec){
+			var res;
+ 	    	var unixTimestamp = new Date( ) ;
+ 	    	var sec0 = unixTimestamp.getTime()-sec;
+ 	    	if(sec0/86400000>1){
+ 	    		res = parseInt(sec0/86400000)+"天前"
+ 	    	}else if(sec0/3600000>1){
+ 	    		res = parseInt(sec0/3600000)+"小时前"
+ 	    	}else if(sec0/60000>1){
+ 	    		res = parseInt(sec0/60000)+"分钟前"
+ 	    	}else{
+ 	    		res = "刚刚"
+ 	    	}
+			return res;
+ 	    }
+		</script>
+	</body>
+</html>

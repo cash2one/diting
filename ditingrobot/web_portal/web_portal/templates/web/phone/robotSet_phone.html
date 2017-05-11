@@ -1,0 +1,103 @@
+{% extends "web/phone/layout_phone.html" %}
+{% block style %}
+<script type="text/javascript" src="/static/js/success-index.js{{ _suffix_ }}"></script>
+<!--<script type="text/javascript" src="/static/js/diting1.0/pc/robotSet2.js{{ _suffix_ }}"></script>-->
+<script type="text/javascript">
+    window.onload = function () {
+        csh_suc_index(); //初始化
+
+    }
+</script>
+{% endblock %}
+{% block mainnofooter %}
+<div style="background: url('/static/images/phone/niupiBJ.png') repeat ;height: 11rem;">
+    <header class="header1">
+        <a href="/m/home" style="display: block;position: absolute; left: 0.1rem;top: 0.15rem;font-size: 0.22rem;padding: 0.1rem 0.05rem;color: #fff;"><img style="width: 0.4rem;" src="/static/images/phone/return.png" title="回到首页"></a>
+        机器人定制
+    </header>
+<div style="text-align: center; background: #fff; height: 0.5rem; line-height: 0.5rem;margin-bottom: 0.08rem;padding: 0.17rem 1.3rem;">
+<a href="/m/robotSet" class="phone_nav2" style="border-bottom: 1px solid #08bec2;color: #08bec2;">机器人设置</a>
+    <a href="/m/knowledge" class="phone_nav2">知识库</a>
+</div>
+<ul class="phone_robotSet_ul">
+    <li>
+        机器人名称：<input id="name" name="ROBOT_NAME" value="" placeholder="2~5位中文名或4~12位英文名！" maxlength="12" type="text"  onblur="rob__name()" style="color: rgb(0, 0, 0);width: 3.6rem;"><span style="color: red;float: right;margin-right: 0.1rem;line-height: 0.4rem">*</span>
+    </li>
+    <!--<li>所有者名：-->
+        <!--<input id="companyName" name="GONGSI" placeholder="请输入2~16位的中文" maxlength="16" minlength="2" value="" type="text" runat= "server"  onblur="companyName00()" /><span style="color: red;float: right;margin-right: 0.1rem;line-height: 0.4rem">*</span>-->
+    <!--</li>-->
+    <li>
+        机器人域名：<span style="font-size: 0.16rem;color: #444343;">http://www.ditingai.com/r/</span><input id="shortDomainName"  onblur="rob_shortDomainName()"  style=" color: rgb(0, 0, 0);width: 1rem;" maxlength="30" value="" placeholder="3~30位" name="shortDomainName" type="text"><span style="color: red;float: right;margin-right: 0.1rem;line-height: 0.4rem;">*</span>
+    </li>
+    <li>
+        机器人简介： <input id="profile" maxlength="30" placeholder="请用30字简单介绍自己的机器人！" value="" name="ROBOT_profile" type="text" style="width: 3.5rem;">
+    </li>
+    <li>
+        我的动态：<input id="welcomes" maxlength="60" value="" name="ROBOT_WELCOME" type="text" style="width: 3.4rem;">
+    </li>
+    <!--<li class="rob_txt">行业领域：-->
+        <!--<select name="HANGYE" id="industry" style="height: 0.4rem;border: 1px solid orange;outline: none;border-radius: 0.1rem;" >-->
+            <!--<option value="0" selected="selected">IT/互联网</option>-->
+            <!--<option value="1">文化/体育</option>-->
+            <!--<option value="2">音乐/娱乐</option>-->
+            <!--<option value="3">酒店/餐饮</option>-->
+            <!--<option value="4">旅游</option>-->
+            <!--<option value="5">贸易/零售</option>-->
+            <!--<option value="6">法律/金融/咨询服务</option>-->
+            <!--<option value="7">教育</option>-->
+            <!--<option value="8">政府/非营利机构</option>-->
+            <!--<option value="9">医疗/保健</option>-->
+            <!--<option value="10">房地产建筑</option>-->
+            <!--<option value="11">加工/制造</option>-->
+            <!--<option value="12">其他</option>-->
+        <!--</select>-->
+
+    <!--</li>-->
+    <li>
+        无效答案1：<input id="answer1" maxlength="40" value="" name="answer1" type="text" style="width: 3.7rem;">
+    </li>
+    <li>
+        无效答案2：<input id="answer2" maxlength="40" value="" name="answer2" type="text" style="width: 3.7rem;">
+    </li>
+    <li>公共知识库：
+        <select name="isDisable" id="isDisable" style="border-radius: 0.1rem;height: 0.4rem;border: 1px solid orange;outline: none;">
+            <option class="option1" value="false">启用</option>
+            <option class="option2" value="true">禁用</option>
+        </select>
+    </li>
+</ul>
+    <ul style="display: none;">
+        <li><span>自定义无效答案3:</span>
+            <span class="spanInput"><input id="answer3" maxlength="40" value="" name="answer3" type="text"/></span>
+        </li>
+        <li><span>自定义无效答案4:</span>
+            <span class="spanInput"><input id="answer4" maxlength="40" value="" name="answer4" type="text"/></span>
+        </li>
+        <li><span>自定义无效答案5:</span>
+            <span class="spanInput"><input id="answer5" maxlength="40" value="" name="answer5" type="text"/></span>
+        </li>
+        <li><span>自定义无效答案6:</span>
+            <span class="spanInput"><input id="answer6" maxlength="40" value="" name="answer6" type="text"/></span>
+        </li>
+        <li><span>自定义无效答案7:</span>
+            <span class="spanInput"><input id="answer7" maxlength="40" value="" name="answer7" type="text"/></span>
+        </li>
+        <li><span>自定义无效答案8:</span>
+            <span class="spanInput"><input id="answer8" maxlength="40" value="" name="answer8" type="text"/></span>
+        </li>
+        <li><span>自定义无效答案9:</span>
+            <span class="spanInput"><input id="answer9" maxlength="40" value="" name="answer9" type="text"/></span>
+        </li>
+        <li><span>自定义无效答案10:</span>
+            <span class="spanInput"><input id="answer10" maxlength="40" value="" name="answer10" type="text"/></span>
+        </li>
+    </ul>
+<div style="text-align: center;">
+    <input class="phone_saveRob" type="button" value="提交设置" onclick="saveRob()">
+
+</div>
+
+
+</div>
+
+{% endblock %}

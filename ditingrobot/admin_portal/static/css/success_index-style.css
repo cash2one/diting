@@ -1,0 +1,119 @@
+header{
+	height: 120px;width: 100%;background: #fff;
+}
+#logo{
+	width: 242px;height: 63px;margin:22px 0 0 30px;
+}
+#logo img{
+	height: 100%;width: 100%;
+}
+nav,#logo{float: left;}
+nav{
+	width: 720px;
+	height: 100px;
+	float:right ;
+	font-size: 25px;
+}
+nav>div{
+	text-align: center;
+	line-height: 130px;
+	width: 143px;
+	height: 100px;
+	float: left;
+	color: #6f6f6f;
+	cursor: pointer;
+	border-radius: 15px;
+}
+.nav1{
+	color:#00C4C2;
+}
+#navTop input{
+	border: none;outline:none;float: left;margin-top: 50px;
+}
+#navTop .login_ctrl{
+	width: 25px;
+	height: 42px;
+
+	
+}
+#navTop .name{
+	width: 90px;
+    color: #13ced7;
+    font-weight: bold;
+    text-align: center;
+    background-color: #fff;
+    font-size: 15px;
+    height: 40px;
+    line-height: 55px;
+}
+.btn-group{
+	position: absolute;
+	right: 53px;
+	top: 54px;
+	height: 25px;
+	width: 110px;
+}
+/*==左菜单栏===================*/
+.left_menu {
+    float: left;
+    width: 229px;
+    height: 556px;
+    border-left:1px solid #ccc;
+    background: #f9faf5;
+}
+#_menu{
+	padding-top:25px ;
+}
+
+.menu li{
+	width: 181px;
+	height: 51px;
+	display: block;
+	margin: auto;
+	line-height: 51px;
+	text-align: center;
+	cursor: pointer;
+	margin-top: 12px;
+	background: #00C4C2;
+	border-radius:15px;
+}
+
+.menu li img{
+	width: 33px;
+	height: 33px;
+	position: relative;
+	top: 8px;
+	left: 12px;
+}
+.menu span {
+    position: relative;
+    top: -32px;
+    left: 16px;
+    font-size: 20px;
+   
+    color: #FFF;
+    font-weight: 900;
+}
+#section{
+	width: 1000px;margin: 0 auto;background: #f9faf5;
+}
+.mains{
+	width: 771px;border-left: 1px solid #ccc;border-right:  1px solid #ccc;margin: 0 auto;background: #f9faf5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

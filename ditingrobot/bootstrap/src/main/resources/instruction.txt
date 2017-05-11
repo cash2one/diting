@@ -1,0 +1,8 @@
+# dev
+sudo mvn exec:java
+
+# app server
+sudo mvn exec:java -Dexec.args="appbox"
+
+# cron job server
+sudo mvn exec:java -Dexec.args="cronbox"

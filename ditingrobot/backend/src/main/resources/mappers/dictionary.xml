@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.DictionaryMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.dict.Dictionary">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="value" property="value" jdbcType="VARCHAR"/>
+        <result column="tag" property="tag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.dict.Dictionary">
+     INSERT
+        INTO dictionary (
+                      name,
+                      value,
+                      tag
+                    )
+        VALUES (#{name},
+                  #{value},
+                  #{tag})
+    </insert>
+
+    <update id="update" parameterType="com.diting.model.dict.Dictionary">
+        UPDATE
+          dictionary
+        SET
+          name = #{name},
+          value = #{value},
+          tag = #{tag}
+        WHERE id = #{id}
+    </update>
+
+    <select id="get" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+          *
+        FROM
+          dictionary
+        WHERE id = #{dictId}
+        LIMIT 1
+    </select>
+
+    <select id="search" resultMap="defaultResultMap">
+        SELECT
+          *
+        FROM dictionary
+          WHERE 1=1
+            <if test="tag != null">
+                and tag = #{tag}
+            </if>
+        ORDER BY value ASC
+    </select>
+
+    <select id="checkExists" resultType="boolean">
+        select exists(
+            select
+              1
+            from
+              dictionary
+            where
+              name = #{name}
+                and value = #{value}
+                  and tag = #{tag}
+        )
+    </select>
+
+</mapper>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <div id='wx_pic' style='margin:0 auto;display:none;'>
+        <img src='/static/images/phone/pic300.jpg' />
+    </div>
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    <title>谛听机器人--爱的初配对</title>
+    <meta name="keywords" content="机器人,恋爱机器人,谛听机器人,自动应答程序,拜年机器人,客服机器人,问答机器人,招聘机器人">
+    <meta name="description" content="谛听机器人能通过注册获得自己的问答机器人。该机器人可以捆绑在自己公众号，可以部署在自己网站上，可以通过我们提供的API 进行二次开发，接入各类软件。用户可以通过我们提供的管理后台增加和编辑机器人的问答知识，将机器人用于客服、销售、招聘，机器人会自动按照用户添加的问题和答案回答提问。我们善于做上下文处理，对语义的理解更加精准。">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js" ></script>
+    <script type="text/javascript" src="/static/js/lib/circle-progress.js" ></script> <!--进度圆环-->
+    <script type="text/javascript" src="/static/js/diting-common.js{{ _suffix_ }}"></script>
+    <script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+    <link rel="stylesheet" type="text/css" href="/static/css/phone/common-style-phone.css{{ _suffix_ }}" />
+
+    <style>
+        input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; }
+        .header {
+            background: #fe73a3;
+            height: 0.76rem;
+            color: #fff;
+            line-height: 0.76rem;
+            float: left;
+            outline: none;
+            width: 100%;
+            border: none;
+            font-size: 0.38rem;
+        }
+        @-webkit-keyframes fadeIn {
+            0% {
+                opacity: 0; /*初始状态 透明度为0*/
+            }
+            90% {
+                opacity: 0; /*中间状态 透明度为0*/
+            }
+            100% {
+                opacity: 1; /*结尾状态 透明度为1*/
+            }
+        }
+        #box{
+            opacity: 0;
+            animation: fadeIn 10s 0s 1 forwards;
+            position: absolute;
+            left: 1.1rem;
+            top: 1.05rem;
+
+        }
+        .cornerMatchBtn {
+            padding: 0.11rem 0.8rem;
+            background: #fa5067;
+            color: #fff;
+            font-weight: 900;
+            font-size: 0.28rem;
+            border: 1px solid #fa5067;
+            margin-top: 0.2rem;
+            border-radius: 0.1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="header " style="text-align: center;">
+    {% if loginInfo.userName == None and loginInfo.userType == None%}
+    <a href="/m/newYearRegister" style="display: block;position: absolute; left: 0.1rem;font-size: 0.22rem;padding: 0.1rem 0.05rem;color: #fff;">领养</a>
+
+    {% else %}
+    <a href="/m/newYearRegister" style="display: block;position: absolute; left: 0.1rem;font-size: 0.22rem;padding: 0.1rem 0.05rem;color: #fff;">培养</a>
+
+    {% endif %}
+    <div style="width: 4.5rem;margin:0 auto;font-size: 0.26rem">配对池</div>
+</div>
+<div style="border-bottom:1px solid #f0f0f0;height: 2.3rem;width: 100%;">
+    <div style="width: 1.4rem;float: left"><img src="/static/images/phone/womanHeader2.png" style="width: 1rem;padding: 0.2rem"/></div>
+    <div style="width:4.5rem;float: left ;line-height: 0.3rem;font-size: 0.28rem;padding-top:0.5rem ">
+        {% if loginInfo.userName == None and loginInfo.userType == None%}
+       <p>您还没有登录， <a href="/m/cornerAI_login" style="color: #fe73a3">点我登录！</a></p>
+        {% else %}
+        <p>所有者名：<span id="ComName">{{company.name}}</span></p>
+        <p>机器人名：<span id="RobName">{{robot.name}}</span></p>
+        {% endif %}
+    </div>
+</div>
+
+<p style="text-align: center;line-height: 0.5rem;font-size: 0.28rem;color: #666;margin-top: 0.3rem">爱的配对</p>
+<div id="circle" style="position: relative;top: 0.8rem;left: 1.6rem;">
+
+    <div id="box" style="">
+        <p><b style="color: #fff">还需<b></b>人开放配对池</b></p><br/>
+        <p><span style="color: #000;font-size: 0.3rem">敬请期待</span></p><br/>
+    </div>
+
+</div>
+<div style="text-align: center;margin-top: 1rem;display: none;">
+    <input class="cornerMatchBtn" type="button" value="生成邀请链接" onclick=""><br/>
+    <p style="color:#fa5067; line-height: 0.8rem;font-size: 0.28rem;">提示：每邀请一位用户，增加一次配对机会</p>
+</div>
+
+</body>
+<script>
+
+    window.onload=function () {
+        //动态改变页面宽度
+        document.documentElement.style.fontSize=document.documentElement.clientWidth/6.4+"px";
+        window.addEventListener("resize",fn,false);
+        function fn(){
+            document.documentElement.style.fontSize=document.documentElement.clientWidth/6.4+"px";
+        }
+
+//进度圆环
+        $('#circle').circleProgress({
+            value: 1,
+            size: 200,
+            fill: {
+                gradient: ["#fe73a3", "#fe73a3"]
+            }
+        });
+
+    };
+
+</script>
+<script>
+var imgUrl = '/static/images/phone/pic300.jpg';
+var lineLink = 'www.baidu.com';
+var descContent = "万达狂欢节, 夺宝幸运星大抽奖活动开始啦！";
+var shareTitle = '万达狂欢节';
+function shareFriend() {
+WeixinJSBridge.invoke('sendAppMessage',{
+"img_url": imgUrl,
+"img_width": "640",
+"img_height": "640",
+"link": lineLink,
+"desc": descContent,
+"title": shareTitle
+}, function(res) {
+_report('send_msg', res.err_msg);
+})
+}
+function shareTimeline() {
+WeixinJSBridge.invoke('shareTimeline',{
+"img_url": imgUrl,
+"img_width": "640",
+"img_height": "640",
+"link": lineLink,
+"desc": descContent,
+"title": shareTitle
+}, function(res) {
+_report('timeline', res.err_msg);
+});
+}
+function shareWeibo() {
+WeixinJSBridge.invoke('shareWeibo',{
+"content": descContent,
+"url": lineLink,
+}, function(res) {
+_report('weibo', res.err_msg);
+});
+}
+// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+// 发送给好友
+WeixinJSBridge.on('menu:share:appmessage', function(argv){
+shareFriend();
+});
+// 分享到朋友圈
+WeixinJSBridge.on('menu:share:timeline', function(argv){
+shareTimeline();
+});
+// 分享到微博
+WeixinJSBridge.on('menu:share:weibo', function(argv){
+shareWeibo();
+});
+}, false);
+</script>
+</html>

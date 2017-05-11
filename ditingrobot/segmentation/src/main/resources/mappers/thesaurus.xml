@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.ThesaurusMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.Thesaurus">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="word" property="word" jdbcType="VARCHAR"/>
+        <result column="word_frequency" property="word_frequency" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.Thesaurus">
+        INSERT INTO wb_thesaurus(
+        word,
+        word_frequency
+        )
+        VALUES (
+        #{word},
+        #{word_frequency}
+        )
+    </insert>
+
+
+    <select id="searchForPage" parameterType="com.diting.model.options.ThesaurusOptions" resultMap="defaultResultMap">
+        SELECT * FROM wb_thesaurus WHERE 1=1
+        <if test="keyword!=null and keyword!=''">
+          AND word =#{keyword}
+        </if>
+    </select>
+
+    <update id="update" parameterType="com.diting.model.Thesaurus">
+        UPDATE wb_thesaurus SET word=#{word} , word_frequency=#{word_frequency} WHERE id=#{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM wb_thesaurus WHERE id=#{id}
+    </delete>
+
+    <select id="get" resultType="com.diting.model.Thesaurus">
+        SELECT * FROM wb_thesaurus WHERE id=#{id}
+    </select>
+</mapper>

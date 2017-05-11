@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.ParameterMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.Parameter">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="api_id" property="apiId" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="default_value" property="defaultValue" jdbcType="VARCHAR"/>
+        <result column="required" property="required" jdbcType="BOOLEAN"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.Parameter">
+        INSERT
+            INTO parameter (owner,
+                            owner_type,
+                            deleted,
+                            created_by,
+                            created_time,
+                            update_by,
+                            update_time,
+                            api_id,
+                            name,
+                            type,
+                            description,
+                            default_value,
+                            required
+                            )
+            VALUES (#{owner},
+                            #{ownerType},
+                            #{deleted},
+                            #{createdBy},
+                            #{createdTime},
+                            #{updatedBy},
+                            #{updatedTime},
+                            #{apiId},
+                            #{name},
+                            #{type},
+                            #{description},
+                            #{defaultValue},
+                            #{required})
+    </insert>
+
+    <select id="get" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+            *
+          FROM
+            parameter
+              WHERE id = #{parameterId}
+               LIMIT 1
+    </select>
+</mapper>

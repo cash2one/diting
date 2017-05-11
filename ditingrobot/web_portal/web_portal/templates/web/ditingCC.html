@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    <title>谛听机器人——拆拆</title>
+    <meta name="keywords" content="机器人,谛听机器人,谛听拆拆">
+    <meta name="description" content="谛听拆拆是知识库建设工具。它可以将类似百科知识、产品定义、企业介绍拆分成机器人自己的知识。">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" type="text/css" href="/static/css/common-style.css{{ _suffix_ }}" />
+    <script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+    <script type="text/javascript" src="/static/js/diting-common.js{{ _suffix_ }}"></script>
+    <script type="text/javascript" src="/static/js/talk.js{{ _suffix_ }}"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            talks()
+
+        }
+    </script>
+    <style type="text/css">
+        /*==与小谛的交流区================================================*/
+
+        #container {
+            display: block;
+            border-radius: 20px;
+            width: 800px;
+            height: 700px;
+            background: #eee;
+            margin: 20px auto;
+            position: relative;
+            box-shadow:15px 6px 76px #ccc;
+        }
+        .header {
+            border-radius: 5px;
+            background: #333;
+            height: 80px;
+            color: #fff;
+            line-height: 76px;
+            font-size: 38px;
+            padding: 0 10px;
+            text-align: center;
+        }
+        .footer {
+            height: 73px;
+            background: #fff;
+            position: absolute;
+            bottom: 0;
+            padding: 10px;
+            border-top: 1px solid #eee;
+            margin: 0 20px;
+        }
+        .footer input {
+            width: 550px;
+            height: 60px;
+            outline: none;
+            font-size: 26px;
+            text-indent: 10px;
+            margin: 10px;
+            border: 0;
+            background: none;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .footer span {
+            display: inline-block;
+            width: 80px;
+            height: 60px;
+            background: #64c4f4;
+            color: #fff;
+            font-weight: 100;
+            line-height: 60px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 26px;
+            float: right;
+            margin: 10px;
+        }
+        .footer span:hover {
+            color: #fff;
+            background: #999;
+        }
+        #user_face_icon {
+            margin-top: 10px;
+            display: block;
+            background: #fff;
+            width: 60px;
+            border-radius: 30px;
+            overflow: hidden;
+            float: left;
+        }
+        #user_face_icon img{
+            width: 100%;
+            height: 100%;
+        }
+        .content img {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+        }
+        .content {
+            font-size: 20px;
+            width: 99%;
+            height: 70%;
+            overflow: auto;
+            padding: 5px;
+        }
+        .content li {
+            margin-top: 10px;
+            padding-left: 10px;
+            width: 97%;
+            display: block;
+            clear: both;
+            overflow: hidden;
+        }
+        .content li img {
+            float: left;
+        }
+        .content li span{
+            background: #7cfc00;
+            padding: 10px;
+            border-radius: 10px;
+            float: left;
+            margin: 6px 10px 13px 10px;
+            max-width: 47%;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 3px #ccc;
+            position: relative;
+            word-break: break-all;
+            min-width: 60px;
+        }
+        .content li span .changeBook1{
+            float: left;width: 127px;
+        }
+        .content li span .changeBook1 .answerImg{
+            width: 127px;height: 163px;
+        }
+        .content li span .changeBook2{
+            float: left;width: 170px;min-height: 163px;
+        }
+        .content li span .changeBook2 h5{
+            text-align: center;
+            font-weight: 900;
+            font-size: 16px;
+            margin: 12px 0;
+        }
+        .content li span .changeBook2 h6{
+            margin-left: 11px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        h6{
+            font-weight: 100;
+        }
+        .content li span i{
+            position: absolute;
+            bottom: -16px;
+            right: 4px;
+            font-style: normal;
+            font-size: 12px;
+            color: #aaa;
+        }
+        .content li img.imgleft {
+            float: left;
+        }
+        .content li img.imgright {
+            float: right;
+        }
+        .content li span.spanleft {
+            float: left;
+            background: #fff;
+        }
+        .content li span.spanright {
+            float: right;
+            background: #7cfc00;
+        }
+
+        .footerNav {
+            min-width: 800px;width: 100%;background: url(/static/images/phone/phone_index/index_phoneFooter.png) no-repeat;background-size: 100%;
+        }
+        .footerNav p a{
+            color: #fff;
+            padding: 10px;
+        }
+        .footerNav p a:hover{
+            color: #00c4c2;
+        }
+        .footerNav p{
+            color: #fff;
+            padding: 10px;text-align: center;font-size: 20px
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="CCheader">
+    <h2 style="text-align: center;font-size: 40px;">谛听拆拆</h2>
+</div>
+<div style="width: 800px;margin: 30px auto;">
+    <textarea id="knowsCC" style="width: 800px; padding:0;resize: none;height: 100px; overflow-y: auto; font-size: 16px; outline: none;text-indent: 0;" placeholder="在这里输入一段知识（百科知识），然后点击下面的提交按钮。我们的人工智能算法AI会自动把您输入的内容拆分成无数条机器人的知识。您可以在下面的机器人对话框里进行测试。"></textarea>
+    <input onclick="tempCCC()" id="tempCCC" type="button" value="开始拆拆拆" style="background: #00a9e1;color: #fff; text-align: center; width: 200px; display: block; line-height: 50px;font-size: 24px;margin:10px auto;"/>
+</div>
+    <div style="margin:1px auto;">
+        <h3 id="icon003" style=" width: inherit;text-align: center;">谛听机器人开放平台-唐破床-演示<br/><i style="color: #666">ditingai robot demo</i></h3>
+        <div style="display: none;">
+            <input type="text" id="name" name="name" value="唐破床">
+            <input type="text" id="Cname" name="name" value="唐破床">
+            <input type="text" id="idd0" name="id" value="{{ robot.id }}">
+            <input type="text" id="invitationCode_no" name="invitationCode" value="">
+            <input type="text" id="enable" name="enable"  value="0">
+            <input type="text" id="unique_id" name="unique_id" value="1b5ba5c4b80640a7966d38fdd4c4427c">
+            <input type="text" id="uuid" name="uuid"  value="">
+            <input type="text" id="welcomes" name="welcomes" value="{{ robot.welcomes }}">
+            <input type="text" id="profile" name="profile"  value="{{ robot.profile or '' }}">
+            <input type="text" id="answer1" name="answer1" value="{{ robot.invalidAnswer1 }}">
+            <input type="text" id="answer2" name="answer2" value="{{ robot.invalidAnswer2 }}">
+            <input type="text" id="answer3" name="answer3" value="{{ robot.invalidAnswer3 }}">
+            <input type="text" id="answer4" name="answer4" value="{{ robot.invalidAnswer4 }}">
+            <input type="text" id="answer5" name="answer5" value="{{ robot.invalidAnswer5 }}">
+            <input type="text" id="headPortrait" name="headPortrait" value="http://diting-picture.pingxingren.cn/jinLhF60kNPTO3yDz6JJUn.jpg?imageMogr2?imageMogr2/thumbnail/100x100">
+        </div>
+        <div id="container">
+            <div class="header"  id="roboName0">
+            </div>
+
+            <ul class="content" id="content">
+            </ul>
+            <div class="footer">
+                <div id="user_face_icon">
+                    <img id="thead" src="/static/images/phone/manHeader1.png" alt="聊天头像">
+                </div>
+                <input id="text" type="text" placeholder="有事可以提问题，没事还能唠唠嗑..."/>
+                <span id="btn">发送</span>
+            </div>
+
+        </div>
+
+        <div id="answerImgBigTC"></div>
+    </div>
+<div class="footerNav">
+    <p style=""><a href="/">首页</a>|<a href="/login">登录</a>|<a href="/all_questions_rank">排行榜</a>|<a href="/channel">接入下载</a></p>
+    <p style="font-size: 14px;"> Copyright ©2016 谛听机器人 All Rights Reserved 京ICP备16026036号-1<br/>增值电信业务经营许可证：京B2-20170408</p>
+
+</div>
+
+</body>
+<script>
+    function tempCCC(){
+        if($('#knowsCC').val().length>="40"){
+            var CCC = {
+                question: $('#knowsCC').val(),
+                accountId:15
+            };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: 'temp/knowledge/save',
+                data: JSON.stringify(CCC)
+            }).done(function (data) {
+                var data = JSON.parse(data);
+                console.log(data)
+                layer.msg(data.result)
+            }).fail(function (data) {
+                var message = JSON.parse(data.responseText).message;
+                layer.msg(message, {icon: 5})
+            });
+        }else {
+            layer.msg("您要拆分的内容不能少于40个字哦！", {icon: 5})
+        }
+
+    }
+</script>
+</html>

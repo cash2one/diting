@@ -1,0 +1,105 @@
+{% extends "web/ditingpc1.0/success_layout.html" %}
+{% block head %}
+		<script type="text/javascript" src="/static/js/diting1.0/pc/company.js{{ _suffix_ }}"></script>
+<style type="text/css">
+	#station_M>tbody>tr:hover{
+		background: #fafafa
+	}
+	#station_M {
+		font-size: 14px;
+		min-width: 1000px;width: 100%;
+
+	}
+	#station_M th{
+		background: #fff;height:60px;
+		border-bottom: 1px solid #fafafa;
+		border-top: 1px solid #fafafa;
+		text-align: center;
+
+	}
+	#station_M td{
+		text-align: center;font-size: 12px;max-height: 50px;overflow: hidden;
+		border-right:1px solid #fff;
+		word-break: break-all;text-align: center;
+	}
+
+	#station_M tr{
+		height:40px;
+	}
+
+	#shopss{
+		margin: 20px auto;
+		width: 1000px;
+	}
+	.stationMessageMoreStyle {
+		width: 40%;
+		height: 400px;
+		background: #f2f2f2;
+		overflow-y: auto;
+		position: fixed;
+		top: 18%;
+		left: 30%;
+		border-radius: 10px;
+		padding: 10px;
+	}
+</style>
+{% endblock %}
+
+
+{% block main %}
+
+		<div class="mains" style="padding: 0 20px;min-height: 610px">
+			<div style="display: none">
+				<input id="receive_name" type="text" value="{{robot.name}}">
+			</div>
+			<div >
+				<h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_sys1.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;系统消息</h3>
+				<div style="display: none;">
+					<input type="text" id="pageNo" value=""/>
+				</div>
+				<table  border="0" cellpadding="0" cellspacing="0" id="station_M">
+
+				</table>
+				<div id="shopss">
+
+					<div id="red" style="margin: 0;width: 900px;" class="pager red" >
+						<div class="btn disabled">首页</div>
+						<div class="btn disabled">上一页</div>
+						<ul id="pages">
+							<li>
+								<a id="1" class="red normal active" href="javascript:void(0)">1</a>
+							</li>
+							<li>
+								<a id="2" class="red normal" href="javascript:void(0)">2</a>
+							</li>
+							<li>
+								<a id="3" class="red normal" href="javascript:void(0)">3</a>
+							</li>
+							<li>
+								<a id="4" class="red normal" href="javascript:void(0)">4</a>
+							</li>
+						</ul>
+						<div class="btn">下一页</div>
+						<div class="btn">尾页</div>
+						<div class="short" style="float: right"><input type="text" /><input type="button" value="跳转" class="btn"><span><b></b></span><span></span><span><b></b></span><span>总计</span><span><b></b>条</span></div>
+					</div></div>
+
+
+			</div>
+			
+		</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+	window.onload=function () {
+		csh_sysStation();
+		$('.newTime').html(new Date().toLocaleString())
+
+
+	};
+</script>
+{% endblock %}
+
+

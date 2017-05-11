@@ -1,0 +1,277 @@
+{% extends "web/success_layout.html" %}
+{% block style %}
+    <style type="text/css">
+        .link_item {
+            width: 1000px;
+            height: 120px;
+            border-bottom: #e7e7e7 solid 1px;
+            margin: 0 auto;
+        }
+
+        .link_item div {
+            cursor: pointer;
+            float: left;
+            height: 120px;
+            line-height: 120px;
+            float: left;
+            width: 220px;
+            margin-left: 50px;
+            color: #00c4c2;
+            font-size: 24px;
+            text-align: left;
+        }
+
+        .link_item div a {
+            color: #00c4c2;
+        }
+
+        .link_item img {
+            width:80px;
+            height: 73px;
+            float: left;
+            margin-top: 20px;
+            margin-left: 100px;
+        }
+
+        .sample_code {
+            background: #fff;
+            display: none;
+            margin: 15px auto;
+            width: 800px;
+            height: 300px;
+            border: 1px solid #e7e7e7;
+            overflow: auto;
+            padding: 10px;
+        }
+
+        .link_item .examples {
+            background: url(/static/images/down1.png) no-repeat right center;
+            width: 120px;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+    <body>
+    <div class="link_item">
+        <img src="/static/images/01.png"/>
+
+        <div style="cursor: default;">接入网站客服</div>
+        <div><a onclick="window.location.href='/api/web_document/download'">下载说明文档</a></div>
+        <div class="examples" id="examples1">示例代码</div>
+    </div>
+    <div class="sample_code" id="web_code1" style="display: none;">
+
+    </div>
+
+    <div class="link_item">
+        <img src="/static/images/04.png"/>
+
+        <div style="cursor: default;">接入微信公众平台</div>
+        <div><a onclick="window.location.href='/api/web_document/download'">下载说明文档</a></div>
+        <div><a id="wx_go" title="请在www.ditingai.com完整域名下接入微信，否则会接入失败"
+                style="cursor:pointer;padding:10px;line-height:34px;font-size:16px;color: #fff;border: none;width: 125px;height: 34px;border-radius: 17px;background: #00C4C2">+微信公众号</a>
+        </div>
+
+
+    </div>
+  <!--  <div class="link_item">
+        <img src="/static/images/04.png"/>
+
+        <div style="cursor: default;">接入个人微信号</div>
+        <div><a onclick="window.location.href='/api/web_document/download'">下载说明文档</a></div>
+        <div class="examples" id="examples04">快速接入</div>
+    </div>
+    <div class="sample_code" id="web_code04" style="display: none;">
+        <ul class="rob_txt">
+            <li>
+                <span>&nbsp;&nbsp;&nbsp;微信昵称:</span>
+                <span class="spanInput"><input type="text" placeholder="请输入您的微信昵称" name="nicheng" value="" id="nicheng" required="required" maxlength="16" /></span>
+                <input style=" width: 70px; height: 34px; background: #13CED7; border-radius: 5px; font-size: 16px;  border: none; color: #fff;" type="button" value="确认"  onclick="save_weixin()" />
+            </li>
+        </ul>
+
+
+        <div class="_input_nobg" style="margin-top: 20px; width: 205px;margin: 10px auto;">
+            <img id="img_a" style="width: 100%;">
+        </div>
+    </div>-->
+    <div class="link_item">
+        <img src="/static/images/applogo0.png"/>
+
+        <div style="cursor: default;">谛听语义APP</div>
+        <div><a onclick="window.location.href='/api/dtrobot_sementic_app_operationGuide/download'">下载说明文档</a></div>
+        <div><a onclick="window.location.href='/api/dtrobot_document/download'"  style="cursor:pointer;padding:10px 14px;line-height:34px;font-size:16px;color: #fff;border: none;width: 125px;height: 34px;border-radius: 17px;background: #00C4C2">&nbsp;APP&nbsp;下&nbsp;载&nbsp;</a>
+        </div>
+
+
+    </div>
+    <!--<div class="link_item" style="display: none">-->
+        <!--<img src="/static/images/02.png"/>-->
+
+        <!--<div style="cursor: default;">中文切词API</div>-->
+        <!--<div><a onclick="window.location.href='/api/word_segmentation/download'">下载说明文档</a></div>-->
+        <!--<div class="examples" id="examples3">示例代码</div>-->
+    <!--</div>-->
+    <!--<div class="sample_code" id="chinaapi_code3" style="display: none;">-->
+
+    <!--</div>-->
+
+    <div class="link_item">
+        <img src="/static/images/06.png"/>
+
+        <div style="cursor: default;">开放的机器人API</div>
+        <div><a onclick="window.location.href='/api/website_customer_service/download'">下载说明文档</a></div>
+        <div class="examples" id="examples4">示例代码</div>
+    </div>
+    <div class="sample_code" id="robotapi_code4" style="display: none;">
+        public class HttpUtils {<br/>
+
+            public static String sendRequestWithHttpURLConnection(String url,String json) {<br/>
+
+                String response = null;<br/>
+
+                try {<br/>
+
+                URL Url = new URL(url);<br/>
+
+                HttpURLConnection connection = (HttpURLConnection) Url.openConnection();<br/>
+
+                    connection.setDoOutput(true);<br/>
+
+                    connection.setDoInput(true);<br/>
+
+                    connection.setRequestMethod("POST");<br/>
+
+                               connection.setUseCaches(false);<br/>
+
+                               connection.setInstanceFollowRedirects(true);<br/>
+
+                               connection.setRequestProperty("Content-Type", "application/json");<br/>
+
+                               connection.connect();<br/>
+
+                    // POST请求<br/>
+                               DataOutputStream out = new DataOutputStream(connection.getOutputStream());<br/>
+                               out.write(json.getBytes());<br/>
+                               out.flush();<br/>
+                               out.close();<br/>
+
+                               // 读取响应
+                               BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));<br/>
+                               String lines;<br/>
+                               StringBuffer sb = new StringBuffer("");<br/>
+                               while ((lines = reader.readLine()) != null) {<br/>
+                                      lines = new String(lines.getBytes(), "utf-8");<br/>
+                                      sb.append(lines);<br/>
+                               }<br/>
+                               reader.close();<br/>
+                              // 断开连接<br/>
+                               connection.disconnect();<br/>
+                               response = sb.toString();<br/>
+
+                } catch (Exception e) {<br/>
+
+                    e.printStackTrace();<br/>
+
+                    return "我是机器人，很高兴为您服务！";<br/>
+
+                }<br/>
+
+                return response;<br/>
+
+            }<br/>
+
+           
+
+        public static void main(String[] args) {<br/>
+               JSONObject json = new JSONObject();<br/>
+               try {<br/>
+                       json.put("uuid","ssdeesds"); //随机字符串 保证唯一即可<br/>
+                       json.put("question","你好");<br/>
+                       json.put("username","13161202845"); //换成自己注册的谛听开发平台账号<br/>
+               } catch (JSONException e) {<br/>
+                      // TODO Auto-generated catch block<br/>
+                       e.printStackTrace();<br/>
+               }
+               String s = HttpUtils.sendRequestWithHttpURLConnection("http://www.ditingai.com/remote/chat/info",json.toString());<br/>
+               if (s != null) {<br/>
+               try {<br/>
+                       JSONObject jsonobject= new JSONObject(s.toString());<br/>
+                       String answer = jsonobject.getString("answer"); //得到答案<br/>
+                       String action = jsonobject.getJSONObject("action").getString("actionOption"); //得到动作<br/>
+                       System.out.println("answer:" + answer);<br/>
+                       System.out.println("action:" + action);<br/>
+               } catch (JSONException e) {<br/>
+                      // TODO Auto-generated catch block<br/>
+                     e.printStackTrace();<br/>
+               }<br/>
+          }<br/>
+        }   <br/>
+
+     }<br/>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        window.onload = function () {
+            var strssl = "&lt;style&gt;a.__cl_weblink{position:fixed;bottom:10px;right:20px;display:inlin-block}&lt;/style&gt;&lt;a class='__cl_weblink' href='" + "<input id='web_url' type='text' style='width: 100%;border: none;'/>" + " ' target='_blank'&gt;&lt;img style='width:60px;height:60px;' src='http://www.ditingai.com/static/images/xiaodi.jpg'/&gt;&lt;/a&gt;<br/>* 提示： 手动复制上面的代码并添加到网页中，请将代码置于&lt;/body&gt;标签之前。<br/> * 或者直接使用下面的地址： " + "<input id='web_url2' type='text' style='width: 100%;border: none;'/>"
+            $('#web_code1').html(strssl);
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: "/api/get-robot-info"
+
+            }).done(function (data) {
+                var result = JSON.parse(data);
+                if (result.shortDomainName != null && result.shortDomainName != "") {
+                    $("#web_url").val('http://www.ditingai.com/r/' + result.shortDomainName);
+                    $("#web_url2").val('http://www.ditingai.com/r/' + result.shortDomainName);
+                } else {
+                    $("#web_url").val('http://www.ditingai.com/robot-company/' + result.uniqueId);
+                    $("#web_url2").val('http://www.ditingai.com/robot-company/' + result.uniqueId);
+                }
+            }).fail(function (data) {
+            });
+
+            clickDisnone('examples1', 'web_code1')
+//            clickDisnone('examples04', 'web_code04')
+//            clickDisnone('examples3', 'chinaapi_code3')
+            clickDisnone('examples4', 'robotapi_code4')
+            $("#wx_go").click(function go() {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: '/wx/api/wechat/authorize'
+                }).done(function (data) {
+                    window.location.href = data.message;
+                }).fail(function (data) {
+                });
+            })
+        }
+
+        function save_weixin() {
+            var account = {}
+            account.phone = $("#nicheng").val();
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: '/mails/find_p',
+                data: JSON.stringify(account)
+            }).done(function (data) {
+                layer.msg(data.message, {time:500,icon: 6}, function () {
+                    data =	JSON.parse(data)
+                    phone = data.flg;
+                    // alert(phone);
+                    //F:\robor\ditingrobot\web_portal\web_portal\static\ima
+                    $("#img_a").attr("src", "http://on7e7xp4p.bkt.clouddn.com/"+ phone);
+                })
+            }).fail(function (data) {
+                // var message = JSON.parse(data.responseText).message;
+                // layer.msg(message, {icon: 5})
+            });
+        }
+    </script>
+{% endblock %}

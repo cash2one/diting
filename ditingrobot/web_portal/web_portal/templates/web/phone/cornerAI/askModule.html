@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+		<title>黑图-提问</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+            html{
+                width: 100%;
+                overflow: hidden;
+            }
+			body{
+                width: 100%;
+                overflow: hidden;
+				background: #f2f2f2;
+			}
+            .item{
+                position: relative;
+            }
+            .itemText{
+                font-size:14px;
+                text-align:center;
+            }
+            .itemImg{
+                width: 80px;
+            }
+            .sexImg{
+                display: block;
+                width: 10px;
+                height: 10px;
+                position: absolute;
+                left: 0;
+                top:0;
+            }
+            input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; }
+		</style>
+	</head>
+	<body>
+    <span id="isLogin" style="display: none"></span>
+    <div id="wrapLoad" style="width: 100%;height: 100%;background: rgba(0,0,0,0.2);position:fixed;top:0;z-index:999;display: none">
+        <img src="/static/images/phone/loading.gif" style="display: block;margin: 50% auto 0" alt="">
+    </div>
+    <div id="messages" style="display: none">
+        <span id="upHead">{{ account.headImgUrl }}</span>
+    </div>
+		<div>
+			<div id="image-wrap" style="height: 250px;padding-top: 5px;position: relative;background: white;" >
+				<span style="display: block;width: 100%;height: 50px; border: 1px dashed #CCC;position: absolute;bottom:-50px ;background: white;">
+					<span style="position: absolute;top: 0;display: block;line-height: 50px;text-align: center;width: 100%;">+添加图片</span>
+					<input type="file" id="inputImage" name="file" accept="image/jpg,image/jpeg,image/png" multiple style="opacity: 0;display: inline-block;border: none; width: 100%;height: 50px;" value="+"/>
+				</span>
+			</div>
+
+
+			<div style="height: 60px; padding-top: 20px;margin-top: 50px;background: white;margin-top: 70px" >
+				<p style="width: 20%;display: inline-block;margin-left: 12px;font-size: 14px;">奇葩问题:</p>
+				<input id="problem" style="width: 74%;height: 40px; float: right;border: 1px solid #CCC;margin-right: 1%;border: none;outline: none;" placeholder="(60字以内)"  />
+			</div>
+			<div style="height: 40px;background: white;margin-top: 20px;" >
+				<p style="width: 20%;display: inline-block;margin-left: 12px;height: 40px;line-height: 40px;font-size: 14px;">问题答案:</p>
+				<input id="answer" style="width: 74%;height: 40px; float: right;border: 1px solid #CCC;margin-right: 1%;border: none;outline: none;" placeholder="（答案不超过五个字）" />
+			</div>
+        </div>
+
+
+        <div>
+             <button style="background: #4ab7fc;width: 80%;line-height: 40px;height: 40px;margin: 40px 10%;border:none;color: white;font-size: 14px;border-radius: 5px" onclick="pdLogin()">发布</button>
+		</div>
+
+	</body>
+    <script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js" ></script>
+    <script src="/static/js/lib/ajaxfileupload.js" type="text/javascript"></script>
+    <script src="/static/js/loveAutoLogin.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+    	$(document).ready(function(){
+			$.imageFileVisible({wrapSelector: "#image-wrap",
+				fileSelector: "#inputImage",
+				width: 100,
+				height: 50
+			});
+			autoLogin();
+		});
+        function pdLogin() {
+             if($("#isLogin").html()=="ok"){
+                uploadImage('inputImage')
+            }else{
+                 window.location.href="/m/cornerAI_login"
+             }
+        }
+        function uploadImage(element) {
+            //console.log($("#problem").val().length,$("#answer").val())
+             //console.log($("#image-wrap").css("background-color"))
+            if($("#problem").val().length>60||$("#answer").val().length>5||$("#image-wrap").css("background-color")=="rgb(255, 255, 255)"){
+                alert("请重新填写问题或图片！")
+            }else{
+                $("#wrapLoad").css("display","block")
+                 $.ajaxFileUpload({
+                type: 'post',
+                url: '/upload/' + element, //你处理上传文件的服务端
+                secureuri: false, //是否需要安全协议，一般设置为false
+                fileElementId: element,//与页面处理代码中file相对应的ID值
+                async: false,
+                dataType: 'json', //返回数据类型:text，xml，json，html,scritp,jsonp五种
+                success: function (data) {
+                    console.log(data)
+                    askProblem(data.url)
+                },
+                error: function (data, status, e)//服务器响应失败处理函数
+                {
+                    console.error(e);
+                }
+
+            })
+          }
+        }
+        function askProblem(url) {
+            var problemData={
+                question:$("#problem").val(),
+                answer:$("#answer").val(),
+                imageUrl:url,
+                headImgUrl:$("#upHead").html(),     //  用户头像
+                sex:0
+            }
+            console.log(problemData)
+            if (problemData.question == "" || problemData.question == null) {
+                alert("问题不能为空")
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: '/love/create',
+                    data: JSON.stringify(problemData)
+                }).done(function (data) {
+                    $("#wrapLoad").css("display","none")
+                    alert("提问成功！")
+                    window.location.href="/m/indexPage"
+                })
+            }
+        }
+</script>
+
+<script type="text/javascript">
+	(function($) {
+		$.imageFileVisible = function(options) {
+			var defaults = {
+			wrapSelector: null,
+  			fileSelector:  null ,
+  			width : '100%',
+  			height: 'auto',
+  			errorMessage: "不是图片"
+ 		};
+ 		var opts = $.extend(defaults, options);
+ 		$(opts.fileSelector).on("change",function(){
+		var file = this.files[0];
+		var imageType = /image.*/;
+		if (file.type.match(imageType)) {
+		var reader = new FileReader();
+		reader.onload = function(){
+			$("#image-wrap").css({
+				"background":"url("+reader.result+") no-repeat",
+				"background-size":"100% 100%"
+			})
+
+		};
+		reader.readAsDataURL(file);
+		}else{
+		    alert(opts.errorMessage);
+		}
+	});
+	};
+})($);
+</script>
+</html>

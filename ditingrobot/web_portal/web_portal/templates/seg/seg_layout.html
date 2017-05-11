@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="/static/images/favicon.ico">
+	{% block title %}
+	<title>谛听机器人语义词库</title>
+	{% endblock %}
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js" ></script>
+	<script type="text/javascript" src="/static/js/lib/bootstrap.min.js" ></script>
+	<script type="text/javascript" src="/static/js/lib/smartpaginator.js"></script><!--分页插件-->
+	<script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+	<script type="text/javascript" src="/static/js/lib/bootstrap-datepicker.js"></script> <!--时间插件-->
+	<link rel="stylesheet" href="/static/css/lib/smartpaginator.css" />
+	<link rel="stylesheet" href="/static/css/lib/bootstrap.min.css" />
+	<link rel="stylesheet" href="/static/css/lib/datepicker.css" /> <!--时间插件样式-->
+	<link rel="stylesheet" type="text/css" href="/static/css/common-style.css{{ _suffix_ }}" />
+	<link rel="stylesheet" type="text/css" href="/static/css/success_index-style.css{{ _suffix_ }}" />
+	<link rel="stylesheet" type="text/css" href="/static/css/seg-style.css{{ _suffix_ }}" />
+	{% block head %}{% endblock %}
+	<style>
+		.menu .segLi{
+			width:100%;border-radius: 0;
+			background: #222;
+			border:1px solid #333;
+			margin: 0;
+		}
+		.menu .segLi2{
+			color: #999999;
+			background: #333;
+			border-bottom: 1px solid #383838;
+			display: none;
+			height:40px;
+			line-height: 40px;
+		}
+		.menu .segLi span{
+			color: #9d9d9d;
+			top:0;left: 0;
+		}
+		.menu .segLi2 span{
+			font-size: 14px;
+		}
+		.menu .segLi:hover span,.menu .segLi:hover{
+			color: #fff;
+			background: #444;
+		}
+		#navTop input{
+			margin:0;
+		}
+		.btn-group{
+			top:10px;
+		}
+	</style>
+</head>
+
+<body style="overflow-x: hidden;">
+<!--==header开始==============================================-->
+<header style="background: #222;height: 50px;position: fixed;top: 0px;z-index: 100;">
+	<div style="height:100%;margin: 0 auto;position: relative;">
+		<nav id="navTop" style="height: 50px;">
+			<div style="float: right ;border: 0;">
+
+				<input class="login_ctrl" type="button" style="background: url(/static/images/user_photo.png) no-repeat center;background-size: 25px;"/>
+				<input class="name" id="regname" type="text" style="background: #222" readonly="readonly" value="15116972596"/>
+
+				<section class="btn-group">
+					<a class="btn" data-toggle="dropdown" href="#" style="height: 100%;width: 100%;border: none;outline: none;">      </a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" >
+						<li><a class="pwd-change" tabindex="-1" >修改密码</a></li>
+						<li><a tabindex="-1" href="/logout">注销</a></li>
+					</ul>
+				</section>
+			</div>
+		</nav>
+		<div class="cleardiv"></div>
+	</div>
+</header>
+
+<!--==section==================================================-->
+<div id="tanchuang"></div>
+<section  style="position: relative">
+	<menu class="left_menu" style="height: 704px;width: 15%;background: #222;border: 0;position: fixed;top: 50px;left: 0;">
+				<span>
+
+					<div id="_menu" style="padding: 0">
+						<ul class="menu">
+							<li class="left_nav1 segLi" >
+								<a href="#"><span>系统账号↓</span></a>
+							</li>
+
+							<li class="left_nav1_1 segLi segLi2" >
+								<a href="/seg/admin"><span>内部账号</span></a>
+							</li>
+
+							<li class="left_nav2 segLi" >
+								<a href="#"><span>词库管理↓</span></a>
+							</li>
+
+							<li class="left_nav2_1 segLi segLi2" >
+								<a href="/seg/native"><span>原生词库管理</span></a>
+							</li>
+							<li class="left_nav2_1 segLi segLi2" >
+								<a href="/seg/synonymous"><span>同义词管理</span></a>
+							</li>
+							<li class="left_nav2_1 segLi segLi2" >
+								<a href="/seg/absoluteReplacement"><span>绝对替换管理</span></a>
+							</li>
+							<li class="left_nav2_1 segLi segLi2" >
+								<a href="/seg/synonymy"><span>近义词替换管理</span></a>
+							</li>
+							<li class="left_nav2_1 segLi segLi2" >
+								<a href="/seg/spokenLanguage"><span>口语处理</span></a>
+							</li>
+
+							<li class="left_nav3 segLi" >
+								<a href="#"><span>新词系统↓</span></a>
+							</li>
+
+							<li class="left_nav3_1 segLi segLi2" >
+								<a href="/seg/newWord"><span>新词管理</span></a>
+							</li>
+
+							<li class="left_nav4 segLi" >
+								<a href="#"><span>语义理解API↓</span></a>
+							</li>
+
+							<li class="left_nav4_1 segLi segLi2" >
+								<a href="/seg/semanticsAPI"><span>语义理解API测试</span></a>
+							</li>
+						</ul>
+					</div>
+				</span>
+	</menu>
+	<!--==右侧内容区==============-->
+
+	<div class="mains" style="height: 704px;width: 85%;overflow-y: auto;position: relative;">
+		<div style="height: 50px;width: 100%;"></div>
+		{% block main %}{% endblock %}
+
+
+	</div>
+</section>
+<!--==footer部分==============================================-->
+
+</body>
+<script type="text/javascript">
+	$('.left_nav1').click(function(){
+		$('.left_nav1_1').toggle();
+	});
+	$('.left_nav2').click(function(){
+		$('.left_nav2_1').toggle();
+	});
+	$('.left_nav3').click(function(){
+		$('.left_nav3_1').toggle();
+	});
+	$('.left_nav4').click(function(){
+		$('.left_nav4_1').toggle();
+	});
+</script>
+
+</html>

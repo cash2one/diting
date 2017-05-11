@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.diting.dao.WalletLotTransactionMapper">
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.WalletLotTransaction">
+        INSERT
+            INTO wallet_lot_transaction (
+                    owner,
+                    owner_type,
+                    deleted,
+                    created_by,
+                    created_time,
+                    update_by,
+                    update_time,
+                    wallet_id,
+                    wallet_lot_id,
+                    wallet_transaction_id,
+                    transaction_type,
+                    lot_type,
+                    tracking_uuid,
+                    amount
+                    )
+            VALUES (#{owner},
+                    #{ownerType},
+                    #{deleted},
+                    #{createdBy},
+                    #{createdTime},
+                    #{updatedBy},
+                    #{updatedTime},
+                    #{walletId},
+                    #{walletLotId},
+                    #{transactionId},
+                    #{transactionType},
+                    #{lotType},
+                    #{trackingUuid},
+                    #{amount})
+    </insert>
+
+
+    <!--<select id="search" resultMap="defaultResultMap">-->
+        <!--select-->
+            <!--<include refid="*"/>-->
+        <!--from wallet_lot_transcation-->
+        <!--where 1=1-->
+        <!--<if test="options.walletId != null">-->
+            <!--and payload->>'walletId' = #{options.walletId}-->
+        <!--</if>-->
+        <!--<if test="options.transactionType != null">-->
+            <!--and payload->>'walletLotId' = #{options.walletLotId}-->
+        <!--</if>-->
+        <!--<include refid="PAGINATION"/>-->
+    <!--</select>-->
+</mapper>

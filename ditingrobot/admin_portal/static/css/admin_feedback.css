@@ -1,0 +1,118 @@
+.conNav{
+    height:40px;
+    background:white;
+    margin-top:10px;
+    line-height:40px;
+    text-indent:10px;
+}
+
+.tit_table{
+	width: 100%;
+	background: white;
+}
+.tit_table td{
+	background: #EEF3FA;
+	text-align: center;
+	padding:4px 0;
+}
+.tit0{
+	width: 28px;
+}
+.tit_ans{
+	width: 46px;
+	max-width: 46px;
+    text-align: center;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+.changjing{
+	width: 280px;
+    max-width: 280px;
+    text-align: center;
+    word-wrap: break-word;
+}
+.tit_time{
+	width: 80px;
+}
+.tit_control{
+	width: 60px;
+}
+.lookOver{
+	color: #00C4C2;
+	cursor: pointer;
+}
+.mainTable{
+	position: relative;
+	min-height: 400px;
+	font-size: 12px;
+}
+.footPage{
+	width: 100%;
+	position: absolute;
+	top: 100%;
+	background: white;
+	height: 42px;
+}
+.page{
+    height: 40px;
+	float: left;
+	margin-top: 2px;
+}
+#alldeletes{
+	float: left;
+    border: none;
+    margin-top: 12px;
+	background: white;
+	cursor: pointer;
+	margin-left: 20px;
+	background: url(/static/images/admin2.0/shanchu00.png) no-repeat;
+	background-size: auto 100%;
+	width: 80px;
+	text-indent: 20px;
+}
+.text_link{
+	width: 40px;
+    margin-top: 10px;
+	height: 18px;
+	float: right;
+}
+#link_page{
+	float: right;
+	margin-top: 10px;
+}
+#pageCount{
+	display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    color: red;
+}
+.edit_item{
+	width: 30px;
+	height: 22px;
+	background: url(/static/images/admin2.0/bianji00.png) no-repeat;
+	background-size: auto 100%;
+	border: none;
+}
+.dele_item{
+	width: 30px;
+	height: 22px;
+	background: url(/static/images/admin2.0/shanchu00.png) no-repeat;
+	background-size: auto 100%;
+	border: none;
+}
+.pageCountW{
+	width: 80px;
+	float: left;
+}
+.tianjia{
+	background:white url(/static/images/admin2.0/add00.png) no-repeat;
+	background-size: auto 110%;
+}
+.addIn{
+	background:white url(/static/images/admin2.0/addin.png) no-repeat;
+	background-size: auto 110%;
+}
+.addOut{
+	background:white url(/static/images/admin2.0/addout.png) no-repeat;
+	background-size: auto 110%;
+}

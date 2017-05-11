@@ -1,0 +1,162 @@
+{% extends "success_layout.html" %}
+{% block head %}
+		<title>谛听机器人——日报数据表</title>
+		<style type="text/css">
+			nav, #logo {float: left;  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;  }
+			.update_c p span{color:#4898d5;}
+			table,td {text-align: center;}
+			table {width: 1000px;border-collapse: collapse;}
+			th,td {padding: .5em;border: 1px solid #fff;}
+			th {background: #328aa4 url(/static/images/tr_back.gif) repeat-x;color: #fff;text-align: center;}
+			td {background: #e5f1f4;}
+			#admin_daily_tab{border: 1px solid #ccc;display: block;  max-height: 431px;  overflow-y: scroll;  height: 431px;  overflow-x: hidden;  background: #efefef;  }
+			.tablemain{width: 1000px;margin: 0 auto;}
+			/* tablecloth styles */
+			td:hover{background: #ecfbd4;}
+			td:active{background: #bce774;color: #fff;  }
+			.btnzt{border: none;width: 72px;height: 32px;border:2px solid #00c4c2;background: #00c4c2;border-radius: 5px;font-size: 16px;color: #fff;cursor: pointer;  }
+			.btnzt:active{background: #328aa4;}
+			.pager{margin: 0;width:922px;}
+			.export_daily{
+				border: 0;
+				width: 50px;
+				height: 30px;
+				background: #55a6e0;
+				text-align: center;
+				line-height: 30px;
+				color: #fff;
+				border-radius: 5px;
+				font-size: 16px;
+				margin: 10px;
+			}
+
+		</style>
+{% endblock %}
+
+{% block main %}
+	<div style="display: none;">
+		<input type="text" id="pageNo" value="" />
+	</div>
+	<div class="tablemain">
+		<div style="text-align: center;color: #00C4C2;font-size: 25px;padding-top: 10px">日报数据表</div>
+		<table cellspacing="0" cellpadding="0" id="admin_daily_tab">
+
+
+		</table>
+		<div id="shopss">
+			<input class="export_daily" type="button" value="导出" onclick="window.location.href='/api/sta-accounts/export-sta-account'" />
+			<div id="red" style="float: right;" class="pager red" >
+				<div class="btn disabled">首页</div>
+				<div class="btn disabled">上一页</div>
+				<ul id="pages">
+					<li>
+						<a id="1" class="red normal active" href="javascript:void(0)">1</a>
+					</li>
+					<li>
+						<a id="2" class="red normal" href="javascript:void(0)">2</a>
+					</li>
+					<li>
+						<a id="3" class="red normal" href="javascript:void(0)">3</a>
+					</li>
+					<li>
+						<a id="4" class="red normal" href="javascript:void(0)">4</a>
+					</li>
+				</ul>
+				<div class="btn">下一页</div>
+				<div class="btn">尾页</div>
+				<div class="short"><input type="text"><input type="button" value="跳转" class="btn"></div><span><b></b></span><span></span><span><b></b></span><span>总计</span><span><b></b>条</span></div>
+		</div>
+	</div>
+
+
+
+	<div id="tanc"></div>
+
+{% endblock %}
+
+{% block script %}
+	<script>
+
+	<!--初始化管理员第三方应用页面-->
+
+	$.ajax({
+		type: "GET",
+		contentType: "application/json",
+		url:  "/api/sta-accounts/search-page?pageNo="+1
+	}).done(function (data) {
+		var data = JSON.parse(data);
+		console.log(data)
+		Paging_device(data.total);
+		var str = '<tr> <th rowspan="2" style="width: 44px;">日期</th> <th colspan="6">单日用户数据</th> <th colspan="3">累计用户数据</th> <th colspan="4">活跃用户</th> <th colspan="2">知识库容量（句）</th> <th rowspan="2">单日登录用户（人）</th> </tr> <tr> <th>总新增注册用户（人）</th>  <th>新增注册用户（人）</th><th>注册用户总数（人）</th> <th>单日有效问答（句）</th> <th>单日无效问答（句）</th> <th>单日问答总量（句）</th> <th>有效问答总量（句）</th> <th>无效问答总量（句）</th> <th>累计问答总量（句）</th><th style="width: 50px;">单日C端问答用户数（人）</th>  <th style="width: 50px;">单日B端问答用户数（人）</th> <th style="width: 50px;">活跃问答总句数（句）</th> <th style="width: 50px;">活跃问答人均句数（句）</th> <th>知识库新增容量（句）</th> <th>知识库总容量（句）</th> </tr>';
+		for (var i = 0; i < data.items.length; i++) {
+			var d = new Date(data.items[i].dataTime );    //根据时间戳生成的时间对象
+			var times = (d.getFullYear()) + "/" + (d.getMonth() + 1) + "/" + (d.getDate());
+			str += '<tr> <td>'+ times +'</td><td>'+ data.items[i].dayAccountCount +'</td> <td>'+ data.items[i].dayAccountCountOne +'/'+ data.items[i].dayAccountCountTwo +'/'+ data.items[i].dayAccountCountThree +'/'+ data.items[i].dayAccountCountFour +'/'+ data.items[i].dayAccountCountFive +'</td><td>'+ data.items[i].allAccountCount +'</td> <td>'+ data.items[i].dayValidCount +'</td> <td>'+ data.items[i].dayInvalidCount +'</td> <td>'+ data.items[i].dayQuestionCount +'</td> <td>'+ data.items[i].allValidCount+'</td> <td>'+ data.items[i].allInvalidCount +'</td> <td>'+ data.items[i].allQuestionCount +'</td> <td>'+ data.items[i].dayQuestionAndAnswerNumber +'</td> <td>'+ data.items[i].dayQuestionAndAnswerUserNum +'</td> <td>暂无</td> <td>暂无</td> <td>'+ data.items[i].dayKnowledgeCount +'</td> <td>'+ data.items[i].allKnowledgeCount +'</td> <td>'+ data.items[i].dayLoginCount+'</td> </tr>';
+
+		}
+		if(data.items.length==0){
+			var strxx = '<tr> <th rowspan="2" style="width: 44px;">日期</th> <th colspan="6">单日用户数据</th> <th colspan="3">累计用户数据</th>  <th colspan="4">活跃用户</th> <th colspan="2">知识库容量（句）</th> <th rowspan="2">单日登录用户（人）</th> </tr> <tr> <th>总新增注册用户（人）</th>  <th>新增注册用户（人）</th><th>注册用户总数（人）</th> <th>单日有效问答（句）</th> <th>单日无效问答（句）</th> <th>单日问答总量（句）</th> <th>有效问答总量（句）</th> <th>无效问答总量（句）</th> <th>累计问答总量（句）</th><th style="width: 50px;">单日C端问答用户数（人）</th> <th style="width: 50px;">单日B端问答用户数（人）</th> <th style="width: 50px;">活跃问答总句数（句）</th> <th style="width: 50px;">活跃问答人均句数（句）</th> <th>知识库新增容量（句）</th> <th>知识库总容量（句）</th> </tr>';
+			layer.msg("没有搜索到相应数据");
+
+			$('#admin_daily_tab').html(strxx)
+		}else {
+
+			$('#admin_daily_tab').html(str)
+		}
+
+	}).fail(function (data) {
+		console.log(data);
+
+	});
+
+
+
+	//分页器，页码切换执行
+	function Paging_device(strips) {  //参数是总计多少条
+		$.ajaxSetup({cache:false})  //禁止ie浏览器读取缓存的ajax
+		var x=$("#pageNo").val();
+		$('#red').smartpaginator({
+
+			totalrecords: strips,
+			datacontainer: 'tabProduct',
+			recordsperpage: 15,
+			dataelement: 'tr',
+			length: 4,
+			next: '下一页',
+			prev: '上一页',
+			first: '首页',
+			last: '尾页',
+			theme: 'red',
+			initval:x,
+			controlsalways: true,
+			onchange:function(){
+
+				$.ajax({
+					type: "GET",
+					contentType: "application/json",
+					url:  "/api/sta-accounts/search-page?pageNo=" + $("#pageNo").val()
+				}).done(function (data) {
+					var data = JSON.parse(data);
+					Paging_device(data.total);
+					var str = '<tr> <th rowspan="2" style="width: 44px;">日期</th> <th colspan="6">单日用户数据</th> <th colspan="3">累计用户数据</th> <th colspan="4">活跃用户</th> <th colspan="2">知识库容量（句）</th> <th rowspan="2">单日登录用户（人）</th> </tr> <tr> <th>总新增注册用户（人）</th>  <th>新增注册用户（人）</th><th>注册用户总数（人）</th> <th>单日有效问答（句）</th> <th>单日无效问答（句）</th> <th>单日问答总量（句）</th> <th>有效问答总量（句）</th> <th>无效问答总量（句）</th> <th>累计问答总量（句）</th><th style="width: 50px;">单日C端问答用户数（人）</th>  <th style="width: 50px;">单日B端问答用户数（人）</th> <th style="width: 50px;">活跃问答总句数（句）</th> <th style="width: 50px;">活跃问答人均句数（句）</th> <th>知识库新增容量（句）</th> <th>知识库总容量（句）</th> </tr>';
+					for (var i = 0; i < data.items.length; i++) {
+						var d = new Date(data.items[i].dataTime );    //根据时间戳生成的时间对象
+						var times = (d.getFullYear()) + "/" + (d.getMonth() + 1) + "/" + (d.getDate());
+						str += '<tr> <td>'+ times +'</td><td>'+ data.items[i].dayAccountCount +'</td> <td>'+ data.items[i].dayAccountCountOne +'/'+ data.items[i].dayAccountCountTwo +'/'+ data.items[i].dayAccountCountThree +'/'+ data.items[i].dayAccountCountFour +'/'+ data.items[i].dayAccountCountFive +'</td><td>'+ data.items[i].allAccountCount +'</td> <td>'+ data.items[i].dayValidCount +'</td> <td>'+ data.items[i].dayInvalidCount +'</td> <td>'+ data.items[i].dayQuestionCount +'</td> <td>'+ data.items[i].allValidCount+'</td> <td>'+ data.items[i].allInvalidCount +'</td> <td>'+ data.items[i].allQuestionCount +'</td> <td>'+ data.items[i].dayQuestionAndAnswerNumber +'</td> <td>'+ data.items[i].dayQuestionAndAnswerUserNum +'</td> <td>暂无</td> <td>暂无</td> <td>'+ data.items[i].dayKnowledgeCount +'</td> <td>'+ data.items[i].allKnowledgeCount +'</td> <td>'+ data.items[i].dayLoginCount+'</td> </tr>';
+						$('#admin_daily_tab').html(str)
+					}
+
+				}).fail(function (data) {
+					console.log(data);
+
+				});
+
+
+			}
+		});
+	}
+
+
+
+	</script>
+{% endblock %}

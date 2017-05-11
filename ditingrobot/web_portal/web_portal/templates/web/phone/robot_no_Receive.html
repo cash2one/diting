@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="/static/images/favicon.ico">
+	<title>谛听机器人 - 待认领机器人</title>
+	<meta name="keywords" content="机器人,谛听机器人,自动应答程序,客服机器人,问答机器人,招聘机器人">
+	<meta name="description" content="谛听机器人能通过注册获得自己的问答机器人。该机器人可以捆绑在自己公众号，可以部署在自己网站上，可以通过我们提供的API 进行二次开发，接入各类软件。用户可以通过我们提供的管理后台增加和编辑机器人的问答知识，将机器人用于客服、销售、招聘，机器人会自动按照用户添加的问题和答案回答提问。我们善于做上下文处理，对语义的理解更加精准。">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js" ></script>
+	<script type="text/javascript" src="/static/js/phone-common.js{{ _suffix_ }}"></script>
+	<script type="text/javascript" src="/static/js/diting-common.js{{ _suffix_ }}"></script>
+	<script type="text/javascript" src="/static/js/talk.js{{ _suffix_ }}"></script>
+	<script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+	<link rel="stylesheet" type="text/css" href="/static/css/phone/common-style-phone.css{{ _suffix_ }}" />
+
+	<style type="text/css">
+		/*==与小谛的交流区================================================*/
+		.reg{width: 100%;height:0.5rem;line-height: 0.5rem;}
+		.searchRank{
+			width: 100%;margin: 0 auto;font-size: 0.2rem;display: block;
+		}
+		.SearchK{
+			width: 4.5rem;
+			height: 0.4rem;
+			line-height: 0.4rem;
+			font-size: 0.14rem;
+			margin:0 auto;
+			border: 1px solid #ccc;
+			border-radius: 0.05rem;
+			background: #fff;
+		}
+		#cominput0{
+			height: 0.40rem;
+			border: none;
+			width: 3.8rem;
+			background: none;
+			margin: 0;
+			margin-left: 0.08rem;
+			font-size: 0.18rem;
+		}
+		.searchF{
+			vertical-align: middle;
+			display: initial;
+			height: 0.30rem;
+			cursor: pointer;
+			float: right;
+			margin-right: 0.06rem;
+			margin-top: 0.05rem;
+		}
+		.search_bottom{
+			border: 1px #ccc solid;
+			border-top: 0px;
+			width: 4.46rem;
+			position: fixed;
+			left: 0.95rem;
+			top: 0.7rem;
+			background: #fff;
+			max-height: 5.76rem;
+			overflow: hidden;
+			margin-left: 0;
+			margin-top: 0;
+			z-index: 101;
+		}
+		.ques_ranks a{
+			padding: 0.1rem;
+		}
+	</style>
+</head>
+<body>
+<div style="display: none;">
+	<input type="text" id="idd0" name="name" value="">
+	<input type="text" id="invitationCode_no" name="invitationCode" value="{{ invitationCode }}">
+</div>
+<div id="searchBoxZ" style="position: fixed;left: 0;top: 0;z-index: 100;display: none;width: 100%;height:100%; background-color: #000;opacity: 0.3;" >
+
+</div>
+<div id="searchBoxZZ" style="display: none;">
+	<div style="width: 100%;background: #333;;padding: 0.26rem 0;;position: fixed;z-index: 101">
+		<div class="SearchK">
+			<input  id="cominput0" type="text" name="keywords" maxlength="20" value="" placeholder="可以搜索平行人哦！"/>
+			<img class="searchF" src="/static/images/search_tip.png" onclick="search_comssPhone()">
+		</div>
+		<a href="/m/talk-rank" style="display: block;position: absolute; right: 0.1rem;top: 0.2rem;font-size: 0.22rem;padding: 0.1rem 0.05rem;color: #fff;">排行榜</a>
+	</div>
+	<div class="search_bottom" >
+		<table style="width: 100%;text-align: right;" class="ques_ranks" id="search_bottom" >
+
+		</table>
+	</div>
+</div>
+
+
+<div id="tanchuang"></div>
+<div class="searchRank">
+	<!--昨日问答排行-->
+	<div style="width:100%;background: #333;height: 0.76rem;color: #fff;line-height: 0.76rem;font-size: 0.3rem;padding:0.1rem 0;text-align: center;">
+		待认领平行人
+		<a href="javascript:void(0)" style="position: absolute; right: 0.1rem;top: 0.2rem;font-size: 0.22rem;padding: 0.1rem;color: #fff;border-left: 1px solid #000;"><img id="imgSearchBlock" class="searchF" src="/static/images/search_tip.png" ></a>
+	</div>
+	<table style="width: 100%;text-align: center;font-size: 0.16rem" class="ques_ranks" id="ques_ranks">
+
+
+	</table>
+</div>
+</body>
+
+<script type="text/javascript">
+
+	window.onload=function () {
+		$('#robotProfileP').html($('#profile').val());
+		claimloadALL();
+		//robot_talk页搜索
+//回车键搜索功能
+		$("#cominput0").keydown(function entersearch_comss(e){
+			e = e||event;
+			if(e.keyCode == 13) {
+				search_comssPhone()
+			}
+			return;
+		})
+		//未领取平行人
+		function claimloadALL() {
+			$.ajax({
+				type: "GET",
+				contentType: "application/json",
+				url: "/api/claim-robots"
+			}).done(function (data) {
+				var data = JSON.parse(data);
+//				console.log(data);
+				var stryes = '<tr style="font-size: 0.26rem;line-height: 0.6rem;"> <th  style="width: 10%;height: 0.30rem;border-bottom: 1px solid #ddd;border-top: 1px solid #ddd;"> 序号 </th><th  style="width: 40%;height: 0.30rem;border-bottom: 1px solid #ddd;border-top: 1px solid #ddd;"> 平行人名 </th><th  style="width: 25%;height: 0.30rem;border-bottom: 1px solid #ddd;border-top: 1px solid #ddd;">  价值</th><th  style="width: 25%;height: 0.30rem;border-bottom: 1px solid #ddd;border-top: 1px solid #ddd;"> 操作 </th></tr>';
+				for (var i = 0; i < data.length; i++) {
+					stryes += '<tr style="width: 100%;height: 0.30rem;" class="trstate"> <td  style="width: 10%;height: 0.30rem;"> '+ (i+1) +'. </td><td  style="width: 40%;height: 0.30rem;"> <a href="/robot-company/' + data[i].uniqueId + '?yaoqingma='+ $("#invitationCode_no").val() +'" style="display:block;text-decoration:none;width: 2.5rem;font-size: 0.22rem;" target="_blank" class="ui-link"><b>' + data[i].name + '</b> </a> </td><td  style="width: 25%;height: 0.30rem;color:#FF9800;"> ¥50' +'</td><td  style="width: 25%;height: 0.30rem;"> <a class="ReceiveSS" data-id="'+ data[i].id +'" style="color: #fff;cursor: pointer;font-size: 0.22rem;background: #61aae4;padding: 0.1rem 0.25rem;border-radius: 0.05rem;">认领</a>  </td></tr>'
+					$('#ques_ranks').html(stryes)
+				}
+				ReceiveSS()
+			}).fail(function (data) {
+				console.log(data);
+			});
+		}
+
+		$('#imgSearchBlock').click(function (){
+			$('#searchBoxZ').css('display','block')
+			$('#searchBoxZZ').css('display','block')
+		})
+		$('#searchBoxZ').click(function (){
+			$('#searchBoxZ').css('display','none')
+			$('#searchBoxZZ').css('display','none')
+		})
+	};
+</script>
+
+

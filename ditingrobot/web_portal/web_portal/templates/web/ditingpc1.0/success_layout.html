@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="/static/images/favicon.ico">
+	{% block title %}
+	<title>谛听机器人开放平台——智联网的交互系统</title>
+	{% endblock %}
+	<meta name="keywords" content="谛听机器人,语义理解,开放平台,自动应答程序,客服机器人,聊天机器人,陪伴机器人,问答机器人,招聘机器人,恋爱机器人,平行人,转角爱,AI,人工智能,彭军辉,机器人柳柳,小谛机器人">
+	<meta name="description" content="谛听机器人开放平台能让每个用户通过注册获得自己的个性化问答机器人。该机器人可以捆绑在自己微信公众号，可以部署在WEB网站上，可以通过我们提供的API 进行二次开发接入各类软件或者APP。用户可以通过我们提供的管理后台增加和编辑机器人的问答知识，建设知识库，将机器人用于客服、销售、招聘等方面，机器人会自动按照用户添加的问题和答案回答FAQ提问。我们擅于做上下文处理，对语义的理解更加精准。">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js" ></script>
+	<script type="text/javascript" src="/static/js/lib/bootstrap.min.js" ></script>
+	<script type="text/javascript" src="/static/js/lib/smartpaginator.js{{ _suffix_ }}"></script><!--分页插件-->
+	<script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+	<script type="text/javascript" src="/static/js/lib/bootstrap-datepicker.js"></script> <!--时间插件-->
+	<script type="text/javascript" src="/static/js/diting-common.js{{ _suffix_ }}"></script>
+	<link rel="stylesheet" href="/static/css/lib/bootstrap.min.css" />
+	<link rel="stylesheet" href="/static/css/lib/fb_flat_0.3.css" /> <!--反馈样式-->
+	<link rel="stylesheet" href="/static/css/lib/datepicker.css" /> <!--时间插件样式-->
+	<link rel="stylesheet" type="text/css" href="/static/css/diting1.0/pc/common-style2.css{{ _suffix_ }}" />
+	<link rel="stylesheet" type="text/css"  href="/static/css/diting1.0/pc/fenYePcStyle.css{{ _suffix_ }}" />
+	<script type="text/javascript" src="/static/js/lib/cropper.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/css/lib/cropper.min.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/lib/uploadPhoto.css{{ _suffix_ }}" />
+	{% block head %}{% endblock %}
+	{% block script %}
+
+	{% endblock %}
+</head>
+
+<body style="overflow-x: hidden;background: #fafafa;">
+<!--==header开始==============================================-->
+<header style="background: #fff;height: 60px;z-index: 100;min-width: 1340px;margin:0 auto;position: fixed;top: 0;width: 100%">
+	<a href="/home/index" style="display: block;width: 350px;"><img src="/static/images/applogo0.png" style="width: 40px;float: left; margin: 10px 5px;"/><span style="color:#00d2ce;font-size: 20px;float: left; line-height:60px;">谛听机器人管理平台</span></a>
+	<div style="background: #00c4c2;float: right;width: 100px;height: 60px;text-align: center; color: #fff;border-left: 1px solid #fff;cursor: pointer;"  onclick="logOut()"><img src="/static/images/diting1.0/pc/icon_ZX000.png" style="margin: 4px auto;"/><span style="display:inline-block;">注销</span></div>
+	<div style="background: #00c4c2;float: right;width: 100px;height: 60px;text-align: center; color: #fff;border-left: 1px solid #fff;cursor: pointer;" onclick="view_tickling1()"><img src="/static/images/diting1.0/pc/icon_FK000.png" style="margin: 4px auto;"/><span style="display:inline-block;">反馈</span></div>
+	<div style="background: #00c4c2;float: right;width: 100px;height: 60px;text-align: center; border-left: 1px solid #fff"><a target="_blank"  {% if loginInfo.shortDomainName == None %} href="/robot-company/{{ loginInfo.uniqueId }}" {% else %} href="/r/{{ loginInfo.shortDomainName }}"{% endif %} style="display: block;color: #fff;"><img src="/static/images/diting1.0/pc/icon_rob000.png" style="margin: 4px auto;"/><span style="display:inline-block;">机器人演示</span></a></div>
+
+	<div style="clear: both;"></div><h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+</header>
+
+<!--==section==================================================-->
+<div id="tanchuang"></div>
+<section  style="min-width: 1340px;margin: auto;">
+	<menu class="leftMains">
+
+		{% if loginInfo.headPortrait == None%}
+		<img src="/static/images/applogo0.png" style="width: 80px; float: left;margin: 20px 60px;border-radius: 50%;background: #fff;"/>
+
+		{% else %}
+		<img src="{{ loginInfo.headPortrait}}" style="width: 80px; float: left;margin: 20px 60px;border-radius: 50%;background: #fff;"/>
+		{% endif %}
+		<div >
+			<p style="text-align: center;color: #fff;">账号：{{ loginInfo.userName }}</p>
+			<a href="/systemMessage" title="未读系统消息" style="float: left;width: 50%; padding: 10px 0 10px 35px;line-height: 27px;font-size: 16px;"><img src="/static/images/diting1.0/pc/icon_letter.png" style="width: 27px;float: left; "/>(<span id="unreadLetterNum" style="font-size: 16px; line-height: 27px;color: orange;">0</span>)</a>
+			<a href="/privateMessage" title="未读私信消息" style="float: left;width: 50%; padding: 10px 0;line-height: 27px;font-size: 16px;"><img src="/static/images/diting1.0/pc/icon_letter2.png" style="width: 27px;float: left;"/>(<span id="unreadMessageNum" style="font-size: 16px;line-height: 27px;color: orange;">0</span>)</a><div style="clear: both;"></div>
+		</div>
+		<div class="menuHeight" style="width: 200px;min-height: 406px;overflow: hidden;">
+			<div class="menuHeight" style="width: 220px;min-height: 406px;overflow-y: scroll;">
+				<ul class="menu">
+					<li class="segLi" >
+						<a href="/home/index"><img src="/static/images/diting1.0/pc/icon_1.png"/><span>平台首页</span><div class="navBg1"></div></a>
+					</li>
+					<li class="left_nav1 segLi" >
+						<img src="/static/images/diting1.0/pc/icon_2.png"/><span>机器人定制</span><div {% if showFlag=="robot_setting" or showFlag=="base_table2" %}  class="navBg2" {% else %} class="navBg1" {% endif %} > </div>
+					</li>
+
+					<li class="left_nav1_1 segLi segLi2"  {% if showFlag=="robot_setting" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="base_table2" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/robot-setting"><span>机器人设置</span></a>
+					</li>
+					<li class="left_nav1_1 segLi segLi2" {% if showFlag=="base_table2" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="robot_setting" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/base_table2"><span>基础信息</span></a>
+					</li>
+					<li class="left_nav2 segLi" >
+						<img src="/static/images/diting1.0/pc/icon_3.png"/><span>接入方式</span><div {% if showFlag=="access_webVx1" or showFlag=="access_app2" or showFlag=="access_api3"  %}  class="navBg2" {% else %} class="navBg1" {% endif %} ></div>
+					</li>
+
+					<li class="left_nav2_1 segLi segLi2" {% if showFlag=="access_webVx1" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="access_app2" or showFlag=="access_api3" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/access_webVx1"><span>网站&amp;微信</span></a>
+					</li>
+					<li class="left_nav2_1 segLi segLi2" {% if showFlag=="access_app2" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="access_webVx1" or showFlag=="access_api3" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/access_app2"><span>智能硬件APP</span></a>
+					</li>
+					<li class="left_nav2_1 segLi segLi2" {% if showFlag=="access_api3" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="access_webVx1" or showFlag=="access_app2" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/access_api3"><span>开放的API</span></a>
+					</li>
+
+					<li class="left_nav3 segLi" >
+						<img src="/static/images/diting1.0/pc/icon_4.png"/><span>数据管理</span><div {% if showFlag=="visitAdmin" or showFlag=="highQues" or showFlag=="questions_count"  %}  class="navBg2" {% else %} class="navBg1" {% endif %}></div>
+					</li>
+
+					<li class="left_nav3_1 segLi segLi2" {% if showFlag=="visitAdmin" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="highQues" or showFlag=="questions_count" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/visitAdmin"><span>访问管理</span></a>
+					</li>
+					<li class="left_nav3_1 segLi segLi2" {% if showFlag=="highQues" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="visitAdmin" or showFlag=="questions_count" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/highQues"><span>高频问题</span></a>
+					</li>
+					<li class="left_nav3_1 segLi segLi2" {% if showFlag=="questions_count" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="visitAdmin" or showFlag=="highQues" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/questions_count"><span>问答记录</span></a>
+					</li>
+
+					<li class="left_nav4 segLi" >
+						<img src="/static/images/diting1.0/pc/icon_5.png"/><span>知识库</span><div {% if showFlag=="knowledge-base" or showFlag=="Synonym2" or showFlag=="invalidQuestion" %}  class="navBg2" {% else %} class="navBg1" {% endif %}></div>
+					</li>
+
+					<li class="left_nav4_1 segLi segLi2"  {% if showFlag=="knowledge-base" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="Synonym2" or showFlag=="invalidQuestion" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/knowledge-base"><span>知识填写</span></a>
+					</li>
+					<li class="left_nav4_1 segLi segLi2"  {% if showFlag=="invalidQuestion" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="knowledge-base" or showFlag=="Synonym2" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/invalidQuestion"><span>未知问题</span></a>
+					</li>
+					<li class="left_nav4_1 segLi segLi2"  {% if showFlag=="Synonym2" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="knowledge-base" or showFlag=="invalidQuestion" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/Synonym2"><span>同义词库</span></a>
+					</li>
+					<span id="dt_com">
+						<li class="left_nav5 segLi" >
+							<img src="/static/images/diting1.0/pc/icon_6.png"/><span>应用管理</span><div {% if showFlag=="apiPost" or showFlag=="apiThreeAdmin" or showFlag=="apiSelfAdmin" %}  class="navBg2" {% else %} class="navBg1" {% endif %}></div>
+						</li>
+
+						<li class="left_nav5_1 segLi segLi2" {% if showFlag=="apiPost" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="apiThreeAdmin" or showFlag=="apiSelfAdmin" %} style="display:block;"{% else %} {% endif %}>
+							<a href="/apiPost"><span>应用提交</span></a>
+						</li>
+						<li class="left_nav5_1 segLi segLi2" {% if showFlag=="apiSelfAdmin" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="apiPost" or showFlag=="apiThreeAdmin" %} style="display:block;"{% else %} {% endif %}>
+							<a href="/apiSelfAdmin"><span>我的应用管理</span></a>
+						</li>
+						<li class="left_nav5_1 segLi segLi2" {% if showFlag=="apiThreeAdmin" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="apiSelfAdmin" or showFlag=="apiPost" %} style="display:block;"{% else %} {% endif %}>
+							<a href="/apiThreeAdmin"><span>公共应用管理</span></a>
+						</li>
+					</span>
+
+					<span id="dt_cc" style="display: none;">
+						<li class="left_nav5 segLi" >
+							<img src="/static/images/diting1.0/pc/icon_6.png"/><span>应用管理</span><div {% if showFlag=="apiThreeAdmin" %}  class="navBg2" {% else %} class="navBg1" {% endif %}></div>
+						</li>
+						<li class="left_nav5_1 segLi segLi2" {% if showFlag=="apiThreeAdmin" %} style="background:#00c4c2;display:block;color:#fff;" {% else %} {% endif %}>
+							<a href="/apiThreeAdmin"><span>公共应用管理</span></a>
+						</li>
+					</span>
+
+					<li class="left_nav6 segLi" >
+						<img src="/static/images/diting1.0/pc/icon_7.png"/><span>账号设置</span><div {% if showFlag=="company-info2" or showFlag=="pwd-change2" %}  class="navBg2" {% else %} class="navBg1" {% endif %}></div>
+					</li>
+
+					<li class="left_nav6_1 segLi segLi2" {% if showFlag=="company-info2" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="pwd-change2" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/company-info"><span>账号信息设置</span></a>
+					</li>
+					<li class="left_nav6_1 segLi segLi2" {% if showFlag=="pwd-change2" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="company-info2" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/pwd-change2"><span>密码重置</span></a>
+					</li>
+
+					<li class="left_nav7 segLi" >
+						<img src="/static/images/diting1.0/pc/icon_8.png"/><span>消息管理</span><div {% if showFlag=="systemMessage" or showFlag=="privateMessage" %}  class="navBg2" {% else %} class="navBg1" {% endif %}></div>
+					</li>
+
+					<li class="left_nav7_1 segLi segLi2" {% if showFlag=="systemMessage" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="privateMessage" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/systemMessage"><span>系统消息</span></a>
+					</li>
+					<li class="left_nav7_1 segLi segLi2" {% if showFlag=="privateMessage" %} style="background:#00c4c2;display:block;color:#fff;"{% elif showFlag=="systemMessage" %} style="display:block;"{% else %} {% endif %}>
+						<a href="/privateMessage"><span>私信消息</span></a>
+					</li>
+
+					<!--<li class="segLi" >-->
+						<!--<a href="#"><img src="/static/images/diting1.0/pc/icon_9.png"/><span>帮助中心</span><div  class="navBg1"></div></a>-->
+					<!--</li>-->
+					<li style="height: 45px;width:100%;"></li>
+					<li style="height: 45px;width:100%;"></li>
+					<li style="height: 45px;width:100%;"></li>
+				</ul>
+			</div>
+		</div>
+	</menu>
+	<!--==右侧内容区==============-->
+
+	<div class="rightMains" >
+		{% block main %}{% endblock %}
+
+
+	</div><div style="clear: both;"></div>
+</section>
+<!--==footer部分==============================================-->
+
+<!--反馈窗口开始===============================================================-->
+<!--遮罩层-->
+
+<div id="fb_baidu_wizard" class="fb-baidu-wizard" style="position:fixed;display: none;"></div>
+
+<!--反馈窗口-->
+
+<div id="fb_baidu_right_dialog" class="fb-feedback-right-dialog" style="position: fixed; z-index: 999999; right: 0px; bottom: 0px;display: none">
+	<div class="fb-modal " data-html2canvas-ignore="true">
+		<div class="fb-header" id="fb_dialog_header" unselectable="on" onselectstart="return false;" style="left: 564px; top: 148px;cursor: initial;">
+			<a class="fb-close" id="fb_close_x" onclick="fb_close_x()">×</a>
+			<h3 class="fb-header-tips" style="cursor: initial;">意见反馈</h3></div>
+		<div class="fb-body" id="fb_qa_feedback_body">
+			<div class="fb-action">
+				<div class="fb-tips-block"><span class="fb-content-tips">您需要什么样的帮助？请告诉我们</span><span class="fb-danger-tips"> (*必填)</span></div>
+				<div class="fb-textarea fb-content-block"><textarea maxlength="400" class="fb-des-content" name="issuedesc" id="fb_des_content" data-exclude="true" style="color: rgb(154, 154, 154);" placeholder="欢迎提出您在使用过程中遇到的问题或宝贵建议（400字以内），感谢您对谛听的支持。"></textarea></div>
+				<div class="fb-block fb-cut-block">
+					<div>
+						<span id="fb_tips_span">（如果您的问题比较复杂，需要截图等功能进行表述，您可以加一下客服QQ：2090388712）</span></div>
+				</div>
+				<div class="fb-block fb-email-block">
+					<div class="fb-phone-txt">联系方式（选填）</div>
+					<div><input type="text" class="fb-email" maxlength="32" placeholder="留下您的联系方式，便于我们及时回复您。" id="feedback_email"></div>
+				</div>
+			</div>
+			<div class="fb-footer">
+				<div class="fb-btn fb-btn-primary" id="fb_right_canvas_save" onclick="fd_save()" >提交反馈</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!--反馈窗口结束================================================-->
+</body>
+<script type="text/javascript">
+console.log(window.location.host)
+	if(window.location.host=='ditingai.cc'||window.location.host=='www.ditingai.cc'){
+		$('#dt_cc').css("display","block")
+		$('#dt_com').css("display","none")
+	}else{
+
+	}
+
+
+
+	$('.left_nav1').click(function(){
+		$('.left_nav1_1').toggle(100);
+		$(this).find('div').toggleClass('navBg1').toggleClass('navBg2');
+	});
+	$('.left_nav2').click(function(){
+		$('.left_nav2_1').toggle(100);
+		$(this).find('div').toggleClass('navBg1').toggleClass('navBg2');
+	});
+	$('.left_nav3').click(function(){
+		$('.left_nav3_1').toggle(100);
+		$(this).find('div').toggleClass('navBg1').toggleClass('navBg2');
+	});
+	$('.left_nav4').click(function(){
+		$('.left_nav4_1').toggle(100);
+		$(this).find('div').toggleClass('navBg1').toggleClass('navBg2');
+	});
+	$('.left_nav5').click(function(){
+		$('.left_nav5_1').toggle(100);
+		$(this).find('div').toggleClass('navBg1').toggleClass('navBg2');
+	});
+	$('.left_nav6').click(function(){
+		$('.left_nav6_1').toggle(100);
+		$(this).find('div').toggleClass('navBg1').toggleClass('navBg2');
+	});
+	$('.left_nav7').click(function(){
+		$('.left_nav7_1').toggle(100);
+		$(this).find('div').toggleClass('navBg1').toggleClass('navBg2');
+	});
+
+//	站内信；私信未读数量
+		$.ajax({
+			type: "GET",
+			contentType: "application/json",
+			url: "/api/find/unread_letter_num"
+		}).done(function (data) {
+			var data = JSON.parse(data);
+			$('#unreadLetterNum').html(data.unreadLetterNum)
+			$('#unreadMessageNum').html(data.unreadMessageNum)
+		}).fail(function (data) {
+			console.log(data);
+		});
+//	左侧导航的高度
+	var menuHeight = ($(window).height()-260) + "px";
+	$('.menuHeight').css('height',menuHeight)
+</script>
+
+</html>

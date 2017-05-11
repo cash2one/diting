@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.InvalidQuestionMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.mongo.ChatLog">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="uuid" property="uuid" jdbcType="VARCHAR"/>
+        <result column="question" property="question" jdbcType="VARCHAR"/>
+        <result column="answer" property="answer" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="app_key" property="app_key" jdbcType="VARCHAR"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+        <result column="extra1" property="extra1" jdbcType="VARCHAR"/>
+        <result column="extra2" property="extra2" jdbcType="VARCHAR"/>
+        <result column="extra3" property="extra3" jdbcType="VARCHAR"/>
+        <result column="extra4" property="extra4" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.mongo.ChatLog">
+        INSERT
+        INTO invalid_question (owner,
+        owner_type,
+        deleted,
+        created_by,
+        created_time,
+        update_by,
+        update_time,
+        uuid,
+        question,
+        answer,
+        username,
+        app_key,
+        ip,
+        extra1,
+        extra2,
+        extra3,
+        extra4)
+        VALUES (#{owner},
+        #{ownerType},
+        #{deleted},
+        #{createdBy},
+        #{createdTime},
+        #{updatedBy},
+        #{updatedTime},
+        #{uuid},
+        #{question},
+        #{answer},
+        #{username},
+        #{app_key},
+        #{ip},
+        #{extra1},
+        #{extra2},
+        #{extra3},
+        #{extra4})
+    </insert>
+
+    <select id="searchForPage" parameterType="com.diting.model.options.ChatLogOptions" resultMap="defaultResultMap">
+        SELECT id,username,deleted,question,created_time,COUNT(question) num FROM invalid_question  WHERE deleted=0 AND username=#{userName}
+        <if test="question!=null and question!=''">
+            AND question LIKE CONCAT(CONCAT('%',#{question}),'%')
+        </if>
+        <if test="startTime!= null and startTime != ''">
+            and created_time <![CDATA[   >=  ]]> #{startTime}
+        </if>
+        <if test="endTime!= null and endTime != ''">
+            and created_time <![CDATA[   <=  ]]> #{endTime}
+        </if>
+        GROUP BY question
+        ORDER BY num DESC
+    </select>
+
+    <select id="searchAdminForPage" parameterType="com.diting.model.options.ChatLogOptions"
+            resultMap="defaultResultMap">
+        SELECT id,question,deleted,COUNT(question) num FROM invalid_question GROUP BY question HAVING deleted=0
+        <if test="question!=null and question!=''">
+             AND question LIKE CONCAT(CONCAT('%',#{question}),'%')
+        </if>
+        ORDER BY num DESC
+    </select>
+
+    <delete id="delete" parameterType="com.diting.model.mongo.ChatLog">
+        DELETE FROM invalid_question WHERE question=#{question} AND username=#{username}
+    </delete>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            DELETE invalid_question FROM invalid_question, (select question FROM invalid_question WHERE id=${item.id}) b
+            WHERE invalid_question.question=b.question AND invalid_question.username=${item.username}
+        </foreach>
+
+    </delete>
+
+    <update id="update" parameterType="com.diting.model.mongo.ChatLog">
+        UPDATE invalid_question SET deleted=1,answer=#{answer} WHERE  question=#{question} AND username=#{username}
+    </update>
+
+    <select id="searchForMobile" parameterType="com.diting.model.options.ChatLogOptions"
+            resultMap="defaultResultMap">
+        SELECT * from invalid_question GROUP BY question
+        <if test=" uuid!=null and uuid!=''">
+            HAVING uuid=#{uuid}
+            <if test="question!=null and question!='' ">
+                AND question=#{question}
+            </if>
+        </if>
+
+    </select>
+</mapper>

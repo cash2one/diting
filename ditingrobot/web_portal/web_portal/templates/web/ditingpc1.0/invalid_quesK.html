@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>无效问题弹窗内容</title>
+		<link rel="stylesheet" href="/static/css/diting1.0/pc/quesK-style.css" />
+	</head>
+
+	<body>
+		<form >
+			<div >
+				<table>
+					<tbody>
+						<tr>
+							<td>问题:</td>
+							<td>
+								<input type="text" class="" placeholder="无效问题的question不能编辑" name="question" readonly="readonly" id="question" style="width:300px;"  maxlength="60" value="">
+							</td>
+						</tr>
+						<tr>
+							<td>答案:</td>
+							<td>
+								<textarea class="" placeholder="最多240个汉字" name="answer" required="required" id="answer" style="width:297px;max-width: 297px;min-width: 297px;height: 97px;min-height: 97px;max-height: 97px;overflow-y:auto" rows="5" cols="37" maxlength="240"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td style="display: block;width: 43px;"></td>
+							<td class="btns" align="center">
+								<a class="btn3" >取消</a>
+								<a class="btn2" >保存</a>
+
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+		</form>
+	</body>
+	<script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript">
+		$('.btn3').click(function() {
+			parent.window.location.reload(false);
+//			parent.history.go(0); //取消键刷新页面
+		})
+	</script>
+</html>

@@ -1,0 +1,227 @@
+{% extends "web/ditingpc1.0/success_layout.html" %}
+{% block head %}
+<script type="text/javascript" src="/static/js/diting1.0/pc/robotSet2.js{{ _suffix_ }}"></script>
+<style>
+    /*机器人设置*/
+    .form{font-size:15px;font-family:"Microsoft YaHei"; }
+    .form li{margin-top: 6px;}
+    .rob_txt li{
+        height: 46px;
+    }
+    .rob_txt input{
+        border: none;
+        width: 690px;
+        height: 30px;
+        margin: 7px 0;
+        line-height: 30px;
+        border-bottom: 1px solid #fafafa;
+    }
+    .rob_txt span{float: left;display: block;height: 46px;line-height: 46px;margin-left: 40px;}
+    .btn_submit{
+        width: 95px;
+        height: 40px;
+        background: #01b3d9;
+        border-radius: 5px;
+        color: #fff;
+        border: 0;
+        margin: 20px 400px;
+    }
+    .rob_txt .newInputK {
+        width: 300px;
+        height: 30px;
+        border: 1px solid #fafafa;
+        border-radius: 5px;
+        background: #fff;
+    }
+    #answer_more{
+        display: none;
+    }
+    #answer_all:hover,#answer_short:hover{
+        border-bottom: 1px solid #ff3230;
+    }
+
+    .transRadio label {
+        background: #01b3d7;
+        color: #fff;
+    }
+    label{
+        background: #ccc;
+    }
+    .transRadio0 label {
+        cursor: pointer;
+        display: block;
+        width: 60px;
+        text-align: center;
+        float: left;
+        padding: 7px;
+        margin: 0;
+        font-size: 14px;
+        font-weight: 100;
+    }
+    .transRadio0 input[type="radio"] {
+        margin: 3px 3px 0px 5px;
+        display: none;
+    }
+</style>
+
+{% endblock %}
+
+{% block main %}
+<!--==右侧内容区==============-->
+        <div>
+            <input name="USERNAME" value="{{ loginInfo.userName }}" type="hidden">
+
+            <div id="form" class="form">
+                <ul class="rob_txt" style="background: #fff;padding: 0px 20px;width: 100%;margin-bottom: 20px;">
+                    <h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_robotSet1.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;机器人设置</h3>
+
+                    <li><span>机器人名称:</span>
+                        <span class="spanInput">
+                            <input id="name" name="ROBOT_NAME" value="" placeholder="2~5位中文或4~12位英文！" maxlength="12" onblur="rob__name()" type="text"/>
+
+                        </span>
+                        <span id="RobotN" style="display:none;color: #fff;position: absolute;right: 2px;background: url(/static/images/errorK0.jpg) no-repeat center;font-size: 12px;width: 180px;background-size: 180px 22px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2~5位中文或4~12位英文</span>
+                    </li>
+                    <li><span>所有者名:&nbsp;&nbsp;&nbsp;</span>
+                        <span class="spanInput"><input id="companyName" name="GONGSI" placeholder="请输入2~16位的中文" maxlength="16" minlength="2" value="" type="text" runat= "server"  onblur="companyName00()" /></span>
+                    </li>
+
+                    <li><span>机器人域名:</span>
+                        <span class="spanInput" >
+                            <p style="width: 418px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 10px;position: relative;top: 0;left:325px;color: #ff7777;">您的机器人域名：http://www.ditingai.com/r/<b id="shortDName" style="color: #000;">（短域名）</b></p>
+                            <input id="shortDomainName" style="position: relative;top: -46px;width: 320px" maxlength="30" value="" placeholder="3~30位仅限字母和数字！" onblur="rob_shortDomainName()" name="shortDomainName" type="text"/>
+
+                        </span>
+                        <span id="DomainN" style="display:none;color: #fff;position: absolute;right: 2px;background: url(/static/images/errorK0.jpg) no-repeat center;font-size: 12px;width: 180px;background-size: 180px 22px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3~30位仅限字母和数字</span>
+                    </li>
+                    <li><span>机器人简介:</span>
+                        <span class="spanInput" ><input id="profile" maxlength="30" placeholder="请用30字简单介绍自己的机器人！" value=""  style="width: 645px;"  name="ROBOT_profile" type="text"/></span>
+                    </li>
+                    <li><span>我的动态:&nbsp;&nbsp;&nbsp;</span>
+                        <span class="spanInput"><input id="welcomes" maxlength="60" value="" style="width: 645px;" name="ROBOT_WELCOME" type="text"/></span>
+                    </li>
+                        <li class="rob_txt"><span class="newInputKtop">行业领域:&nbsp;&nbsp;&nbsp;</span>
+                            <select name="HANGYE" id="industry" style="margin-left: 40px;" class="newInputK">
+                                <option value="0" selected="selected">IT/互联网</option>
+                                <option value="1">文化/体育</option>
+                                <option value="2">音乐/娱乐</option>
+                                <option value="3">酒店/餐饮</option>
+                                <option value="4">旅游</option>
+                                <option value="5">贸易/零售</option>
+                                <option value="6">法律/金融/咨询服务</option>
+                                <option value="7">教育</option>
+                                <option value="8">政府/非营利机构</option>
+                                <option value="9">医疗/保健</option>
+                                <option value="10">房地产建筑</option>
+                                <option value="11">加工/制造</option>
+                                <option value="12">其他</option>
+                            </select>
+
+                        </li>
+
+                    <li class="enable"><span>公用知识库:</span>
+                        <input type="text" readonly value="false" id="isDisable" style="display: none"/>
+
+                        <div class="transRadio0">
+                            <div class="transRadio" style="width:60px;float: left;margin-left: 40px;">
+                                <input type="radio" id="isDisableFalse" checked="checked" name="isDisable"  value="false">
+                                <label name="isDisableFalse" for="isDisableFalse" style="border-top-left-radius: 30px;border-bottom-left-radius: 30px;">开启</label>
+                            </div>
+                            <div style="width:60px;float: left;">
+                                <input type="radio" id="isDisableTrue" name="isDisable" value="true">
+                                <label name="isDisableTrue" for="isDisableTrue" style="border-top-right-radius: 30px;border-bottom-right-radius: 30px;">关闭</label>
+                            </div><div style="clear: both"></div>
+                        </div>
+                    </li>
+                   <div style=" width:150px;float: right; position: relative; top: -190px; right: -17px;text-align: center;">
+                       <img style=" width:150px;" title="机器人二维码是" alt="机器人二维码" src="http://pan.baidu.com/share/qrcode?w=150&h=150&url=http://www.ditingai.com{% if  loginInfo.uniqueId == None %}/robot-company/7818c7f73c31468ca03c63b7375994b9{% elif loginInfo.shortDomainName == None %}/robot-company/{{ loginInfo.uniqueId }}{% else %}/r/{{ loginInfo.shortDomainName }}{% endif %}"/>
+                       <a download="机器人二维码.jpg" href="http://pan.baidu.com/share/qrcode?w=150&h=150&url=http://www.ditingai.com{% if  loginInfo.uniqueId == None %}/robot-company/7818c7f73c31468ca03c63b7375994b9{% elif loginInfo.shortDomainName == None %}/robot-company/{{ loginInfo.uniqueId }}{% else %}/r/{{ loginInfo.shortDomainName }}{% endif %}">下载二维码</a>
+
+                   </div>
+                </ul>
+
+                <div style="background: #fff;padding: 0px 20px;width: 100%;">
+                   
+               
+                <ul class="rob_txt">
+                    <h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_robotSet2.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;未知问题</h3>
+
+                    <li><span>自定义回复1:</span>
+                        <span class="spanInput"><input id="answer1" maxlength="40" value="" name="answer1" type="text"/></span>
+                    </li>
+                    <li><span>自定义回复2:</span>
+                        <span class="spanInput"><input id="answer2" maxlength="40" value="" name="answer2" type="text"/></span>
+                    </li>
+                    <li><span>自定义回复3:</span>
+                        <span class="spanInput"><input id="answer3" maxlength="40" value="" name="answer3" type="text"/></span>
+                    </li>
+                    <li>
+                        <input style="color:#ff3230;background:none;width: 139px;margin-left: 23px" type="button" id="answer_all" value="更多自定义回复"/>
+                    </li>
+                </ul>
+                <ul class="rob_txt" id="answer_more">
+
+                    <li><span>自定义回复4:</span>
+                        <span class="spanInput"><input id="answer4" maxlength="40" value="" name="answer4" type="text"/></span>
+                    </li>
+                    <li><span>自定义回复5:</span>
+                        <span class="spanInput"><input id="answer5" maxlength="40" value="" name="answer5" type="text"/></span>
+                    </li>
+                    <li><span>自定义回复6:</span>
+                        <span class="spanInput"><input id="answer6" maxlength="40" value="" name="answer6" type="text"/></span>
+                    </li>
+                    <li><span>自定义回复7:</span>
+                        <span class="spanInput"><input id="answer7" maxlength="40" value="" name="answer7" type="text"/></span>
+                    </li>
+                    <li><span>自定义回复8:</span>
+                        <span class="spanInput"><input id="answer8" maxlength="40" value="" name="answer8" type="text"/></span>
+                    </li>
+                    <li><span>自定义回复9:</span>
+                        <span class="spanInput"><input id="answer9" maxlength="40" value="" name="answer9" type="text"/></span>
+                    </li>
+                    <li><span>自定义回复10:</span>
+                        <span class="spanInput"><input id="answer10" maxlength="40" value="" name="answer10" type="text"/></span>
+                    </li>
+                    <li>
+                        <input style="color:#ff3230;background:none;width: 63px;margin-left: 23px;" type="button" id="answer_short" value="收起"/>
+                    </li>
+                </ul>
+               </div>
+
+                <div style="margin: 15px;">
+                    <input class="btn_submit" type="button" value="提交" onclick="saveRob()"/>
+                </div>
+            </div>
+        </div>
+
+<div id="tanc"></div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    window.onload=function () {
+        csh_suc_index(); //初始化
+//        $("input[type='radio'][name='isDisable']").parent().removeClass("transRadio")
+//        $("input[type='radio'][value='"+ data.isDisable +"']").parent().removeClass("transRadio")
+//开启关闭公共知识库样式
+        $("input[type='radio']").click(function(){
+            //找出和当前name一样的单选按钮对应的label，并去除选中的样式的class
+            $("input[type='radio'][name='"+$(this).attr('name')+"']").parent().removeClass("transRadio")
+            //给自己对应的label
+            $(this).parent().addClass("transRadio");
+            $('#isDisable').val($(this).val())
+            console.log($('#isDisable').val())
+        });
+//        自定义答案
+        $('#answer_all').click(function(){
+            $('#answer_more').toggle();
+
+        });
+        $('#answer_short').click(function(){
+            $('#answer_more').css("display","none")
+        })
+
+    }
+
+</script>
+{% endblock %}

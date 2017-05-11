@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.AccountMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.Account">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="avatar_url" property="avatarUrl" jdbcType="VARCHAR"/>
+        <result column="invitation_code" property="invitationCode" jdbcType="VARCHAR"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+        <result column="last_login_time" property="lastLoginDate" jdbcType="TIMESTAMP"/>
+        <result column="claim_enable" property="claimEnable" jdbcType="BOOLEAN"/>
+        <result column="company_id" property="companyId" jdbcType="INTEGER"/>
+        <result column="open_id" property="openId" jdbcType="VARCHAR"/>
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
+        <result column="union_id" property="unionId" jdbcType="VARCHAR"/>
+        <result column="forbidden_enable" property="forbiddenEnable" jdbcType="BOOLEAN"/>
+        <result column="angel_id" property="angelId" jdbcType="VARCHAR"/>
+        <result column="source" property="source" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+        <result column="telephone_switch" property="telephoneSwitch" jdbcType="BOOLEAN" />
+        <association property="chatStatistics" javaType="com.diting.model.ChatStatistics">
+            <id column="user_id" property="userId"/>
+            <result column="time" property="time"/>
+            <result column="yesterday_count" property="yesterdayCount"/>
+            <result column="all_count" property="allCount"/>
+            <result column="accuracy_rate" property="accuracyRate"/>
+            <result column="robot_value" property="robotValue"/>
+        </association>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.Account">
+        INSERT
+        INTO account (
+        owner,
+        owner_type,
+        deleted,
+        created_by,
+        created_time,
+        update_by,
+        update_time,
+        user_name,
+        password,
+        mobile,
+        real_name,
+        email,
+        avatar_url,
+        invitation_code,
+        ip,
+        last_login_time,
+        company_id,
+        open_id,
+        nick_name,
+        head_img_url,
+        union_id,
+        forbidden_enable,
+        claim_enable,
+        angel_id,
+        source,
+        sex
+        )
+        VALUES (#{owner},
+        #{ownerType},
+        #{deleted},
+        #{createdBy},
+        #{createdTime},
+        #{updatedBy},
+        #{updatedTime},
+        #{userName},
+        #{password},
+        #{mobile},
+        #{realName},
+        #{email},
+        #{avatarUrl},
+        #{invitationCode},
+        #{ip},
+        <choose>
+            <when test="lastLoginDate != null">
+                #{lastLoginDate},
+            </when>
+            <when test="lastLoginDate == null">
+                #{createdTime},
+            </when>
+        </choose>
+        #{companyId},
+        #{openId},
+        #{nickName},
+        #{headImgUrl},
+        #{unionId},
+        #{forbiddenEnable},
+        #{claimEnable},
+        #{angelId},
+        #{source},
+        #{sex})
+    </insert>
+
+    <update id="update" parameterType="com.diting.model.Account">
+        UPDATE
+          account
+        SET
+          deleted = #{deleted},
+          update_by = #{updatedBy},
+          update_time = #{updatedTime},
+          user_name = #{userName},
+          password = #{password},
+          mobile = #{mobile},
+          real_name = #{realName},
+          email = #{email},
+          company_id = #{companyId},
+          claim_enable = #{claimEnable},
+          forbidden_enable=#{forbiddenEnable},
+          head_img_url=#{headImgUrl}
+        WHERE id = #{id}
+    </update>
+
+    <select id="get" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+          *
+        FROM
+          account
+        WHERE id = #{userId}
+        LIMIT 1
+    </select>
+
+    <select id="getByMobile" resultMap="defaultResultMap" parameterType="java.lang.String">
+        SELECT
+          *
+        FROM
+          account
+        WHERE mobile = #{mobile}
+        LIMIT 1
+    </select>
+
+    <select id="getByUsername" resultMap="defaultResultMap" parameterType="java.lang.String">
+        SELECT
+        *
+        FROM
+        account
+        WHERE user_name = #{username}
+        LIMIT 1
+    </select>
+
+    <select id="getByOpenId" resultMap="defaultResultMap" parameterType="java.lang.String">
+        SELECT
+        *
+        FROM
+        account
+        WHERE open_id = #{openId}
+        LIMIT 1
+    </select>
+
+    <select id="getByUnionId" resultMap="defaultResultMap" parameterType="java.lang.String">
+        SELECT
+        *
+        FROM
+        account
+        WHERE union_id = #{UnionId}
+        LIMIT 1
+    </select>
+
+    <select id="getByAngelId" resultMap="defaultResultMap" parameterType="java.lang.String">
+        SELECT
+        *
+        FROM
+        account
+        WHERE angel_id = #{angelId}
+        LIMIT 1
+    </select>
+
+    <select id="getByCompanyId" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+        *
+        FROM
+        account
+        WHERE company_id = #{companyId}
+        LIMIT 1
+    </select>
+
+    <select id="checkUsernameLogin" resultMap="defaultResultMap">
+        select
+         *
+        from account
+        where password = #{password}
+        and user_name = #{userName}
+        limit 1
+    </select>
+
+    <update id="updateLastLoginTime" parameterType="java.lang.Integer">
+        UPDATE
+          account
+        SET
+          last_login_time = NOW()
+        WHERE id = #{userId}
+    </update>
+
+    <update id="updateRecharge" parameterType="java.lang.Integer">
+        UPDATE
+        account
+        SET
+        recharge = 1
+        WHERE id = #{userId}
+    </update>
+
+    <select id="checkMobileExists" resultType="boolean">
+        select exists(
+            select 1 from account where mobile = #{mobile}
+        )
+    </select>
+
+    <select id="checkPassword" resultType="boolean">
+        select exists(
+            select 1 from account
+             where password = #{password}
+              and id = #{userId}
+        )
+    </select>
+
+    <update id="updatePassword">
+        UPDATE
+          account
+        SET
+          password = #{password}
+        WHERE id = #{userId}
+    </update>
+
+    <update id="updateOpenId">
+        UPDATE
+        account
+        SET
+        open_id = #{openId},
+        union_id = #{unionId}
+        WHERE user_name = #{userName}
+    </update>
+
+    <update id="updateUnionId">
+        UPDATE
+        account
+        SET
+        union_id = #{unionId}
+        WHERE open_id = #{openId}
+    </update>
+
+    <update id="updateAngelId">
+        UPDATE
+        account
+        SET
+        angel_id = #{angelId}
+        WHERE user_name = #{userName}
+    </update>
+
+    <update id="updateTelephoneSwitch">
+        UPDATE
+        account
+        SET
+        telephone_switch = #{type}
+        WHERE id = #{accountId}
+    </update>
+
+    <select id="search" resultMap="defaultResultMap">
+        SELECT * FROM account WHERE claim_enable=1
+    </select>
+
+    <select id="searchForPage" resultMap="defaultResultMap">
+        SELECT *
+            FROM account
+              WHERE claim_enable=1
+                ORDER BY id DESC
+    </select>
+
+    <select id="searchAccountForPage" resultMap="defaultResultMap"
+            parameterType="com.diting.model.options.CompanyOptions">
+        SELECT B.* FROM
+        (SELECT a.id,w.balance from account a INNER JOIN wallet w ON a.id=w.user_id) A,
+        (SELECT
+        ac.id,ac.created_time,ac.user_name,ac.invitation_code,ac.last_login_time,ac.claim_enable,ac.company_id,ch.yesterday_count,ch.accuracy_rate,ch.all_count,ch.robot_value,ac.source
+        FROM account ac INNER JOIN chat_statistics ch ON ac.claim_enable=1 AND ac.id=ch.user_id) B
+        WHERE A.id=B.id
+        <if test="keywords!=null and keywords!=''">
+            AND B.invitation_code = #{keywords} OR B.user_name=#{keywords}
+        </if>
+        <if test="type!=null and type==1">
+            ORDER BY A.balance
+        </if>
+        <if test="type!=null and type==0">
+            ORDER BY B.created_time DESC
+        </if>
+    </select>
+    <select id="searchForPageBytime" resultMap="defaultResultMap"
+            parameterType="com.diting.model.options.CompanyOptions">
+        SELECT * from account WHERE 1=1
+        <if test="startTime!= null and startTime != ''">
+            and created_time <![CDATA[   >=  ]]> #{startTime}
+        </if>
+        <if test="endTime!= null and endTime != ''">
+            and created_time <![CDATA[   <=  ]]> #{endTime}
+        </if>
+        <if test="source!=null and source>0">
+           AND source=#{source}
+        </if>
+        <if test="level!=null and level==1">
+            AND company_id==NULL
+        </if>
+        <if test="level!=null and level==2">
+            AND company_id!=NULL
+        </if>
+        ORDER BY created_time DESC
+    </select>
+
+    <select id="searchUserStatistics" resultMap="defaultResultMap">
+        SELECT * from account WHERE 1=1
+        <if test="startTime!= null and startTime != ''">
+            and created_time <![CDATA[   >=  ]]> #{startTime}
+        </if>
+        <if test="endTime!= null and endTime != ''">
+            and created_time <![CDATA[   <=  ]]> #{endTime}
+        </if>
+        ORDER BY created_time ASC
+    </select>
+
+    <select id="searchLoginUserStatistics" resultMap="defaultResultMap">
+        SELECT * from account WHERE 1=1
+        <if test="startTime!= null and startTime != ''">
+            and last_login_time <![CDATA[   >=  ]]> #{startTime}
+        </if>
+        <if test="endTime!= null and endTime != ''">
+            and last_login_time <![CDATA[   <=  ]]> #{endTime}
+        </if>
+        ORDER BY created_time ASC
+    </select>
+
+    <select id="searchAccountByWhereForPage" resultMap="defaultResultMap"
+            parameterType="com.diting.model.options.CompanyOptions">
+        SELECT B.* FROM
+        (SELECT a.id,w.balance from account a INNER JOIN wallet w ON a.id=w.user_id) A,
+        (SELECT
+        ac.id,ac.created_time,ac.user_name,ac.invitation_code,ac.last_login_time,ac.claim_enable,ac.company_id,ch.yesterday_count,ch.accuracy_rate,ch.all_count,ch.robot_value,ac.source
+        FROM account ac INNER JOIN chat_statistics ch ON ac.claim_enable=1 AND ac.id=ch.user_id) B
+        WHERE A.id=B.id
+        <if test="keywords!=null and keywords!=''">
+            AND B.invitation_code = #{keywords} OR B.user_name=#{keywords}
+        </if>
+        <if test="startTime!= null and startTime != ''">
+            AND created_time <![CDATA[   >=  ]]> #{startTime}
+        </if>
+        <if test="endTime!= null and endTime != ''">
+            AND created_time <![CDATA[   <=  ]]> #{endTime}
+        </if>
+        <if test="source!=null and source>0">
+            AND source=#{source}
+        </if>
+        <if test="level!=null and level==1">
+            AND company_id==NULL
+        </if>
+        <if test="level!=null and level==2">
+            AND company_id!=NULL
+        </if>
+        <if test="type!=null and type==1">
+            ORDER BY A.balance
+        </if>
+        <if test="type!=null and type==0">
+            ORDER BY B.created_time DESC
+        </if>
+    </select>
+    <select id="searchAgentForPage" resultMap="defaultResultMap"
+            parameterType="com.diting.model.options.CompanyOptions">
+        SELECT *
+        FROM account
+        WHERE claim_enable=1
+        <if test="invitationCode!=null and invitationCode!=''">
+            AND invitation_code = #{invitationCode}
+        </if>
+    </select>
+    <select id="searchAddAccount" resultType="Integer">
+        SELECT count(id) FROM account WHERE claim_enable=1
+        <if test="beginTime!=null and beginTime!=''">
+            and created_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime!=null and endTime!=''">
+            and created_time &lt; #{endTime}
+        </if>
+    </select>
+
+    <select id="searchAddAccountBySource" resultType="Integer">
+        SELECT count(id) FROM account WHERE claim_enable=1 AND source=#{source}
+        <if test="beginTime!=null and beginTime!=''">
+            and created_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime!=null and endTime!=''">
+            and created_time &lt; #{endTime}
+        </if>
+    </select>
+
+    <select id="searchDayLoginAccount" resultType="Integer">
+        SELECT count(id) FROM account WHERE claim_enable=1
+        <if test="beginTime!=null and beginTime!=''">
+            and last_login_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime!=null and endTime!=''">
+            and last_login_time &lt; #{endTime}
+        </if>
+    </select>
+
+    <update id="bindMobile" parameterType="com.diting.resources.request.AccountBindRequest">
+        UPDATE
+          account
+        SET
+          created_time = now(),
+          user_name = #{userName},
+          password = #{password},
+          mobile = #{mobile},
+          claim_enable = #{claimEnable},
+          invitation_code = #{invitationCode},
+          last_login_time = NOW(),
+          source=#{source}
+        WHERE id = #{accountId};
+
+        UPDATE
+          company
+        SET
+          created_by = #{companyCreatedBy}
+        WHERE id = #{companyId};
+
+        UPDATE
+          invalid_question
+        SET
+          username = #{mobile}
+        WHERE username = #{oldMobile};
+    </update>
+
+</mapper>

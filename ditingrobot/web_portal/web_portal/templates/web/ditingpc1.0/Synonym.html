@@ -1,0 +1,115 @@
+{% extends "web/ditingpc1.0/success_layout.html" %}
+		{% block head %}
+		<script type="text/javascript" src="/static/js/diting1.0/pc/Synonym.js{{ _suffix_ }}"></script>
+		<link rel="stylesheet" href="/static/css/diting1.0/pc/quesK-style.css{{ _suffix_ }}" />
+		<style type="text/css">
+			#tabProduct>tbody>tr:hover{
+				background: #fafafa
+			}
+			#tabProduct {
+				font-size: 14px;
+				min-width: 1000px;width: 100%;
+			}
+			#tabProduct th{
+				background: #fff;
+				height: 60px;
+				text-align: center;
+
+			}
+			#tabProduct td{
+				text-align: center;font-size: 12px;max-height: 50px;overflow: hidden;
+				border-right:1px solid #fff;
+				word-break: break-all;
+			}
+			.writeBtn{
+				border: none;background: #fff;font-size: 16px;color: #69a4a2;width: 55px;line-height: 28px;
+			}
+			#tabProduct tr{
+				height:40px;
+				border-bottom: 1px solid #fafafa;
+				background: #fff;
+			}
+
+			#shopss{
+				margin: 20px auto;
+				width: 1000px;
+			}
+			.addq{
+				border:0;width: 80px;height: 30px;background: #00C5C0;text-align: center;line-height: 30px;color: #fff;border-radius: 3px;font-size: 16px;
+				margin-right: 35px;float: right;
+			}
+			.addq:hover{
+				background: #8aC4FF;
+			}
+		</style>
+
+		{% endblock %}
+
+		{% block main %}
+		<!--左侧菜单栏-->
+
+
+		<!--==右侧内容区==============-->
+		<div class="mains">
+		<div style="padding:0 20px;background: #fff;">
+				<h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_Syn.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;同义词库</h3>
+
+					<!--======搜索==========-->
+			<div style="border-bottom: 1px solid #fafafa;padding: 20px;min-width: 1000px;">
+					<input style="width: 200px;border: 1px solid #fafafa;height: 28px;border-radius: 4px;"  class="nav-search-input" autocomplete="off" id="nav-search-input" type="text" maxlength="20" name="keywords" value="" placeholder="这里输入关键词" />
+					<input type="button" class="writeBtn" id="knowsearch" value="搜索"  onclick="changess_Synonym()" />
+
+				<input class="addq" type="button" name="Submit" value="新增" onclick="addq()"  />
+			</div>
+				<div style="display: none;">
+					<input type="text" id="pageNo" value="" />
+				</div>
+				<!--===============-->
+				<table  border="0" cellpadding="0" cellspacing="0" id="tabProduct" >
+
+				</table>
+					<div id="shopss">
+						<div id="red" class="pager red" >
+							<div class="btn disabled">首页</div>
+							<div class="btn disabled">上一页</div>
+							<ul id="pages">
+								<li>
+									<a id="1" class="red normal active" href="javascript:void(0)">1</a>
+								</li>
+								<li>
+									<a id="2" class="red normal" href="javascript:void(0)">2</a>
+								</li>
+								<li>
+									<a id="3" class="red normal" href="javascript:void(0)">3</a>
+								</li>
+								<li>
+									<a id="4" class="red normal" href="javascript:void(0)">4</a>
+								</li>
+							</ul>
+							<div class="btn">下一页</div>
+							<div class="btn">尾页</div>
+							<div class="short"><input type="text"><input type="button" value="跳转" class="btn"></div><span><b></b></span><span></span><span><b></b></span><span>总计</span><span><b></b>条</span></div>
+					</div>
+		</div>
+	</div>
+<div id="tanc"></div>
+
+		{% endblock %}
+
+			{% block script %}
+<script type="text/javascript">
+	window.onload=function () {
+		csh_Syn2(); //初始化
+//回车键搜索
+		$("#nav-search-input").keydown(function entersearch_Synonym(e){
+			e = e||event;
+			if(e.keyCode == 13) {
+				changess_Synonym()
+			}
+			return;
+		})
+	};
+</script>
+
+
+			{% endblock %}

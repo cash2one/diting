@@ -1,0 +1,82 @@
+{% extends "web/phone/layout_phone.html" %}
+{% block title %}
+<title>谛听机器人开放平台--注册</title>
+{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/lib/iconfont.css{{ _suffix_ }}" />
+<link rel="stylesheet" type="text/css" href="/static/css/phone/login_phoneStyle.css{{ _suffix_ }}"/>
+<script type="text/javascript" src="/static/js/register.js{{ _suffix_ }}"></script>
+<style>
+    ._input{
+        border: 0;
+    }
+</style>
+<script type="text/javascript">
+    window.onload = function () {
+        textCode0( $('.code_send0'));
+        // 然后调用getParameter 方法:
+        var temp = getParameter("yaoqingma");
+        $('#InvitationR').val(temp);
+        if( $('#InvitationR').val()!=""){
+            $('#InvitationK').css("display","block")
+        }else {
+            $('#InvitationK').css("display","none")
+        }
+
+    }
+</script>
+{% endblock %}
+{% block mainnofooter %}
+<!--=============================================================================-->
+<div style="width: 6.4rem;height: 10.1rem;background: #fff">
+    <div style="background: #333;color: #fff;line-height: 0.76rem;font-size: 0.3rem;padding:0.1rem 0.3rem;text-align: left;margin-bottom: 0.2rem;"> 注册谛听机器人 </div>
+    <div class="reg_input black_reg" >
+        <div class="_input" style=" margin: 0.22rem auto;border-bottom: 1px solid #999;width: 5.4rem;">
+            <span class="i_W" style="color: #000">+86</span>
+            <input type="text" placeholder="请输入手机号" name="USERNAME" id="phone" value="" required="required"
+                   maxlength="11" onblur="oPhonetest()" style="width: 4rem;border: none; color: #000;">
+            <i class="phone_i">请输入正确手机号</i>
+        </div>
+        <div class="_input" style="margin: 0.22rem auto;border-bottom: 1px solid #999;width: 5.4rem;">
+            <span style=" width: 0.5rem; height: 0.5rem;display: inline-block;background: url(/static/images/antusheng/phone/antusheng_JYM1.png) no-repeat 0.05rem; background-size: 0.4rem; margin: 0.1rem;"></span>
+            <input type="text" class="_input3" placeholder="请输入校正码" value="" name="txcode" id="txcode"
+                   required="required" maxlength="4" style="border: none; color: #000;"> <input style="right: 0rem;margin: 0.07rem 0.05rem 0 0;" type="button" id="btnTxCode" class="code_send0" onclick="textCode0(this);"/>
+            <i class="txcode_i">请先正确填写校正码</i>
+        </div>
+        <div class="_input" style="margin: 0.22rem auto;border-bottom: 1px solid #999;width: 5.4rem;">
+            <span style=" width: 0.5rem; height: 0.5rem;display: inline-block;background: url(/static/images/antusheng/phone/antusheng_DX1.png) no-repeat 0.05rem; background-size: 0.4rem; margin: 0.1rem;"></span>
+            <input type="text" class="_input3" placeholder="请输入验证码" value="" name="telcode" id="telcode"
+                   required="required" maxlength="20" style="border: none; color: #000;"> <input style="right: 0rem;margin: 0.07rem 0.05rem 0 0;" type="button" id="btnCode" value="发送验证码" class="_send" onclick="code_if();"/>
+        </div>
+        <div class="_input password" style="margin: 0.22rem auto;border-bottom: 1px solid #999;width: 5.4rem;">
+            <span style=" width: 0.5rem; height: 0.5rem;display: inline-block;background: url(/static/images/antusheng/phone/antusheng_PWD1.png) no-repeat 0.05rem; background-size: 0.4rem; margin: 0.1rem;"></span>
+            <input type="password" placeholder="6~16位密码,区分大小写" name="PASSWORD" value="" id="pwd" required="required"
+                   maxlength="16" style="width: 4rem;border: none; color: #000;">
+            <i class="pwd_i" >请输入6~16位密码，区分大小写</i>
+        </div>
+        <div class="_input" style="margin: 0.22rem auto;border-bottom: 1px solid #999;width: 5.4rem;">
+            <span style=" width: 0.5rem; height: 0.5rem;display: inline-block;background: url(/static/images/antusheng/phone/antusheng_PWD1.png) no-repeat 0.05rem; background-size: 0.4rem; margin: 0.1rem;"></span>
+            <input type="password" placeholder="两次密码需要一致" name="requrePassword" value="" id="pwd2" required="required"
+                   maxlength="16" style="width: 4rem;border: none; color: #000;">
+            <i class="pwd2_i">两次密码需要一致</i>
+        </div>
+
+        <div class="_input"  id="InvitationK" style="margin: 0.22rem auto;border-bottom: 1px solid #999;width: 5.4rem;display: none">
+            <span class="i_W" style="color: #000;">邀请码:</span>
+            <input type="text" placeholder="请输入邀请码（选填）" name="Invitation" value="" id="InvitationR" maxlength="14" readonly="readonly" style="width: 4rem;border: none; color: #000;"/>
+        </div>
+        <div style="width: 5.6rem; margin:0.6rem auto 0;" >
+            <div class="protocol">
+                <input style="float: left;height: 0.3rem;width: 0.3rem;display: none" type="checkbox" checked="checked" data="unselected" id="checkbox" alt="selected"/>
+                <span style="float: left;font-size: 0.22rem;"> 点击“注册”按钮，即同意《<a href="/agreement" target="_blank" style="color: red;">谛听相关协议内容</a>》</span>
+                <div style="clear:both;"></div>
+            </div>
+        </div>
+        <br/>
+
+        <div  style="margin: auto ;width: 5.4rem; height: 0.8rem;">
+            <input id="btn_reg0"  style="width: 100%; height: 100%; background: #1ca4e8; color: #fff; font-size: 0.32rem;border: 0;border-radius: 0.1rem;" type="button" onclick="save01()" value="注册"/>
+        </div>
+    </div>
+</div>
+{% endblock %}

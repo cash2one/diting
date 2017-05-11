@@ -1,0 +1,127 @@
+/*==write---juning=====================================================*/
+html,body,ul,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,legend,img,input,menu,nav,header,footer,article{ margin:0; padding:0;}
+body{font-size:12px;background: #fff;min-width: 1000px;}
+a{text-decoration:none;color:#646464;outline: none;}
+a:hover{text-decoration:none;}
+img{display:block;border: 0px none;}
+ul,li{list-style:none;outline: none;}
+input{outline:none;}
+.cleardiv{clear: both;}
+a:focus {outline: none;}
+div,span,p,tr,td{word-break: break-all;}
+/*===编辑==删除btn==============================================*/
+.edits{
+    background: url(/static/images/edit.png) no-repeat;border: none; width: 21px;height: 24px;
+}
+.deletes{
+    background: url(/static/images/del.png) no-repeat;border: none; width: 21px;height: 24px;
+}
+
+/*=====弹窗样式==========================================================*/
+body .demo-class .layui-layer-title {
+    background: #4898D5;
+    color: #fff;
+    border: none;
+}
+
+body .demo-class .layui-layer-btn {
+    border-top: 1px solid #E9E7E7
+}
+
+body .demo-class .layui-layer-btn a {
+    background: #4898D5;
+}
+
+body .demo-class .layui-layer-btn .layui-layer-btn1 {
+    background: #999;
+}
+
+body .demo-class {
+    height: 320px;
+}
+
+body .layer-anim {
+    width: 400px;
+}
+body .demo-class2 .layui-layer-title {
+    background: #4898D5;
+    color: #fff;
+    border: none;
+}
+body .demo-class2 {
+    height: 350px;
+    margin: 0 auto;
+}
+
+body .demo-class2.layer-anim {
+    width: 600px;
+    height: 350px;
+}
+
+/*==footer=====================================================*/
+footer{
+    float: left;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    clear: both;
+    margin: 30px auto 0px;
+    color: rgb(153, 153, 153);
+    border-top: 1px solid rgb(83, 202, 195);
+}
+footer div {
+    margin: 10px auto;
+    width: 1000px;
+}
+footer div div {
+    width: 100%;
+    height: 26px;
+    line-height: 26px;
+
+}
+footer li{
+    position: relative;
+    display: inline-block;
+    padding: 0 10px;
+    border-right: 1px solid #999;
+    cursor:pointer;
+}
+footer .wxgzh{
+    border: 0;color: #000;position: relative;
+}
+.WXerweima{
+    height: 230px;
+    width: 230px;
+    display:none;
+    position: absolute;
+    top: -240px;
+    right: -70px;
+}
+.wxgzh:hover .WXerweima{display: block;}
+.WXerweima{
+    height: 230px;
+    width: 230px;
+    display:none;
+    position: absolute;
+    top: -240px;
+    right: -70px;
+}
+.WXerweima img{
+    height: 100%;width: 100%;z-index: 100;
+}
+footer li a {
+    display: block;
+    padding: 0 10px;
+    height: 12px;
+    line-height: 12px;
+    color: #000;
+}
+footer a:hover{
+    color: #31B0D5;
+}
+.bigImg0 {
+    display: block;
+    max-width: 900px;
+    max-height: 500px;
+    margin: 100px auto;
+}

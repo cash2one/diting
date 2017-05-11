@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.love.LoveMessageLogMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.love.LoveMessageLog">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="forword_name" property="forwordName" jdbcType="VARCHAR"/>
+        <result column="forword_id" property="forwordId" jdbcType="INTEGER"/>
+        <result column="receive_name" property="receiveName" jdbcType="VARCHAR"/>
+        <result column="receive_id" property="receiveId" jdbcType="INTEGER"/>
+        <result column="message" property="message" jdbcType="VARCHAR"/>
+        <result column="love_id" property="loveId" jdbcType="INTEGER"/>
+        <result column="flag" property="flag" jdbcType="INTEGER"/>
+        <result column="message_type" property="messageType" jdbcType="INTEGER"/>
+        <result column="receive_head_img_url" property="receiveHeadImgUrl" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="countLogMap" type="java.util.HashMap">
+        <result column="count_log" property="countLog" jdbcType="INTEGER"/>
+        <result column="receive_name" property="receiveName" jdbcType="VARCHAR"/>
+        <result column="receive_id" property="receiveId" jdbcType="INTEGER"/>
+        <result column="receive_head_img_url" property="receiveHeadImgUrl" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectCountMap" resultMap="countLogMap">
+          select count(id) count_log,receive_id,receive_name,receive_head_img_url from love_message_log group by receive_id ORDER BY count_log DESC;
+    </select>
+    <select id="selectByUserId" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+          *
+        FROM
+          love_message_log
+          WHERE receive_id=#{userId}
+          ORDER BY created_time DESC
+    </select>
+    <select id="selectCountByUserId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM
+        love_message_log
+        WHERE receive_id=#{userId} AND flag=0
+    </select>
+    <select id="selectCountByLoveId" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM
+        love_message_log
+        WHERE love_id=#{loveId}
+    </select>
+    <insert id="create">
+        INSERT INTO love_message_log(
+        created_time,
+        forword_name,
+        forword_id,
+        receive_name,
+        receive_id,
+        message,
+        love_id,
+        flag,
+        message_type,
+        receive_head_img_url
+        ) VALUES (
+        now(),
+        #{forwordName},
+        #{forwordId},
+        #{receiveName},
+        #{receiveId},
+        #{message},
+        #{loveId},
+        0,
+        0,
+        #{receiveHeadImgUrl}
+        )
+    </insert>
+    <update id="updateByUserId" parameterType="java.lang.Integer">
+        UPDATE love_message_log SET flag=1 WHERE receive_id=#{userId}
+    </update>
+</mapper>

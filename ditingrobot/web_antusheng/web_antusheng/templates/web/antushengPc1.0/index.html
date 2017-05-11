@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>谛听</title>
+    <link rel="stylesheet" href="/static/css/antusheng1.0/pc/index.css">
+    <script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js"></script>
+    <script src="/static/js/antusheng1.0/pc/index.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/talk.js{{ _suffix_ }}"></script>
+    <script type="text/javascript" src="/static/js/diting-common.js{{ _suffix_ }}"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            talks();
+            $(".advan1_child").mouseenter(function () {
+                $(this).children(".cap").css({
+                    "top":"0",
+                    "transition": "top 0.5s",
+                    "-moz-transition": "top 0.5s",
+                    "-webkit-transition":"top 0.5s",
+                    "-o-transition": "top 0.5s"
+                })
+            }).mouseleave(function () {
+                $(this).children(".cap").css({
+                    "top":"-150%",
+                    "transition": "top 0.5s",
+                    "-moz-transition": "top 0.5s",
+                    "-webkit-transition":"top 0.5s",
+                    "-o-transition": "top 0.5s"
+                })
+            })
+        }
+    </script>
+</head>
+<body>
+    <div class="wrapTop">
+       	<ul class="right topUl">
+            <li class="shenqing">代理商申请</li>
+            <a href="/atsLogin" style="color: black;"><li class="login">登录</li></a>
+        </ul>
+    </div>
+    <div class="banner">
+    	<p style="text-align:center;font-size: 0.6rem;">"谛听客服机器人" &nbsp;每个企业都因你而变</p>
+    	<p style="text-align:center;font-size: 0.24rem;margin-top: 0.4rem;">完美融合机器人与人工客服，所有渠道整合为一，让你的客服触手可及</p>
+    	<a class="shiyong" href="/atsRegister">申请试用</a>
+        <div class="navUl">
+            <ul style="width: 11rem;height: 100%;margin: 0 auto;display: flex;justify-content: space-around">
+                <a href="#service"><li class="navLi navLi01">介绍</li></a>
+                <a href="#advantages"><li class="navLi navLi02">优势</li></a>
+                <a href="#yanshi"><li class="navLi navLi03">演示</li></a>
+                <a href="#partner"><li class="navLi navLi04">排行榜</li></a>
+    	    </ul>
+        </div>
+    </div>
+    <div id="service" class="service">
+    	<p style="font-size: 0.28rem;text-align: center;">服务</p>
+    	<p style="font-size: 0.24rem;text-align: center;margin-bottom: 0.4rem;">Service</p>
+    	<div style="height: 5.2rem;width: 10rem;margin: 0 auto">
+    		<div class="pcImg left">
+    			<ul class="pcImgUl">
+    				<li>
+    					<img style="width: 100%;float:left;" src="/static/images/antusheng/web/pc1.png"/>
+    					<p style="font-size: 0.12rem;color: #1483d9;width: 100%;float:left;margin-top:0.2rem">高端可定制知识库</p>
+    				</li>
+    				<li>
+    					<img style="width: 100%;float: left" src="/static/images/antusheng/web/pc3.png"/>
+    					<p style="font-size: 0.12rem;color: #1483d9;width: 100%;float:left;margin-top:0.2rem;">免费云接口</p>
+    				</li>
+    				<li>
+    					<img style="width: 100%;float: left" src="/static/images/antusheng/web/pc2.png"/>
+    					<p style="font-size: 0.12rem;color: #1483d9;width: 100%;float:left;margin-top:0.2rem;">免费试用</p>
+    				</li>
+    			</ul>
+    		</div>
+
+    		<div class="about">
+    			<ul>
+    				<li>
+    					<p style="font-weight: 900"><span style="font-weight: 900;padding-right: 0.2rem;">|</span>关于我们</p>
+    					<p style="line-height:0.28rem;font-size:0.14rem;text-indent: 0.3rem">谛听客服机器人是谛听平台下的智能客服系统，隶属北京谛听机器人科技有限公司。提供在线客服，全渠道接入等产品与服务，帮助企业提高客服工作效率，提高客户满意度，提高客户转化率</p>
+    				</li>
+    				<li class="lxfs">
+    					<p style="font-size: 0.16rem;font-weight: 900"><span style="font-weight: 900;padding-right: 0.2rem;">|</span>联系方式</p>
+    					<p>地址：北京市朝阳区顺白路12号比目鱼创业园a座301</p>
+    					<p>联系方式：400-900-3381</p>
+    					<p>公司邮箱：pengjunhui@dtrobo.com</p>
+    					<p>客服邮箱：18910937949@189.cn</p>
+    				</li>
+    				<li>
+    					<span style="display: block;color: #00a9e1;margin: 0.1rem 0;">● 谛听科技</span>
+    					<img src="/static/images/antusheng/web/erweima.png" style="margin-left: -0.1rem;height: 1.6rem" alt="二维码" />
+    				</li>
+    			</ul>
+    		</div>
+    	</div>
+    </div>
+    <div id="advantages" class="advantages">
+    	<p style="font-size: 0.28rem;text-align: center;">我们的优势</p>
+    	<p style="font-size: 0.24rem;text-align: center;margin-bottom: 0.4rem;">Our advantages</p>
+    	<div class="advan1">
+    		<div class="advan1_child">
+    			<img src="/static/images/antusheng/web/advan8.png"/>
+    			<p>图文结合</p>
+                <div class="cap" style="height: 70%;padding-top: 30%;">支持图文消息，会话交互一目了然。</div>
+    		</div>
+    		<div class="advan1_child">
+    			<img src="/static/images/antusheng/web/advan6.png"/>
+    			<p>Always online</p>
+                <div class="cap" style="height: 90%;padding-top: 10%;">轻松应对高并发请求<br />客服机器人24h一对多即时服务，支持海量用户富媒体并发访问。<br />移动端：高效响应</div>
+    		</div>
+    		<div class="advan1_child">
+    			<img src="/static/images/antusheng/web/advan1.png"/>
+    			<p>全渠道接入</p>
+                <div class="cap"  style="height: 90%;padding-top: 10%;">支持接入PC网页、移动Web、微信、App、安卓硬件机器人等多渠道全媒体平台，全渠道统一部署多终端信息，一体化快速回复。</div>
+    		</div>
+    		<div class="advan1_child">
+    			<img src="/static/images/antusheng/web/advan2.png"/>
+    			<p>操作所见即所得</p>
+                <div class="cap" style="height: 90%;padding-top: 10%;">平台遵循实用原则，API接入简单，增删改查模块一目了然。管理人员不需编写代码、或制作复杂的页面，即可实现对客服机器人的定制和完美维护。</div>
+    		</div>
+    	</div>
+    	<div class="advan1">
+    		<div class="advan1_child">
+    			<img src="/static/images/antusheng/web/advan3.png"/>
+    			<p>独有专利核心算法</p>
+                <div class="cap"  style="height: 90%;padding-top: 10%;">独有Deep Semantic Analysis核心算法，结合ASR（语音识别）和NLU（自然语言理解）等技术，中文语义理解准确率高，支持语言场景切换、同义问法和上下文处理。
+</div>
+    		</div>
+    		<div class="advan1_child">
+    			<img src="/static/images/antusheng/web/advan5.png"/>
+    			<p>强大的泛化能力</p>
+                <div class="cap"  style="height: 90%;padding-top: 10%;">核心语义理解技术拥有极强的同义处理能力，无需编写大量同义句，定义好标准问答，客服机器人即可举一反三，工作一劳永逸。</div>
+    		</div>
+    		<div class="advan1_child">
+    			<img src="/static/images/antusheng/web/advan4.png"/>
+    			<p>海量知识点，功能应用丰富</p>
+                <div class="cap"  style="height: 90%;padding-top: 10%;">平台提供百科、日常闲聊、金融、电商等各类知识点供用户选用，还开发了丰富的实用工具应用，如查天气、订票、计算、讲笑话、看新闻、翻译、通用指令等，满足用户基本需求。</div>
+    		</div>
+    		<div class="advan1_child">
+    			<img src="/static/images/antusheng/web/advan7.png"/>
+    			<p>数据永久存留</p>
+                <div class="cap"  style="height: 80%;padding-top: 20%;">用户数据和企业知识库不做过期删档处理，完整记录客服数据，推动用户分析和产品升级。</div>
+    		</div>
+    	</div>
+    </div>
+    <div id="yanshi" class="yanshi" style="height: 8rem">
+        <p style="font-size: 0.28rem;text-align: center;">谛听客服机器人演示</p>
+    	<p style="font-size: 0.24rem;text-align: center;margin-bottom: 0.4rem;">Antusheng customer service robot demo</p>
+        <div style="width: 11.6rem;margin:0 auto;">
+            <div style="display: none;">
+                <input type="text" id="name" name="name" value="谛听客服">
+                <input type="text" id="Cname" name="name" value="谛听客服">
+                <input type="text" id="idd0" name="id" value="{{ robot.id }}">
+                <input type="text" id="invitationCode_no" name="invitationCode" value="">
+                <input type="text" id="enable" name="enable"  value="0">
+                <input type="text" id="unique_id" name="unique_id" value="5b916465c8d945e2ae4de4477c910aca">
+                <input type="text" id="uuid" name="uuid"  value="">
+                <input type="text" id="welcomes" name="welcomes" value="{{ robot.welcomes }}">
+                <input type="text" id="profile" name="profile"  value="{{ robot.profile or '' }}">
+                <input type="text" id="answer1" name="answer1" value="{{ robot.invalidAnswer1 }}">
+                <input type="text" id="answer2" name="answer2" value="{{ robot.invalidAnswer2 }}">
+                <input type="text" id="answer3" name="answer3" value="{{ robot.invalidAnswer3 }}">
+                <input type="text" id="answer4" name="answer4" value="{{ robot.invalidAnswer4 }}">
+                <input type="text" id="answer5" name="answer5" value="{{ robot.invalidAnswer5 }}">
+                <input type="text" id="headPortrait" name="headPortrait" value="http://diting-picture.pingxingren.cn/bLWcE6o0106v3FXcWgW7qL.png?imageMogr2/crop/!101x101a0a0/thumbnail/200x200">
+            </div>
+            <p style="height: 0.6rem;color: black;text-align: center;line-height: 0.6rem;color: white;background: black;font-size: 0.16rem;">谛听客服机器人</p>
+            <div style="width: 100%;height: 6rem;">
+                <div class="talk" style="width: 6.2rem;height: 5.4rem;float: left">
+                    <ul style="height: 100%">
+                        <li style="background:url(/static/images/phone/phone_index/index_phoneTalk.png) no-repeat;background-size: 100%; height: 100%;">
+                            <div id="container">
+                                <ul class="content" id="content">
+
+                                </ul>
+                                <div class="footer">
+                                    <div style="height:0.55rem;border:1px solid #00e1de;">
+                                        <input style="height:100%;float:left;width:80%;margin:0;padding:0;border:none;" id="text" type="text" placeholder="有事可以提问题，没事还能唠唠嗑..."/>
+                                        <span style="height:100%;float:right;width:20%;margin:0;padding:0;line-height: 0.55rem;background: #00e1de" id="btn">发送</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li><div style="clear: both"></div>
+                    </ul>
+                </div>
+                <div class="question" style="font-size:0.16rem;float:right;width:4rem;border-left:1px solid #CCC;padding-left:1rem;">
+                    <span style="display:block;line-height:0.6rem;text-indent:0.1rem;font-weight:800;">常见问题</span>
+                    <ul style="line-height:0.28rem;">
+                        <li>1.谛听机器人简介</li>
+                        <li>2.机器人能做什么</li>
+                        <li>3.机器人有哪些接入渠道</li>
+                        <li>4.你们的产品是不是免费的</li>
+                        <li>5.你们的产品优势是什么</li>
+                        <li>6.介绍一下你们的公司</li>
+                        <li>7.你们公司的创始人是谁</li>
+                        <img style="width:1.8rem;margin-top:0.4rem;" src="/static/images/antusheng/web/teacher.png" alt="">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="partner" class="partner">
+    	<p style="font-size: 0.28rem;text-align: center;">合作伙伴</p>
+    	<p style="font-size: 0.24rem;text-align: center;margin-bottom: 0.4rem;">Cooperative partner</p>
+    	<div class="partner1">
+    		<div class="partner_child">
+    			<img src="/static/images/antusheng/web/par1.png"/>
+    		</div>
+    		<div class="partner_child">
+    			<img src="/static/images/antusheng/web/par2.png"/>
+    		</div>
+    		<div class="partner_child">
+    			<img src="/static/images/antusheng/web/par3.png"/>
+    		</div>
+    	</div>
+    	<div class="partner1">
+    		<div class="partner_child">
+    			<img src="/static/images/antusheng/web/par4.png"/>
+    		</div>
+    		<div class="partner_child">
+    			<img src="/static/images/antusheng/web/par5.png"/>
+    		</div>
+    		<div class="partner_child">
+    			<img src="/static/images/antusheng/web/par6.png"/>
+    		</div>
+    	</div>
+    	<div class="partner1">
+    		<div class="partner_child">
+    			<img src="../static/images/antusheng/web/par7.png"/>
+    		</div>
+    		<div class="partner_child">
+    			<img src="/static/images/antusheng/web/par8.png"/>
+    		</div>
+    		<div class="partner_child">
+    			<img src="/static/images/antusheng/web/par9.png"/>
+    		</div>
+    	</div>
+    </div>
+    <div class="foot">
+    	<p style="text-align:center;font-size: 0.32rem;">还没有使用谛听机器人？</p>
+    	<a class="dianji" href="/atsRegister">点击使用</a>
+    </div>
+</body>
+</html>

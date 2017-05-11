@@ -1,0 +1,93 @@
+{% extends "web/agent/agent_layout.html" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/quesK-style.css{{ _suffix_ }}" />
+		<style type="text/css">
+			.invitationCodess {
+				height:416px;
+				padding-top: 120px;
+			}
+			.invitationCodess p{
+				text-align: center;
+			}
+			#invitationURL,#PINGinvitationURL{
+				width: 455px;
+				margin: 0 auto;
+				height: 30px;
+				line-height: 30px;
+				font-size: 14px;
+			}
+			#copyURL,#generateInvitationURL{
+				border: 0;
+				width: 120px;
+				height: 30px;
+				background: #55a6e0;
+				text-align: center;
+				line-height: 30px;
+				color: #fff;
+				border-radius: 5px;
+				font-size: 13px;
+				margin: 15px auto;
+				display: block;
+			}
+
+			nav>div {
+				width: 173px;
+			}
+
+		</style>
+
+{% endblock %}
+
+{% block main %}
+
+<!--==内容区==============-->
+	<div class="mains" style="width: 100%;">
+		<div style="padding: 10px;">	
+
+				<div style="display: none;">
+					<input type="text" id="pageNo" value="" />
+					<input type="text" id="invitationCode0" value="{{loginInfo.invitationCode}}" />
+				</div>
+				<div class="invitationCodess">
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;注&nbsp;&nbsp;册&nbsp;&nbsp;页&nbsp;&nbsp;邀&nbsp;&nbsp;请&nbsp;&nbsp;链&nbsp;&nbsp;接:&nbsp;&nbsp;<input type="text" id="invitationURL" value="http://www.ditingai.com/register?yaoqingma={{loginInfo.invitationCode}}" /></p>
+					<br/>
+				<p>待认领平行人页邀请链接:&nbsp;&nbsp;<input type="text" id="PINGinvitationURL" value="http://www.ditingai.com/m/claim?yaoqingma={{loginInfo.invitationCode}}" /></p>
+
+					<input type="button" id="generateInvitationURL" title="生成邀请链接" value="生成链接" style="margin-top: 100px" />
+					<!--<input type="button" id="copyURL" title="复制邀请链接" value="复制" />-->
+
+				</div>
+
+
+		</div>
+	</div>
+<div id="tanc"></div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+	window.onload=function () {
+		$('#generateInvitationURL').click(function(){
+			$('#invitationURL').val("http://www.ditingai.com/register?yaoqingma="+$('#invitationCode0').val());
+			$('#PINGinvitationURL').val("http://www.ditingai.com/m/claim?yaoqingma="+$('#invitationCode0').val())
+		});
+
+
+//		$(document).ready(function() {
+//			if(window.clipboardData) {
+//				$('#copyURL').click(function() {
+//					window.clipboardData.setData("Text", $('#invitationURL').val());
+//				});
+//			} else {
+//				$("#copyURL").zclip({
+//					path:'/static/js/lib/ZeroClipboard.swf', //记得把ZeroClipboard.swf引入到项目中
+//					copy:function(){
+//						return $('#invitationURL').val();
+//
+//					}
+//				});
+//			}
+//		});
+	}
+</script>
+{% endblock %}

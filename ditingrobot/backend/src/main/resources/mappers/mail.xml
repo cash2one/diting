@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.diting.dao.MailMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.Mail">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="biaoti" property="biaoti" jdbcType="VARCHAR"/>
+        <result column="zhengwen" property="zhengwen" jdbcType="VARCHAR"/>
+
+        <collection property="mail_phone" ofType="com.diting.model.Mail_phone" column="id">
+            <result column="phone" property="phone"/>
+            <result column="ids" property="ids" />
+            <result column="flg" property="flg" />
+        </collection>
+
+
+
+    </resultMap>
+
+
+    <select id="search" resultMap="defaultResultMap">
+        select
+            *
+        from mail
+                order by created_time desc
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.Mail">
+        INSERT
+        INTO mail (
+        created_by,
+        created_time,
+        biaoti,
+        zhengwen
+        )
+        VALUES (
+        #{createdBy},
+        #{createdTime},
+        #{biaoti},
+        #{zhengwen}
+        )
+    </insert>
+
+
+
+
+
+    <insert id="save_phone" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.Mail_phone">
+        INSERT
+        INTO mail_phone (
+        phone,
+        ids,
+        flg
+        )
+        VALUES (
+        #{phone},
+        #{ids},
+        #{flg}
+        )
+    </insert>
+
+
+
+    <select id="find_phone" resultMap="defaultResultMap" parameterType="com.diting.model.Mail_phone">
+         select * from mail m
+
+        left join
+
+        (select * from mail_phone where phone = #{phone}) c
+
+        on m.id = c.ids
+
+        where flg is null
+    </select>
+
+    <select id="search_phoneForPage" resultMap="defaultResultMap" parameterType="com.diting.model.options.MailOptions">
+        select * from mail m
+
+        left join
+
+        (select * from mail_phone where phone = #{phone}) c
+
+        on m.id = c.ids
+
+        order by created_time desc
+    </select>
+
+
+</mapper>

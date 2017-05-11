@@ -1,0 +1,39 @@
+{% extends "web/ditingpc1.0/success_layout.html" %}
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+<!--==右侧内容区==============-->
+    <div style="background: #fff;padding: 0px 20px 20px;width: 100%;margin-bottom: 20px;">
+        <h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_App2.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;智能硬件APP</h3>
+        <h4 style="cursor: default;line-height: 36px;padding-left: 40px;font-size: 12px; font-weight: 100;">谛听语义操作指导</h4>
+        <div  style=" padding:0 40px 20px; line-height: 24px;">
+            <p style="text-indent: 2em">谛听语义是北京谛听机器人科技有限公司研发的智能对话系统。
+            谛听机器人领先的语义理解技术与支持安卓系统的智能硬件（包括智
+            能机器人、手机、平板等）结合使其成为一款个性化的机器人。
+            只需要两步，轻松搞定：</p>
+            <p>一、谛听语义的使用前提是您拥有谛听机器人（软件），登录
+            www.ditingai.com 注册自己的机器人，注册成功后建设自己的知识
+            库，知识库分为单个加入和批量加入，例如：“添加问题”为单个问
+            题添加，“导入数据”为批量导入，批量导入内容按模板即可。</p>
+            <p>二、谛听语义的唤醒</p>
+            <p style="text-indent: 2em">在智能硬件的桌面点击谛听语义,登陆自己的帐号，唤醒词为
+            “小谛小谛”，唤醒成功后就可以和个性化机器人对话。
+            谛听语义的唤醒间隔时间为 10 秒，如果您 10 秒没有和它对话
+            会自动休眠，需要重新唤醒。如果在和小谛对话的同时唤醒了其他系
+            统，这时你只需按返回键退出谛听语义，再次唤醒小谛即可。</p>
+        </div>
+        <div style=" padding-left: 40px;"><a onclick="window.location.href='/api/dtrobot_document/download'"  style="cursor: pointer; padding: 5px; line-height: 26px; font-size: 14px; color: #fff; border: none; width: 124px; border-radius: 3px; background: #00C4C2; display: block;text-align: center;">&nbsp;APP&nbsp;下&nbsp;载&nbsp;</a></div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    window.onload = function () {
+
+    }
+</script>
+{% endblock %}

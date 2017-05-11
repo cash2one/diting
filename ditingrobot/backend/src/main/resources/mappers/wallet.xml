@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.diting.dao.WalletMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.Wallet">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="salt" property="salt" jdbcType="BIGINT"/>
+        <result column="sign" property="sign" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_type" property="userType" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="currency" property="currency" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="balance" property="balance" jdbcType="DECIMAL"/>
+        <result column="leger_type" property="legerType" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.Wallet">
+        INSERT
+            INTO wallet (
+                    owner,
+                    owner_type,
+                    deleted,
+                    created_by,
+                    created_time,
+                    update_by,
+                    update_time,
+                    salt,
+                    sign,
+                    user_id,
+                    user_type,
+                    type,
+                    currency,
+                    status,
+                    balance,
+                    leger_type
+                    )
+            VALUES (#{owner},
+                    #{ownerType},
+                    #{deleted},
+                    #{createdBy},
+                    #{createdTime},
+                    #{updatedBy},
+                    #{updatedTime},
+                    #{salt},
+                    #{sign},
+                    #{userId},
+                    #{userType},
+                    #{type},
+                    #{currency},
+                    #{status},
+                    #{balance},
+                    #{legerType})
+    </insert>
+
+    <update id="update" parameterType="com.diting.model.Wallet">
+        UPDATE
+            wallet
+        SET
+            update_by = #{updatedBy},
+            update_time = #{updatedTime},
+            salt = #{salt},
+            sign = #{sign},
+            balance = #{balance}
+        WHERE id = #{id}
+    </update>
+
+    <select id="checkWalletExists" resultType="boolean">
+        select exists(
+            select 1 from wallet where user_id = #{userId}
+                and user_type = #{userType}
+                  and type = #{type}
+        )
+    </select>
+
+    <select id="getWalletByLegerType" resultMap="defaultResultMap">
+        select
+            *
+        from wallet
+          where 1 = 1
+        <if test="legerType != null">
+            and leger_type = #{legerType}
+        </if>
+    </select>
+
+    <select id="get" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+            *
+        FROM
+            wallet
+        WHERE id = #{walletId}
+        LIMIT 1
+    </select>
+
+    <select id="searchWalletByUserId" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+        *
+        FROM
+        wallet
+        WHERE user_id = #{userId}
+        LIMIT 1
+    </select>
+    <select id="search" resultMap="defaultResultMap">
+        select
+            *
+        from wallet
+            where 1=1
+                <if test="userId != null">
+                    and user_id = #{userId}
+                </if>
+                <if test="userType != null">
+                    and user_type = #{userType}
+                </if>
+                order by id desc
+    </select>
+
+</mapper>

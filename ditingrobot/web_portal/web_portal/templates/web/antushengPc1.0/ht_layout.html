@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+        {% block head %}{% endblock %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="renderer" content="webkit">
+        <meta name="keywords" content="谛听 客服机器人 智能客服">
+        <meta name="description" content="谛听客服机器人，把自然语言变成计算机可执行代码，让企业简便操即可创造在线智能客服机器人。谛听客服机器人可自动回复多条并发，节省人力成本，提高服务效率及质量，产品转化率提高10倍。">
+		<link rel="stylesheet" type="text/css" href="/static/css/antusheng1.0/pc/ht_layout.css"/>
+        <link rel="shortcut icon" href="/static/images/favicon.ico">
+		<script src="/static/js/antusheng1.0/pc/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript">
+			window.onload=function(){
+				var flag = true;
+				$("#fLi").click(function(){
+					if(flag){
+						$("#topUl").css({
+							"height":"184px",
+							"transition": "height 0.5s",
+							"-moz-transition": "height 0.5s",
+							"-webkit-transition": "height 0.5s",
+							"-o-transition": "height 0.5s"
+						})
+						flag=!flag
+					}else{
+						$("#topUl").css({
+							"height":"60px",
+							"transition": "height 0.5s",
+							"-moz-transition": "height 0.5s",
+							"-webkit-transition": "height 0.5s",
+							"-o-transition": "height 0.5s"
+						})
+						flag=!flag
+					}
+				})
+			}
+		</script>
+        {% block style %}{% endblock %}
+	</head>
+	<body>
+		<div class="top">
+			<ul class="topUl" id="topUl">
+				<li id="fLi" >
+					<img src="/static/images/antusheng/web/gerenzhongxin2.png"/>
+					<span style="float:right;display:inline-block;line-height:60px;overflow: hidden;">天空之城</span>
+				</li>
+				<li style="border: none;">站内消息</li>
+				<li>密码重置</li>
+				<li>退出登录</li>
+			</ul>
+		</div>
+
+		<div class="nav">
+			<img src="/static/images/antusheng/web/logo2.png"/>
+			<ul class="navUl">
+				<li style="background: url(/static/images/antusheng/web/shouye.png) no-repeat 0.42rem 0.14rem;">首页</li>
+				<li style="background: url(/static/images/antusheng/web/shezhi.png) no-repeat 0.42rem 0.14rem;">设置</li>
+				<li style="background: url(/static/images/antusheng/web/zhishi.png) no-repeat 0.42rem 0.14rem;">知识库</li>
+				<li style="background: url(/static/images/antusheng/web/jiqiren.png) no-repeat 0.42rem 0.14rem;">我的机器人</li>
+				<li style="background: url(/static/images/antusheng/web/shujujieru.png) no-repeat 0.42rem 0.14rem;">接入与下载</li>
+				<li style="background: url(/static/images/antusheng/web/shujuzhongxin.png) no-repeat 0.42rem 0.14rem;">数据中心</li>
+			</ul>
+		</div>
+
+		<div class="wrapContent">
+			<div class="content">
+                {% block content %}{% endblock %}
+			</div>
+		</div>
+	</body>
+</html>

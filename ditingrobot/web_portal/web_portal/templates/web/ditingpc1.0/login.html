@@ -1,0 +1,42 @@
+{% extends "web/ditingpc1.0/layout.html" %}
+{% block style %}
+	<link rel="stylesheet" type="text/css" href="/static/css/diting1.0/pc/LoginStyle.css{{ _suffix_ }}"/>
+	<script type="text/javascript" src="/static/js/login.js{{ _suffix_ }}"></script>
+{% endblock %}
+{% block main %}
+<div style="position: absolute;top: 0;left: 0;right: 0;height: 400px;background: #000 url(/static/images/index_img/index2_bj001.png) no-repeat;z-index: -1;"></div>
+<div style="min-width: 1000px;margin: auto;">
+
+	<div class="boxLogin10">
+		<div class="login_logo" >
+			<a href="/" style="display: block;width: 350px;"><img src="/static/images/applogo0.png" style="width: 50px;float: left; margin: 34px 5px;"/><span style="color:#00d2ce;font-size: 30px;float: left; line-height:118px;">谛听机器人管理平台</span><div style="clear:both;"></div></a>
+
+			<h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+		</div>
+
+		<div style="width: 510px;height: 484px;background: #fff;box-shadow: 0px 0px 5px #ddd;border-radius: 5px;">
+			<h2 style="line-height: 50px;text-align: center;font-size: 18px;color: #fff;background: #00c4c2;border-top-left-radius: 5px;border-top-right-radius: 5px;">登录</h2>
+			<div class="boxInput10">
+				<img src="/static/images/diting1.0/pc/icon_login01.png"/>
+				<input type="text" placeholder="手机号码" name="loginname" id="phone" maxlength="11">
+			</div>
+			<div class="boxInput10">
+				<img src="/static/images/diting1.0/pc/icon_login02.png" />
+				<input type="password" placeholder="密码" name="password"  id="pwd" maxlength="16">
+			</div>
+			<input id="btn_go" type="button" value="登录" onclick="save11()"/>
+			<div class="boxOtherA">
+				<a href="/password-reset" style="float: left;">忘记密码</a>
+				<a href="/register" style="float: right;">注册</a>
+				<div style="clear: both"></div>
+
+			</div>
+			<div style="height: 0px;border-top: 1px  solid #fafafa;width: 466px;margin:35px auto;"><span style="position: relative;top: -9px;">快速登录</span></div>
+
+			<a  href="https://open.weixin.qq.com/connect/qrconnect?appid=wxd7e83c7f47dab038&redirect_uri=http://www.ditingai.com/wx/wechat_login&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect"><img style=" display: inherit;width: 80px;"  src="/static/images/diting1.0/pc/icon_loginVX3.png"/> </a>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

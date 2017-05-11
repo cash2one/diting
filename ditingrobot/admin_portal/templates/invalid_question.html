@@ -1,0 +1,96 @@
+{% extends "success_layout.html" %}
+{% block style %}
+<script type="text/javascript" src="/static/js/invalid.js{{ _suffix_ }}"></script>
+<link rel="stylesheet" href="/static/css/quesK-style.css{{ _suffix_ }}" />
+		<style type="text/css">
+			#invalid {
+				border: 1px solid #ccc;
+				font-size: 14px;
+				display: block;
+				max-height: 417px;
+				overflow-y: scroll;
+				overflow-x: hidden;
+				height:416px;
+			}
+			#invalid th{
+				background: #EFEFEF;
+			}
+			#invalid td{
+				text-align: left;
+				border-right:1px solid #fff;
+			}
+			#invalid tr{
+				height: 30px;
+			}
+			#alldeletes{
+				background: url(/static/images/del.png) no-repeat;
+				border: none;
+				width: 21px;
+				height: 24px;
+			}
+
+		</style>
+{% endblock %}
+
+{% block main %}
+
+<!--==内容区==============-->
+	<div class="mains" style="width: 100%;">
+		<div style="padding: 10px;">	
+			<form id="form1" name="form1" method="post" action="">
+
+				<div style="background: url(/static/images/search_input.png) no-repeat;width: 416px;height: 36px;float: right">
+					<input  id="invalid-search-input"  type="text" name="keywords" value="" placeholder="搜索" style="border: none;width: 90%;height: 35px;line-height: 36px;background: none;padding-left: 20px;" onkeydown="enterinvalidsearch()"/>
+					<img src="/static/images/search_tip.png"  style="vertical-align: middle;display: initial;cursor: pointer;float: right;margin:5px;"  id="invalidsearch" onclick="invalidSearch()" />
+				</div><div style="clear: both;"> </div>
+				<br /><br />
+				<div style="display: none;">
+					<input type="text" id="pageNo" value="" />
+				</div>
+				<table border="0" cellpadding="0" cellspacing="0" id="invalid">
+
+
+
+				</table>
+				<div id="shopss" style="height: 41px;">
+					<div style="float: left;margin-top: 10px;">
+
+						<input id="alldeletes" type="button" name="alldeletes"  onclick="" />
+
+					</div>
+					<div id="red" style="margin: auto;" class="pager red" style="width: 769px;">
+						<div class="btn disabled">First</div>
+						<div class="btn disabled">Prev</div>
+						<ul id="pages">
+							<li>
+								<a id="1" class="red normal active" href="javascript:void(0)">1</a>
+							</li>
+							<li>
+								<a id="2" class="red normal" href="javascript:void(0)">2</a>
+							</li>
+							<li>
+								<a id="3" class="red normal" href="javascript:void(0)">3</a>
+							</li>
+							<li>
+								<a id="4" class="red normal" href="javascript:void(0)">4</a>
+							</li>
+						</ul>
+						<div class="btn">Next</div>
+						<div class="btn">Last</div>
+						<div class="short"><input type="text"><input type="button" value="Go" class="btn"></div><span><b></b></span><span></span><span><b></b></span><span></span><span><b></b></span></div>
+				</div>
+				
+				
+			</form>
+		</div>
+	</div>
+<div id="tanc"></div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+	window.onload=function () {
+		csh_invalid(); //初始化
+	}
+</script>
+{% endblock %}

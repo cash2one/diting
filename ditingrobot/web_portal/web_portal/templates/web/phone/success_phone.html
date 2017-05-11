@@ -1,0 +1,27 @@
+{% extends "web/phone/layout_phone.html" %}
+{% block style %}
+<script type="text/javascript">
+    window.onload = function () {
+
+
+    }
+</script>
+{% endblock %}
+{% block mainnofooter %}
+<div class="binding_box" style="background: url('/static/images/phone/successNav2Bj.jpg') no-repeat;background-size: 6.4rem;height: 9.8rem;">
+    <div id="logo" style=" padding: 0.8rem 0.5rem 0.2rem;">
+        <a href="/"><img src="/static/images/phone/DTLOGO.png" /></a>	<h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+    </div>
+    <div style="text-align: center" id="NavDiv">
+        <div > <a href="/m/robotSet"> <input type="button" value="机器人定制" id="phone_rob" class="phone_nav1"/> </a> </div>
+        <div > <a {% if loginInfo.shortDomainName == None %} href="/robot-company/{{ loginInfo.uniqueId }}" {% else %} href="/r/{{ loginInfo.shortDomainName }}"{% endif %}> <input type="button" value="我的机器人" id="phone_myRob" class="phone_nav1"/> </a> </div>
+        <div > <a href="/m/user_admin_phone"> <input type="button" value="用户管理" id="phone_user" class="phone_nav1"/>  </a></div>
+        <div > <a href="/m/mySelf"> <input type="button" value="个人中心" id="phone_self" class="phone_nav1"/>  </a></div>
+    </div>
+
+
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends "success_layout.html" %}
+
+{% block style %}
+    <script type="text/javascript" src="/static/js/knowledge_b.js{{ _suffix_ }}"></script>
+    <link rel="stylesheet" href="/static/css/quesK-style.css{{ _suffix_ }}"/>
+    <style type="text/css">
+        #tabProduct {
+            border: 1px solid #ccc;
+            font-size: 14px;
+            display: block;
+            max-height: 404px;
+            overflow-y: scroll;
+            height: 404px;
+            overflow-x: hidden;
+        }
+
+        #tabProduct th {
+            background: #EFEFEF;
+            height: 30px;
+        }
+
+        #tabProduct td {
+            text-align: left;
+            font-size: 12px;
+            line-height: 14px;
+            max-height: 43px;
+            overflow: hidden;
+            border-right: 1px solid #fff;
+        }
+
+        #tabProduct tr {
+            height: 30px;
+        }
+
+        #alldeletes, input.addq, input.mould-down, input.leading, input.exports {
+            border: 0;
+            width: 100px;
+            height: 40px;
+            background: #00C4C2;
+            text-align: center;
+            line-height: 40px;
+            color: #fff;
+            border-radius: 10px;
+            font-size: 18px;
+            margin: 10px;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block main %}
+
+
+    <!--==内容区==============-->
+    <div class="mains" style="width: 100%;">
+        <div style="padding: 10px;">
+            <div>
+                <!--======搜索==========-->
+                <table style="float: right;">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="nav-search">
+                                <span style="display: block;border: 1px solid #ccc;">
+                                    <select name="select" id="selectques" style="width: 64px;outline:none;">
+                                        <option value="0">搜问题</option>
+                                        <option value="1">搜答案</option>
+                                    </select>
+                                    <input  style="width: 90px;border: none;"  class="nav-search-input" autocomplete="off" id="nav-search-input" type="text" name="keywords" value="" placeholder="这里输入关键词" onkeydown="enterChangessB()" />
+                                </span>
+                            </div>
+                        </td>
+                        <td style="vertical-align: top; padding-left: 2px;">
+                            <select name="select" id="select">
+                                <option value="0">模糊搜索</option>
+                                <option value="1">精准搜索</option>
+                            </select>
+                        </td>
+                        <td style="vertical-align: top; padding-left: 2px;">
+                            <a id="knowsearch" title="检索" onclick="changess()">
+                                <i style="background:url(/static/images/search_tip.png) no-repeat center;background-size: 20px 20px;width: 30px;height: 22px;display: block;cursor: pointer;"></i>
+                            </a>
+                        </td>
+                        <td style="vertical-align: top; padding-left: 2px;">
+                            <select name="order" id="order" onchange="changess()">
+                                <option value="0">按时间排序</option>
+                                <option value="1">按调用次数排序</option>
+                            </select>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="display: none;">
+                <input type="text" id="pageNo" value=""/>
+                <input type="text" id="companyid0" value="{{companyId }}"/>
+            </div>
+            <!--===============-->
+            <table width="980" border="0" cellpadding="0" cellspacing="0" id="tabProduct">
+
+            </table>
+            <div id="shopss" style="height: 41px;">
+                <div id="red" style="margin: 0 19px ;float: right;" class="pager red">
+                    <div class="btn disabled">首页</div>
+                    <div class="btn disabled">上一页</div>
+                    <ul id="pages">
+                        <li>
+                            <a id="1" class="red normal active" href="javascript:void(0)">1</a>
+                        </li>
+                        <li>
+                            <a id="2" class="red normal" href="javascript:void(0)">2</a>
+                        </li>
+                        <li>
+                            <a id="3" class="red normal" href="javascript:void(0)">3</a>
+                        </li>
+                        <li>
+                            <a id="4" class="red normal" href="javascript:void(0)">4</a>
+                        </li>
+                    </ul>
+                    <div class="btn">下一页</div>
+                    <div class="btn">尾页</div>
+                    <div class="short"><input type="text"><input type="button" value="跳转" class="btn"></div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <div id="tanc"></div>
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        window.onload=function () {
+            csh_b()  //初始化
+        }
+    </script>
+{% endblock %}

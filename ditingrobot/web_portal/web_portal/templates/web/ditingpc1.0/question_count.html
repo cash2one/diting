@@ -1,0 +1,89 @@
+{% extends "web/ditingpc1.0/success_layout.html" %}
+{% block head %}
+<script type="text/javascript" src="/static/js/diting1.0/pc/question_count2.js{{ _suffix_ }}"></script>
+	<style type="text/css">
+		.table1 {
+			margin: 0 auto;
+			border-collapse: collapse;
+		}
+		
+		.table1>tbody>tr>th {
+			background: #fff;height:50px;
+			border-bottom: 1px solid #fafafa;
+			border-top: 1px solid #fafafa;
+			text-align: center;
+			line-height: 50px;
+			padding-left: 8px;
+		}
+		.table1>tbody>tr:hover{
+			background: #fafafa
+		}
+		
+		.table1 td{
+			border-bottom: #fafafa solid 1px;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			padding-left: 8px;
+			color: #696969;
+			font-weight: 100;
+		}
+		
+		.table1 td a {
+			color: #337ab7;
+		}
+		#shopss{margin: 20px auto;width:1000px;}
+	</style>
+
+{% endblock %}
+
+{% block main %}
+
+
+<!--==右侧内容区==============-->
+<div class="mains" style="padding:0 20px;background: #fff;">
+	<h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_high.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;问答记录</h3>
+
+	<div id="newsRecord"></div>
+		<div style="font-size: 16px;">
+			<div style="display: none;">
+				<input type="text" id="pageNo" value="" />
+				<input type="text" id="thisuuid" value="" />
+			</div>
+			<table id="mt" class="table1 table" >
+
+			</table>
+	
+			<div id="shopss">
+				<div id="red" class="pager red" >
+					<div class="btn disabled">首页</div>
+					<div class="btn disabled">上一页</div>
+					<ul id="pages">
+						<li>
+							<a id="1" class="red normal active" href="javascript:void(0)">1</a>
+						</li>
+						<li>
+							<a id="2" class="red normal" href="javascript:void(0)">2</a>
+						</li>
+						<li>
+							<a id="3" class="red normal" href="javascript:void(0)">3</a>
+						</li>
+						<li>
+							<a id="4" class="red normal" href="javascript:void(0)">4</a>
+						</li>
+					</ul>
+					<div class="btn">下一页</div>
+					<div class="btn">尾页</div>
+					<div class="short"><input type="text"><input type="button" value="跳转" class="btn"></div><span><b></b></span><span></span><span><b></b></span><span>总计</span><span><b></b>条</span></div>
+			</div>
+		</div>
+</div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+	window.onload=function(){
+		cshQuesCount(); //初始化
+	}
+</script>
+
+{% endblock %}

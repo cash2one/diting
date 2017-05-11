@@ -1,0 +1,70 @@
+{% extends "web/phone/layout_phone.html" %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/static/css/phone/fenYeStyle.css{{ _suffix_ }}"/>
+
+<script type="text/javascript" src="/static/js/user_admin_phone.js{{ _suffix_ }}"></script>
+<script type="text/javascript" src="/static/js/lib/smartpaginator_phone.js{{ _suffix_ }}"></script><!--分页插件-->
+<style>
+    #userAdminPhone th{
+        font-size: 0.28rem;line-height: 0.6rem;color: #999;
+    }
+    #userAdminPhone td{
+        font-size: 0.24rem;line-height: 0.6rem;color: #000;
+        background: #fff;
+        border-bottom:1px solid #ccc;
+    }
+    #userAdminPhone td a{
+        text-decoration: none;
+        cursor: pointer;
+        color: #ed5a5a;
+        padding: 0.05rem 0.2rem;
+        border: 1px solid #ed5a5a;
+        border-radius: 0.35rem;
+    }
+</style>
+<script type="text/javascript">
+    window.onload = function () {
+        // 然后调用getParameter 方法:
+        var temp = getParameter("uuid");
+        $('#messUuid').val(temp);
+        csh_userMessage(); //初始化
+
+    }
+</script>
+{% endblock %}
+{% block mainnofooter %}
+<div style="background: url('/static/images/phone/niupiBJ.png') repeat ;min-height: 11rem">
+    <header class="header1">
+        <a href="/m/user_admin_phone" style="display: block;position: absolute; left: 0.1rem;top: 0.15rem;font-size: 0.22rem;padding: 0.1rem 0.05rem;color: #fff;"><img style="width: 0.4rem;" src="/static/images/phone/return.png" title="回到首页"></a>
+        消息记录
+    </header>
+    <div style="font-size: 0.28rem;">
+        <div style="display: none;">
+            <input type="text" id="pageNo" value="" />
+            <input type="text" id="thisuuid" value="" />
+            <input id="messUuid" type="text" value=""/>
+        </div>
+        <table id="userMessagePhone" style="width: 6.4rem;text-align: center; border-collapse: collapse;">
+
+        </table>
+
+        <div id="shopss">
+            <div id="red" >
+                <div class="btn disabled"><<</div>
+                <div class="btn disabled"><</div>
+                <ul id="pages">
+                    <li>
+                        <a id="1" class="red normal active" href="javascript:void(0)">1</a>
+                    </li>
+
+                </ul>
+                <div class="btn">></div>
+                <div class="btn">>></div>
+                <div class="short"><input type="text" class="jumpTxt"><input type="button" value="跳转" class="btn"></div></div>
+        </div><div style="clear: both"></div>
+    </div>
+
+
+</div>
+
+{% endblock %}

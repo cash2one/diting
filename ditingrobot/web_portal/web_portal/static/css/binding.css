@@ -1,0 +1,69 @@
+.binding_box{
+	width:685px;
+	padding: 50px 0;
+	margin: 0 auto;
+}
+.binding_a{
+	width:355px;
+	margin: 10px auto;
+
+}
+.binding_a a{
+	padding: 10px 20px;
+	display: block;
+	float: left;
+}
+._input{
+	margin:35px auto;
+	width: 335px;
+	border:1px solid #aaa;
+	height:40px;
+}
+._input span{
+	margin-left: 10px;
+}
+._input input{
+	width:260px;
+	text-align: center;
+	height:40px;
+	border:none;
+}
+._input ._input2{
+	width:120px;
+}
+.reg_input .code_send0{
+	margin-left: 23px;
+	width: 125px;
+	height: 34px;
+	border-radius: 17px;
+	background: url(/static/images/code_bj.jpg) no-repeat;
+	background-size: 100% 100%;
+	vertical-align: middle;
+	cursor: pointer;
+	color: #fff;
+}
+.reg_input ._send {
+
+	width: 125px;
+	height: 34px;
+	background: #00c4c2;
+	border-radius: 17px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.protocol{
+	margin-left: 20px;
+}
+
+.reg_input ._send_disable{
+	border-radius: 17px;
+	width: 125px;
+	height: 34px;
+}
+.pwd_i,.pwd2_i,.phone_i,.txcode_i{
+	display: none;
+	line-height: 18px;
+	color: red;
+	font-style: inherit;
+}
+

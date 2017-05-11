@@ -1,0 +1,90 @@
+{% extends "web/phone/layout_phone.html" %}
+{% block style %}
+<script type="text/javascript" src="/static/js/register.js{{ _suffix_ }}"></script>
+<style>
+    .phone_mySelf_ul li {
+        border: 0;
+    }
+
+    .phone_mySelf_ul ._send {
+        width: 1.4rem;
+        height: 0.45rem;
+        background: #00c4c2;
+        border:0;
+        border-radius: 0.225rem;
+        vertical-align: middle;
+        cursor: pointer;
+        background-size: 100% 100%;
+        color:#fff;
+    }
+    .phone_mySelf_ul ._send_disable{
+        width: 1.4rem;
+        height: 0.45rem;
+        background: none;
+        border:0;
+    }
+    .spanInputBox{
+        display: -webkit-inline-box;
+        width: 4.5rem;
+        padding: 0.1rem;
+        border-bottom: 1px solid #ccc;
+    }
+    #phone{
+        color: #ccc;
+    }
+</style>
+<script type="text/javascript">
+    window.onload = function () {
+        platformMail()
+
+
+    }
+</script>
+{% endblock %}
+{% block mainnofooter %}
+<div style="background: url('/static/images/phone/niupiBJ.png') repeat ;height: 11rem;">
+    <header class="header1">
+        <a href="/m/home" style="display: block;position: absolute; left: 0.1rem;top: 0.15rem;font-size: 0.22rem;padding: 0.1rem 0.05rem;color: #fff;"><img style="width: 0.4rem;" src="/static/images/phone/return.png" title="回到首页"></a>
+        个人中心
+    </header>
+    <div style="text-align: center; height: 0.6rem; line-height: 0.6rem;margin-bottom: 0.4rem">
+        <a href="/m/mySelf" class="phone_nav22" >账户信息</a>
+        <a href="/m/myStation" class="phone_nav22" >站内消息<span class="allBiao2" style="width: 6px; height:6px;border-radius: 50%;background: red;"></span></a>
+        <a href="/m/reset_pwd_phone" class="phone_nav22" style="border-bottom: 1px solid #08bec2;color: #08bec2;">密码重置</a>
+        <a href="/m/logout_phone" class="phone_nav22">注销</a>
+    </div>
+    <div >
+        <input name="USERNAME" value="{{ loginInfo.userName }}" type="hidden">
+        <div id="form" class="form" >
+            <ul class="phone_mySelf_ul">
+                <li>
+
+                    <span>注册手机:</span>
+                        <span class="spanInputBox"><input type="text" placeholder="手机号码" name="USERNAME" id="phone" value="{{ loginInfo.userName }}" readonly="readonly" maxlength="11" style="margin-left: 0.1rem;border: 0;" onblur="oPhonetest()"/></span>
+                </li>
+                <li>
+                    <span>短信验证:</span>
+                    <span class="spanInputBox">
+                        <input type="text" class="_input2" placeholder="短信验证码" value="" name="telcode" id="telcode" required="required" maxlength="20" style="width: 3rem;"/>
+                        <input type="button" class="_send" id="btnCode" value="发送验证码"  onclick="onclickTimeOut();"/>
+                    </span>
+
+                </li>
+                <li>
+                    <span>&nbsp;&nbsp;&nbsp;新密码:</span>
+                    <span  class="spanInputBox"><input type="password" placeholder="6~16位密码,区分大小写" name="PASSWORD" value="" id="pwd" required="required" maxlength="16" /></span>
+                </li>
+                <li>
+                    <span>确认密码:</span>
+                    <span  class="spanInputBox"><input type="password" placeholder="确认密码" name="requrePassword" value="" id="pwd2" required="required" maxlength="16"></span>
+                </li>
+            </ul>
+
+                <input type="button" value="确认"  onclick="save03()" style="padding: 0.15rem 1rem; background: #08bec2; color: #fff; border: none;  border-radius: 0.1rem; display: block; margin: 0.4rem auto; font-weight: 900;font-size: 0.24rem;"/>
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

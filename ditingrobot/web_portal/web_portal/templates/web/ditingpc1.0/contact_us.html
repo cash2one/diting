@@ -1,0 +1,64 @@
+{% extends "web/ditingpc1.0/layout.html" %}
+{% block style %}
+<style type="text/css">
+	section {
+		font-size:14px;
+		font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+		margin: 35px auto 150px;
+		position: relative;
+		min-width: 1002px;
+	}
+	section p {
+		color: #555;
+	}
+	section a {
+		color: #53cac3;
+	}
+
+	.GZUS img {
+		height: 200px;
+		width: 200px;
+		display: -webkit-box;
+		float: right;
+	}
+	.GZUS em{
+		color: #f96601;
+		text-align: center;
+		line-height: 200px;
+		float: right;
+		margin: 0 120px 0 60px;
+	}
+
+</style>
+{% endblock %}
+{% block main %}
+<div style="min-width:1000px;width: 100%;height: 110px; border-bottom: 1px solid #fafafa;">
+	<a href="/" style="display: block;width: 350px;float: left;"><img src="/static/images/applogo0.png" style="width: 50px;float: left; margin: 30px 5px;"/><span style="color:#00d2ce;font-size: 30px;float: left; line-height:110px;">谛听机器人管理平台</span><div style="clear:both;"></div></a><span style="display: block;float: right;line-height: 110px;margin-right: 20px;">我已有账号，<a href="/login" style="color: #00c4c2;">点击登录</a></span>
+
+	<h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+</div>
+
+<h2 style="font-size: 20px;text-align: center;height: 50px;line-height: 50px;color: #000;margin-bottom: 10px;min-width: 1002px;">联系我们</h2>
+
+<section>
+		<div class="GZUS" style="float: left;min-width: 499px;width: 49%;border-right: 1px solid #ccc;">
+			<em>关注我们</em><img src="/static/images/diting1.0/pc/dingyuehaoEVM4-19.jpg" height="200" width="200">
+
+		</div>
+
+
+		<div style="float: left;min-width: 499px;width: 50%;">
+			<ul style="width: 438px;margin-left: 120px;">
+				<li>公司名称：北京谛听机器人科技有限公司</li><br/>
+				<li>网站地址：<a href="/">http://www.ditingai.com</a></li><br/>
+				<li>总部地址：北京市朝阳区顺白路12号比目鱼创业园A座3层</li><br/>
+				<li>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：400-900-3381</li><br/>
+				<li>QQ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;群：10232039</li><br/>
+				<li>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：<a href="mailto:hr@dtrobo.com">hr@dtrobo.com</a></li><br/>
+			</ul>
+		</div><div style="clear: both"></div>
+
+
+
+</section>
+{% endblock %}

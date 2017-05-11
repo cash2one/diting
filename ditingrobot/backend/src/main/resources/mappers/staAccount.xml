@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.StaAccountMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.StaAccount">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="data_time" property="dataTime" jdbcType="TIMESTAMP"/>
+        <result column="day_account_count" property="dayAccountCount" jdbcType="INTEGER"/>
+        <result column="day_account_count_one" property="dayAccountCountOne" jdbcType="INTEGER"/>
+        <result column="day_account_count_two" property="dayAccountCountTwo" jdbcType="INTEGER"/>
+        <result column="day_account_count_three" property="dayAccountCountThree" jdbcType="INTEGER"/>
+        <result column="day_account_count_four" property="dayAccountCountFour" jdbcType="INTEGER"/>
+        <result column="day_account_count_five" property="dayAccountCountFive" jdbcType="INTEGER"/>
+        <result column="day_login_count" property="dayLoginCount" jdbcType="INTEGER"/>
+        <result column="day_valid_count" property="dayValidCount" jdbcType="INTEGER"/>
+        <result column="day_invalid_count" property="dayInvalidCount" jdbcType="INTEGER"/>
+        <result column="day_question_count" property="dayQuestionCount" jdbcType="INTEGER"/>
+        <result column="day_knowledge_count" property="dayKnowledgeCount" jdbcType="INTEGER"/>
+        <result column="day_question_answer_number" property="dayQuestionAndAnswerNumber" jdbcType="INTEGER"/>
+        <result column="day_question_answer_user_num" property="dayQuestionAndAnswerUserNum" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.StaAccount">
+        INSERT
+        INTO sta_account (
+        owner,
+        owner_type,
+        deleted,
+        created_by,
+        created_time,
+        update_by,
+        update_time,
+        data_time,
+        day_account_count,
+        day_account_count_one,
+        day_account_count_two,
+        day_account_count_three,
+        day_account_count_four,
+        day_account_count_five,
+        day_login_count,
+        day_valid_count,
+        day_invalid_count,
+        day_question_count,
+        day_knowledge_count,
+        day_question_answer_number,
+        day_question_answer_user_num
+        )
+        VALUES (#{owner},
+        #{ownerType},
+        #{deleted},
+        #{createdBy},
+        #{createdTime},
+        #{updatedBy},
+        #{updatedTime},
+        #{dataTime},
+        #{dayAccountCount},
+        #{dayAccountCountOne},
+        #{dayAccountCountTwo},
+        #{dayAccountCountThree},
+        #{dayAccountCountFour},
+        #{dayAccountCountFive},
+        #{dayLoginCount},
+        #{dayValidCount},
+        #{dayInvalidCount},
+        #{dayQuestionCount},
+        #{dayKnowledgeCount},
+        #{dayQuestionAndAnswerNumber},
+        #{dayQuestionAndAnswerUserNum})
+    </insert>
+
+    <update id="update" parameterType="com.diting.model.StaAccount">
+        UPDATE
+          sta_account
+        SET
+          deleted = #{deleted},
+          update_by = #{updatedBy},
+          update_time = #{updatedTime},
+          user_name = #{userName},
+          data_time = #{dataTime},
+          day_account_count = #{dayAccountCount}
+          day_login_count=#{dayLoginCount}
+          day_valid_count=#{dayValidCount},
+          day_invalid_count=#{dayInvalidCount},
+          day_question_count=#{dayQuestionCount},
+          day_knowledge_count=#{dayKnowledgeCount}
+        WHERE id = #{id}
+    </update>
+    <select id="searchForPage" parameterType="com.diting.model.options.PageableOptions" resultMap="defaultResultMap">
+        SELECT *
+        FROM sta_account
+        WHERE 1=1
+        ORDER BY id DESC
+    </select>
+
+    <select id="findAll" parameterType="com.diting.model.options.PageableOptions" resultMap="defaultResultMap">
+        SELECT *
+        FROM sta_account
+        WHERE 1=1
+        ORDER BY id asc
+    </select>
+</mapper>

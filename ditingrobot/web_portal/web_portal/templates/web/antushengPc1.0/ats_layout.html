@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		{% block head %}{% endblock %}
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+        <meta name="keywords" content="谛听 客服机器人 智能客服">
+        <meta name="description" content="谛听客服机器人，把自然语言变成计算机可执行代码，让企业简便操即可创造在线智能客服机器人。谛听客服机器人可自动回复多条并发，节省人力成本，提高服务效率及质量，产品转化率提高10倍。">
+        <link rel="stylesheet" href="/static/css/antusheng1.0/pc/login.css">
+        <link rel="shortcut icon" href="/static/images/favicon.ico">
+		<script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js"></script>
+        <script type="text/javascript" src="/static/js/antusheng1.0/pc/atsLogin.js{{ _suffix_ }}"></script>
+        <script type="text/javascript" src="//s.union.360.cn/145578.js" async defer></script>
+        {% block style %}{% endblock %}
+
+	</head>
+	<body>
+	    {% block content %}{% endblock %}
+     <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261750930'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261750930' type='text/javascript'%3E%3C/script%3E"));</script>
+    </body>
+</html>

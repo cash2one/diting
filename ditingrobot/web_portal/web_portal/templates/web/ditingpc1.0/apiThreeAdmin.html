@@ -1,0 +1,162 @@
+{% extends "web/ditingpc1.0/success_layout.html" %}
+{% block head %}
+<style type="text/css">
+
+    .threeButton{
+        padding: 5px;
+        margin: 10px;
+        min-width: 110px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+    .threeButtonB{
+        background: #00c4c2;
+        color: #fff;
+    }
+
+    .threeButtonG{
+        background: #dddddd;
+    }
+    #Qbtn{
+        border-radius: 5px;
+        background: #00c4c2;
+        float: right;
+        outline: none;
+        border: 0;
+        padding: 5px 15px;
+        color: #fff;
+        margin-right: 100px;
+    }
+    #allThree{
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        opacity: 0;
+    }
+    .allthree {
+        float: right;
+        display: inline-block;
+        position: relative;
+        padding: 5px 10px;
+        background: #00c4c2;
+        color: #fff;
+        border-radius: 5px;
+        margin: 0 20px;
+    }
+</style>
+{% endblock %}
+{% block main %}
+<div class="mains" style="padding:0 20px;background: #fff; min-height: 645px;">
+    <h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_Three.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;公共应用管理</h3>
+<div id="threeAdmin"></div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    window.onload=function(){
+        three3()
+    }
+    //一个汉字占三个字符
+    //var inputNum = document.getElementById('name').value.replace(/[^\x00-\xff]/g,"***").length;
+    function three3(){
+        var str = '<div id="three33" style="min-height: 280px;"></div><div style="font-size: 16px;padding: 10px 0;"><input type="button" id="Qbtn" value="启用所选应用"/><span class="allthree">全选<input type="checkbox" name="allThree" id="allThree"/></span><div style="clear: both;"></div></div>'
+        $('#threeAdmin').html(str);
+        var strx ='';
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: "/api/apis/search-validity"
+        }).done(function (data) {
+            var data1 = JSON.parse(data);
+            for (var i = 0; i < data1.length; i++) {
+                strx += '<input class="threeButton threeButtonG" type="button" value="'+ data1[i].name +'" data-mn="0" data-id="'+ data1[i].id +'"/>';
+                $('#three33').html(strx)
+            }
+            //获取已经选择的应用
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: "/api/ex-applications/search-checked"
+            }).done(function (data) {
+                var data2 = JSON.parse(data);
+                var data3 =new Array()
+                $(".threeButton").each(function () {
+                    data3.push($(this).attr("data-id"));
+                });
+                var tab1 = arrayIntersection(data2,data3)
+            }).fail(function (data) {
+                console.log(data);
+            });
+            open_three3()
+        }).fail(function (data) {
+            console.log(data);
+        });
+    }
+    function arrayIntersection(a, b) { //获取数组交集
+        var ai=0, bi=0;
+        var result = new Array();
+        while( ai < a.length && bi < b.length )
+        {
+            if (a[ai] < b[bi] ){ ai++; }
+            else if (a[ai] > b[bi] ){ bi++; }
+            else  {
+                result.push(a[ai]);
+                $(".threeButton").eq(bi).removeClass("threeButtonG").addClass("threeButtonB").attr("data-mn","1");
+                ai++;
+                bi++;
+            }
+        }
+        return result;
+    }
+
+
+    function open_three3(){ //弹出选择启用第三方后的操作
+//   是否选中
+        $(".threeButton").click(function(){
+            if($(this).attr("data-mn")=="0"){
+                $(this).removeClass("threeButtonG").addClass("threeButtonB").attr("data-mn","1");
+            }else  {
+                $(this).removeClass("threeButtonB").addClass("threeButtonG").attr("data-mn","0");
+            }
+        });
+//全选
+        $("#allThree").click(function () {
+            if (this.checked == true) {
+                $(".threeButton").removeClass("threeButtonG").addClass("threeButtonB").attr("data-mn","1");
+            } else {
+                $(".threeButton").removeClass("threeButtonB").addClass("threeButtonG").attr("data-mn","0");
+            }
+        });
+//    启用提交键
+        $('#Qbtn').click(function(){
+            var OpenList = new Array();
+            $(".threeButtonB").each(function () {
+                OpenList.push($(this).attr("data-id"));
+            });
+            var CloseList = new Array();
+            $(".threeButton").each(function () {
+                CloseList.push($(this).attr("data-id"));
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: '/api/ex-applications/setting',
+                data: JSON.stringify({'openIds': OpenList,'closedIds': CloseList})
+            }).done(function (data) {
+                layer.msg(data.message, {time:1000,icon: 6})
+            }).fail(function (data) {
+                var message = JSON.parse(data.responseText).message;
+                layer.msg(message, {icon: 5})
+            });
+        })
+    }
+
+</script>
+{% endblock %}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.WeChatMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.WeChatAccount">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="original_id" property="originalId" jdbcType="VARCHAR"/>
+        <result column="refresh_token" property="refreshToken" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="app_id" property="appId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.WeChatAccount">
+        INSERT
+        INTO wechat_account (
+        owner,
+        owner_type,
+        deleted,
+        created_by,
+        created_time,
+        update_by,
+        update_time,
+        original_id,
+        refresh_token,
+        user_name,
+        app_id
+        )
+        VALUES (#{owner},
+        #{ownerType},
+        #{deleted},
+        #{createdBy},
+        #{createdTime},
+        #{updatedBy},
+        #{updatedTime},
+        #{originalId},
+        #{refreshToken},
+        #{userName},
+        #{appId})
+    </insert>
+
+    <update id="delete" parameterType="com.diting.model.WeChatAccount">
+        UPDATE
+        wechat_account
+        SET
+        update_by = #{updatedBy},
+        update_time = #{updatedTime},
+        deleted = 1
+        WHERE app_id = #{appId}
+    </update>
+
+    <select id="get" resultMap="defaultResultMap" parameterType="java.lang.String">
+        SELECT
+        *
+        FROM
+        wechat_account
+        WHERE original_id = #{originalId}
+        AND deleted = 0
+        LIMIT 1
+    </select>
+    <select id="searchAllCountByTime" resultType="java.lang.Integer" parameterType="com.diting.model.options.WeChatAccountOptions">
+        SELECT
+        count(id)
+        FROM
+        wechat_account
+        WHERE 1=1
+        <if test="startTime!= null and startTime != ''">
+            and created_time <![CDATA[   >=  ]]> #{startTime}
+        </if>
+        <if test="endTime!= null and endTime != ''">
+            and created_time <![CDATA[   <=  ]]> #{endTime}
+        </if>
+    </select>
+</mapper>

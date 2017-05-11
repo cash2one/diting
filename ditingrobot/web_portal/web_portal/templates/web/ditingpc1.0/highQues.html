@@ -1,0 +1,153 @@
+{% extends "web/ditingpc1.0/success_layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/diting1.0/pc/quesK-style.css{{ _suffix_ }}" />
+<script type="text/javascript" src="/static/js/diting1.0/pc/highQues.js{{ _suffix_ }}"></script>
+<style type="text/css">
+	#highQues>tbody>tr:hover{
+		background: #fafafa
+	}
+	#highQues {
+		font-size: 14px;
+		min-width: 1000px;width: 100%;
+
+	}
+	#highQues th{
+		background: #fff;height:60px;
+		border-bottom: 1px solid #fafafa;
+		border-top: 1px solid #fafafa;
+		text-align: center;
+
+	}
+	#highQues td{
+		text-align: center;font-size: 12px;max-height: 50px;overflow: hidden;
+		border-right:1px solid #fff;
+		word-break: break-all;
+	}
+
+	#highQues tr{
+		height:40px;
+		background: #fff;
+	}
+
+	#shopss{
+		margin: 20px auto;
+		width: 1000px;
+	}
+	.writeBtn {
+		border: none;
+		background: #fff;
+		font-size: 16px;
+		color: #69a4a2;
+		width: 55px;
+		line-height: 28px;
+	}
+</style>
+{% endblock %}
+
+{% block main %}
+
+	<div style="padding:0 20px;background: #fff;">
+		<h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_high.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;高频问题</h3>
+		<form id="form1" name="form1" method="post" action="">
+			<table style="width: 550px;float: left;margin-top: 15px;">
+				<tbody><tr>
+					<td style="padding-left: 6px;">
+						<span style="float: left; color:#a8a8a8;">
+							开始日期:<input style="width: 140px;height: 30px;border:none;background: #fafafa;" class=" date-picker" type="text" id="startdate" name="startdate" readonly="readonly" value="">
+							结束日期:<input style="width: 140px;height: 30px;border:none;background: #fafafa;"  class=" date-picker" type="text" id="enddate" name="enddate" readonly="readonly" value="">
+						</span>
+						<input type="button" value="搜索" class="writeBtn" onclick="searchs()"/>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			<div style="clear: both;"></div>
+			<br/>
+			<div style="display: none;">
+				<input type="text" id="pageNo" value=""/>
+			</div>
+			<table  border="0" cellpadding="0" cellspacing="0" id="highQues">
+
+			</table>
+			<div id="shopss">
+
+				<div id="red" style="margin: 0;width: 900px;" class="pager red" >
+					<div class="btn disabled">首页</div>
+					<div class="btn disabled">上一页</div>
+					<ul id="pages">
+						<li>
+							<a id="1" class="red normal active" href="javascript:void(0)">1</a>
+						</li>
+						<li>
+							<a id="2" class="red normal" href="javascript:void(0)">2</a>
+						</li>
+						<li>
+							<a id="3" class="red normal" href="javascript:void(0)">3</a>
+						</li>
+						<li>
+							<a id="4" class="red normal" href="javascript:void(0)">4</a>
+						</li>
+					</ul>
+					<div class="btn">下一页</div>
+					<div class="btn">尾页</div>
+					<div class="short" style="float: right"><input type="text" /><input type="button" value="跳转" class="btn"><span><b></b></span><span></span><span><b></b></span><span>总计</span><span><b></b>条</span></div>
+			</div></div>
+		</form>
+	</div><div id="answerImgBigTC" style="position: fixed;z-index:1000;"></div><div id="tanc"></div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+	window.onload=function () {
+		csh_highQues(); //初始化
+		//回车键搜索
+		$("#invalid-search-input").keydown(function entersearch_invalid(e){
+			e = e||event;
+			if(e.keyCode == 13) {
+				invalidSearch()
+			}
+			return;
+		})
+		//日期框
+		$('.date-picker').datepicker({autoclose: true,todayHighlight: true});
+
+		$('input[name=enddate]').change(
+				function() {
+					var startDate = $("#startdate").val();
+					var date1 = new Date(startDate);
+					startDate=date1.getTime()
+
+					var endDate = $("#enddate").val();
+					var date2 = new Date(endDate);
+					endDate=date2.getTime()
+
+
+					if(endDate<startDate && endDate!=""){
+						document.getElementById("enddate").value = "";
+						layer.msg("开始日期大于结束日期，请您选择日期时小于结束日期");
+					}
+				});
+		$('input[name=startdate]').change(function() {
+
+			var startDate = $("#startdate").val();
+			var date1 = new Date(startDate);
+			startDate=date1.getTime()
+
+			var endDate = $("#enddate").val();
+			var date2 = new Date(endDate);
+			endDate=date2.getTime()
+
+			if(endDate==""){
+				return true;
+			}
+			if(startDate>endDate){
+				document.getElementById("startdate").value = "";
+				layer.msg("开始日期大于结束日期，请您选择日期时小于结束日期");
+			}
+		});
+	}
+
+
+</script>
+
+{% endblock %}

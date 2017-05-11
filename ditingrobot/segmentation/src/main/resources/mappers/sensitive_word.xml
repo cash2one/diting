@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.SensitiveWordMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.SensitiveWord">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="word_name" property="wordName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.SensitiveWord">
+        INSERT INTO wb_sensitive_word(
+        owner,
+        owner_type,
+        deleted,
+        created_by,
+        created_time,
+        update_by,
+        update_time,
+        word_name
+        )
+        VALUES (
+        #{owner},
+        #{ownerType},
+        #{deleted},
+        #{createdBy},
+        #{createdTime},
+        #{updatedBy},
+        #{updatedTime},
+        #{wordName}
+        )
+    </insert>
+
+
+    <select id="searchForPage" parameterType="com.diting.model.options.SensitiveWordOptions" resultMap="defaultResultMap">
+        SELECT * FROM wb_sensitive_word WHERE 1=1
+        <if test="keyword!=null and keyword!=''">
+          AND word_name LIKE CONCAT(CONCAT('%',#{keyword}),'%')
+        </if>
+    </select>
+
+    <update id="update" parameterType="com.diting.model.SensitiveWord">
+        UPDATE wb_sensitive_word SET word_name=#{wordName} ,update_time=now() WHERE id=#{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM wb_sensitive_word WHERE id=#{id}
+    </delete>
+
+    <select id="get" resultType="com.diting.model.SensitiveWord">
+        SELECT * FROM wb_sensitive_word WHERE id=#{id};
+    </select>
+</mapper>

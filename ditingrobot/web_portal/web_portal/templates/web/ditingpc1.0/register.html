@@ -1,0 +1,77 @@
+{% extends "web/ditingpc1.0/layout.html" %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/static/css/diting1.0/pc/LoginStyle.css{{ _suffix_ }}"/>
+<script type="text/javascript" src="/static/js/diting1.0/pc/register.js{{ _suffix_ }}"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        textCode0( $('.code_send0'))
+// 然后调用getParameter 方法:
+        var temp = getParameter("yaoqingma");
+        $('#InvitationR').val(temp);
+        if( $('#InvitationR').val()!=""){
+            $('#InvitationK').css("display","block")
+        }else {
+            $('#InvitationK').css("display","none")
+        }
+    }
+</script>
+{% endblock %}
+{% block main %}
+<div style="min-width: 1000px;margin: auto;">
+    <div style="min-width:1000px;width: 100%;height: 110px; border-bottom: 1px solid #fafafa;">
+        <a href="/" style="display: block;width: 350px;float: left;"><img src="/static/images/applogo0.png" style="width: 50px;float: left; margin: 30px 5px;"/><span style="color:#00d2ce;font-size: 30px;float: left; line-height:110px;">谛听机器人管理平台</span><div style="clear:both;"></div></a><span style="display: block;float: right;line-height: 110px;margin-right: 20px;">我已有账号，<a href="/login" style="color: #00c4c2;">点击登录</a></span>
+
+        <h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+    </div>
+    <div class="boxLogin10">
+
+
+        <div style="width: 510px;height: 530px;background: #fff;">
+            <h2 style="line-height: 50px;text-align: center;font-size: 18px;border-top-left-radius: 5px;border-top-right-radius: 5px;">注册</h2>
+
+            <div class="boxInput10">
+                <img src="/static/images/diting1.0/pc/icon_reg01.png"/>
+                <input type="text" placeholder="手机号码" name="USERNAME" id="phone" value="" required="required" maxlength="11" onblur="oPhonetest()"/>
+                <i class="phone_i">请输入正确手机号</i>
+            </div>
+
+            <div class="boxInput10" style="border: none;width: 470px;">
+                <input type="text" placeholder="验证码" value="" name="txcode" id="txcode" required="required" maxlength="4" style="width: 362px;border: 1px solid #fafafa; text-indent: 1em;"/>
+                <input type="button" id="btnTxCode" class="code_send0" onclick="textCode0(this);"/>
+                <i class="txcode_i">&nbsp;&nbsp;请先正确填写验证码</i>
+            </div>
+
+            <div class="boxInput10" style="width:470px;">
+                <img src="/static/images/diting1.0/pc/icon_reg02.png"/>
+                <input type="text" placeholder="短信验证码" value="" name="telcode" id="telcode" required="required" maxlength="20" style="width: 313px;border-right: 1px solid #fafafa; text-indent: 1em;"/>
+                <input type="button" value="发送验证码" id="btnCode" class="_send" onclick="code_if();"/>
+            </div>
+
+            <div class="boxInput10">
+                <img src="/static/images/diting1.0/pc/icon_login02.png"/>
+                <input type="password" placeholder="6~16位密码,区分大小写" name="PASSWORD" value="" id="pwd" required="required" maxlength="16"/>
+                <i class="pwd_i" >6~16位密码,区分大小写</i>
+            </div>
+
+            <div class="boxInput10">
+                <img src="/static/images/diting1.0/pc/icon_login02.png"/>
+                <input type="password" placeholder="确认密码" name="requrePassword" value="" id="pwd2" required="required" maxlength="16"/>
+                <i class="pwd2_i">两次密码需要一致</i>
+            </div>
+
+            <div class="boxInput10"  id="InvitationK" style="display: none;">
+
+                <input type="text" placeholder="请输入邀请码（选填）" style="width:460px;" name="Invitation" value="" id="InvitationR" maxlength="14" readonly="readonly"/>
+            </div>
+
+        <div class="protocol">
+            <input style="float: left; width: 18px; height: 18px;" type="checkbox" checked="checked" data="unselected" id="checkbox" alt="selected"/>
+           <span style="float: left;"> 阅读并同意谛听用户<a href="/agreement" target="_blank">协议</a>内容</span></span>
+        </div>
+
+            <input id="btn_go" type="button" onclick="save01()" value="注册"/>
+
+    </div>
+</div>
+</div>
+{% endblock %}

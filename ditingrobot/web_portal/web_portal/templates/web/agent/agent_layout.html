@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="shortcut icon" href="/static/images/favicon.ico">
+		<title>谛听机器人——代理商管理界面</title>
+		<meta name="keywords" content="机器人,谛听机器人,自动应答程序,客服机器人,问答机器人,招聘机器人">
+		<meta name="description" content="谛听机器人能通过注册获得自己的问答机器人。该机器人可以捆绑在自己公众号，可以部署在自己网站上，可以通过我们提供的API 进行二次开发，接入各类软件。用户可以通过我们提供的管理后台增加和编辑机器人的问答知识，将机器人用于客服、销售、招聘，机器人会自动按照用户添加的问题和答案回答提问。我们善于做上下文处理，对语义的理解更加精准。">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js" ></script>
+		<script type="text/javascript" src="/static/js/lib/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="/static/js/lib/jquery.zclip.js{{ _suffix_ }}" ></script>
+		<script type="text/javascript" src="/static/js/lib/smartpaginator.js"></script><!--分页插件-->
+		<script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+		<script type="text/javascript" src="/static/js/diting-common.js{{ _suffix_ }}"></script>
+		<link rel="stylesheet" href="/static/css/lib/smartpaginator.css" />
+		<link rel="stylesheet" href="/static/css/lib/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/static/css/common-style.css{{ _suffix_ }}" />
+		<link rel="stylesheet" type="text/css" href="/static/css/success_index-style.css{{ _suffix_ }}" />
+		{% block head %}{% endblock %}
+		{% block style %}{% endblock %}
+	</head>
+	<script type="text/javascript">
+		window.onload=function(){
+
+
+
+		}
+	</script>
+	<body>
+		<!--==header开始==============================================-->
+		<header>
+			<div style="width: 1000px;height:100%;margin: 0 auto;position: relative;border-bottom: 1px solid #ccc;">
+				<div id="logo">
+					<a href=""><img src="/static/images/logo3.png" /></a><h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+				</div>
+
+				<nav id="navTop">
+					<div><a {% if showFlag=="E" %}class="nav1"{% else %}class=""{% endif %} href="/dl/agent_admin">企业管理</a></div>
+					<!--<div><a {% if showFlag=="Q" %}class="nav1"{% else %}class=""{% endif %} href="/agent_admin">收入管理</a></div>-->
+					<div><a {% if showFlag=="S" %}class="nav1"{% else %}class=""{% endif %} href="/dl/agent_invitation">邀请链接</a></div>
+					<div><a {% if showFlag=="Q" %}class="nav1"{% else %}class=""{% endif %} href=""></a></div>
+
+					<div>
+						<input class="login_ctrl" type="button" style="float: right;background: url(/static/images/user_photo.png) no-repeat center;background-size: 25px;"/>
+						<input class="name" id="regname" type="text" readonly="readonly" value="{{ loginInfo.userName }}" style="float: right;"/>
+						<section class="btn-group">
+							<a class="btn" data-toggle="dropdown" href="#" style="height: 100%;width: 100%;border: none;outline: none;"></a>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" >
+								<li><a tabindex="-1" href="/dl/logout">注销</a></li>
+							</ul>
+						</section>
+					</div>
+
+				</nav>
+				<div class="cleardiv"></div>
+			</div>
+		</header>
+		
+		<!--==section==================================================-->
+		
+		<section id="section">
+			{% block main %}{% endblock %}
+
+		
+			
+		</section>
+		{% block home %}{% endblock %}
+		<!--==footer部分==============================================-->	
+		<footer id="footer">
+			<div>
+				<div>
+					<ul>
+						<li><a href="/agreement" target="_blank">用户协议</a></li>
+						<li><a href="/cooperative_partner" target="_blank">合作伙伴</a></li>
+						<li><a href="/about" target="_blank">关于我们</a></li>
+						<li><a href="/contact_us" target="_blank">联系我们</a></li>
+						<li class="wxgzh"><a style="position: relative;">微信订阅号</a>
+							<!--底部二维码-->
+							<div class="WXerweima">
+								<img src="/static/images/diting1.0/pc/dingyuehaoEVM4-19.jpg" />
+							</div>
+						</li>
+						<li class="wxgzh" style="border-left: 1px solid #999;">
+							<a style="position: relative;">客服微信号
+								<div class="WXerweima">
+									<img src="/static/images/diting1.0/pc/kefuEVM4-19.jpg" />
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<p> Copyright ©2016 谛听机器人 All Rights Reserved 京ICP备16026036号-1<br/>增值电信业务经营许可证：京B2-20170408</p>
+
+			</div>
+		</footer>
+	</body>
+	{% block script %}
+
+	{% endblock %}
+</html>

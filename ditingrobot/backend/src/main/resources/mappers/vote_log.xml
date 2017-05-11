@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.VoteLogMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.VoteLog">
+        <id column="id" property="id"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="vote" property="vote"/>
+        <result column="voted" property="voted"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.VoteLog">
+        INSERT
+        INTO vote_log (
+        created_by,
+        created_time,
+        vote,
+        voted
+        )
+        VALUES (
+        #{createdBy},
+        #{createdTime},
+        #{vote},
+        #{voted}
+        )
+    </insert>
+
+    <select id="getVoteCount" resultType="Integer">
+        SELECT count('x') FROM vote_log WHERE vote = #{vote}
+    </select>
+
+    <select id="checkVoteExists" resultType="boolean">
+        select exists(
+        select 1 from vote_log where vote = #{vote} and voted = #{voted}
+        )
+    </select>
+
+
+</mapper>

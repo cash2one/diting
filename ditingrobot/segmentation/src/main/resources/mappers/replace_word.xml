@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.ReplaceWordMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.ReplaceWord">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="pre_replace_word" property="pre_replace_word" jdbcType="VARCHAR"/>
+        <result column="replace_word" property="replace_word" jdbcType="VARCHAR"/>
+        <result column="updated_time" property="updated_time" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.ReplaceWord">
+        INSERT INTO wb_replace_word(
+        pre_replace_word,
+        replace_word,
+        updated_time
+        )
+        VALUES (
+        #{pre_replace_word},
+        #{replace_word},
+        #{updated_time}
+        )
+    </insert>
+
+    <select id="searchAll"  resultMap="defaultResultMap">
+        SELECT * FROM wb_replace_word WHERE 1=1
+    </select>
+
+    <select id="searchForPage" parameterType="com.diting.model.options.ReplaceWordOptions" resultMap="defaultResultMap">
+        SELECT * FROM wb_replace_word WHERE 1=1
+        <if test="keyword!=null and keyword!=''">
+            AND replace_word LIKE CONCAT(CONCAT('%',#{keyword}),'%')
+        </if>
+    </select>
+
+    <update id="update" parameterType="com.diting.model.ReplaceWord">
+        UPDATE wb_replace_word SET pre_replace_word=#{pre_replace_word} , replace_word=#{replace_word},updated_time=#{updated_time} WHERE id=#{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM wb_replace_word WHERE id=#{id}
+    </delete>
+
+    <select id="get" resultType="com.diting.model.ReplaceWord">
+        SELECT * FROM wb_replace_word WHERE id=#{id}
+    </select>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            DELETE FROM wb_replace_word WHERE id=${item.id}
+        </foreach>
+    </delete>
+</mapper>

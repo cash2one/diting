@@ -1,0 +1,100 @@
+{% extends "web/success_layout.html" %}
+{% block style %}
+		<script type="text/javascript" src="/static/js/register.js{{ _suffix_ }}" ></script>
+<script>
+	function save_weixin() {
+	var account = {}
+	account.phone = $("#nicheng").val();
+	$.ajax({
+	type: "POST",
+	contentType: "application/json",
+	url: '/mails/find_p',
+	data: JSON.stringify(account)
+	}).done(function (data) {
+	layer.msg(data.message, {time:500,icon: 6}, function () {
+	data =	JSON.parse(data)
+	phone = data.flg;
+	urls = data.ids;
+	// alert(phone);
+	//F:\robor\ditingrobot\web_portal\web_portal\static\ima
+	$("#img_a").attr("src", "http://on7e7xp4p.bkt.clouddn.com/"+ phone);
+	$("#btn_reg0").attr("disabled", true);
+	$("#btn_reg0").attr("value", "不可点击状态");
+	$("#i_a").attr("src", urls);
+	$("#i_b").attr("value", urls);
+
+	})
+	}).fail(function (data) {
+	// var message = JSON.parse(data.responseText).message;
+	// layer.msg(message, {icon: 5})
+	});
+	}
+</script>
+
+
+{% endblock %}
+
+	{% block main %}
+	<!--左侧菜单栏-->
+
+	<menu class="left_menu" style="height: 640px;">
+			<span>
+
+		        <div id="_menu">
+		            <ul class="menu">
+
+	                    <li class="basic_data">
+	                    	<a href="/company-info"><span>账户设置</span></a>
+	                    </li>
+
+		                <li class="pwd_reset">
+		                	<a href="/pwd-change"><span>密码重置</span></a>
+	                    </li>
+
+ 						<li class="station-message">
+		                	<a href="/station-message"><span>站内消息</span></a>
+	                    </li>
+
+						<!--<li class="aboutTransaction">-->
+		                	<!--<a href="/aboutTransaction"><span>交易管理</span></a>-->
+	                    <!--</li>-->
+		            </ul>
+		        </div>
+		    </span>
+	</menu>
+
+	<div class="mains">
+		<form >
+			<div style="height: 600px;">
+				<input name="USERNAME" value="{{ loginInfo.userName }}" type="hidden">
+				<div id="form" class="form" style="margin:40px;width:700px;">
+					<ul class="rob_txt">
+						<li>
+							<span>注册手机:</span><span class="readonly"><input type="text" placeholder="手机号码" name="USERNAME" id="phone" value="{{ loginInfo.userName }}" readonly="readonly" maxlength="11" onblur="oPhonetest()"></span>
+						</li>
+					</ul>
+
+					
+					<ul class="rob_txt">
+						<li>
+							<span>&nbsp;&nbsp;&nbsp;微信昵称:</span>
+							<span class="spanInput"><input type="text" placeholder="请输入您的微信昵称" name="nicheng" value="" id="nicheng" required="required" maxlength="16" /></span>
+						</li>
+					</ul>
+					<div class="_input_nobg" style="margin-top: 20px;">											
+						<input id="btn_reg0" type="button" value="确认"  onclick="save_weixin()" />
+					</div>
+					<br/><br/><br/>
+					<div class="_input_nobg" style="margin-top: 20px; width: 250px;margin: 10px auto;">
+						<!--<img id="img_a" style="width: 100%;">-->
+						<input type="text" id="i_b" value="eee">
+						<iframe scrolling="no"  id="i_a" style="width: 300px;height: 300px"/>
+
+					</div>
+					
+	            </div>
+			</div>
+		</form>
+	</div>
+	{% endblock %}
+

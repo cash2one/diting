@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.OralTreatmentMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.OralTreatment">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="word" property="word" jdbcType="VARCHAR"/>
+        <result column="word_place" property="word_place" jdbcType="VARCHAR"/>
+        <result column="word_size" property="word_size" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="updated_time" property="updated_time" jdbcType="VARCHAR"/>
+        <result column="create_time" property="create_time" jdbcType="VARCHAR"/>
+        <result column="eliminate" property="eliminate" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.OralTreatment">
+        INSERT INTO wb_oral_treatment(
+        owner,
+        owner_type,
+        deleted,
+        created_by,
+        created_time,
+        update_by,
+        update_time,
+        word,
+        word_place,
+        word_size,
+        eliminate
+        )
+        VALUES (
+        #{owner},
+        #{ownerType},
+        #{deleted},
+        #{createdBy},
+        #{createdTime},
+        #{updatedBy},
+        #{updatedTime},
+        #{word},
+        #{word_place},
+        #{word_size},
+        #{eliminate}
+        )
+    </insert>
+
+    <select id="searchAll" resultMap="defaultResultMap">
+        SELECT * FROM wb_oral_treatment WHERE 1=1
+    </select>
+
+    <select id="searchForPage" parameterType="com.diting.model.options.OralTreatmentOptions"
+            resultMap="defaultResultMap">
+        SELECT * FROM wb_oral_treatment WHERE 1=1
+        <if test="keyword!=null and keyword!=''">
+            AND word LIKE CONCAT(CONCAT('%',#{keyword}),'%')
+        </if>
+    </select>
+
+    <update id="update" parameterType="com.diting.model.OralTreatment">
+        UPDATE wb_oral_treatment SET word=#{word} , word_place=#{word_place},word_size=#{word_size},eliminate=#{eliminate} WHERE id=#{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM wb_oral_treatment WHERE id=#{id}
+    </delete>
+
+    <select id="get" resultType="com.diting.model.OralTreatment">
+        SELECT * FROM wb_oral_treatment WHERE id=#{id}
+    </select>
+</mapper>

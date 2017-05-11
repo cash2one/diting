@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.MessageMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.Message">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="company_id" property="companyId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="suggestion" property="suggestion" jdbcType="VARCHAR"/>
+        <!--<result column="feedback" property="feedback" jdbcType="VARCHAR"/>-->
+        <result column="contactInformation" property="contactInformation" jdbcType="VARCHAR"/>
+        <collection property="feedbackMessageList" ofType="com.diting.model.FeedbackMessage" column="message_id">
+            <id column="f_id" property="id"/>
+            <result column="message_id" property="messageId"/>
+            <result column="feedback" property="feedback"/>
+            <result column="admin_name" property="adminName"/>
+        </collection>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.Message">
+        INSERT
+        INTO message (
+        owner,
+        owner_type,
+        deleted,
+        created_by,
+        created_time,
+        update_by,
+        update_time,
+        company_id,
+        user_id,
+        suggestion,
+        contactInformation
+        )
+        VALUES (
+        #{owner},
+        #{ownerType},
+        #{deleted},
+        #{createdBy},
+        #{createdTime},
+        #{updatedBy},
+        #{updatedTime},
+        #{companyId},
+        #{userId},
+        #{suggestion},
+        #{contactInformation}
+        )
+    </insert>
+
+    <select id="searchMessageForPage" resultMap="defaultResultMap">
+        SELECT *
+        FROM message m LEFT JOIN feedback_message f
+        ON m.id=f.message_id
+        ORDER BY id DESC
+    </select>
+
+    <select id="searchByMessageId" resultMap="defaultResultMap">
+        SELECT m.*,f.*
+        FROM message m , feedback_message f
+        WHERE m.id=f.message_id AND m.id=#{id}
+    </select>
+
+    <select id="searchMessage" resultMap="defaultResultMap">
+        SELECT *
+        FROM message
+        WHERE id=#{id} limit 1
+    </select>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            DELETE  FROM message WHERE id=${item.id}
+        </foreach>
+
+    </delete>
+</mapper>

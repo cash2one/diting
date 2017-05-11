@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="/static/images/favicon.ico">
+	<title>{{ company.name}}机器人 - {{ robot.name }}</title>
+	<meta name="keywords" content="谛听客服机器人,问答机器人">
+	<meta name="description" content="谛听客服机器人提供微信客服机器人，web客服机器人，让用户可以自建知识库。机器人可以按照设定好的问题和答案回答。支持一个问题的多种问法，支持语义场景和上下文处理。">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="/static/css/phone/common-style-phone.css{{ _suffix_ }}" />
+	<script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js" ></script>
+	<script type="text/javascript" src="/static/js/diting-common.js{{ _suffix_ }}"></script>
+	<script type="text/javascript" src="/static/js/talk.js{{ _suffix_ }}"></script>
+	<script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+	<script>
+		//动态改变页面宽度
+		document.documentElement.style.fontSize=document.documentElement.clientWidth/6.4+"px";
+		window.addEventListener("resize",fn,false);
+		function fn(){
+			document.documentElement.style.fontSize=document.documentElement.clientWidth/6.4+"px";
+		}
+	</script>
+	<style type="text/css">
+		/*==与小谛的交流区================================================*/
+		.reg{width: 100%;height:0.5rem;line-height: 0.5rem;}
+		#container {
+			display: block;
+			width: 100%;
+			height: 10rem;
+			margin: 0 auto;
+			position: relative;
+		}
+		.header {
+			background: #333;
+			height: 0.76rem;
+			color: #fff;
+			line-height: 0.76rem;
+			font-size: 0.38rem;
+			padding:0.1rem 0;
+		}
+		.header #roboName0{
+			float: left;
+			outline: none;
+			width: 95%;
+			background: none;
+			border: none;
+			height: 100%;
+			font-size: 0.38rem;
+			color: #fff;
+		}
+		.footer {
+			border: 1px solid #eee;
+			padding: 0.1rem;
+			background: #f6f6f6;
+		}
+		.footer input {
+			width: 5rem;
+			height: 0.6rem;
+			outline: none;
+			font-size: 0.26rem;
+			text-indent: 0.1rem;
+			border-radius: 0.06rem;
+			margin: 0.1rem;
+			border: 0;
+			border-bottom: 1px solid #ccc;
+		}
+		.footer span {
+			display: inline-block;
+			width: 0.9rem;
+			height: 0.6rem;
+			background: #9eea6a;
+			color: #fff;
+			font-weight: 100;
+			line-height: 0.6rem;
+			cursor: pointer;
+			text-align: center;
+			border-radius:0.06rem;
+			font-size: 0.26rem;
+		}
+		.footer span:hover {
+			color: #fff;
+			background: #999;
+		}
+		#user_face_icon {
+			margin-top: 0.1rem;
+			display: block;
+			background: #fff;
+			width: 0.60rem;
+			border-radius: 0.30rem;
+			overflow: hidden;
+			float: left;
+		}
+		#user_face_icon img{
+			width: 100%;
+			height: 100%;
+		}
+		.content img {
+			width: 0.6rem;
+			border-radius: 0.6rem;
+		}
+		.content {
+			font-size: 0.18rem;
+			width: 100%;
+			height: 7.5rem;
+			overflow: auto;
+			padding: 0.05rem 0;
+		}
+		.content li {
+			margin-top: 0.1rem;
+			padding-left: 0.1rem;
+			width: 97%;
+			display: block;
+			clear: both;
+			overflow: hidden;
+		}
+		.content li img {
+			float: left;
+		}
+		.content li span{
+			background: #a1e758;
+			padding: 0.1rem;
+			border-radius: 0.1rem;
+			float: left;
+			margin: 0.06rem 0.1rem 0.2rem 0.1rem;
+			max-width: 47%;
+			border: 1px solid #eee;
+			position: relative;
+			word-break: break-work;
+			min-width:0.33rem;
+			font-size: 0.20rem;
+		}
+		.content li span .changeBook1{
+			float: left;width: 1.27rem;
+		}
+		.content li span .changeBook1 .answerImg{
+			width: 1.27rem;min-height: 1.63rem;
+		}
+		.content li span .changeBook2{
+			float: left;
+			width: 1.64rem;
+			min-height: 1.8rem;
+			overflow: hidden;
+		}
+		.content li span .changeBook2 h5{
+			font-weight: 900;font-size: 0.16rem;margin: 0.05rem 0 0.12rem;text-align: center;
+		}
+		.content li span .changeBook2 h6{
+			font-size: 0.12rem;margin-bottom: 0.12rem; font-weight: 100;margin-left: 0.1rem;
+		}
+		h6{
+			font-weight: 100;
+		}
+		.content li span i{
+			position: absolute;
+			bottom: -0.24rem;
+			right: 0.04rem;
+			font-style: normal;
+			font-size: 0.12rem;
+			color: #aaa;
+		}
+		.content li img.imgleft {
+			float: left;
+		}
+		.content li img.imgright {
+			float: right;
+		}
+		.content li span.spanleft {
+			float: left;
+			background: #fff;
+		}
+		.content li span.spanright {
+			float: right;
+		}
+		.writeBtn {
+			border: none;
+			background: #fff;
+			font-size: 0.24rem;
+			color: #333;
+			width: 0.7rem;
+			line-height: 0.5rem;
+			border-left: 1px solid #ccc;
+		}
+		.searchRental_bottom a{
+			display: block;
+			font-size:0.2rem;
+			text-align: center;
+			border: 1px solid #d8d8d8;
+			line-height: 0.6rem;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			padding: 0 0.2rem;
+		}
+
+	</style>
+</head>
+<body>
+<div style="display: none;">
+	<input type="text" id="name" name="name" value="{{ robot.name }}">
+	<input type="text" id="Cname" name="name" value="{{ robot.name }}">
+	<input type="text" id="idd0" name="id" value="{{ robot.id }}">
+	<input type="text" id="invitationCode_no" name="invitationCode" value="">
+	<input type="text" id="enable" name="enable"  value="{{ robot.enable }}">
+	<input type="text" id="unique_id" name="unique_id" value="{{ robot.uniqueId }}">
+	<input type="text" id="uuid" name="uuid"  value="">
+	<input type="text" id="welcomes" name="welcomes" value="{{ robot.welcomes }}">
+	<input type="text" id="profile" name="profile"  value="{{ robot.profile or '' }}">
+	<input type="text" id="answer1" name="answer1" value="{{ robot.invalidAnswer1 }}">
+	<input type="text" id="answer2" name="answer2" value="{{ robot.invalidAnswer2 }}">
+	<input type="text" id="answer3" name="answer3" value="{{ robot.invalidAnswer3 }}">
+	<input type="text" id="answer4" name="answer4" value="{{ robot.invalidAnswer4 }}">
+	<input type="text" id="answer5" name="answer5" value="{{ robot.invalidAnswer5 }}">
+	<input type="text" id="headPortrait" name="headPortrait" value="{{ company.headPortrait }}">
+</div>
+<div id="rentalDiv"  style="position: fixed;z-index:999;background: rgba(0,0,0,0.4);bottom: 0px;top: 0px;left: 0px;right: 0px;display: none;">
+	<div style="width:1.39rem;float: left;height: 9.7rem"  onclick="rentalFn()"></div>
+	<div style="width:5rem;float: right;background: #fff;overflow: hidden; height: 8.43rem;">
+		<div style="width: 100%;background: #d8d8d8;padding: 0.15rem 0;">
+			<div style="width: 4.6rem;  margin: auto; border: 1px solid #fafafa; background: #fff;">
+				<input style="text-indent: 1em;width: 3.8rem;height: 0.5rem;border: none;" id="shopInputSearch" type="text" maxlength="20" name="keywords" value="" placeholder="请搜索商家名称">
+				<input type="button" value="搜索" class="writeBtn" onclick="">
+			</div>
+		</div>
+		<div class="searchRental_bottom" id="searchRental_bottom">
+
+			<a href="/robot-company/null" target="_blank">大小咖啡BigSmallCoffee</a>
+			<a href="/robot-company/null" target="_blank">大小咖啡BigSmallCoffee</a>
+			<a href="/robot-company/null" target="_blank">大小咖啡BigSmallCoffee</a>
+			<a href="/robot-company/null" target="_blank">大小咖啡BigSmallCoffee</a><a href="/robot-company/null" target="_blank">大小咖啡BigSmallCoffee</a>
+			<a href="/robot-company/null" target="_blank">大小咖啡BigSmallCoffee</a>
+			<a href="/robot-company/null" target="_blank">大小咖啡BigSmallCoffee</a>
+			<a href="/robot-company/null" target="_blank">大小咖啡BigSmallCoffee</a><a href="/robot-company/null" target="_blank">大小咖啡BigSmallCoffee</a>
+			<a href="/robot-company/null" target="_blank">大小咖啡BigSmallCoffee</a>
+			<a href="/robot-company/null" target="_blank">大小咖啡BigSmallCoffee</a>
+			<a href="/robot-company/null" target="_blank">大小咖啡BigSmallCoffee</a>
+
+		</div>
+	</div>
+</div>
+<div id="tanchuang"></div>
+<div id="container">
+	<!--{% if loginInfo.userName == None and loginInfo.userType == None%}-->
+	<!--<a href="/m/login" style="display: block;position: absolute; left: 0.1rem;top: 0.2rem;font-size: 0.22rem;padding: 0.1rem 0.1rem;color: #fff;border-right: 1px solid #000;">登录</a>-->
+	<!--{% else %}-->
+	<!--<a href="/m/home" style="display: block;position: absolute; left: 0.1rem;top: 0.2rem;font-size: 0.22rem;padding: 0.1rem 0.1rem;color: #fff;border-right: 1px solid #000;">管理</a>-->
+	<!--{% endif %}-->
+	<div class="header" id="roboName0" style="text-align: center;">
+	</div>
+	<a onclick="rentalFn()" style="display: block;position: absolute; right: 0rem;top: 0.2rem;font-size: 0.22rem;padding: 0.1rem 0.1rem;color: #fff;border-left: 1px solid #000;">租赁商家</a>
+		<ul class="content" id="content">
+
+		</ul>
+	<div class="footer">
+		<div>
+			<input id="text" type="text" placeholder=""/>
+			<span id="btn">发送</span>
+		</div>
+
+	</div>
+
+</div>
+<div id="answerImgBigTC"></div>
+</body>
+<script type="text/javascript">
+	talks();
+	$('#robotProfileP').html($('#profile').val());
+	// 然后调用getParameter 方法:
+	var temp = getParameter("yaoqingma");
+	$('#invitationCode_no').val(temp);
+   function rentalFn(){
+	   $('#rentalDiv').toggle();
+   }
+</script>
+</html>
+

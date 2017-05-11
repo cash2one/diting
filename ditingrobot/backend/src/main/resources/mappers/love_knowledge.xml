@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.love.LoveKnowledgeMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.love.LoveKnowledge">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="question" property="question" jdbcType="VARCHAR"/>
+        <result column="answer" property="answer" jdbcType="VARCHAR"/>
+        <result column="image_url" property="imageUrl" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="robot_id" property="robotId" jdbcType="INTEGER"/>
+        <result column="robot_name" property="robotName" jdbcType="VARCHAR"/>
+        <result column="unique_id" property="uniqueId" jdbcType="VARCHAR"/>
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="defaultResultMap">
+        SELECT
+          *
+        FROM
+          love_knowledge
+          ORDER BY created_time DESC
+    </select>
+    <select id="selectById" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+        *
+        FROM
+        love_knowledge
+        WHERE id=#{id}
+        LIMIT 1
+    </select>
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.love.LoveKnowledge">
+        INSERT
+        INTO love_knowledge (
+        question,
+        answer,
+        image_url,
+        created_by,
+        created_time,
+        user_id,
+        user_name,
+        robot_id,
+        robot_name,
+        unique_id,
+        head_img_url,
+        sex
+        )
+        VALUES (#{question},
+        #{answer},
+        #{imageUrl},
+        #{createdBy},
+        now(),
+        #{userId},
+        #{userName},
+        #{robotId},
+        #{robotName},
+        #{uniqueId},
+        #{headImgUrl},
+        #{sex})
+    </insert>
+</mapper>

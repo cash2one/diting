@@ -1,0 +1,156 @@
+/*机器人设置*/
+
+.form{font-size:15px;font-family:"Microsoft YaHei"; }
+.form li{margin-top: 6px;}
+.rob_txt li{
+	height: 46px;
+}
+.rob_txt input{
+	border: none;width: 357px;height: 30px;margin: 7px 17px;line-height: 30px;
+}
+.rob_txt span{float: left;display: block;height: 46px;line-height: 46px;margin-left: 15px;}
+.rob_txt .spanInput{
+	width: 416px;height: 46px;background: url(/static/images/form_input.png) no-repeat center;
+}
+.rob_txt .newInputKtop{float: left;display: block;height: 40px;line-height: 40px;margin-left: 15px;}
+
+.rob_txt .newInputK{
+    width: 300px;height: 40px;
+    border:1px solid #ccc;border-radius: 5px;
+    background: #fff;
+}
+
+.rob_txt .newInputK input{
+    border: none;
+    width: 274px;
+    height: 30px;
+    margin: 5px 10px;
+    line-height: 30px;
+    display: block;
+    float: left;
+}
+
+.rob_txt ._send{
+    width: 123px;
+    height: 35px;
+    background: #00c4c2;
+    color: #fff;
+    border-radius: 23px;
+    position: absolute;
+    right: -17px;
+    top: -1px;
+}
+.rob_txt ._send_disable {
+    width: 127px;
+    height: 46px;
+    background: url(/static/images/anniu_send_hui.png) no-repeat center;
+    position: absolute;
+    right: -17px;
+    top: -7px;
+    border: none;
+}
+.enable,.read0 span{margin-left: 15px;}
+.savePhoto {
+    width: 150px;
+    height: 45px;
+    background: #07A4A2;
+    border-radius: 20px;
+    font-size: 20px;
+    color: #fff;
+    border: none;
+}
+.savePhoto:hover{background: #8aC4FF;}
+#company_next:hover,#company_upper:hover{background:#777;color:#fff;}
+#company_submit{width: 90px;border-radius: 15px;background: #07A4A2;margin-left: 280px;color: #fff;}
+#company_submit:hover{background: #8aC4FF;}
+.readonly input{
+	border: none;background: #f9faf5;
+}
+#btn_reg0 {
+    width: 200px;
+    height: 56px;
+    position: relative;
+    left: 190px;
+    top: 45px;
+    background:#13CED7;
+    border-radius: 5px;
+    font-size: 26px;
+    border: none;
+    color: #fff;
+}
+#btn_reg0:hover{
+	background:  #07A4A2;
+}
+/*站内消息*/
+#station_M li,#station_L li{
+    padding: 10px;
+    background: #dfdfdf;margin-bottom: 5px;border-radius: 10px;line-height: 24px;font-size: 14px;
+}
+.stationMessageMoreStyle{
+width:40%;height: 400px;background: #f2f2f2;overflow-y: auto;position: fixed;top: 18%;left: 30%;border-radius: 10px;padding: 10px;
+}
+
+
+/*交易管理*/
+/*点数充值*/
+.transNav input[type=button]{
+    display: block;
+    float: left;
+    padding: 6px 65px;
+    background: #82dedc;
+    border: none;
+    font-size: 18px;
+    color: #fff;
+}
+
+.transP{
+    line-height: 40px;
+    margin: 20px 0;
+    font-size: 18px;
+}
+.transP span{
+    min-width: 200px; padding: 10px 10px;display: initial;border: 1px solid #ccc;
+}
+.transRadio0 input[type="radio"] {
+    margin: 3px 3px 0px 5px;
+    display: none;
+}
+.transRadio0 label {
+    cursor: pointer;
+    border: 1px solid #0cc;
+    display: block;
+    width: 195px;
+    text-align: center;
+    float: left;
+    padding: 8px;
+    margin: 0 15px 20px 0;
+    border-radius: 3px;
+}
+.transRadio label{
+    background: #0cc;
+    color:#fff;
+}
+.transRadio0 div{
+
+}
+/*订单记录*/
+#orders0{
+    border:0;
+    border-color: #ccc;
+    width: 608px;
+}
+#orders0 th{
+    text-align: center;padding: 5px;
+}
+#orders0 td{
+    text-align: center;padding: 5px;
+}
+.transBtn{
+    line-height: 34px;
+    font-size: 16px;
+    width: 100px;
+    background: #00c4c2;
+    border-radius: 5px;
+    color: #fff;
+    float: right;
+}

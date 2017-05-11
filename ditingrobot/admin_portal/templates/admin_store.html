@@ -1,0 +1,117 @@
+{% extends "success_layout.html" %}
+{% block style %}
+<script type="text/javascript" src="/static/js/admin_store.js{{ _suffix_ }}"></script>
+	<style type="text/css">
+		nav, #logo {
+			float: left;
+			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		}
+		.update_c p span{
+			color:#4898d5;
+		}
+		table,
+		td {
+			font: 100% Arial, Helvetica, sans-serif;
+		}
+		table {
+			width: 980px;
+			border-collapse: collapse;
+			margin: 1em auto;
+		}
+		th,td {
+			text-align: left;
+			padding: .5em;
+			border: 1px solid #fff;
+		}
+		th {
+			background: #328aa4 url(/static/images/tr_back.gif) repeat-x;
+			color: #fff;
+			text-align: center;
+		}
+		td {
+			background: #e5f1f4;
+		}
+		/* tablecloth styles */
+		td:hover{
+			background: #ecfbd4;
+		}
+		td:active{
+			background: #bce774;
+			color: #fff;
+		}
+		.btnzt{
+			border: none;
+		    width: 72px;
+		    height: 32px;
+			border:2px solid #00c4c2;
+		    background: #00c4c2;
+		    border-radius: 5px;
+		    font-size: 16px;
+		    color: #fff;
+		    cursor: pointer;
+			line-height: 32px;
+		}	
+		.btnzt:active{
+			 background: #328aa4;
+		}
+		#footer{
+			position: fixed;bottom: 0;background: #fff;
+		}
+		.tablemain{
+			height:550px;
+			overflow-y: auto;
+		}
+	</style>
+
+	{% endblock %}
+
+	{% block main %}
+
+
+	<div class="tablemain">
+		<table cellspacing="0" cellpadding="0" id="admin_store_tab">
+
+		</table>
+		<div style="display: none;">
+			<input type="text" id="pageNo" value="">
+		</div>
+		<div id="shopss" style="height: 51px;background: #efefef;">
+			<div class="cz_btn" style="float: left;margin-top: 10px;">
+
+			</div>
+			<div id="red" style="margin: 0;float:right;width: 900px;" class="pager red">
+				<div class="btn disabled">First</div>
+				<div class="btn disabled">Prev</div>
+				<ul id="pages">
+					<li>
+						<a id="1" class="red normal active" href="javascript:void(0)">1</a>
+					</li>
+					<li>
+						<a id="2" class="red normal" href="javascript:void(0)">2</a>
+					</li>
+					<li>
+						<a id="3" class="red normal" href="javascript:void(0)">3</a>
+					</li>
+					<li>
+						<a id="4" class="red normal" href="javascript:void(0)">4</a>
+					</li>
+				</ul>
+				<div class="btn">Next</div>
+				<div class="btn">Last</div>
+				<div class="short"><input type="text"><input type="button" value="Go" class="btn"></div><span><b></b></span><span></span><span><b></b></span><span></span><span><b></b></span></div>
+		</div>
+	</div>
+	<div id="tanc"></div>
+	<div style="height: 100px;background: #fff;"></div>
+	{% endblock %}
+
+	{% block script %}
+	<script>
+		window.onload=function(){
+			csh_store();
+
+		}
+
+	</script>
+	{% endblock %}
+

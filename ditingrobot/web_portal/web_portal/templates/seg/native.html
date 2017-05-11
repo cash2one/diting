@@ -1,0 +1,50 @@
+{% extends "seg/seg_layout.html" %}
+
+{% block main %}
+<p style="font-size: 14px;text-indent: 2em;line-height: 24px;">当前所在位置：词库管理/原生词库管理</p><br/>
+<div  style="padding: 0 20px;">
+	<div >
+		<div>
+			<input type="text"  id="keyword" placeholder="word" class="seg_input"/>
+
+			<select name="selectOption" id="selectOption" style="width: 110px;height: 34px;padding: 6px 12px;font-size: 14px;line-height: 1.42857143; color: #555; background-color: #fff; background-image: none; border: 1px solid #ccc;">
+				<option value="1">模糊查询</option>
+				<option value="2">精准查询</option>
+			</select>
+                <button id="searchBtn"  class="seg_btn" type="button">搜索</button>
+                <button id="toNew"  class="seg_btn" type="button">新建词</button>
+                <a title="批量删除" onclick="makeAll('确定要删除选中的数据吗?');">批量删除</a>
+		</div>
+
+		<div id="search_bottom" style="margin-right: 3px;background: #fff;width: 196px;position: absolute;left: 20px;;z-index: 10;border:1px solid #ccc"></div>
+	</div>
+</div>
+
+<div class="col-sm-12" style="margin-top: 50px">
+	<p>
+		<label>总记录数：</label>
+		<span id="totalCount" >8</span>个
+	</p>
+	<table class="table table-bordered table-hover" id="account_list_tab">
+		<thead>
+		<tr class="active">
+			<th class="text-center">ID</th>
+			<th class="text-center">姓名</th>
+			<th class="text-center">角色</th>
+			<th class="text-center">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr class="text-center"><td>29</td><td>zhuxiaohui</td><td>administrator</td><td></span><a style="text-decoration:none;cursor: pointer" onclick="">&nbsp;&nbsp;&nbsp;编辑&nbsp;&nbsp;&nbsp;</a><a style="text-decoration:none;cursor: pointer" onclick="">修改密码</a></td></tr>
+		</tbody>
+	</table>
+	<div class="customer-pagination" style="">
+		<ul class="pagination"></ul>
+	</div>
+</div>
+
+
+
+
+
+{% endblock %}

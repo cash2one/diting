@@ -1,0 +1,29 @@
+{% extends "web/phone/layout_phone.html" %}
+{% block style %}
+<script type="text/javascript">
+    window.onload = function () {
+        platformMail()
+
+    }
+</script>
+{% endblock %}
+{% block mainnofooter %}
+<div style="background: url('/static/images/phone/niupiBJ.png') repeat ;height: 11rem;">
+    <header class="header1">
+        <a href="/m/home" style="display: block;position: absolute; left: 0.1rem;top: 0.15rem;font-size: 0.22rem;padding: 0.1rem 0.05rem;color: #fff;"><img style="width: 0.4rem;" src="/static/images/phone/return.png" title="回到首页"></a>
+        个人中心
+    </header>
+<div style="text-align: center; height: 0.6rem; line-height: 0.6rem;">
+    <a href="/m/mySelf" class="phone_nav22" >账户信息</a>
+    <a href="/m/myStation" class="phone_nav22" >站内消息<span class="allBiao2" style="width: 6px; height:6px;border-radius: 50%;background: red;"></span></a>
+    <a href="/m/reset_pwd_phone" class="phone_nav22" >密码重置</a>
+    <a href="/m/logout_phone" class="phone_nav22" style="border-bottom: 1px solid #08bec2;color: #08bec2;">注销</a>
+</div>
+    <div style="font-size: 0.3rem;text-align: center;margin: 1rem;">
+       退出当前账户
+    </div>
+    <input type="button" value="确定" onclick="logOut()" style=" padding: 0.16rem 1rem; color: #fff; border: none; border-radius: 0.1rem;display: block;margin: auto;background: #e60f35;font-size: 0.26rem;font-weight: 900;"/>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.diting.dao.WalletTransactionMapper">
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.WalletTransaction">
+        INSERT
+            INTO wallet_transaction (
+                    owner,
+                    owner_type,
+                    deleted,
+                    created_by,
+                    created_time,
+                    update_by,
+                    update_time,
+                    wallet_id,
+                    type,
+                    tracking_uuid,
+                    event,
+                    reason,
+                    amount,
+                    original_balance,
+                    current_balance
+                    )
+            VALUES (#{owner},
+                    #{ownerType},
+                    #{deleted},
+                    #{createdBy},
+                    #{createdTime},
+                    #{updatedBy},
+                    #{updatedTime},
+                    #{walletId},
+                    #{type},
+                    #{trackingUuid},
+                    #{event},
+                    #{reason},
+                    #{amount},
+                    #{originalBalance},
+                    #{currentBalance})
+    </insert>
+
+
+    
+    <!--<select id="search" resultMap="defaultResultMap">-->
+        <!--select-->
+        <!--<choose>-->
+            <!--<when test="_CountingMode_ == true">-->
+                <!--count('x') as id-->
+            <!--</when>-->
+            <!--<otherwise>-->
+                <!--id,-->
+                <!--payload,-->
+                <!--owner,-->
+                <!--owner_type,-->
+                <!--created_by,-->
+                <!--created_time,-->
+                <!--updated_by,-->
+                <!--updated_time-->
+            <!--</otherwise>-->
+        <!--</choose>-->
+        <!--from wallet_transaction-->
+        <!--where 1=1-->
+        <!--<if test="options.userId != null">-->
+            <!--AND owner = #{options.userId}-->
+        <!--</if>-->
+        <!--<if test="options.walletId != null">-->
+            <!--and payload->>'walletId' = #{options.walletId}-->
+        <!--</if>-->
+        <!--<if test="options.transactionType != null">-->
+            <!--and payload->>'type' = #{options.transactionType}-->
+        <!--</if>-->
+        <!--<if test="options.event != null">-->
+            <!--and payload->>'event' = #{options.event}-->
+        <!--</if>-->
+        <!--<if test="options.startTime != null">-->
+            <!--and CAST(payload->>'createdTime' AS FLOAT) &gt;= (#{options.startTime}) ::FLOAT-->
+        <!--</if>-->
+        <!--<if test="options.endTime != null">-->
+            <!--and CAST(payload->>'createdTime' AS FLOAT) &lt;= (#{options.endTime}) ::FLOAT-->
+        <!--</if>-->
+        <!--<if test="options.events != null">-->
+            <!--AND payload->>'event' IN-->
+            <!--<foreach item="event" index="index" collection="options.events" open="(" separator="," close=")">-->
+                <!--#{event}-->
+            <!--</foreach>-->
+        <!--</if>-->
+        <!--<if test="_CountingMode_ != true">-->
+            <!--<if test="options.validOrderBy != null">-->
+                <!--<include refid="ORDER_BY"/>-->
+            <!--</if>-->
+        <!--</if>-->
+        <!--<include refid="PAGINATION"/>-->
+    <!--</select>-->
+
+</mapper>

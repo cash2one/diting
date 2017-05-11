@@ -1,0 +1,29 @@
+{% extends "web/layout.html" %}
+{% block style %}
+	<link rel="stylesheet" type="text/css" href="/static/css/LoginStyle.css{{ _suffix_ }}"/>
+	<script type="text/javascript" src="/static/js/seg_login.js{{ _suffix_ }}"></script>
+	<script type="text/javascript">
+		window.onload=function(){
+
+		}
+	</script>
+{% endblock %}
+{% block main %}
+	<div class="login_logo" style="margin-top: 6%">
+		<a href="/"><img src="/static/images/login_logonew.png" /></a>
+		<h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+	</div>
+	<form id="loginForm" style="height: 316px;">
+		<div class="login_input" id="loginbox" >
+			<div class="_input">
+				<input type="text" placeholder="手机号码" name="loginname" id="phone" maxlength="11">
+			</div>
+			<div class="_input password">
+				<input type="password" placeholder="密码" name="password"  id="pwd" maxlength="16">
+				<img class="login_go" src="/static/images/anniu_02.png" />
+				<input id="btn_go" type="button" value="" onclick="save11()"/>
+			</div>
+		</div>
+
+	</form>
+{% endblock %}

@@ -1,0 +1,58 @@
+/*分页器*/
+#shopss .btn{
+	float: left;
+	padding: 0.1rem;
+	margin: 0.2rem 0.05rem;
+}
+
+#shopss ul{
+	display: -webkit-inline-box;
+	float: left;
+	padding: 0.2rem;
+	line-height: 0.6rem;
+	font-size: 0.28rem;
+}
+#shopss .jumpTxt{
+	width: 0.5rem;
+	float: left;
+	padding: 0.1rem;
+	margin: 0.2rem 0.1rem;
+	font-size: 0.26rem;
+	border: 1px solid #ccc;
+}
+
+.pager span{
+	line-height: 1rem;
+}
+/*搜索框*/
+.searchRank{
+	width: 100%;margin: 0 auto;font-size: 0.2rem;display: block;
+}
+.SearchK{
+	width: 5.5rem;
+	height: 0.5rem;
+	line-height: 0.5rem;
+	font-size: 0.24rem;
+	margin:0 auto;
+	border: 1px solid #ccc;
+	border-radius: 0.1rem;
+}
+#nav-search-input{
+	height: 0.50rem;
+	border: none;
+	width: 3.4rem;
+	background: none;
+	margin: 0;
+	margin-left: 0.08rem;
+	font-size: 0.18rem;
+}
+.searchF{
+	vertical-align: middle;
+	display: initial;
+	height: 0.30rem;
+	cursor: pointer;
+	float: right;
+	margin-right: 0.1rem;
+	margin-top: 0.1rem;
+}
+

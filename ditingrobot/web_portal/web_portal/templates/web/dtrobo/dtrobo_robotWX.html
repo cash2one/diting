@@ -1,0 +1,100 @@
+{% extends "web/ditingpc1.0/layout.html" %}
+{% block title %}
+<title>谛听机器人开放平台——黑图聊天机器人</title>
+{% endblock %}
+{% block style %}
+<style>
+    .mainWX00 h2{
+        font-size: 48px;
+        color: #333;
+        font-weight: 100;
+        text-align: center;
+        line-height: 86px;
+        margin-top: 95px;
+    }
+    .mainWX00 p{
+        font-size: 18px;
+        color: #666;
+        text-align: center;
+        line-height: 56px;
+        margin-bottom: 40px;
+    }
+    .divWX00 {
+        width: 485px;
+        height: 500px;
+        float: left;
+        background: #fafafa;
+        border-radius: 5px;
+    }
+    .divWX00 h4{
+        color: #fff;
+        background: #00c4c2;
+        line-height: 80px;
+        font-size: 20px;
+        text-align: center;
+        font-weight: 100;
+    }
+    .divWX00 p{
+        text-align: center;
+        line-height: 140px;
+        font-size: 18px;
+    }
+    .divWX00 b{
+        font-size: 44px;
+    }
+    .divWX00 div{
+        font-size: 14px;
+        border-top: 1px solid #f3f3f3;
+        padding: 30px 20px;
+    }
+    .btnWX00 {
+        display: block;
+        margin:0 auto 30px;
+        width: 140px;
+        height: 40px;
+        background: #00c4c2;
+        color: #fff;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+.btnWX00:hover{
+    background: #8ec8ee;
+}
+    
+</style>
+{% endblock %}
+{% block main %}
+
+<div style="width: 100%;border-bottom: 1px solid #f2f2f2;">
+    <header style="background: #fff;height: 100px;width: 1000px;margin:0 auto;">
+        <a href="/" > <img src="/static/images/dtrobo/dtroboLogo00.png" style="height: 60px; float: left; margin: 20px 0px"/></a>
+        <h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+        <span style="float: right;line-height: 30px;font-size: 18px;color: #333;">客服热线：400-900-3381</span>
+        <a href="/register" style="border: none; background: #00c4c2; padding: 7px 26px;color: #fff;  border-radius: 3px; margin: 0 20px;float: right;">立即开通</a>
+        <div style="clear: both;"></div>
+    </header>
+</div>
+<div class="mainWX00" style="width: 1000px; margin: 0 auto">
+    <h2>多种在线方案，满足不同用户需求</h2>
+    <p>满足微信公众号个人微信号等全渠道服务，支持用户信息展示，丰富沟通方式，方便用户微信管理。</p>
+
+    <div class="divWX00" style="margin-right: 30px;">
+        <h4>微信公众号免费版</h4>
+        <p>¥:<b>0</b></p>
+        <input class="btnWX00" type="button" value="免费试用" />
+        <div>北京谛听机器人科技有限公司（"谛听机器人"）是中文语义与认知计算的产品和服务提供商，致力于自然语言理解技术（NLU）的持续创新与应用。</div>
+    </div>
+    <div class="divWX00">
+        <h4>个人微信免费版</h4>
+        <p>¥:<b>299</b></p>
+        <input class="btnWX00" type="button" value="立即开通"/>
+        <div>北京谛听机器人科技有限公司（"谛听机器人"）是中文语义与认知计算的产品和服务提供商，致力于自然语言理解技术（NLU）的持续创新与应用。</div>
+
+    </div><div style="clear: both"></div>
+
+
+</div>
+
+{% endblock %}

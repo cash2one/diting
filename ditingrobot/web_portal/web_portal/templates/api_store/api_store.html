@@ -1,0 +1,262 @@
+{% extends "web/success_layout.html" %}
+{% block style %}
+<style type="text/css">
+    table.imagetable {
+        font-family: verdana, arial, sans-serif;
+        font-size: 11px;
+        color: #333333;
+        border: 1px #999999;
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+
+    table.imagetable th {
+        /*background: #b5cfd2 url(/static/images/cell-blue.jpg);*/
+        /*border: 1px solid #999999;*/
+        padding: 8px;
+        text-align: right;
+    }
+
+    table.imagetable td {
+        /*background: #dcddc0 url(/static/images/cell-grey.jpg);*/
+        /*border: 1px solid #999999;*/
+        padding: 8px;
+    }
+
+    .btn0_0{
+        border: none;
+        background: #00c4c2;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #fff;
+        cursor: pointer;
+        padding: 8px 22px;
+        float: left;
+    }
+    #btn0_all{
+        background: #1daf23;
+        margin-left: 70px;
+    }
+    #btn0_all:hover{
+        background: #50cc55;
+    }
+    #btn0_0:hover{
+        background: #8aC4FF;
+    }
+    input[type="text"]{
+        height: 30px;
+        width: 100%;
+        line-height: 20px;
+        border-radius: 15px;
+        text-indent: 1em;
+    }
+    textarea{
+        width:566px;height: 94px;overflow-y:auto;font-size: 13px;resize:none;outline:none;border-radius: 5px;text-indent: 1em;
+    }
+</style>
+{% endblock %}
+{% block main %}
+<menu class="left_menu" style="height: 744px;">
+	<span>
+
+		<div id="_menu">
+			<ul class="menu">
+     			<li class="left_nav1_2" title="机器人基础设置">
+                    <a href="/robot-setting"><span>机器人设置</span></a>
+				</li>
+
+				<li class="knowledge_base" title="机器人知识库">
+					<a href="/learning/knowledge-base"><span>知识填写</span></a>
+				</li>
+
+				<li class="invalid_question" title="聊天中产生的无效问题">
+					<a href="/invalid-question/statistics"><span>无效问题</span></a>
+				</li>
+
+				<li class="Synonym" title="同义词替换">
+					<a href="/Synonym"><span>同义词库</span></a>
+				</li>
+
+				<li class="base_table" title="生成公司基础信息知识库" style="position: relative;">
+					<a href="/base_table"><span>基础库生成</span></a>
+                    <!--<span>基础库生成</span>-->
+                    <!--<div class="base_KU" >-->
+                    <!--<a href="/base_table">招聘机器人</a>-->
+                    <!--&lt;!&ndash;<a href="/base_table">XX机器人</a>&ndash;&gt;-->
+                    <!--</div>-->
+
+				</li>
+                <li class="api_external" title="提交自己开发的第三方应用" >
+                    <a href="/api/external" ><span>应用提交</span></a>
+                </li>
+                <li class="api_external" title="管理自己提交的第三方应用" >
+                    <a href="/api/externalAdmin" ><span>用户应用管理</span></a>
+                </li>
+			</ul>
+		</div>
+	</span>
+</menu>
+<!--==右侧内容区==============-->
+<div class="mains" style="height: 744px;overflow-y: auto;position: relative;padding-top: 39px">
+    <table class="imagetable">
+        <tbody>
+        <tr>
+            <th>开发商名称：</th>
+            <td style="width: 220px;"><input id="fwsName" placeholder="此项必填！" maxlength="20" type="text" value=""/></td>
+            <th>开发商英文名称：</th>
+            <td style="width: 220px;"><input id="fwsEngName" type="text" value="" /></td>
+        </tr>
+        <tr>
+            <th>联系电话：</th>
+            <td><input id="telephone" placeholder="此项必填！" maxlength="11" type="text" value=""/></td>
+            <th>联系邮箱：</th>
+            <td><input id="email" type="text" value="" maxlength="32"/></td>
+        </tr>
+        <tr>
+            <th>联系地址：</th>
+            <td colspan="3"><input id="findPlace"   type="text" value="" /></td>
+        </tr>
+        <tr>
+            <th>应用名称：</th>
+            <td><input id="fwName" placeholder="此项必填！" maxlength="15" type="text" value=""/></td>
+            <th>应用英文名称：</th>
+            <td><input id="EngName" type="text" value="" /></td>
+        </tr>
+        <tr>
+            <th>场景设置：</th>
+            <td><input id="scene" placeholder="此项必填！" maxlength="20" type="text" value="" /></td>
+            <td colspan="2"><div style="border-radius: 15px;border: 1px solid #ccc;background: #fff;"><input id="countScene" placeholder="这里填写要计算场景的话哦！" type="text" value=""  style="width: 265px;border: 0;"/><input style="    width: 79px; cursor: pointer; height: 30px; border-radius: 15px;color: #fff; background: #00c4c7;border: 0;" id="sceneBtn" type="button" value="计算" onclick="countScene()"/></div></td>
+        </tr>
+        <tr style="height: 100px;">
+            <th>功能描述：</th>
+            <td colspan="3"><textarea placeholder="此项必填！" maxlength="240" name="" required="required" title="" id="fwDepict"></textarea></td>
+
+        </tr>
+        <tr style="height: 100px;">
+            <th>关键字：</th>
+            <td colspan="3"><textarea placeholder="此项必填！每个关键字以“，”分隔。" maxlength="240" name="" required="required" title="" id="keywords" ></textarea></td>
+
+        </tr>
+        <tr>
+            <th>API名称：</th>
+            <td style="width: 220px;"><input id="APIName" placeholder="此项必填！" maxlength="20" type="text" value="" /></td>
+            <th >API英文名称：</th>
+            <td style="width: 216px;"><input id="APIEngName" type="text" value=""  /></td>
+        </tr>
+        <tr>
+            <th>API访问链接：</th>
+            <td><input id="APILink" type="text" value="" placeholder="此项必填！"  /></td>
+            <th>版本号：</th>
+            <td><input id="version" type="text" value=""  /></td>
+        </tr>
+        <tr>
+            <th>http请求方式：</th>
+            <td colspan="3">
+                <!--<input type="radio" name="ral" value="GET" />GET-->
+                <input type="radio" name="ral" checked="checked" value="POST" style="margin-left: 10px"/>POST
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <div style="margin: auto;width: 125px;">
+        <input id="btn0_0" class="btn0_0" type="button" title="用户应用提交" value="用户应用提交" onclick="test0()">
+        <!--<input id="btn0_all" class="btn0_0" type="button" title="公共应用提交" value="公共应用提交" onclick="test0All()">-->
+        <div style="clear: both;"></div>
+    </div>
+<br/>
+    <p style="margin-left: 136px">注：1.请将必填信息输入完全，不然无法操作用户应用提交。提交后需审核请耐心等待。</p>
+    <p style="margin-left: 162px">2.用户应用审核通过后，方可进行公共应用提交。</p>
+</div>
+<div style="display: none">
+    <input type="text" readonly id="adminAgree"  value=""/>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    function test0(){
+        if( $('#fwsName').val()!="" && $('#telephone').val()!="" && $('#fwName').val()!="" && $('#scene').val()!="" && $('#fwDepict').val()!="" && $('#APIName').val()!="" && $('#APILink').val()!=""&& $("#keywords").val()!=""){
+            layer.confirm('1.请确认信息填写正确，以免给您造成困扰。<br/>2.应用提交后，审核结果结果可通过站内消息查看，请您耐心等待。<br/>3.修改信息需重新提交审核。', {
+                btn: ['是','否'] //按钮
+            }, function(){
+                test();
+            }, function(){
+
+            });
+        }else {
+            layer.msg('请将必填信息填写完整！');
+        }
+    }
+
+
+    function countScene(){ //计算场景
+        var ques = $('#countScene').val();
+        var editscene = {
+            question: ques
+        };
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: '/api/knowledge/scene',
+            data: JSON.stringify(editscene)
+        }).done(function (data) {
+            var data = JSON.parse(data);
+            $('#scene').val(data.scene);
+        }).fail(function (data) {
+            console.log(data);
+        });
+    }
+
+    function test(){
+        var api={}
+        api.providerName = $('#fwsName').val()
+        api.providerEnName = $('#fwsEngName').val()
+        api.mobile = $('#telephone').val()
+        api.email = $('#email').val()
+        api.address = $('#findPlace').val()
+        api.serverName = $('#fwName').val()
+        api.serverEnName = $('#EngName').val()
+        api.scene = $('#scene').val()
+        api.description = $('#fwDepict').val()
+        api.name = $('#APIName').val()
+        api.enName = $('#APIEngName').val()
+        api.keywords = $('#keywords').val()
+        api.url = $('#APILink').val()
+        api.version = $('#version').val()
+        api.method = "POST"
+
+
+        var result={
+            apiPersonalStore : api
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: '/api/apis/personal/save',
+            data: JSON.stringify(result)
+        }).done(function (data) {
+            layer.msg(data.message, {icon: 6});
+        }).fail(function (data) {
+            console.log(data);
+            var message = JSON.parse(data.responseText).message;
+            layer.msg(message, {icon: 5})
+        });
+    }
+
+    function testAll00(){
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: '/api/apis/save',
+            data: JSON.stringify(result)
+        }).done(function (data) {
+            layer.msg(data.message, {icon: 6});
+        }).fail(function (data) {
+            console.log(data);
+            var message = JSON.parse(data.responseText).message;
+            layer.msg(message, {icon: 5})
+        });
+    }
+</script>
+{% endblock %}

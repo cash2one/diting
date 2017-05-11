@@ -1,0 +1,89 @@
+{% extends "web/ditingpc1.0/success_layout.html" %}
+{% block head %}
+<script type="text/javascript" src="/static/js/diting1.0/pc/question_count2.js{{ _suffix_ }}"></script>
+	<style type="text/css">
+		.table1 {
+			margin: 0 auto;
+			border-collapse: collapse;
+		}
+		
+		.table1>tbody>tr>th {
+			border-bottom: #CCC solid 1px;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			padding-left: 8px;
+			color: #696969;
+		}
+		
+		.table1 td{
+			border-bottom: #CCC solid 1px;
+			height: 42px;
+			line-height: 42px;
+			text-align: center;
+			padding-left: 8px;
+			color: #696969;
+			font-weight: 100;
+		}
+		
+		.table1 td a {
+			color: #337ab7;
+		}
+		#shopss{margin: 20px auto;width: 1000px;}
+	</style>
+
+{% endblock %}
+
+{% block main %}
+
+
+<!--==右侧内容区==============-->
+<div class="mains" style="padding: 10px;background: #fff;">
+	<div id="newsRecord"></div>
+		<div style="font-size: 16px;">
+			<div style="display: none;">
+				<input type="text" id="pageNo" value="" />
+				<input type="text" id="thisuuid" value="" />
+				<input id="messUuid" type="text" value=""/>
+			</div>
+			<table id="quesMessage" style="text-align: center; border-collapse: collapse;">
+
+			</table>
+	
+			<div id="shopss">
+				<div id="red" style="margin: auto;width: 900px;" class="pager red" >
+					<div class="btn disabled">首页</div>
+					<div class="btn disabled">上一页</div>
+					<ul id="pages">
+						<li>
+							<a id="1" class="red normal active" href="javascript:void(0)">1</a>
+						</li>
+						<li>
+							<a id="2" class="red normal" href="javascript:void(0)">2</a>
+						</li>
+						<li>
+							<a id="3" class="red normal" href="javascript:void(0)">3</a>
+						</li>
+						<li>
+							<a id="4" class="red normal" href="javascript:void(0)">4</a>
+						</li>
+					</ul>
+					<div class="btn">下一页</div>
+					<div class="btn">尾页</div>
+					<div class="short"><input type="text"><input type="button" value="跳转" class="btn"></div><span><b></b></span><span></span><span><b></b></span><span>总计</span><span><b></b>条</span></div>
+			</div>
+		</div>
+</div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+	window.onload = function () {
+		// 然后调用getParameter 方法:
+		var temp = getParameter("uuid");
+		$('#messUuid').val(temp);
+		csh_talkMessage(); //初始化
+
+	}
+</script>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+ /*问答量排名*/
+.header{
+	width: 100%;
+    height: 120px;
+    background: #FFF;
+}
+.all_ques_logo{
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: 20px;
+    width: 242px;
+    height: 63px;
+    float: left;
+    font-size: 48px;
+    text-indent: 0.5em;
+    color: #13CED7;
+}
+.ques_menu{
+    margin-top: 20px;
+    width: 51%;
+    float: left;
+}
+.ques_menu .tabs li{
+    float: left;
+    display: block;
+    width: 28%;
+    height: 80px;
+    line-height: 90px;
+    text-align: center;
+    color: #6f6f6f;
+    font-size: 25px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.ques_ranks tr{
+	width: 100%; height: 50px;
+}
+.ques_ranks th{
+	text-align: center;font-size: 30px;
+}
+.ques_ranks td{
+	text-align: center;font-size: 20px;
+}
+.ques_ranks td a{
+	text-decoration:none;color: black;display: block;height:50px;line-height: 50px;
+}
+.ques_ranks td .comA:hover{
+    background: #d4d4d2;
+}
+#search_bottom td:hover{
+    background: #d4d4d2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

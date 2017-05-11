@@ -1,0 +1,34 @@
+{% extends "web/layout.html" %}
+{% block style %}
+	<link rel="stylesheet" type="text/css" href="/static/css/LoginStyle.css{{ _suffix_ }}"/>
+	<script type="text/javascript" src="/static/js/login.js{{ _suffix_ }}"></script>
+{% endblock %}
+{% block main %}
+	<div class="login_logo" style="margin-top: 6%">
+		<a href="/"><img src="/static/images/login_logonew.png" /></a>
+		<h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+	</div>
+	<form id="loginForm" style="height: 316px;">
+		<div class="login_input" id="loginbox" >
+			<div class="_input">
+				<input type="text" placeholder="手机号码" name="loginname" id="phone" maxlength="11">
+			</div>
+			<div class="_input password">
+				<input type="password" placeholder="密码" name="password"  id="pwd" maxlength="16">
+				<img class="login_go" src="/static/images/anniu_02.png" />
+				<input id="btn_go" type="button" value="" onclick="save11()"/>
+			</div>
+		</div>
+		<div class="jizhu">
+			快速登录：<a  href="https://open.weixin.qq.com/connect/qrconnect?appid=wxd7e83c7f47dab038&redirect_uri=http://www.ditingai.com/wx/wechat_login&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect"><img style=" display: inherit;width: 30px;" src="static/images/weixinicon.png"/> </a>
+			<span style="margin-left: 159px;">
+				<a href="/password-reset">忘记密码？</a>
+			</span>
+			<br /><br />
+			<a href="/dl/login">代理商管理后台登录</a>
+			<span style="margin-left: 27px;">没有账号？<a href="/register">注册</a>一个吧！</span>
+
+
+		</div>
+	</form>
+{% endblock %}

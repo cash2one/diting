@@ -1,0 +1,46 @@
+{% extends "web/antushengPc1.0/ats_layout.html" %}
+{% block head %}
+	<title>谛听客服-忘记密码</title>
+{% endblock %}
+{% block style %}
+    <script>
+        window.onload = function () {
+    }
+    </script>
+{% endblock %}
+{% block content %}
+    <div>
+			<div class="logo">
+				<img src="/static/images/antusheng/web/LOGO.png" alt="" />
+			</div>
+			<div class="content">
+				<div class="tit">
+					<span style="color: #23b6ff;line-height:60px;">申请试用 >>></span>
+					<a href="" style="background:#23b6ff;color:white;padding:5px 8px;border-radius:4px;float:right;margin-top: 18px;">找回密码</a>
+				</div>
+				<div class="inputs">
+					<span style="display:block;width:14%;text-align:center;background: white;margin: -10px auto">忘记密码</span>
+					<div class="wrapInput1">
+						<input id="phone" name="USERNAME" type="text" placeholder="手机号" required="required" maxlength="11" onblur="oPhonetest()"/>
+						<span id="phone_ts">请输入正确的手机号码</span>
+					</div>
+					<div class="wrapInput1">
+						<input name="telcode" id="telcode" required="required" maxlength="20" type="text" placeholder="验证码" style="width: 62%;" />
+						<b class="yzm _send" id="btnCode" onclick="code_if_change()">发送验证码</b>
+						<span>NO MESSAGE</span>
+					</div>
+					<div class="wrapInput1">
+						<input name="PASSWORD" value="" id="pwd" required="required" maxlength="16" type="password" placeholder="新密码" onblur="pwdtest()"/>
+						<span id="pwd_ts">6~16位密码,区分大小写</span>
+					</div>
+					<div class="wrapInput1">
+						<input id="pwd2" required="required" name="requrePassword" maxlength="16" type="password" placeholder="确认密码" onblur="pwdtest2()"/>
+						<span id="pwd2_ts">两次密码需要一致</span>
+					</div>
+					<div class="wrapInput1">
+						<input type="button" value="确定" style="background: #23b6ff; border: none; color: white;" onclick="atsForget()"/>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}

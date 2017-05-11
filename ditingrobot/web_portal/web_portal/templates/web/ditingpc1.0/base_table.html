@@ -1,0 +1,112 @@
+{% extends "web/ditingpc1.0/success_layout.html" %}
+{% block head %}
+<script type="text/javascript" src="/static/js/diting1.0/pc/base_table.js{{ _suffix_ }}" ></script>
+<style>
+    /*机器人设置*/
+    .form{font-size:15px;font-family:"Microsoft YaHei"; }
+    .form li{margin-top: 6px;}
+    .rob_txt li{
+        height: 46px;
+    }
+    .rob_txt input{
+        border: none;width: 100%;height: 30px;margin: 7px 17px;line-height: 30px;border-bottom: 1px solid #fafafa;
+    }
+    .rob_txt span{float: left;display: block;height: 46px;line-height: 46px;margin-left: 15px;}
+    .rob_txt .spanInput{width: 70%;}
+     #company_submit{
+         width: 95px;
+         height: 40px;
+         background: #01b3d9;
+         border-radius: 5px;
+         color: #fff;
+         border: 0;
+         margin: 20px 400px;
+
+     }
+
+
+</style>
+{% endblock %}
+
+
+{% block main %}
+<!--==右侧内容区==============-->
+            <input name="USERNAME" value="{{ loginInfo.userName }}" type="hidden">
+            <!--公司名称；公司网址；所在行业；融资状况？；公司规模；公司概况；热招职位？；工作时间；工作地点；-->
+            <div id="form" class="form" style="padding:0 20px;width:100%;background: #fff;">
+                <h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_base.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;基础信息</h3>
+
+                <ul class="rob_txt" id="company_tab1" style="height: 500px;min-width: 500px;width:49%;float: left">
+                    <li><span>公司名称:</span>
+                        <span class="spanInput"><input id="company_name" value="" name="company_name" maxlength="240" type="text" /></span>	</li>
+                    <li><span>公司网址:</span>
+                        <span class="spanInput"><input id="company_web"  value="" name="company_web" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>工作地址:</span>
+                        <span class="spanInput"><input id="company_site"  value="" name="company_site" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>公交线路:</span>
+                        <span class="spanInput"><input id="company_bus"  value="" name="company_bus" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>公司电话:</span>
+                        <span class="spanInput"><input id="company_tel"  value="" name="company_tel" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>公司业务:</span>
+                        <span class="spanInput"><input id="company_work"  value="" name="company_work" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>公司微信:</span>
+                        <span class="spanInput"><input id="company_wx" value="" name="company_wx" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>公司规模:</span>
+                        <span class="spanInput"><input id="company_size"  value="" name="company_size" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>公司概况:</span>
+                        <span class="spanInput"><input id="company_abstract" name="company_name" maxlength="240" value=""  type="text" /></span>
+                    </li>
+
+                </ul>
+
+                <ul class="rob_txt" id="company_tab2" style="height: 500px;min-width: 500px;width:49%;float: left;">
+                    <li><span>产品介绍:</span>
+                        <span class="spanInput"><input id="product_suggest" value="" name="company_web" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>技术优势:</span>
+                        <span class="spanInput"><input id="skill_well" value="" name="company_site" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>所在行业:</span>
+                        <span class="spanInput"><input id="now_industry" value="" name="company_bus" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>发展前景:</span>
+                        <span class="spanInput"><input id="development" value="" name="company_tel" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>企业文化:</span>
+                        <span class="spanInput"><input id="company_culture" value="" name="company_work" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>上班时间:</span>
+                        <span class="spanInput"><input id="work_time"  value="" name="company_wx" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>公司领导:</span>
+                        <span class="spanInput"><input id="company_leader"  value="" name="company_size" maxlength="240" type="text" /></span>
+                    </li>
+                    <li><span>融资情况:</span>
+                        <span class="spanInput"><input id="morMoney" value="" name="morMoney" maxlength="240" type="text" /></span>
+                    </li>
+
+                    <li><span>热招职位:</span>
+                        <span class="spanInput"><input id="hot_positions"  value="" name="hot_positions" maxlength="240" type="text" /></span>
+                    </li>
+                </ul><div style="clear: both"></div>
+                    <input id="company_submit" onclick="saveBase()" type="button" value="提交" />
+
+            </div>
+<div class="layui-layer layui-layer-loading  layer-anim" id="layui-layer10" type="loading" times="10" showtime="0" contype="string" style="z-index: 19891024; top: 50%; left: 48%;display: none"><div id="" class="layui-layer-content layui-layer-loading0"></div><span class="layui-layer-setwin"></span></div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+    window.onload=function () {
+        csh_name_place()
+        csh_Base_T(); //初始化
+    };
+
+</script>
+{% endblock %}

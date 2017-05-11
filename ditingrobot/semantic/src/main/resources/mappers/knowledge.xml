@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.KnowledgeMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.Knowledge">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="company_id" property="companyId" jdbcType="INTEGER"/>
+        <result column="account_id" property="accountId" jdbcType="INTEGER"/>
+        <result column="question" property="question" jdbcType="VARCHAR"/>
+        <result column="handle_question" property="handleQuestion" jdbcType="VARCHAR"/>
+        <result column="answer" property="answer" jdbcType="VARCHAR"/>
+        <result column="kw1" property="kw1" jdbcType="VARCHAR"/>
+        <result column="kw2" property="kw2" jdbcType="VARCHAR"/>
+        <result column="kw3" property="kw3" jdbcType="VARCHAR"/>
+        <result column="kw4" property="kw4" jdbcType="VARCHAR"/>
+        <result column="kw5" property="kw5" jdbcType="VARCHAR"/>
+        <result column="scene" property="scene" jdbcType="VARCHAR"/>
+        <result column="emotion" property="emotion" jdbcType="INTEGER"/>
+        <result column="frequency" property="frequency" jdbcType="INTEGER"/>
+        <result column="action_option" property="actionOption" jdbcType="VARCHAR"/>
+        <result column="synonym_question" property="synonymQuestion" jdbcType="VARCHAR"/>
+        <result column="img_url" property="img_url" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.Knowledge">
+        INSERT
+            INTO knowledge (owner,
+                            owner_type,
+                            deleted,
+                            created_by,
+                            created_time,
+                            update_by,
+                            update_time,
+                            company_id,
+                            account_id,
+                            question,
+                            handle_question,
+                            answer,
+                            kw1,
+                            kw2,
+                            kw3,
+                            kw4,
+                            kw5,
+                            scene,
+                            emotion,
+                            frequency,
+                            action_option,
+                            synonym_question,
+                            img_url)
+            VALUES (#{owner},
+                            #{ownerType},
+                            #{deleted},
+                            #{createdBy},
+                            #{createdTime},
+                            #{updatedBy},
+                            #{updatedTime},
+                            #{companyId},
+                            #{accountId},
+                            #{question},
+                            #{handleQuestion},
+                            #{answer},
+                            #{kw1},
+                            #{kw2},
+                            #{kw3},
+                            #{kw4},
+                            #{kw5},
+                            #{scene},
+                            #{emotion},
+                            #{frequency},
+                            #{actionOption},
+                            #{synonymQuestion},
+                            #{img_url})
+    </insert>
+
+    <update id="update" parameterType="com.diting.model.Knowledge">
+        UPDATE
+            knowledge
+        SET
+            deleted = #{deleted},
+            update_by = #{updatedBy},
+            update_time = #{updatedTime},
+            question = #{question},
+            handle_question = #{handleQuestion},
+            answer = #{answer},
+            kw1 = #{kw1},
+            kw2 = #{kw2},
+            kw3 = #{kw3},
+            kw4 = #{kw4},
+            kw5 = #{kw5},
+            scene = #{scene},
+            emotion = #{emotion},
+            frequency = #{frequency},
+            action_option=#{actionOption},
+            synonym_question = #{synonymQuestion},
+            img_url=#{img_url}
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Integer">
+        UPDATE
+        knowledge
+        SET
+        deleted = 1
+        WHERE id = #{knowledgeId}
+    </update>
+
+    <update id="updateFrequency" parameterType="java.lang.Integer">
+        UPDATE
+        knowledge
+        SET
+        frequency = frequency+1
+        WHERE id = #{knowledgeId}
+    </update>
+
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update knowledge
+            <set>
+                deleted = 1
+            </set>
+            where id = ${item.id}
+        </foreach>
+    </update>
+
+    <update id="batchUpdateKeywords" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update knowledge
+            <set>
+                kw1 = '${item.kw1}',
+                kw2 = '${item.kw2}',
+                kw3 = '${item.kw3}',
+                kw4 = '${item.kw4}',
+                kw5 = '${item.kw5}',
+                update_time = now()
+            </set>
+            where id = ${item.id}
+        </foreach>
+    </update>
+
+    <select id="get" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+            *
+          FROM
+            knowledge
+              WHERE id = #{knowledgeId}
+               LIMIT 1
+    </select>
+
+    <select id="getLastKnowledge" resultMap="defaultResultMap">
+        SELECT
+        *
+        FROM
+        knowledge
+        WHERE 1=1
+        ORDER BY id DESC
+        LIMIT 1
+    </select>
+    <select id="searchForPage" parameterType="com.diting.model.options.KnowledgeOptions" resultMap="defaultResultMap">
+        SELECT *
+        FROM knowledge
+        WHERE account_id = #{accountId}
+        AND deleted = 0
+        <if test="keywords!=null and keywords!=''">
+            <if test="queryState==0">
+                AND
+                <if test="type==0">
+                    question LIKE CONCAT(CONCAT('%',#{keywords}),'%')
+                </if>
+                <if test="type==1">
+                    answer LIKE CONCAT(CONCAT('%',#{keywords}),'%')
+                </if>
+            </if>
+            <if test="queryState==1">
+                AND
+                <if test="type==0">
+                    question = #{keywords}
+                </if>
+                <if test="type==1">
+                    answer = #{keywords}
+                </if>
+            </if>
+        </if>
+        <if test="startTime!= null and startTime != ''">
+            and created_time <![CDATA[   >=  ]]> #{startTime}
+        </if>
+        <if test="endTime!= null and endTime != ''">
+            and created_time <![CDATA[   <=  ]]> #{endTime}
+        </if>
+        <if test="queryCriteria==0">
+            ORDER BY update_time DESC
+        </if>
+        <if test="queryCriteria==1">
+            ORDER BY frequency DESC
+        </if>
+    </select>
+
+    <select id="findKnowledgesByAccountId" resultMap="defaultResultMap">
+        SELECT
+        *
+        FROM
+        knowledge
+        WHERE account_id=#{accountId} AND answer LIKE  CONCAT(CONCAT('%','action'),'%')
+        AND scene="音乐播放"
+    </select>
+
+    <select id="getKnowledge" resultMap="defaultResultMap" parameterType="com.diting.model.Knowledge">
+        SELECT
+        *
+        FROM
+        knowledge
+        WHERE question=#{question} AND answer=#{answer} AND account_id=#{accountId} AND deleted = 0
+        <if test="scene!=null">
+            AND scene=#{scene}
+        </if>
+        <if test="scene==null">
+            AND scene="" OR scene IS NULL
+        </if>
+    </select>
+
+    <select id="getKnowledgeList" resultMap="defaultResultMap" parameterType="com.diting.model.Knowledge">
+        SELECT
+        *
+        FROM
+        knowledge
+        WHERE deleted=0 AND company_id>0 limit 10
+    </select>
+    <select id="searchKnowledgeNum" resultMap="defaultResultMap">
+        SELECT * from knowledge WHERE 1=1
+        <if test="startTime!= null and startTime != ''">
+            and created_time <![CDATA[   >=  ]]> #{startTime}
+        </if>
+        <if test="endTime!= null and endTime != ''">
+            and created_time <![CDATA[   <=  ]]> #{endTime}
+        </if>
+        ORDER BY created_time ASC
+    </select>
+    <select id="companyKnowledgeList" parameterType="com.diting.model.options.KnowledgeOptions" resultMap="defaultResultMap">
+        select
+        *
+        from
+        knowledge
+        where company_id=#{companyId} AND deleted=0
+        <if test="keywords!=null and keywords!=''">
+            <if test="queryState==0">
+                AND
+                <if test="type==0">
+                    question LIKE CONCAT(CONCAT('%',#{keywords}),'%')
+                </if>
+                <if test="type==1">
+                    answer LIKE CONCAT(CONCAT('%',#{keywords}),'%')
+                </if>
+            </if>
+            <if test="queryState==1">
+                AND
+                <if test="type==0">
+                    question = #{keywords}
+                </if>
+                <if test="type==1">
+                    answer = #{keywords}
+                </if>
+            </if>
+        </if>
+        <if test="startTime!= null and startTime != ''">
+            and created_time <![CDATA[   >=  ]]> #{startTime}
+        </if>
+        <if test="endTime!= null and endTime != ''">
+            and created_time <![CDATA[   <=  ]]> #{endTime}
+        </if>
+        LIMIT 60000
+    </select>
+    <select id="searchCompanyKnowledgeForPage" parameterType="com.diting.model.options.KnowledgeOptions"
+            resultMap="defaultResultMap">
+        SELECT *
+        FROM knowledge
+        WHERE account_id >-1 AND company_id=#{companyId}
+        AND deleted = 0
+        <if test="keywords!=null and keywords!=''">
+            <if test="queryState==0">
+                AND
+                <if test="type==0">
+                    question LIKE CONCAT(CONCAT('%',#{keywords}),'%')
+                </if>
+                <if test="type==1">
+                    answer LIKE CONCAT(CONCAT('%',#{keywords}),'%')
+                </if>
+            </if>
+            <if test="queryState==1">
+                AND
+                <if test="type==0">
+                    question = #{keywords}
+                </if>
+                <if test="type==1">
+                    answer = #{keywords}
+                </if>
+            </if>
+        </if>
+        <if test="startTime!= null and startTime != ''">
+            and created_time <![CDATA[   >=  ]]> #{startTime}
+        </if>
+        <if test="endTime!= null and endTime != ''">
+            and created_time <![CDATA[   <=  ]]> #{endTime}
+        </if>
+        <if test="queryCriteria==0">
+            ORDER BY update_time DESC
+        </if>
+        <if test="queryCriteria==1">
+            ORDER BY frequency DESC
+        </if>
+    </select>
+    <select id="searchKnowledgeCount" parameterType="com.diting.model.Knowledge" resultType="java.lang.Integer">
+        select
+        count(id)
+        from
+        knowledge
+        where  deleted=0
+        <if test="startTime!= null and startTime != ''">
+            and created_time &gt;= #{startTime}
+        </if>
+        <if test="endTime!= null and endTime != ''">
+            and created_time &lt; #{endTime}
+        </if>
+    </select>
+
+    <select id="searchKnowledgeCountByAccountId" parameterType="com.diting.model.options.KnowledgeOptions" resultType="java.lang.Integer">
+        select
+        count(id)
+        from
+        knowledge
+        where account_id=#{accountId} AND deleted=0
+        <if test="startTime!= null and startTime != ''">
+            and created_time &gt;= #{startTime}
+        </if>
+        <if test="endTime!= null and endTime != ''">
+            and created_time &lt; #{endTime}
+        </if>
+    </select>
+
+    <select id="getKnowledgeByFrequencr" resultMap="defaultResultMap" parameterType="com.diting.model.Knowledge">
+        SELECT
+        *
+        FROM
+        knowledge
+        WHERE  deleted = 0 AND frequency>0 AND account_id=#{accountId}
+    </select>
+</mapper>

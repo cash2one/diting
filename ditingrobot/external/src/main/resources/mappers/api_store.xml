@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.ApiStoreMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.ApiStore">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="provider_name" property="providerName" jdbcType="VARCHAR"/>
+        <result column="provider_en_name" property="providerEnName" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="server_name" property="serverName" jdbcType="VARCHAR"/>
+        <result column="server_en_name" property="serverEnName" jdbcType="VARCHAR"/>
+        <result column="scene" property="scene" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="en_name" property="enName" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="VARCHAR"/>
+        <result column="method" property="method" jdbcType="VARCHAR"/>
+        <result column="approval_enable" property="approvalEnable" jdbcType="INTEGER"/>
+        <result column="enable" property="enable" jdbcType="INTEGER"/>
+        <result column="approval_name" property="approvalName" jdbcType="VARCHAR"/>
+        <result column="switch_name" property="switchName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.ApiStore">
+        INSERT
+            INTO api_store (owner,
+                            owner_type,
+                            deleted,
+                            created_by,
+                            created_time,
+                            update_by,
+                            update_time,
+                            provider_name,
+                            provider_en_name,
+                            mobile,
+                            email,
+                            server_name,
+                            server_en_name,
+                            scene,
+                            description,
+                            name,
+                            en_name,
+                            url,
+                            version,
+                            method,
+                            approval_enable,
+                            enable
+                            )
+            VALUES (#{owner},
+                        #{ownerType},
+                        #{deleted},
+                        #{createdBy},
+                        #{createdTime},
+                        #{updatedBy},
+                        #{updatedTime},
+                        #{providerName},
+                        #{providerEnName},
+                        #{mobile},
+                        #{email},
+                        #{serverName},
+                        #{serverEnName},
+                        #{scene},
+                        #{description},
+                        #{name},
+                        #{enName},
+                        #{url},
+                        #{version},
+                        #{method},
+                        #{approvalEnable},
+                        #{enable})
+    </insert>
+
+    <update id="update" parameterType="com.diting.model.ApiStore">
+        UPDATE
+            api_store
+        SET
+            deleted = #{deleted},
+            update_by = #{updatedBy},
+            update_time = #{updatedTime},
+            provider_name = #{providerName},
+            provider_en_name = #{providerEnName},
+            mobile = #{mobile},
+            email = #{email},
+            server_name = #{serverName},
+            server_en_name = #{serverEnName},
+            scene = #{scene},
+            description = #{description},
+            name = #{name},
+            en_name = #{enName},
+            url = #{url},
+            version = #{version},
+            method = #{method}
+        WHERE id = #{id}
+    </update>
+
+    <select id="get" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+          a.*,
+          dic1.name AS approval_name,
+          dic2.name AS switch_name
+        FROM
+          api_store a,dictionary dic1,dictionary dic2
+        WHERE
+          a.id = #{apiStoreId}
+          AND a.approval_enable = dic1.value
+          AND a.enable = dic2.value
+          AND dic2.tag = 'SWITCH'
+          AND dic1.tag = 'APPROVAL'
+          LIMIT 1
+    </select>
+
+    <update id="switchUpdate" parameterType="java.lang.Integer">
+        UPDATE
+            api_store
+                SET
+                    enable = #{status}
+                        WHERE id = #{apiStoreId}
+    </update>
+
+    <update id="approvalUpdate" parameterType="java.lang.Integer">
+        UPDATE
+            api_store
+                SET
+                    approval_enable = #{status}
+                      WHERE id = #{apiStoreId}
+    </update>
+
+    <select id="getByScene" resultMap="defaultResultMap" >
+        SELECT
+          a.*
+        FROM
+          api_store a,
+          personal_application p
+        WHERE a.id = p.app_id
+          AND a.scene = #{scene}
+          AND p.user_id = #{userId}
+        LIMIT 1
+    </select>
+
+    <select id="findByScene" resultMap="defaultResultMap" >
+        SELECT
+        *
+        FROM
+        api_store
+        WHERE
+        scene = #{scene}
+        LIMIT 1
+    </select>
+
+    <select id="searchForPage" resultMap="defaultResultMap">
+        SELECT
+          a.*,
+          dic1.name AS approval_name,
+          dic2.name AS switch_name
+        FROM
+          api_store a,dictionary dic1,dictionary dic2
+        WHERE
+          a.approval_enable = dic1.value
+          AND a.enable = dic2.value
+          AND dic2.tag = 'SWITCH'
+          AND dic1.tag = 'APPROVAL'
+        ORDER BY id ASC
+    </select>
+
+    <select id="searchForValidity" resultMap="defaultResultMap">
+        SELECT
+          a.*
+        FROM
+          api_store a
+        WHERE
+          a.approval_enable = 1
+        ORDER BY a.id
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM api_store WHERE id = #{apiStoreId}
+    </delete>
+
+
+</mapper>

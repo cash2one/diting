@@ -1,0 +1,11 @@
+
+# http://docs.jinkan.org/docs/flask/installation.html
+pip install virtualenv
+virtualenv venv
+
+pip install tornado
+pip install requests
+pip install -U flask-cors
+pip install xlrd
+pip install xlwt
+pip install qiniu

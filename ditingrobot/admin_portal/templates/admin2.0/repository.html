@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="/static/css/admin_layout.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/css/admin_repository.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/css/lib/page.css"/>
+		<script src="/static/js/lib/jquery-2.2.3.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/static/js/lib/ajaxfileupload.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+        <script src="/static/js/lib/page.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="top">
+			<ul id="topUl">
+				<li class="topLi">
+					<img src="/static/images/06.png"/>
+					<b>管理员姓名</b>
+				</li>
+				<a href=""><li class="topLi topLi0">账号设置</li></a>
+                <a href="/logout"><li id="logout" class="topLi topLi0">退出</li></a>
+			</ul>
+		</div>
+		<div class="nav">
+			<ul class="navUl">
+				<li class="navLi navLi_F"></li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/sy00.png) no-repeat 22px 18px;">首页</li>
+				<li class="navLi" id="navLi_zsk" >
+					<span style="display: block; background:#00C4C2 url(/static/images/admin2.0/ck00.png) no-repeat 22px 18px;">知识库管理</span>
+					<ul class="ckUl">
+						<li class="ckLi" style="background: #999" id="zskLearn">知识库学习</li>
+						<li class="ckLi" id="high_p">高频问题</li>
+						<li class="ckLi" onclick="csh_invalid()">无效问题</li>
+					</ul>
+				</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/sj00.png) no-repeat 22px 18px;">数据管理</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/yh00.png) no-repeat 22px 18px;">用户管理</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/dls00.png) no-repeat 22px 18px;">代理商管理</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/yy00.png) no-repeat 22px 18px;">应用管理</li>
+				<li class="navLi" id="navLi_ck" >
+					<span style="display: block; background: url(/static/images/admin2.0/ck00.png) no-repeat 22px 18px;">词库管理</span>
+					<ul class="ckUl">
+						<li class="ckLi" style="background: #999">敏感词</li>
+						<li class="ckLi">原生词库管理</li>
+						<li class="ckLi">同义词库管理</li>
+						<li class="ckLi">绝对替换管理</li>
+						<li class="ckLi">近义词替换管理</li>
+						<li class="ckLi">口语处理</li>
+						<li class="ckLi">新词管理</li>
+						<li class="ckLi">语义理解api</li>
+					</ul>
+				</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/sz00.png) no-repeat 22px 18px;">管理员设置</li>
+                <li class="navLi" style="background: url(/static/images/admin2.0/sz00.png) no-repeat 22px 18px;">意见反馈</li>
+			</ul>
+		</div>
+        <div class="wrapContent">
+            <div class="content">
+                <div class="conNav">
+                    <select id="selectques">
+                        <option>搜索问题</option>
+                        <option>搜索答案</option>
+                    </select>
+                    <select id="select">
+                        <option>模糊搜索</option>
+                        <option>精准搜索</option>
+                    </select>
+                    <div class="searchD">
+                        <input id="nav-search-input" type="text" placeholder="在这里输入关键词">
+                        <button id="" onclick="init_ZSK(1,10,1)" style="width:40px;height: 24px;background: #EEF3FA url(/static/images/admin2.0/sousuo00.png) no-repeat;background-size: auto 100%;outline: none"></button>
+                    </div>
+                    <input class="dateInput" type="date" id="date2">
+                    <input class="dateInput" type="date" id="date1">
+                </div>
+                <div class="conTop">
+                    <input class="tianjia" type="button" value="添加问题" onclick="addQ()">
+                    <input class="addIn" type="button" value="导入">
+                    <input class="addOut" type="button" value="导出" onclick="toExcel()">
+                </div>
+                <div class="mainTable">
+                    <table class="tit_table">
+                        <tr>
+                            <td class="tit0"><input type="checkbox" id="allcheckeds" name="checkbox" value="checkbox"/></td>
+                            <td class="tit_ans">问题</td>
+                            <td id="change_tit" class="tit_ans">答案</td>
+                            <td class="kw">KW1</td>
+                            <td class="kw">KW2</td>
+                            <td class="kw">KW3</td>
+                            <td class="kw">KW4</td>
+                            <td class="kw">KW5</td>
+                            <td  class="changjing">场景</td>
+                            <td  class="changjing">动作</td>
+                            <td  class="tit_time">修改时间</td>
+                            <td class="tit_control">操作</td>
+                        </tr>
+                    </table>
+                    <table class="tit_table" id="real_table">
+
+                    </table>
+                    <div class="footPage">
+                        <button id="alldeletes">删除选中</button>
+                        <ul class="page" maxshowpageitem="6" pagelistcount="15"  id="page"></ul>
+                        <p class="pageCountW">共<span id="pageCount"></span>页</p>
+                        <button id="link_page">跳转</button>
+                        <input id="numPage" class="text_link" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="wrapEdits" class="wrapEdits" style="display:none;width: 100%; height: 100%; position: fixed; top:0; left: 0;z-index: 999; background: rgba(0,0,0,0.3);">
+            <div class="editsBox" style="background:white;width:520px;margin:120px auto 0;position: relative">
+                <div style="height:40px;background:#00C4C2;text-align: center">
+                    <span style="color:white;display:block;line-height:40px;">编辑问题</span>
+                    <span style="display:none;float:right;font-size:24px;cursor: pointer;padding-right:6px;" onclick="closeEditBox()"> × </span>
+                </div>
+                <div style="height:40px;margin-top: 10px">
+                    <label style="margin-left:60px;line-height:40px;float: left">问题：</label>
+                    <input id="editquestion" type="text" style="width: 340px;float:left;height: 40px;">
+                </div>
+                <div style="height:100px;margin-top: 10px">
+                    <label style="margin-left:60px;line-height:40px;float: left">答案：</label>
+                    <textarea id="editanswer" style="height:100%;width: 340px;resize: none"></textarea>
+                </div>
+
+                <div style="margin-top: 10px;height: 64px;position: relative">
+                    <label style="margin-left: 60px;float: left">图片：</label>
+                    <div style="height: 60px;width: 100px;position: absolute;top: 0;left: 108px;z-index: 10;border: 1px dashed #CCC">
+                        <input type="file" accept="image/gif,image/jpeg,image/png" id="inputImage2" name="file" multiple  style="width: 100%;height: 100%;opacity: 0">
+                    </div>
+                    <img id="img-yuLan2" src="" alt="" style="height: 60px;float: left">
+                </div>
+
+                <div style="height:40px;margin-top: 10px">
+                    <label style="margin-left:60px;line-height:40px;float: left">场景：</label>
+                    <input id="editscene" type="text" name="scene" id="" required="required" maxlength="20" value="" title="场景" type="text" style="width: 340px;float:left;height: 40px">
+                </div>
+                <div style="height:40px;margin-top: 10px">
+                    <label style="margin-left:60px;line-height:40px;float: left">动作：</label>
+                    <div style="height:40px;width:340px;float:left;border:1px solid #999">
+                        <span style="display: block;float: left;height: 40px;line-height: 40px;">action_</span>
+                        <input type="text" name="scene" id="action_change" required="required" maxlength="20" value="" title="动作" type="text" style="width: 240px;float:left;height: 40px;border:none;outline:none;font-size: 16px">
+                    </div>
+                </div>
+
+                <div style="height:40px;display: flex;justify-content: space-around;width: 50%;margin: 10px auto 0">
+                    <button id="editSave" style="height:30px;width:80px;border:none;background:#00C4C2;border-radius:5px;color:white;" >保存</button>
+                    <button style="height:30px;width:80px;border:none;background:#CCC;border-radius:5px;color:white;" onclick="closeEditBox()">取消</button>
+                </div>
+                <div id="add_load2" style="width: 100%;height: 100%;background: rgba(0,0,0,0.3);position: absolute;left: 0;top: 0;z-index: 99;display: none;">
+                    <img  src="/static/images/admin2.0/loading.gif" style="margin: 40% auto;display: block">
+                </div>
+            </div>
+        </div>
+        <div id="wrapAddQ" class="wrapEdits" style="display:none;width: 100%; height: 100%; position: fixed; top:0; left: 0;z-index: 999; background: rgba(0,0,0,0.3);">
+            <div class="addQBox" style="background:white;width:520px;margin:120px auto 0;position: relative">
+                <div style="height:40px;background:#00C4C2;text-align: center">
+                    <span style="color:white;display:block;line-height:40px;">添加问题</span>
+                    <span style="float:right;font-size:24px;cursor: pointer;padding-right:6px;display: none"  onclick="closeaddQBox()"> × </span>
+                </div>
+                <div style="height:40px;margin-top: 10px">
+                    <label style="margin-left:60px;line-height:40px;float: left">问题：</label>
+                    <input type="text" class="" name="question" required="required" id="question" placeholder="最多60个汉字" maxlength="60" style="width: 340px;float:left;height: 40px;">
+                </div>
+                <div style="height:100px;margin-top: 10px;">
+                    <label style="margin-left:60px;line-height:40px;float: left">答案：</label>
+                    <textarea placeholder="最多240个汉字" name="answer" required="required" id="answer" maxlength="240" style="height:100%;width: 340px;resize: none"></textarea>
+                </div>
+
+                <div style="margin-top: 10px;height: 64px;position: relative">
+                    <label style="margin-left: 60px;float: left">图片：</label>
+                    <div style="height: 60px;width: 100px;position: absolute;top: 0;left: 108px;z-index: 10;border: 1px dashed #CCC">
+                        <input type="file" accept="image/gif,image/jpeg,image/png" id="inputImage" name="file" multiple  style="width: 100%;height: 100%;opacity: 0">
+                    </div>
+                    <img id="img-yuLan" src="" alt="" style="height: 60px;float: left">
+                </div>
+                <div style="height:40px;margin-top: 10px">
+                    <label style="margin-left:60px;line-height:40px;float: left">场景：</label>
+                    <input type="text" name="scene" id="add_scene" required="required" maxlength="20" value="" title="场景" type="text" style="width: 340px;float:left;height: 40px">
+                </div>
+                <div style="display:none;border: 1px solid rgb(169, 169, 169);width: 301px;">action_<input type="text" name="action_add" required="required" id="action_add" style="width:240px; outline: none;border:0;" placeholder="可以输入动作指令,例如:点头,跳舞" value="0" maxlength="10"/></div>
+                <div style="height:40px;display: flex;justify-content: space-around;width: 50%;margin: 10px auto 0">
+                    <button style="height:30px;width:80px;border:none;background:#00C4C2;border-radius:5px;color:white;" onclick="addquestion('inputImage')">保存</button>
+                    <button style="height:30px;width:80px;border:none;background:#CCCCCC;border-radius:5px;color:white;" onclick="closeaddQBox()">取消</button>
+                </div>
+                <div id="add_load" style="width: 100%;height: 100%;background: rgba(0,0,0,0.3);position: absolute;left: 0;top: 0;z-index: 99;display: none;">
+                    <img  src="/static/images/admin2.0/loading.gif" style="margin: 40% auto;display: block">
+                </div>
+            </div>
+        </div>
+
+    <script src="/static/js/repository.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/commonHt.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        init_ZSK(1,15,1)    //初始化页码   每页条数
+    </script>
+	</body>
+</html>

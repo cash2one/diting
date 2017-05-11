@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.ChatStatisticsMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.ChatStatistics">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="company_id" property="companyId" jdbcType="INTEGER"/>
+        <result column="yesterday_count" property="yesterdayCount" jdbcType="INTEGER"/>
+        <result column="all_count" property="allCount" jdbcType="INTEGER"/>
+        <result column="accuracy_rate" property="accuracyRate" jdbcType="VARCHAR"/>
+        <result column="robot_value" property="robotValue" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.ChatStatistics">
+        INSERT
+        INTO chat_statistics (time,
+        user_id,
+        company_id,
+        yesterday_count,
+        all_count,
+        accuracy_rate,
+        robot_value)
+        VALUES (#{time},
+        #{userId},
+        #{companyId},
+        #{yesterdayCount},
+        #{allCount},
+        #{accuracyRate},
+        #{robotValue})
+    </insert>
+
+    <delete id="deleteAll">
+        DELETE FROM chat_statistics
+    </delete>
+    <select id="getAllRanking" resultMap="defaultResultMap" >
+        SELECT
+        *
+        FROM
+        chat_statistics
+        WHERE robot_value>0
+        ORDER BY robot_value DESC
+        LIMIT 20
+    </select>
+
+    <select id="findByCompanyId" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+        *
+        FROM
+        chat_statistics
+        WHERE company_id = #{companyId}
+        LIMIT 1
+    </select>
+
+</mapper>

@@ -1,0 +1,83 @@
+{% extends "success_layout.html" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/quesK-style.css{{ _suffix_ }}" />
+<style type="text/css">
+	.p1{font-size: 18px; color:goldenrod;line-height: 20px;color: #000;}
+	.p1 b {margin-left:10px;border: none;color: #00C4C2;line-height: 28px;}
+	#comment{width:700px;height:65px;overflow: hidden;resize:none;font-size: 14px;}
+	h4{color: #00c4c2;}
+	li .p1 span{font-size: 12px;}
+	#commentBtn{border:none;background: #00c4c2;padding: 5px 10px;border-radius: 5px;margin: 3px 10px;color: #fff;}
+</style>
+{% endblock %}
+
+{% block main %}
+
+<!--==内容区==============-->
+<div style="display: none;">
+	<input type="text" id="companyid0" value="{{message.id}}"/>
+</div>
+<div class="mains" style="width: 770px;margin: auto;border: 1px solid #fff;height: 460px;overflow-y: auto;">
+	<p class="p1"><b>用户：</b><span>{{message.createdBy}}</span><b>联系方式：</b><span>{{message.contactInformation}}</span></p>
+	<p class="p1"><b style="line-height: 100%;">反馈内容：</b><span style="font-size: 12px;">{{message.suggestion}}</span></p>
+	<br/>
+	<h4>管理员评论</h4>
+	<textarea id="comment" placeholder="好记性不如烂笔头，有想法就留下来。" name="comment" maxlength="120"></textarea><br />
+	<b style="font-size: 16px;">管理员留言</b><input id="commentBtn" type="button" value="发表"  style="margin-left: 75%;" data-id="{{message.id}}" />
+	<div>
+		<ul id="ul1">
+
+		</ul>
+
+	</div>
+</div>
+<div id="tanc"></div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+	window.onload = function()
+	{
+		var arr ='{{message.feedbackMessageList|tojson}}';
+		arr = JSON.parse(arr)
+		console.log(arr)
+		var str ='';
+		for (var i = 0; i < arr.length ; i++) {
+			str +='<li><p class="p1"><b>'+ arr[i].adminName +':</b><span>'+ arr[i].feedback +'</span></li>'
+		}
+		$('#ul1').html(str)
+
+		$('#commentBtn').click(function commentBtn(){
+			var messageId = $('#commentBtn').attr('data-id');
+			var feedback = $('#comment').val();
+			var agree = {
+				messageId:messageId,
+				feedback:feedback
+			};
+			if(feedback == ""){
+				layer.msg("评论不能为空哦！", {time: 1000, icon: 5})
+			}else {
+				$.ajax({
+					type: "POST",
+					contentType: "application/json",
+					url: '/api/message/feedback_message/create',
+					data: JSON.stringify(agree)
+				}).done(function (data) {
+					layer.msg(data.message, {time: 500, icon: 6}, function () {
+						window.location.reload(true);
+					})
+
+				}).fail(function (data) {
+					console.log(data);
+					var message = JSON.parse(data.responseText).message;
+					layer.msg(message, {icon: 5})
+				});
+			}
+
+		})
+
+	}
+
+</script>
+{% endblock %}
+

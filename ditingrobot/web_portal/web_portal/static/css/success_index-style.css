@@ -1,0 +1,199 @@
+header{
+	height: 120px;width: 100%;background: #fff;
+}
+#logo{
+	width: 242px;height: 63px;
+	margin-top:22px ;
+}
+#logo img{
+	height: 100%;width: 100%;
+}
+nav,#logo{float: left;}
+nav{
+	width: 750px;
+	height: 100px;
+	float:right ;
+	font-size: 22px;
+}
+nav>div{
+	text-align: center;
+	line-height: 130px;
+	height: 100px;
+	float: left;
+	color: #6f6f6f;
+	font-weight: 900;
+	cursor: pointer;
+	border: 4px solid #fff;
+	border-radius: 15px;
+	margin-left: 23px;
+}
+.nav1{
+	color:#00C4C2;
+}
+#navTop input{
+	border: none;outline:none;float: left;margin-top: 50px;
+}
+#navTop .login_ctrl{
+	width: 25px;
+	height: 42px;
+	background: url(/static/images/user_photo.png) no-repeat center;background-size: 25px;
+	
+}
+#navTop .name{
+	width: 100px;
+	color: #13ced7;
+	font-weight: bold;
+	text-align: center;
+	background-color: #fff;
+	font-size: 14px;
+	height: 40px;
+	line-height: 55px;
+}
+.btn-group{
+	position: absolute;
+	right: 20px;
+	top: 59px;
+	height: 25px;
+	width: 127px;
+}
+/*==左菜单栏===================*/
+.left_menu {
+    float: left;
+    width: 229px;
+    height: 591px;
+    border-left:1px solid #ccc;
+	border-top:1px solid #ccc;
+    background: #f9faf5;
+}
+#_menu{
+	padding-top:25px ;
+}
+
+.menu li{
+	width: 180px;
+	margin: auto;
+	line-height: 50px;
+	text-align: center;
+	cursor: pointer;
+	margin-top: 12px;
+	background: #00C4C2;
+	border-radius: 8px;
+}
+.menu .menuLeftLi2{
+	width: 160px;
+	/*display: none;*/
+	height:40px;
+	line-height: 40px;
+	background: rgb(33, 160, 159);
+}
+.menu .menuLeftLi1 span{
+	top:0;left: 0;
+}
+.menu .menuLeftLi2 span{
+	font-size: 14px;
+}
+.ques_ranks tr:hover{
+	background: #d4d4d2;
+}
+.menu li img{
+	width: 33px;
+	height: 33px;
+	position: relative;
+	top: 8px;
+	left: 12px;
+}
+.menu li:hover img,.menu li:hover span{
+	opacity: 0.8;
+}
+.menu li:hover{
+	background: #8aC4FF;
+}
+.menu span {
+	display: block;
+    font-size: 20px;
+    color: #FFF;
+    font-weight: 200;
+}
+#section{
+	width: 1000px;margin: 0 auto;background: #f9faf5;
+}
+.mains{
+	width: 771px;border-left: 1px solid #ccc;border-right:  1px solid #ccc;float: right;background: #f9faf5;border-top:1px solid #ccc;
+}
+.reg_prompt div{
+	width:50px;
+	float: left;
+	color: #000;
+	font-size: 12px;
+}
+
+.reg_prompt img{
+	width:80%;
+}
+.rob_txt .robWeb{
+	font-size: 12px;
+	color: #ccc;
+	margin-right: 0px;
+	width: 244px;
+}
+
+.threeButton{
+	padding: 2px 5px;
+	margin: 10px;
+	width:110px;
+	border:none;
+	border-radius: 2px;
+}
+.threeButtonB{
+	background: #00c4c2;
+}
+
+.threeButtonG{
+	background: #dddddd;
+}
+#Qbtn{
+	border-radius: 7px;
+	width: 80px;
+	background: #00c4c2;
+	float:right;
+	outline: none;
+}
+#answer_more{
+	display: none;
+}
+#answer_all:hover,#answer_short:hover{
+	border-bottom: 1px solid #00C4C2;
+}
+.playbq{
+	-webkit-animation: hd 1s linear 0s alternate infinite;z-index: 3;
+	position: absolute;right: 10px;top:300px;
+}
+@-webkit-keyframes hd{
+	/*放大缩小晃动*/
+	from{ transform:  scale(0.9,0.9);}
+	to{transform: scale(1,1);}
+}
+.base_KU{
+	display: none;position: absolute; top: 51px;background: #00c4c2; line-height: 30px;width: 152px;left: 13px;
+}
+.base_KU a{
+	color: #fff;display: block;
+}
+.base_KU a:hover{
+	background: #ccc;
+}
+.base_table:hover .base_KU{
+	display: block;
+}
+.rob_txt .hot_K,.rob_txt .hot_add{
+	width: initial;
+	min-width: 100px;
+	padding: 0 8px;
+	height: 30px;
+	border:1px solid #CCCCCC;
+	border-radius: 10px;
+}
+.rob_txt .hot_K:hover,.rob_txt .hot_add:hover{
+	border:1px solid #777;
+	color:#777;
+}

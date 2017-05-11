@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>黑图-消息通知</title>
+    <meta name="keywords" content="机器人,恋爱机器人,谛听机器人,自动应答程序,拜年机器人,客服机器人,问答机器人,招聘机器人">
+    <meta name="description" content="谛听机器人能通过注册获得自己的问答机器人。该机器人可以捆绑在自己公众号，可以部署在自己网站上，可以通过我们提供的API 进行二次开发，接入各类软件。用户可以通过我们提供的管理后台增加和编辑机器人的问答知识，将机器人用于客服、销售、招聘，机器人会自动按照用户添加的问题和答案回答提问。我们善于做上下文处理，对语义的理解更加精准。">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        ul,ol,li{
+            list-style: none;
+        }
+        input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; }
+        .liList{
+            height:60px ;
+            width: 90%;
+            border-bottom: 1px solid #CCC;
+            padding: 0 5%;
+        }
+        .listName{
+            display: block;
+            float: left;
+            height: 100%;
+            margin-right: 14px;
+            color: #999999;
+            line-height: 60px;
+        }
+        .listMess{
+            display: block;
+            float: left;
+            line-height: 60px;
+        }
+        .listImg{
+            float: right;
+            border-radius: 100%;
+            background: url("/static/images/phone/askImg03.png");
+            background-size: 100% 100%;
+            display: block;
+            width: 40px;
+            height: 40px;
+            margin:10px 14px 0 0;
+            display: none;
+        }
+        .listTime{
+            display: block;
+            float: right;
+            line-height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul id="messList">
+
+        </ul>
+    </div>
+
+    <script src="/static/js/loveAutoLogin.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/lib/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        autoLogin()
+        function showMess() {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: "/loveMessageLog/selectByUserId",
+                success:function(data){
+                    var objData = JSON.parse(data);
+                    console.log(objData)
+                    $.each(objData,function (index,value) {
+                        var time = transDate(value.createdTime)
+                        var str="<li class='liList'>"
+                            str+="<span class='listName'>"+value.forwordName+"</span>"
+                            str+="<b class='listMess'>"+value.message+"</b>"
+                            str+="<span class='listTime'>"+time+"</span>"
+                            str+="<p class='listImg'></p></li>"
+                        $("#messList").html($("#messList").html()+str);
+                    })
+                }
+            })
+        }
+        function update() {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: "/loveMessageLog/updateByUserId",
+                success:function(data){
+                    console.log("done update")
+                }
+            })
+        }
+        function transDate(hms) {
+            var date = new Date(hms);
+            var year = date.getFullYear();
+            var mouth = date.getMonth()+1;
+            var day = date.getDate();
+            return year+"/"+mouth+"/"+day;
+        }
+        showMess();
+        update();
+    </script>
+</body>
+</html>

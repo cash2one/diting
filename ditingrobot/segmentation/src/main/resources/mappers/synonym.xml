@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.SynonymMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.Synonym">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="word_old" property="word_old" jdbcType="VARCHAR"/>
+        <result column="word_new" property="word_new" jdbcType="VARCHAR"/>
+        <result column="word_old_frequency" property="word_old_frequency" jdbcType="INTEGER"/>
+        <result column="word_new_frequency" property="word_new_frequency" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.Synonym">
+        INSERT INTO wb_synonym(
+        word_old,
+        word_new,
+        word_old_frequency,
+        word_new_frequency
+        )
+        VALUES (
+        #{word_old},
+        #{word_new},
+        #{word_old_frequency},
+        #{word_new_frequency}
+        )
+    </insert>
+
+
+    <select id="searchAll" resultMap="defaultResultMap">
+        SELECT * FROM wb_synonym WHERE 1=1
+    </select>
+
+    <select id="searchForPage" parameterType="com.diting.model.options.SynonymOptions" resultMap="defaultResultMap">
+        SELECT * FROM wb_synonym WHERE 1=1
+        <if test="keyword!=null and keyword!=''">
+            AND word_new LIKE CONCAT(CONCAT('%',#{keyword}),'%')
+        </if>
+    </select>
+
+    <update id="update" parameterType="com.diting.model.Synonym">
+        UPDATE wb_synonym SET word_old=#{word_old} , word_new=#{word_new},word_old_frequency=#{word_old_frequency},word_new_frequency=#{word_new_frequency} WHERE id=#{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM wb_synonym WHERE id=#{id}
+    </delete>
+
+    <select id="get" resultType="com.diting.model.Synonym">
+        SELECT * FROM wb_synonym WHERE id=#{id}
+    </select>
+</mapper>

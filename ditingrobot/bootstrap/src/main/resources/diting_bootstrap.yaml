@@ -1,0 +1,33 @@
+environment: 1box
+
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO,
+  # DEBUG, TRACE, or ALL.
+  level: INFO
+
+  appenders:
+    - type: file
+      currentLogFilename: /tmp/diting-server.log
+      archivedLogFilenamePattern: /tmp/diting-server-%d.log.gz
+      archivedFileCount: 5
+      timeZone: UTC
+      logFormat: "%d{HH:mm:ss.SSS} [%thread] [%X{requestId}] %-5level %logger{36} - %msg%n"
+
+    - type: console
+      threshold: ALL
+      timeZone: UTC
+      target: stdout
+      logFormat: "%d{HH:mm:ss.SSS} [%thread] [%X{requestId}] %-5level %logger{36} - %msg%n"
+server:
+  applicationConnectors:
+    - type: http
+      port: 9090
+#    - type: https
+#      port: 8443
+#      keyStorePath: dwstart.keystore
+#      keyStorePassword: crimson
+#      validateCerts: false
+  adminConnectors:
+    - type: http
+      port: 9091

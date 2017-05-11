@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.OrderMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.Order">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="robot_id" property="robotId" jdbcType="INTEGER"/>
+        <result column="order_number" property="orderNumber" jdbcType="VARCHAR"/>
+        <result column="return_code" property="return_code" jdbcType="VARCHAR"/>
+        <result column="return_msg" property="return_msg" jdbcType="VARCHAR"/>
+        <result column="appid" property="appid" jdbcType="VARCHAR"/>
+        <result column="mch_id" property="mch_id" jdbcType="VARCHAR"/>
+        <result column="nonce_str" property="nonce_str" jdbcType="VARCHAR"/>
+        <result column="prepay_id" property="prepay_id" jdbcType="VARCHAR"/>
+        <result column="result_code" property="result_code" jdbcType="VARCHAR"/>
+        <result column="err_code_des" property="err_code_des" jdbcType="VARCHAR"/>
+        <result column="sign" property="sign" jdbcType="VARCHAR"/>
+        <result column="amountOfMmoney" property="amountOfMmoney" jdbcType="DECIMAL"/>
+        <result column="balance" property="balance" jdbcType="DECIMAL"/>
+        <result column="paymentMethod" property="paymentMethod" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.Order">
+        INSERT
+        INTO order_form (
+        name,
+        user_id,
+        robot_id,
+        order_number,
+        return_code,
+        return_msg,
+        appid,
+        mch_id,
+        nonce_str,
+        prepay_id,
+        result_code,
+        err_code_des,
+        sign,
+        amountOfMmoney,
+        balance,
+        paymentMethod,
+        time
+        )
+        VALUES (
+        #{name},
+        #{userId},
+        #{robotId},
+        #{orderNumber},
+        #{return_code},
+        #{return_msg},
+        #{appid},
+        #{mch_id},
+        #{nonce_str},
+        #{prepay_id},
+        #{result_code},
+        #{err_code_des},
+        #{sign},
+        #{amountOfMmoney},
+        #{balance},
+        #{paymentMethod},
+        #{time})
+    </insert>
+    <update id="update" parameterType="com.diting.model.Order">
+        UPDATE order_form SET
+        return_msg=#{return_msg},
+        return_code=#{return_code},
+        amountOfMmoney=#{amountOfMmoney},
+        time=#{time},
+        status=#{status}
+        WHERE
+        order_number=#{orderNumber}
+    </update>
+    <select id="findByOrderNumber" resultMap="defaultResultMap" parameterType="com.diting.model.Order">
+        SELECT * FROM order_form WHERE  order_number=#{orderNumber}
+    </select>
+</mapper>

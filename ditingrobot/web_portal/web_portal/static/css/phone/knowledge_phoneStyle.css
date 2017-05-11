@@ -1,0 +1,46 @@
+#knowledgeBox{
+	width: 6.4rem;
+	height: 6rem;
+	overflow-y: auto;
+	font-size: 0.24rem;
+}
+#knowledgeBox .knowsLi1{
+	width: 2.7rem;
+	height: 2.2rem;
+	background: #fff;
+	float: left;
+	margin: 0.3rem 0 0 0.33rem;
+	border-radius: 0.1rem;
+}
+.addKnow{
+	border-radius: 50%;
+	padding: 0.2rem 0.265rem;
+	color: #fff;
+	background: #00c4c2;
+	margin-right: 0.2rem;
+	display: inline-block;
+	float: right;
+	font-size: 0.4rem;
+}
+.deletePhoneKnow{
+	background: url(/static/images/del.png) no-repeat 0.06rem;
+	background-size: 0.25rem;
+	width: 0.4rem;
+	height: 0.4rem;
+	border-radius: 50%;
+	border: 1px solid #ccc;
+	margin-left: 0.1rem;
+}
+.knowledgeTime{
+	float: right;color: #aaa; margin-top: 0.1rem;
+}
+#knowledgeBox .knowsLi11{
+	width: 0.7rem;
+	height:0.7rem;
+	float: left;
+	padding-top: 0.1rem;
+}
+#knowledgeBox .knowsLi12{
+	width: 2rem;overflow: hidden;
+	height:0.7rem;float: left;padding-top: 0.1rem;
+}

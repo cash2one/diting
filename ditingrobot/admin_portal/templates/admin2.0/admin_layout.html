@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="/static/css/admin_layout.css"/>
+		<script src="/static/js/lib/jquery-2.2.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload=function(){
+				var event = {
+					"topUl":$("#topUl"),
+					"topLi0":$(".topLi0"),
+					"navLi_zsk":$("#navLi_zsk"),
+					"navLi_ck":$("#navLi_ck"),
+                    "ckLi":$(".ckLi"),
+					"flag0":true,
+					"flag1":true,
+					"init":function(){
+						this.topUl.mouseenter(function(){
+							this.navOut()
+						}.bind(this))
+						this.topUl.mouseleave(function(){
+							this.navIn()
+						}.bind(this))
+
+						this.navLi_zsk.click(function(){
+							if(this.flag0){
+								this.navLi_zsk.css({
+									"height":"180px",
+									"transition": "height 0.5s",
+									"-moz-transition": "height 0.5s",
+									"-webkit-transition": "height 0.5s",
+									"-o-transition": "height 0.5s"
+								})
+								this.flag0=!this.flag0
+							}else{
+								this.navLi_zsk.css({
+									"height":"60px",
+									"transition": "height 0.5s",
+									"-moz-transition": "height 0.5s",
+									"-webkit-transition": "height 0.5s",
+									"-o-transition": "height 0.5s"
+								})
+								this.flag0=!this.flag0
+							}
+						}.bind(this))
+						this.navLi_ck.click(function(){
+							if(this.flag0){
+								this.navLi_ck.css({
+									"height":"380px",
+									"transition": "height 1s",
+									"-moz-transition": "height 1s",
+									"-webkit-transition": "height 1s",
+									"-o-transition": "height 1s"
+								})
+								this.flag0=!this.flag0
+							}else{
+								this.navLi_ck.css({
+									"height":"60px",
+									"transition": "height 1s",
+									"-moz-transition": "height 1s",
+									"-webkit-transition": "height 1s",
+									"-o-transition": "height 1s"
+								})
+								this.flag0=!this.flag0
+							}
+						}.bind(this))
+                        this.ckLi.click(function(event){
+							event.stopPropagation();
+							$(this).css("background","#999").siblings().css("background","rgb(50,50,50)")
+						})
+						this.topLi0.mouseenter(function(){
+							$(this).css("background","#CCC").siblings().css("background","white")
+						})
+					},
+					"navOut":function(){
+						this.topUl.css({
+							"height":"196px",
+							"transition": "height 0.5s",
+							"-moz-transition": "height 0.5s",
+							"-webkit-transition": "height 0.5s",
+							"-o-transition": "height 0.5s"
+						})
+					},
+					"navIn":function(){
+						this.topUl.css({
+							"height":"42px",
+							"transition": "height 0.5s",
+							"-moz-transition": "height 0.5s",
+							"-webkit-transition": "height 0.5s",
+							"-o-transition": "height 0.5s"
+
+						})
+						this.topUl.children().css("background","white")
+					}
+				}
+				event.init();
+			}
+		</script>
+	</head>
+	<body>
+		<div class="top">
+			<ul id="topUl">
+				<li class="topLi">
+					<img src=""/>
+					<b>管理员姓名</b>
+				</li>
+				<li class="topLi topLi0">意见反馈</li>
+				<li class="topLi topLi0">账号设置</li>
+				<li class="topLi topLi0">退出</li>
+			</ul>
+		</div>
+		<div class="nav">
+			<ul class="navUl">
+				<li class="navLi navLi_F"></li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/sy00.png) no-repeat 22px 18px;">首页</li>
+				<li class="navLi" id="navLi_zsk" style="background: url(/static/images/admin2.0/ck00.png) no-repeat 22px 18px;">
+					<span>词库管理</span>
+					<ul class="ckUl">
+						<li class="ckLi" style="background: #999">知识库学习</li>
+						<li class="ckLi">高频问题</li>
+						<li class="ckLi">无效问题</li>
+					</ul>
+				</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/sj00.png) no-repeat 22px 18px;">数据管理</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/yh00.png) no-repeat 22px 18px;">用户管理</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/dls00.png) no-repeat 22px 18px;">代理商管理</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/yy00.png) no-repeat 22px 18px;">应用管理</li>
+				<li class="navLi" id="navLi_ck" style="background: url(/static/images/admin2.0/ck00.png) no-repeat 22px 18px;">
+					<span>词库管理</span>
+					<ul class="ckUl">
+						<li class="ckLi" style="background: #999">敏感词</li>
+						<li class="ckLi">原生词库管理</li>
+						<li class="ckLi">同义词库管理</li>
+						<li class="ckLi">绝对替换管理</li>
+						<li class="ckLi">近义词替换管理</li>
+						<li class="ckLi">口语处理</li>
+						<li class="ckLi">新词管理</li>
+						<li class="ckLi">语义理解api</li>
+					</ul>
+				</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/sz00.png) no-repeat 22px 18px;">管理员设置</li>
+			</ul>
+		</div>
+	</body>
+</html>

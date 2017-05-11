@@ -1,0 +1,169 @@
+.conNav{
+	width: 100%;
+	height: 40px;
+	background: white;
+	margin-top: 8px;
+}
+.conNav select{
+	background: rgb(238,243,250);
+	border: none;
+	outline: none;
+	float: left;
+	margin-top: 10px;
+	height: 24px;
+	margin-left: 10px;
+}
+.searchD{
+	float: left;
+	margin-top: 9px;
+	margin-left: 20px;
+}
+.searchD input{
+	border:none;
+	background: #EEF3FA;
+	height: 24px;
+	float: left;
+	outline: none;
+	text-indent: 12px;
+	width: 230px;
+}
+.searchD button{
+	background: #EEF3FA;
+    border: none;
+    height: 24px;
+	float: left;
+	width: 40px;
+}
+.conTop{
+	background: white;
+    margin-top: 10px;
+    height: 34px;
+    padding-top: 10px;
+}
+.conTop input{
+	border: none;
+	margin-left: 12px;
+	text-indent: 22px;
+	outline: none;
+}
+.tit_table{
+	width: 100%;
+	background: white;
+}
+.tit_table td{
+	background: #EEF3FA;
+	text-align: center;
+	padding:4px 0;
+}
+.tit0{
+	width: 40px;
+}
+.tit_ans{
+	width: 120px;
+	max-width: 120px;
+    text-align: center;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+.tit_name{
+	width: 198px;
+	max-width: 198px;
+    text-align: center;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+.kw{
+	width: 60px;
+}
+.changjing{
+	width: 70px;
+}
+.tit_time{
+	width: 80px;
+}
+.tit_control{
+	width: 80px;
+}
+.tit_control bottun{
+	border: none;
+}
+.tit_control a{
+	display: inline-block;
+	color: #00C4C2;
+	background: none;
+}
+.mainTable{
+	position: relative;
+	min-height: 400px;
+	font-size: 12px;
+}
+.footPage{
+	width: 100%;
+	position: absolute;
+	top: 100%;
+	background: white;
+	height: 42px;
+}
+.page{
+    height: 40px;
+	float: left;
+	margin-top: 2px;
+}
+#alldeletes{
+	float: left;
+    border: none;
+    margin-top: 12px;
+	background: white;
+	cursor: pointer;
+	margin-left: 20px;
+	background: url(/static/images/admin2.0/shanchu00.png) no-repeat;
+	background-size: auto 100%;
+	width: 80px;
+	text-indent: 20px;
+}
+.text_link{
+	width: 40px;
+    margin-top: 10px;
+	height: 18px;
+	float: right;
+}
+#link_page{
+	float: right;
+	margin-top: 10px;
+}
+#pageCount{
+	display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    color: red;
+}
+.pageCountW{
+	width: 80px;
+	float: left;
+}
+.dateGroup{
+	float: right;
+	margin: 8px 0 0;
+}
+.dateGroup button{
+	width:40px;
+	height: 24px;
+	background:  url(/static/images/admin2.0/sousuo00.png) no-repeat;
+	background-size: auto 100%;
+	outline: none;
+	border: none;
+	float: right;
+	margin-left: 10px;
+}
+.recharge{
+	width: 30px;
+	height: 22px;
+	background: url(/static/images/admin2.0/bianji00.png) no-repeat;
+	background-size: auto 100%;
+	border: none;
+	float: right;
+	margin-right: 8px;
+}
+.libraryB{
+	margin-top: 2px;
+}

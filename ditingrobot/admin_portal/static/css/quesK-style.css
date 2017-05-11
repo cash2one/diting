@@ -1,0 +1,49 @@
+label {
+	display: block;
+	font-size: inherit;
+	position: relative;
+	height: 30px;
+}
+
+a {
+	text-decoration: none;
+	color: #646464;
+	outline: none;
+	cursor: pointer;
+}
+
+
+.btns {
+	width: 100%;
+	margin-top: 30px;
+}
+
+.btns a {
+	display: block;
+	float: left;
+	width: 80px;
+	height: 31px;
+	border-radius: 5px;
+	background: #4898D5;
+	line-height: 31px;
+	text-align: center;
+	margin-left: 21px;
+	margin-top: 20px;
+	color: #fff;
+	cursor: pointer;
+}
+
+a:hover {
+	opacity: .9;text-decoration:none;
+}
+
+.btns .btn3 {
+	background: #999;
+}
+
+
+
+
+
+
+

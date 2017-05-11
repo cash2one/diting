@@ -1,0 +1,106 @@
+{% extends "web/ditingpc1.0/success_layout.html" %}
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+<!--==右侧内容区==============-->
+    <div style="background: #fff;padding: 0px 20px 20px;width: 100%;margin-bottom: 20px;">
+        <h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_web2.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;接入网站</h3>
+        <div style="cursor: default;line-height: 36px;padding-left: 40px;">示例代码</div>
+        <div class="sample_code" id="web_code1" style=" padding-left: 40px;">
+
+        </div>
+    </div>
+   <div style="background: #fff;padding: 0px 20px 20px;width: 100%;margin-bottom: 20px;"">
+       <h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_VX2.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;接入微信公众平台</h3>
+
+       <div style="cursor: default;line-height: 36px; padding-left: 40px;">谛听机器人开放平台</div>
+        <div style=" padding-left: 40px;">
+            <a id="wx_go" title="请在www.ditingai.com完整域名下接入微信，否则会接入失败" style="cursor: pointer; padding: 5px; line-height: 26px; font-size: 14px; color: #fff; border: none; width: 124px; border-radius: 3px; background: #00C4C2; display: block;text-align: center;">+微信公众平台</a>
+        </div>
+
+   </div>
+
+    <div style="background: #fff;padding: 0px 20px 20px;width: 100%;display: none;">
+        <h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_VX3.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;个人微信接入</h3>
+
+        <div style="cursor: default;line-height: 36px; padding-left: 40px;">谛听机器人开放平台</div>
+        <div class="examples" id="examples04" style="cursor: pointer; padding: 5px; line-height: 26px; font-size: 14px; color: #fff; border: none; width: 124px; border-radius: 3px; background: #00C4C2; text-align: center;margin: 0 40px 20px;">快速接入</div>
+        <div class="sample_code" id="web_code04" style="display: none;padding: 20px 40px;height: 350px;border:1px solid #fafafa;">
+            <ul class="rob_txt">
+                <li>
+                    <span>微信昵称:</span>
+                    <span class="spanInput"><input type="text" placeholder="请输入您的微信昵称" name="nicheng" value="" id="nicheng" required="required" maxlength="16" style="border: none; width: 320px;  height: 30px;  margin: 7px 0; line-height: 30px;border-bottom: 1px solid #fafafa;"/></span>
+                    <input style=" width: 70px; height: 34px; background: #13CED7; border-radius: 5px; font-size: 16px;  border: none; color: #fff;" type="button" value="确认"  onclick="save_weixin()" />
+                </li>
+            </ul>
+
+
+            <div class="_input_nobg" style="width: 205px;margin: 20px 120px;">
+                <img id="img_a" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    window.onload = function () {
+        var strssl = "&lt;style&gt;a.__cl_weblink{position:fixed;bottom:10px;right:20px;display:inlin-block}&lt;/style&gt;&lt;a class='__cl_weblink' href='" + "<input id='web_url' type='text' style='width: 100%;border: none;' readonly/>" + " ' target='_blank'&gt;&lt;img style='width:60px;height:60px;' src='http://www.ditingai.com/static/images/xiaodi.jpg'/&gt;&lt;/a&gt;<br/>* 提示： 手动复制上面的代码并添加到网页中，请将代码置于&lt;/body&gt;标签之前。<br/> * 或者直接使用下面的地址： " + "<input id='web_url2' readonly type='text' style='width: 100%;border: none;'/>"
+        $('#web_code1').html(strssl);
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: "/api/get-robot-info"
+
+        }).done(function (data) {
+            var result = JSON.parse(data);
+            if (result.shortDomainName != null && result.shortDomainName != "") {
+                $("#web_url").val('http://www.ditingai.com/r/' + result.shortDomainName);
+                $("#web_url2").val('http://www.ditingai.com/r/' + result.shortDomainName);
+            } else {
+                $("#web_url").val('http://www.ditingai.com/robot-company/' + result.uniqueId);
+                $("#web_url2").val('http://www.ditingai.com/robot-company/' + result.uniqueId);
+            }
+        }).fail(function (data) {
+        });
+
+        $("#wx_go").click(function go() {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: '/wx/api/wechat/authorize'
+            }).done(function (data) {
+                window.location.href = data.message;
+            }).fail(function (data) {
+            });
+        });
+        clickDisnone('examples04', 'web_code04')
+
+    }
+    function save_weixin() {
+        var account = {}
+        account.phone = $("#nicheng").val();
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: '/mails/find_p',
+            data: JSON.stringify(account)
+        }).done(function (data) {
+            layer.msg(data.message, {time: 500, icon: 6}, function () {
+                data = JSON.parse(data)
+                phone = data.flg;
+                // alert(phone);
+                //F:\robor\ditingrobot\web_portal\web_portal\static\ima
+                $("#img_a").attr("src", "http://on7e7xp4p.bkt.clouddn.com/" + phone);
+            })
+        }).fail(function (data) {
+            // var message = JSON.parse(data.responseText).message;
+            // layer.msg(message, {icon: 5})
+        });
+    }
+</script>
+{% endblock %}

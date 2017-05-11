@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.TeleOtherMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.TeleOther">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="DATE"/>
+        <result column="forword_name" property="forword_name" jdbcType="VARCHAR"/>
+        <result column="receive_name" property="receive_name" jdbcType="VARCHAR"/>
+        <result column="message" property="message" jdbcType="VARCHAR"/>
+        <result column="flag" property="flag" jdbcType="VARCHAR"/>
+        <result column="forword_unique_id" property="forword_unique_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.TeleOther">
+        INSERT
+            INTO tele_other (created_by,
+                            created_time,
+                            forword_name,
+                            receive_name,
+                            message,
+                            flag,
+                            forword_unique_id)
+            VALUES (#{createdBy},
+                    now(),
+                    #{forword_name},
+                    #{receive_name},
+                    #{message},
+                    0,
+                    #{forword_unique_id})
+
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM
+        tele_other
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.diting.model.TeleOther">
+        UPDATE
+        tele_other
+        SET
+        flag = 1
+        WHERE id = #{id}
+    </update>
+
+    <select id="get" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+            *
+          FROM
+            tele_other
+              WHERE id = #{id}
+               LIMIT 1
+    </select>
+
+    <select id="searchForPage" parameterType="com.diting.model.options.TeleOtherOptions" resultMap="defaultResultMap">
+        SELECT *
+        FROM tele_other
+        WHERE 1=1
+        <if test="startTime!= null and startTime != ''">
+            and created_time <![CDATA[   >=  ]]> #{startTime}
+        </if>
+        <if test="endTime!= null and endTime != ''">
+            and created_time <![CDATA[   <=  ]]> #{endTime}
+        </if>
+        <if test="receive_name!= null and receive_name != ''">
+            and receive_name = #{receive_name}
+        </if>
+        order by created_time DESC
+    </select>
+
+    <select parameterType="com.diting.model.TeleOther" resultMap="defaultResultMap" id="getCount">
+        SELECT
+        *
+        FROM
+        tele_other
+        WHERE flag=0
+        <if test="receive_name!=null and receive_name!=''">
+            AND receive_name=#{receive_name}
+        </if>
+        ORDER BY created_time desc;
+    </select>
+</mapper>

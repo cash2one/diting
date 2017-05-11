@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="shortcut icon" href="/static/images/favicon.ico">
+		{% block title %}
+		<title>谛听机器人开放平台——智联网的交互系统</title>
+		{% endblock %}
+		<meta name="keywords" content="谛听机器人,语义理解,开放平台,自动应答程序,客服机器人,聊天机器人,陪伴机器人,问答机器人,招聘机器人,恋爱机器人,平行人,转角爱,AI,人工智能,彭军辉,机器人柳柳,小谛机器人">
+		<meta name="description" content="谛听机器人开放平台能让每个用户通过注册获得自己的个性化问答机器人。该机器人可以捆绑在自己微信公众号，可以部署在WEB网站上，可以通过我们提供的API 进行二次开发接入各类软件或者APP。用户可以通过我们提供的管理后台增加和编辑机器人的问答知识，建设知识库，将机器人用于客服、销售、招聘等方面，机器人会自动按照用户添加的问题和答案回答FAQ提问。我们擅于做上下文处理，对语义的理解更加精准。">
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js" ></script>
+		<script type="text/javascript" src="/static/js/lib/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="/static/js/lib/smartpaginator.js"></script><!--分页插件-->
+		<script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+		<script type="text/javascript" src="/static/js/lib/bootstrap-datepicker.js"></script> <!--时间插件-->
+		<script type="text/javascript" src="/static/js/diting-common.js{{ _suffix_ }}"></script>
+		<link rel="stylesheet" href="/static/css/lib/smartpaginator.css" />
+		<link rel="stylesheet" href="/static/css/lib/bootstrap.min.css" />
+		<link rel="stylesheet" href="/static/css/lib/fb_flat_0.3.css" /> <!--反馈样式-->
+		<link rel="stylesheet" href="/static/css/lib/datepicker.css" /> <!--时间插件样式-->
+		<link rel="stylesheet" type="text/css" href="/static/css/common-style.css{{ _suffix_ }}" />
+		<link rel="stylesheet" type="text/css" href="/static/css/success_index-style.css{{ _suffix_ }}" />
+		<script type="text/javascript" src="/static/js/lib/cropper.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/static/css/lib/cropper.min.css" />
+		<link rel="stylesheet" type="text/css" href="/static/css/lib/uploadPhoto.css{{ _suffix_ }}" />
+		<link rel="stylesheet" type="text/css" href="/static/css/robot_customized-style.css{{ _suffix_ }}" />
+
+		{% block head %}{% endblock %}
+		{% block style %}{% endblock %}
+		{% block script %}
+
+		{% endblock %}
+
+	</head>
+
+	<body style="overflow-x: hidden;">
+	<div class="tickling1"  onclick="view_tickling1()"><p title="反馈展开" style="margin-top: 10px">反馈</p></div>
+		<div class="SonlineBox" id="SonlineBox" style="bottom: 185px; right: -4px; position: fixed; width: 162px;">
+			<div class="openTrigger" style="right: 5px; display: block;" title="客服展开" onclick="openTrigger1()"></div>
+			<div class="contentBox" style="left: 0px;display: none;">
+				<div class="closeTrigger" onclick="closeTrigger1()"><img src="/static/images/closeBtnImg.gif" title="关闭"></div>
+				<div class="titleBox"><span>在线反馈</span></div>
+				<div class="listBox">
+					<div class="QQList"><span>客服一：</span>
+						<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2090388712&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2090388712:51" alt="点击这里给我发消息" title="QQ:2090388712"/></a>
+					</div>
+					<div style="padding-left:10px; padding-top:10px; color:#c30202;">客服QQ：<br/>2090388712</div>
+					<div style="padding-left:10px; padding-top:10px; color:#c30202;">咨询电话：<br/>400-900-3381</div>
+				</div>
+			</div>
+		</div>
+		<!--==header开始==============================================-->
+		{% if loginInfo.userName == None and loginInfo.userType == None%}
+			<header>
+				<div style="width: 1000px;height:100%;margin: 0 auto;position: relative;">
+					<div id="logo">
+						<a href="/home"><img src="/static/images/logo3.png" /></a><h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+					</div>
+
+					<nav id="navTop">
+						{% if claimEnable == False%}<a href="#" id="ReceivePINGX" onclick="ReceivePINGX()" style="position:absolute;top: 50%;left:45%;display: block;margin: 0 auto;font-size: 24px;color: #00c4c2;">点我！认领平行人！</a>{% else %} <a href="/register" style="position:absolute;top: 50%;left:45%;display: block;margin: 0 auto;font-size: 24px;color: #00c4c2;"> 点我！建立个平行人！</a>{% endif %}
+					</nav>
+					<div class="cleardiv"></div>
+				</div>
+			</header>
+		{% else %}
+		<header>
+			<div style="width: 1000px;height:100%;margin: 0 auto;position: relative;">
+				<div id="logo">
+					<a href="/home"><img src="/static/images/logo3.png" /></a><h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+				</div>
+
+				<nav id="navTop">
+					<div><a {% if showFlag=="home" %}class="nav1"{% else %}class=""{% endif %} href="/home">首页</a></div>
+					<div><a href="/all_questions_rank" target="_block">排行榜</a></div>
+					<div><a {% if showFlag=="channel" %}class="nav1"{% else %}class=""{% endif %} href="/channel">接入与下载</a></div>
+					<div><a {% if showFlag=="setting" %}class="nav1"{% else %}class=""{% endif %} href="/robot-setting">机器人定制</a></div>
+
+					<div><a href="/new0" class="externalApi" target="_block" >行业资讯</a></div>
+					<div>
+						<span style="font-weight: 100;font-size: 28px;color: #00C4C2;float: left">|</span>
+						{% if loginInfo.headPortrait == None%}
+						<input class="login_ctrl" type="button" />
+
+						{% else %}
+						<input class="login_ctrl" type="button" style="background: url('{{ loginInfo.headPortrait}}') no-repeat center;background-size: 25px;border-radius: 50%;height: 25px;margin-top: 55px;"/>
+						{% endif %}
+						<input class="name" id="regname" type="text" readonly="readonly" value="{{ loginInfo.userName }}"/>
+
+						<span class="allBiao1" style="width: 10px; height:10px;border-radius: 50%;background: red;position: relative;top: 75px;right: -25px;"></span>
+						<section class="btn-group">
+							<a class="btn" data-toggle="dropdown" href="#" style="height: 100%;width: 100%;border: none;outline: none;">      </a>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" >
+								<li><a class="basic_data" tabindex="-1" href="/company-info">账户设置</a></li>
+								<li><a class="pwd-change" tabindex="-1" href="/pwd-change">密码重置</a></li>
+								<li><a tabindex="-1" href="/weixin-change">微信绑定</a></li>
+								<li><a tabindex="-1" href="/questions/answers/statistics">用户管理</a></li>
+								<li><a class="station-message" tabindex="-1" href="/station-message">站内消息
+									<span class="allBiao2" style="width: 10px; height:10px;border-radius: 50%;background: red;"></span>
+								</a></li>
+								<li><a tabindex="-1"  {% if loginInfo.shortDomainName == None %} href="/robot-company/{{ loginInfo.uniqueId }}" {% else %} href="/r/{{ loginInfo.shortDomainName }}"{% endif %} >我的机器人</a></li>
+								<li><a tabindex="-1" href="/logout">注销</a></li>
+							</ul>
+						</section>
+
+					</div>
+
+				</nav>
+				<input class="name" id="balanceRobotVal" type="text" readonly="readonly" value="{{ loginInfo.balance }}/¥{{ loginInfo.robotVal }}"/>
+				<a id="myROBOT" class="nav1"  {% if loginInfo.shortDomainName == None %} href="/robot-company/{{ loginInfo.uniqueId }}" {% else %} href="/r/{{ loginInfo.shortDomainName }}"{% endif %} >我的机器人</a>
+				<div class="cleardiv"></div>
+			</div>
+		</header>
+		{% endif %}
+		
+		<!--==section==================================================-->
+	<div id="tanchuang"></div>
+		<section id="section" style="position: relative">
+			{% block main %}{% endblock %}
+
+
+			<div id="web_flow">
+				<ul class="web_flow">
+					<a class="fb-close"  onclick="web_flow_close()" style="margin: -10px -7px">×</a>
+					<li>*网站体验流程*</li>
+					<li>1.注册网站账号</li>
+					<li>2.填写企业信息</li>
+					<li>3.填写机器人信息</li>
+					<li>4.增加机器人知识库</li>
+					<li>5.我的机器人</li>
+					<br/>
+					<li class="reg_prompt">
+						<a href="/api/robot_operation_guide/download"> <div title="谛听机器人操作指南"><img  src="/static/images/PDF01.png" /> </div></a>
+						<a href="/api/knowledge_base_construction/download"><div title="问答知识库建设说明" style="margin-left: 15px;"><img  src="/static/images/PDF02.png" /> </div></a>
+					</li>
+
+				</ul>
+			</div>
+		</section>
+		{% block home %}{% endblock %}
+		<!--==footer部分==============================================-->
+		<footer id="footer">
+			<div>
+				<div>
+					<ul>
+						<li><a href="/agreement" target="_blank">用户协议</a></li>
+						<li><a href="/cooperative_partner" target="_blank">合作伙伴</a></li>
+						<li><a href="/about" target="_blank">关于我们</a></li>
+						<li><a href="/contact_us" target="_blank">联系我们</a></li>
+						<li class="wxgzh"><a style="position: relative;">微信订阅号</a>
+							<!--底部二维码-->
+							<div class="WXerweima">
+								<img src="/static/images/diting1.0/pc/dingyuehaoEVM4-19.jpg" />
+							</div>
+						</li>
+						<li class="wxgzh" style="border-left: 1px solid #999;">
+							<a style="position: relative;">客服微信号
+								<div class="WXerweima">
+									<img src="/static/images/diting1.0/pc/kefuEVM4-19.jpg" />
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<p> Copyright ©2016 谛听机器人 All Rights Reserved 京ICP备16026036号-1<br/>增值电信业务经营许可证：京B2-20170408</p>
+
+			</div>
+		</footer>
+
+
+		<!--遮罩层-->
+
+		<div id="fb_baidu_wizard" class="fb-baidu-wizard" style="position:fixed;display: none;"></div>
+
+		<!--反馈窗口-->
+
+		<div id="fb_baidu_right_dialog" class="fb-feedback-right-dialog" style="position: fixed; z-index: 999999; right: 0px; bottom: 0px;display: none">
+			<div class="fb-modal " data-html2canvas-ignore="true">
+				<div class="fb-header" id="fb_dialog_header" unselectable="on" onselectstart="return false;" style="left: 564px; top: 148px;cursor: initial;">
+					<a class="fb-close" id="fb_close_x" onclick="fb_close_x()">×</a>
+					<h3 class="fb-header-tips" style="cursor: initial;">意见反馈</h3></div>
+				<div class="fb-body" id="fb_qa_feedback_body">
+					<div class="fb-action">
+						<div class="fb-tips-block"><span class="fb-content-tips">您需要什么样的帮助？请告诉我们</span><span class="fb-danger-tips"> (*必填)</span></div>
+						<div class="fb-textarea fb-content-block"><textarea maxlength="400" class="fb-des-content" name="issuedesc" id="fb_des_content" data-exclude="true" style="color: rgb(154, 154, 154);" placeholder="欢迎提出您在使用过程中遇到的问题或宝贵建议（400字以内），感谢您对谛听的支持。"></textarea></div>
+						<div class="fb-block fb-cut-block">
+							<div>
+								<span id="fb_tips_span">（如果您的问题比较复杂，需要截图等功能进行表述，您可以加一下客服QQ：2090388712）</span></div>
+						</div>
+						<div class="fb-block fb-email-block">
+							<div class="fb-phone-txt">联系方式（选填）</div>
+							<div><input type="text" class="fb-email" maxlength="32" placeholder="留下您的联系方式，便于我们及时回复您。" id="feedback_email"></div>
+						</div>
+					</div>
+					<div class="fb-footer">
+						<div class="fb-btn fb-btn-primary" id="fb_right_canvas_save" onclick="fd_save()" >提交反馈</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+	</body>
+	<script type="text/javascript">
+		//悬浮窗定位
+		$(window).scroll(function() {
+			var yheight=getScrollTop(); //滚动条距顶端的距离
+			var top=parseInt(yheight)+110;
+			$('.web_flow').attr('style','top:'+top+'px;');
+		})
+		//判断悬浮窗是否显示
+		web_flow_display();
+//		站内信标记
+		platformMail()
+
+
+
+	</script>
+
+</html>

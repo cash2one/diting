@@ -1,0 +1,89 @@
+{% extends "web/ditingpc1.0/success_layout.html" %}
+{% block head %}
+		<script type="text/javascript" src="/static/js/register.js{{ _suffix_ }}" ></script>
+<style>
+	.rob_txt input{
+		border: none;
+		width: 690px;
+		height: 40px;
+		margin: 6px 0;
+		line-height: 40px;
+		border-bottom: 1px solid #fafafa;float: left;
+	}
+	.rob_txt span{float: left;display: block;height: 46px;line-height: 46px;margin:0 30px;}
+	.btn_submit{
+		width: 95px;
+		height: 40px;
+		background: #01b3d9;
+		border-radius: 5px;
+		color: #fff;
+		border: 0;
+		margin: 20px 400px;
+	}
+
+	.rob_txt ._send {
+		width: 123px;
+		height: 35px;
+		color: #f17b87;
+		border:none;
+		position: absolute;
+		right: -17px;
+		top: -1px;
+		background: #fff;
+	}
+	.rob_txt ._send_disable {
+		width: 127px;
+		height: 46px;
+		color: #ccc;
+		position: absolute;
+		right: -17px;
+		top: -7px;
+		border: none;
+		background: #fff;
+
+	}
+
+</style>
+{% endblock %}
+
+	{% block main %}
+
+	<div class="mains" >
+
+			<div style="padding: 0 20px;">
+				<h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_pwd2.png" style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;密码重置</h3>
+				<input name="USERNAME" value="{{ loginInfo.userName }}" type="hidden">
+					<ul class="rob_txt" style="padding: 35px 0">
+						<li>
+							<span>注册手机:</span>
+							<span class="readonly" style="position: relative;">
+								<input type="text" placeholder="手机号码" name="USERNAME" id="phone" value="{{ loginInfo.userName }}" readonly="readonly" maxlength="11" onblur="oPhonetest()">
+								<input type="button" class="_send" value="发送验证码" id="btnCode"   onclick="onclickTimeOut();"/>
+							</span><div style="clear: both"></div>
+						</li>
+						<li>
+							<span>短信验证:</span>
+							<span class="spanInput" >
+								<input type="text" class="_input2" placeholder="短信验证码" value="" name="telcode" id="telcode" required="required" maxlength="20" />
+
+							</span><div style="clear: both"></div>
+						</li>
+						<li>
+							<span>&nbsp;&nbsp;&nbsp;新密码:</span>
+							<span class="spanInput"><input type="password" placeholder="6~16位密码,区分大小写" name="PASSWORD" value="" id="pwd" required="required" maxlength="16" /></span>
+							<div style="clear: both"></div>
+						</li>
+						<li>
+							<span>确认密码:</span>
+							<span class="spanInput"><input type="password" placeholder="确认密码" name="requrePassword" value="" id="pwd2" required="required" maxlength="16"></span>
+							<div style="clear: both"></div>
+						</li>
+					</ul>
+			</div>
+
+	</div>
+	<div class="_input_nobg" style="margin-top: 20px;">
+		<input id="btn_reg0" class="btn_submit" type="button" value="确认"  onclick="save03()" />
+	</div>
+	{% endblock %}
+

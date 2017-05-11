@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+
+    <mongo:mongo host="${mongo.url}" port="${mongo.port}">
+        <mongo:options connections-per-host="10"
+                       threads-allowed-to-block-for-connection-multiplier="5"
+                       connect-timeout="10000"
+                       max-wait-time="12000"
+                       auto-connect-retry="true"
+                       socket-keep-alive="true"
+                       socket-timeout="0"
+                       slave-ok="true"
+                       max-auto-connect-retry-time="15"/>
+    </mongo:mongo>
+    <mongo:db-factory dbname="diting" mongo-ref="mongo" username="diting" password="diting" />
+    <mongo:mapping-converter base-package="com.diting.model.mongo"/>
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+    </bean>
+
+    <bean id="baseMongoMapper" class="com.diting.dao.mongo.BaseMongoMapper"/>
+
+    <bean id="chatLogCountMongoMapper" class="com.diting.dao.ChatLogCountMongoMapper" parent="baseMongoMapper">
+        <property name="mongoTemplate">
+            <ref bean="mongoTemplate"/>
+        </property>
+    </bean>
+
+</beans>

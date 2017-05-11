@@ -1,0 +1,271 @@
+/*资讯总页样式*/
+.container{
+	display:block;
+	width:1000px;
+	margin: 0 auto;
+}
+
+/*n条新闻*/
+.unopacity:hover img {
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity:0.5;
+	opacity:0.5;
+}
+
+.news-nav {
+	padding:0;
+	list-style:none;
+	text-align:center;
+}
+.news-nav li {
+	display:inline-block;
+}
+.news-nav a {
+	display:block;
+	padding:5px 10px;
+	border:solid 2px #fff;
+	font-size:16px;
+}
+.news-nav a:hover, .news-nav .active a {
+	border:solid 2px #00a0ea;
+	color:#00a0ea;
+}
+.news {
+	padding:10px;
+	list-style:none;
+	width: 1000px;
+	margin: auto;
+}
+.news li {
+	display:block;
+	clear:both;
+	height:75px;
+	margin-bottom:10px;
+	overflow:hidden;
+	color: #888;
+}
+.news li img {
+	float:left;
+	width:100px;
+	margin-right:10px;
+}
+ @media (min-width:760px) {
+.news {
+	padding:0;
+}
+.news li {
+	clear:none;
+	float:left;
+	margin:10px;
+	width:230px;
+	height:380px;
+}
+.news li img {
+	width:230px;
+	margin:0 0 10px 0;
+}
+.news li strong {
+	margin:10px 0;
+	font-size:16px;
+	display:block;
+}
+.news-nav li {
+	margin:10px;
+}
+}
+#pages {
+    padding: 0;
+    text-align: center;
+    clear: both;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    height: 30px;
+}
+#pages span {
+    display: inline-block;
+    padding: 0px 8px;
+    height: 24px;
+    font-size: 12px;
+    line-height: 24px;
+    background: #fff;
+    text-align: center;
+    color: #333;
+    margin-right: 5px;
+    border: 1px solid #ddd;
+}
+/*新闻页面样式*/
+.new_container{
+	width:1000px;margin: 0 auto;
+}
+.new_logo{
+	float: left;margin-top: 10px;
+}
+.topbanner{
+	float: left;margin: 0 86px;
+}
+.telCompany{
+	float: left;margin-top: 30px;
+}
+.news_bg{
+	background: #3aa1ec;width: 100%;
+}
+.news_bg1{
+	width: 800px;margin: 0 auto;
+}
+.news_bg1 .img{
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+.newArticle{
+	position:relative;
+	padding: 20px 0;
+	font-size: 16px;
+	color: #666;
+	background: #f2f2f2;
+	width: 100%;
+}
+.newArticle1{
+	width: 1000px;
+	margin: 0 auto;
+}
+.newArticleLeft{
+	float: left;
+	width: 700px;
+	margin-right: 15px;
+	background: #fff;
+}
+.article{
+	padding: 20px;
+}
+.article h1{
+	font-size: 26px;
+	color: #333;
+	font-weight: bold;
+	margin-top: 20px;
+}
+.article .note{
+	padding: 10px 0;
+	margin: 10px 0;
+	border-bottom: solid 1px #ddd;
+}
+.article .note span{
+	display: inline-block;
+	margin-right: 20px;
+}
+.link-main{
+	color: #00a0ea;
+}
+.link-main:hover{
+	color: red;
+}
+.article-content{
+	padding: 10px;
+}
+.article-content .span{
+	color: rgb(68, 68, 68);
+	font-family: 宋体, Arial, Tahoma;
+	font-size: 14px;
+	line-height: 25px;
+}
+.source{
+	margin: 20px 0;
+	border-bottom: solid 1px #ddd;
+	padding-bottom: 20px;
+
+}
+a{
+	color: #333;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #00a0ea;
+}
+/*内容区右侧*/
+.newArticleRight{
+	float: left;
+	width: 265px;
+	padding: 10px;
+	background: #fff;
+}
+.detail-fixed {
+	position:fixed;
+	margin-left:715px;
+	top:0;bottom:150px;
+}
+
+.newArticleRight ul{
+	margin-left: -1px;
+}
+.newArticleRight li{
+	margin-top: 15px;
+}
+
+.sharebtn{
+	border-top: solid 10px #f2f2f2;
+	padding: 30px;
+}
+
+/*==footer=====================================================*/
+footer{
+    float: left;
+    width: 100%;
+    height: 100px;  
+    text-align: center;
+    clear: both;
+    margin: 30px auto 0px;  
+    color: rgb(153, 153, 153);
+    border-top: 1px solid rgb(83, 202, 195);
+}
+footer div {
+    margin: 10px auto;
+    width: 1000px;
+}
+footer div div {
+    width: 100%;
+    height: 26px;
+    line-height: 26px;
+    
+}
+footer li{	
+    position: relative;
+    display: inline-block;
+    padding: 0 10px;
+    border-right: 1px solid #999;
+    cursor:pointer;
+}
+footer .wxgzh{
+	border: 0;color: #000;position: relative;
+}
+.WXerweima{
+	height: 230px;
+	width: 230px;
+	display:none;
+	position: absolute;
+	top: -240px;
+    right: -70px;
+}
+.wxgzh:hover .WXerweima{display: block;}
+.WXerweima{
+	height: 230px;
+	width: 230px;
+	display:none;
+	position: absolute;
+	top: -240px;
+    right: -70px;
+}
+.WXerweima img{
+	height: 100%;width: 100%;z-index: 100;
+}
+footer li a {
+    display: block;
+    padding: 0 10px;
+    height: 12px;
+    line-height: 12px;
+    color: #000;
+}
+footer a:hover{
+	color: #31B0D5;
+}

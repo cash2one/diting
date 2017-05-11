@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.WordBaseMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.WordBase">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="word" property="word" jdbcType="VARCHAR"/>
+        <result column="word_character" property="word_character" jdbcType="INTEGER"/>
+        <result column="word_level" property="word_level" jdbcType="INTEGER"/>
+        <result column="comment" property="comment" jdbcType="VARCHAR"/>
+        <result column="updated_time" property="updated_time" jdbcType="VARCHAR"/>
+        <result column="create_time" property="create_time" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="scene" property="scene" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.WordBase">
+        INSERT INTO wb_wordbase(
+        word,
+        word_character,
+        word_level,
+        comment,
+        updated_time,
+        create_time,
+        state,
+        username,
+        scene
+        )
+        VALUES (
+        #{word},
+        #{word_character},
+        #{word_level},
+        #{comment},
+        #{updated_time},
+        #{create_time},
+        #{state},
+        #{username},
+        #{scene}
+        )
+    </insert>
+    <select id="searchAll" resultMap="defaultResultMap">
+        SELECT * FROM wb_wordbase WHERE 1=1
+    </select>
+
+    <select id="searchForPage" parameterType="com.diting.model.options.WordBaseOptions" resultMap="defaultResultMap">
+        SELECT * FROM wb_wordbase WHERE 1=1
+        <if test="keyword!=null and keyword!=''">
+            <if test="type==1">
+                AND word LIKE CONCAT(CONCAT('%',#{keyword}),'%')
+            </if>
+            <if test="type==2">
+                AND word =#{keyword}
+            </if>
+        </if>
+    </select>
+
+    <update id="update" parameterType="com.diting.model.WordBase" >
+        UPDATE wb_wordbase SET username=#{username} , word_character=#{word_character},word=#{word} WHERE id=#{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM wb_wordbase WHERE id=#{id}
+    </delete>
+
+    <select id="get" resultType="com.diting.model.WordBase">
+        SELECT * FROM wb_wordbase WHERE id=#{id}
+    </select>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            DELETE FROM wb_wordbase WHERE id=${item.id}
+        </foreach>
+    </delete>
+</mapper>

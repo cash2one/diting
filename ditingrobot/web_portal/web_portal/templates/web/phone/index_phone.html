@@ -1,0 +1,130 @@
+{% extends "web/phone/layout_phone.html" %}
+{% block title %}
+<title>谛听客服机器人-首页</title>
+{% endblock %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/static/css/phone/antushengIndexStyle.css{{ _suffix_ }}" />
+<script type="text/javascript" src="/static/js/talk.js{{ _suffix_ }}"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        talks()
+
+    }
+</script>
+{% endblock %}
+{% block mainnofooter %}
+<div class="index_box" >
+    <div>
+        <img src="/static/images/antusheng/phone/antushengLogo2.png" style="width: 2rem;margin: 0.1rem 0.3rem;float: left"/>	<h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+<a href="/m/login" class="phoneBtnA" style="margin: 0 0.3rem;width: 1.4rem;float: right">登录</a><a href="javascript:void(0)" style="font-size: 0.24rem;float: right;line-height: 0.5rem;color: #00a9e1;" onclick=" layer.msg('代理商申请<br/>联系客服：400-900-3381')">代理商申请</a><div style="clear: both"></div>
+    </div>
+    <div style="width: 100%;height:4.2rem;background: url(/static/images/phone/phone_index/index_phoneBj1.png) no-repeat;background-size: 100% 100%;opacity: 0.9;position: relative">
+        <p class="phoneP1">“谛听客服机器人”每个企业都因你改变</p>
+        <p class="phoneP2">完美融合机器人与人工客服，所有渠道整合为一，让你的客服触手可及</p>
+            <a href="/m/register" class="phoneBtnA">申请试用</a>
+        <ul class="phoneUl1" style="position: absolute;bottom: 0;">
+            <li><a href="#icon001"><img src="/static/images/phone/phone_index/index_phoneIconJS.png" /><p>介绍</p></a></li>
+            <li><a href="#icon002"><img src="/static/images/phone/phone_index/index_phoneIconYS.png" /><p>优势</p></a></li>
+            <li><a href="#icon003"><img src="/static/images/phone/phone_index/index_phoneIconTV.png" /><p>演示</p></a></li>
+            <li><a href="/m/talk-rank"><img src="/static/images/phone/phone_index/index_phoneIconPH.png" /><p>排行榜</p></a></li><div style="clear: both"></div>
+        </ul>
+    </div>
+    <div style="border: 1px solid #00a9e1;border-radius:0.5rem;width: 90%;margin: 0.8rem auto 0.5rem;">
+        <h3  id="icon001">服务<br/>Service</h3>
+        <p style="width: 80%; margin: 0 auto 0.4rem; line-height: 0.4rem; font-size: 0.2rem;color: #666;">谛听客服机器人是谛听平台下的智能客服系统，<br/>隶属于北京谛听机器人科技有限公司。<br/>提供在线客服，全渠道接入等产品与服务。<br/>帮助企业提高客服工作效率，提高客户满意度，<br/>提高客户转化率。</p>
+    </div>
+    <div style="width: 90%;height:6rem;background: url(/static/images/phone/phone_index/index_phoneBj2.png) no-repeat;background-size: 100%;margin: auto;">
+        <ul class="phoneUl2" style="">
+            <li><img src="/static/images/phone/phone_index/index_phoneBook.png" /><p>高端可定制知识库</p></li>
+            <li><img src="/static/images/phone/phone_index/index_phoneUsb.png" /><p>免费云接口</p></li>
+            <li><img src="/static/images/phone/phone_index/index_phoneBao.png" /><p>免费试用</p></li><div style="clear: both"></div>
+
+        </ul>
+    </div>
+    <div style="width: 6rem;margin:0.2rem auto 0.4rem;">
+        <h3  id="icon002" style="width: 5rem;">我们的优势<br/>Our advantages</h3>
+        <ul class="phoneUl3">
+            <li><img src="/static/images/phone/phone_index/index_phoneTW1.png" /><p style="color: #39b2e2">图文结合</p></li>
+            <li><img src="/static/images/phone/phone_index/index_phoneRBT1.png" /><p>强大的泛化能力</p></li>
+            <li><img src="/static/images/phone/phone_index/index_phoneJR1.png" /><p>全渠道接入</p></li>
+            <li><img src="/static/images/phone/phone_index/index_phoneCZ1.png" /><p>操作简单</p></li>
+            <li><img src="/static/images/phone/phone_index/index_phoneHX1.png" /><p>独有核心算法</p></li>
+            <li><img src="/static/images/phone/phone_index/index_phoneGX1.png" /><p>高效响应</p></li>
+            <li><img src="/static/images/phone/phone_index/index_phoneHL1.png" /><p>海量知识与应用</p></li>
+            <li><img src="/static/images/phone/phone_index/index_phoneYC1.png" /><p>数据永久留存</p></li>
+            <li><p style="line-height: 2rem; width: 1.6rem;">敬请期待</p></li><div style="clear: both"></div>
+        </ul>
+    </div>
+
+    <div style="width: 6rem;margin:1rem auto;">
+        <h3 id="icon003" style=" width: inherit;">谛听客服机器人演示<br/><i style="color: #666">Diting customer service robot demo</i></h3>
+        <div style="display: none;">
+            <input type="text" id="name" name="name" value="谛听客服">
+            <input type="text" id="Cname" name="name" value="谛听客服">
+            <input type="text" id="idd0" name="id" value="{{ robot.id }}">
+            <input type="text" id="invitationCode_no" name="invitationCode" value="">
+            <input type="text" id="enable" name="enable"  value="0">
+            <input type="text" id="unique_id" name="unique_id" value="5b916465c8d945e2ae4de4477c910aca">
+            <input type="text" id="uuid" name="uuid"  value="">
+            <input type="text" id="welcomes" name="welcomes" value="{{ robot.welcomes }}">
+            <input type="text" id="profile" name="profile"  value="{{ robot.profile or '' }}">
+            <input type="text" id="answer1" name="answer1" value="{{ robot.invalidAnswer1 }}">
+            <input type="text" id="answer2" name="answer2" value="{{ robot.invalidAnswer2 }}">
+            <input type="text" id="answer3" name="answer3" value="{{ robot.invalidAnswer3 }}">
+            <input type="text" id="answer4" name="answer4" value="{{ robot.invalidAnswer4 }}">
+            <input type="text" id="answer5" name="answer5" value="{{ robot.invalidAnswer5 }}">
+            <input type="text" id="headPortrait" name="headPortrait" value="http://diting-picture.pingxingren.cn/bLWcE6o0106v3FXcWgW7qL.png?imageMogr2/crop/!101x101a0a0/thumbnail/200x200">
+        </div>
+        <ul>
+            <li style="background:url(/static/images/phone/phone_index/index_phoneTalk.png) no-repeat;background-size: 100%; height: 6.45rem;">
+                <div id="container">
+                    <div class="header" id="roboName0" style="text-align: center;">
+                    </div>
+                    <ul class="content" id="content">
+
+                    </ul>
+                    <div style="width: 100%;color: #ccc;text-align: center;font-size: 0.14rem;">
+                        <p id="robotProfileP"></p>
+                    </div>
+                    <div class="footer">
+                        <div >
+                            <div id="user_face_icon" >
+                                <img id="thead" src="/static/images/phone/manHeader1.png" alt="聊天头像">
+                            </div>
+                            <input id="text" type="text" placeholder="有事可以提问题，没事还能唠唠嗑..."/>
+                            <span id="btn">发送</span>
+                        </div>
+                    </div>
+                </div>
+            </li><div style="clear: both"></div>
+
+        </ul>
+    </div>
+
+    <div style="border: 1px solid #00a9e1;border-radius:0.1rem;width: 6rem;margin: 0.3rem auto 0.8rem;">
+        <h3 style="color: #00a9e1;">联系方式</h3>
+        <ul class="phoneUl4">
+            <li style="width: 65%;">
+                <p>地址：北京市朝阳区顺白路12号比目鱼创业园A座301</p>
+                <p>联系方式：400-900-3381</p>
+                <p>公司邮箱：pengjunhui@dtrobo.com</p>
+                <p>更多服务请访问：<a href="http://www.ditingai.com/" style="color: #00C4C2;">谛听机器人开放平台</a></p>
+                <p>欢迎加入微信问答机器人技术，qq群号码：91435400</p>
+            </li>
+            <li style="width: 25%"><img src="/static/images/phone/phone_index/index_phoneEVM.png" /></li><div style="clear: both"></div>
+
+        </ul>
+    </div>
+
+    <div style="width: 100%;height:2.3rem;background: url(/static/images/phone/phone_index/index_phoneFooter.png) no-repeat;background-size: 6.4rem;">
+        <ul>
+            <li class="phoneP1">还没有使用谛听客服机器人？</li>
+            <li><a href="/m/register" class="phoneBtnA">点击使用</a></li>
+
+
+        </ul>
+    </div>
+
+</div>
+
+{% endblock %}

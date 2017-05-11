@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.BaseInfoMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.BaseInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="company_url" property="companyUrl" jdbcType="VARCHAR"/>
+        <result column="company_address" property="companyAddress" jdbcType="VARCHAR"/>
+        <result column="bus_line" property="busLine" jdbcType="VARCHAR"/>
+        <result column="company_tel" property="companyTel" jdbcType="VARCHAR"/>
+        <result column="company_business" property="companyBusiness" jdbcType="VARCHAR"/>
+        <result column="company_wechat" property="companyWeChat" jdbcType="VARCHAR"/>
+        <result column="company_size" property="companySize" jdbcType="VARCHAR"/>
+        <result column="company_profile" property="companyProfile" jdbcType="VARCHAR"/>
+        <result column="product_introduction" property="productIntroduction" jdbcType="VARCHAR"/>
+        <result column="technology_advantage" property="technologyAdvantage" jdbcType="VARCHAR"/>
+        <result column="industry_where" property="industryWhere" jdbcType="VARCHAR"/>
+        <result column="development_prospect" property="developmentProspect" jdbcType="VARCHAR"/>
+        <result column="corporate_culture" property="corporateCulture" jdbcType="VARCHAR"/>
+        <result column="work_shift" property="workShift" jdbcType="VARCHAR"/>
+        <result column="company_leadership" property="companyLeadership" jdbcType="VARCHAR"/>
+        <result column="account_id" property="accountId" jdbcType="INTEGER"/>
+        <result column="company_id" property="companyId" jdbcType="INTEGER"/>
+        <result column="financing_situation" property="financingSituation" jdbcType="VARCHAR"/>
+        <result column="hot_positions" property="hotPositions" jdbcType="VARCHAR"/>
+        <collection property="recruitList" ofType="com.diting.model.Recruit" column="company_id">
+            <id column="r_id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="details" property="details" />
+            <result column="salary" property="salary" />
+            <result column="skills_required" property="skillsRequired" />
+            <result column="work_experience" property="workExperience" />
+            <result column="education_requirements" property="educationRequirements"/>
+        </collection>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.BaseInfo">
+        INSERT
+        INTO base_info (owner,
+        owner_type,
+        deleted,
+        created_by,
+        created_time,
+        update_by,
+        update_time,
+        company_name,
+        company_url,
+        company_address,
+        bus_line,
+        company_tel,
+        company_business,
+        company_wechat,
+        company_size,
+        company_profile,
+        product_introduction,
+        technology_advantage,
+        industry_where,
+        development_prospect,
+        corporate_culture,
+        work_shift,
+        company_leadership,
+        account_id,
+        company_id,
+        financing_situation,
+        hot_positions
+        )
+        VALUES (#{owner},
+        #{ownerType},
+        #{deleted},
+        #{createdBy},
+        #{createdTime},
+        #{updatedBy},
+        #{updatedTime},
+        #{companyName},
+        #{companyUrl},
+        #{companyAddress},
+        #{busLine},
+        #{companyTel},
+        #{companyBusiness},
+        #{companyWeChat},
+        #{companySize},
+        #{companyProfile},
+        #{productIntroduction},
+        #{technologyAdvantage},
+        #{industryWhere},
+        #{developmentProspect},
+        #{corporateCulture},
+        #{workShift},
+        #{companyLeadership},
+        #{accountId},
+        #{companyId},
+        #{financingSituation},
+        #{hotPositions})
+    </insert>
+
+    <select id="get" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+        *
+        FROM
+        base_info b LEFT JOIN recruit r
+        ON  b.company_id=r.company_id
+        WHERE
+        b.company_id = #{companyId}
+    </select>
+
+    <update id="update" parameterType="com.diting.model.BaseInfo">
+        UPDATE
+        base_info
+        SET
+        company_name=#{companyName},
+        company_url=#{companyUrl},
+        company_address=#{companyAddress},
+        bus_line=#{busLine},
+        company_tel= #{companyTel},
+        company_business=#{companyBusiness},
+        company_wechat=#{companyWeChat},
+        company_size=#{companySize},
+        company_profile=#{companyProfile},
+        product_introduction=#{productIntroduction},
+        technology_advantage=#{technologyAdvantage},
+        industry_where=#{industryWhere},
+        development_prospect=#{developmentProspect},
+        corporate_culture=#{corporateCulture},
+        work_shift=#{workShift},
+        company_leadership= #{companyLeadership},
+        financing_situation= #{financingSituation},
+        hot_positions= #{hotPositions}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="com.diting.model.BaseInfo">
+        DELETE FROM
+        base_info
+        WHERE id = #{id}
+    </delete>
+
+
+</mapper>

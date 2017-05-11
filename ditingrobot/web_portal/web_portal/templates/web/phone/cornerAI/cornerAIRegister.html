@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    <title>黑图-注册</title>
+    <meta name="keywords" content="机器人,恋爱机器人,谛听机器人,自动应答程序,拜年机器人,客服机器人,问答机器人,招聘机器人">
+    <meta name="description" content="谛听机器人能通过注册获得自己的问答机器人。该机器人可以捆绑在自己公众号，可以部署在自己网站上，可以通过我们提供的API 进行二次开发，接入各类软件。用户可以通过我们提供的管理后台增加和编辑机器人的问答知识，将机器人用于客服、销售、招聘，机器人会自动按照用户添加的问题和答案回答提问。我们善于做上下文处理，对语义的理解更加精准。">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js" ></script>
+    <script type="text/javascript" src="/static/js/diting-common.js{{ _suffix_ }}"></script>
+    <script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+    <script type="text/javascript" src="/static/js/loveRegister.js{{ _suffix_ }}"></script>
+	<style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+		label{
+			font-size: 16px;
+		}
+        input{
+            outline: none;
+        }
+        input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; }
+	</style>
+</head>
+<body id="regsBody">
+<div style="color: #999999;height: 44px;background: #333333;position: fixed;top: 0;left: 0;width: 100%">
+        <button id="back" style="border: none;height: 100%;width: 30px;position: absolute;left:0; background: url(/static/images/phone/loveback.png) no-repeat 5px 50%;background-size: 100%"></button>
+        <span style="display: block;height: 100%;line-height: 44px;font-size: 18px;text-align: center;">注册账户</span>
+    </div>
+    <div id="newYearContainer" style="background-size:6.4rem;height: 11.1rem;margin-top: 60px">
+     	<p id="image-wrap" style="width: 80px;height: 80px;margin: 0 auto; background: url(/static/images/phone/zhucetx.png) no-repeat;background-size: 100% 100%">
+            <input type="file" id="inputImage" name="file" accept="image/jpg,image/jpeg,image/png" multiple style="opacity: 0;display: inline-block;border: none; width: 100%;height: 50px;" value="+"/>
+        </p>
+     	<div style="height: 70px;text-align: center;padding: 0;">
+     		<input type="radio" name="sex" id="man" value="" checked="checked"  /><label for="man">男</label>
+     		<input type="radio" name="sex" id="woman" value="" /><label for="woman">女</label>
+     	</div>
+        <div style="height:34px;width:70%;padding-left: 10%; margin: 20px auto; border-bottom: 1px solid #f3f2f2;background: url(/static/images/phone/suoyouzhe00.png) no-repeat -5px 0;background-size: 12%">
+        	<input id="companyName" name="GONGSI" placeholder="所有者(2~16位中文名)" maxlength="16" minlength="2" value="" type="text" runat= "server"  onblur="companyNameYear()" style="height: 60%;outline: none; border: none; float: left;font-size: 14px;width: 80%;margin-top: 2%;" />
+        </div>
+        <div style="height:34px;width:70%;padding-left: 10%; margin: 20px auto;  border-bottom: 1px solid #f3f2f2;background: url(/static/images/phone/jiqiren00.png) no-repeat -5px 0;background-size: 11%">
+        	<input id="name" name="ROBOT_NAME" value="" placeholder="机器人名(5位中文或12位英文)" maxlength="12" type="text"  onblur="newYearRobotName()" style="height: 60%;outline: none; border: none; float: left;font-size: 14px;width: 88%;margin-top: 2%;" />
+        </div>
+
+        <div style="height: 34px;width: 70%;padding-left:10%; margin: 20px auto;border-bottom: 1px solid #f3f2f2;background: url(/static/images/phone/shouji00.png)no-repeat -5px 0;background-size: 11%">
+            <input  type="text" placeholder="手机号码" name="USERNAME" id="phone" value="" required="required" maxlength="11" onblur="oPhonetestY()" style="height: 60%;width: 50%; display: inline-block; border: none; float: left;font-size: 14px;margin-top: 2%; " />
+            <span id="btnCode" class="" onclick="onclickTimeOutR()" style="float: right;display: inline-block; color: #4ab7fc; font-size: 12px;  padding: 1px;margin:16px 5px;" >发送验证码</span>
+        </div>
+        <div style="height:34px;width:70%;padding-left: 10%; margin: 20px auto; border-bottom: 1px solid #f3f2f2;background: url(/static/images/phone/yanzhengma00.png) no-repeat -5px 0;background-size: 11%">
+        	<input type="text" class="_input3" placeholder="短信验证码" value="" name="telcode" id="telcode" required="required" maxlength="20" style="height:60%;width:80%; border: none; font-size: 14px;float: left;margin-top: 2%;" />
+        </div>
+        <div style="height:34px;width:70%;padding-left: 10%; margin: 20px auto; border-bottom: 1px solid #f3f2f2;background: url(/static/images/phone/mima00.png) no-repeat -5px 2px;background-size: 10%;">
+        	<input type="text" name="" id="password" value="" placeholder="填写密码" style="height:60%;width:80%; border: none;font-size: 14px;float: left;margin-top: 2%;" />
+        </div>
+
+        <p style="text-align: center; color: #4ab7fc; font-size: 14px;margin: 20px 0 20px 0;">注册即同意用户协议</p>
+        <input  class="newYearRegBtn" type="button" value="注册" onclick="uploadImage('inputImage')" style="height: 50px;width: 80%;display: block; background: #4ab7fc; border: none; color: white;line-height: 50px;font-size:18px;margin: 0 auto;border-radius: 5px;"/>
+</div>
+
+</body>
+<script src="/static/js/lib/ajaxfileupload.js" type="text/javascript"></script>
+<script type="text/javascript">
+    window.onload=function () {
+        document.documentElement.style.fontSize=document.documentElement.clientWidth/6.4+"px";
+        addEvent(window,"resize",fn);
+        function fn(){
+            document.documentElement.style.fontSize=document.documentElement.clientWidth/6.4+"px";
+        }
+    };
+    $("#back").click(function(){
+            window.history.back();
+        })
+    var sex0 = 1;
+    $("#man").click(function(){
+        sex0 = 1;
+        console.log(sex0)
+    })
+    $("#woman").click(function(){
+       sex0 = 0;
+       console.log(sex0)
+    })
+
+    $(document).ready(function(){
+			$.imageFileVisible({wrapSelector: "#image-wrap",
+				fileSelector: "#inputImage",
+				width: 100,
+				height: 50
+			});
+		});
+    function uploadImage(element) {
+            $.ajaxFileUpload({
+                type: 'post',
+                url: '/upload/' + element, //你处理上传文件的服务端
+                secureuri: false, //是否需要安全协议，一般设置为false
+                fileElementId: element,//与页面处理代码中file相对应的ID值
+                async: false,
+                dataType: 'json', //返回数据类型:text，xml，json，html,scritp,jsonp五种
+                success: function (data) {
+                    //console.log(data)
+                    saveNewYear(data.url)
+                },
+                error: function (data, status, e)//服务器响应失败处理函数
+                {
+                    console.error(e);
+                }
+
+            })
+        }
+</script>
+
+<script type="text/javascript">
+	(function($) {
+		$.imageFileVisible = function(options) {
+			var defaults = {
+			wrapSelector: null,
+  			fileSelector:  null ,
+  			width : '100%',
+  			height: 'auto',
+  			errorMessage: "不是图片"
+ 		};
+ 		var opts = $.extend(defaults, options);
+ 		$(opts.fileSelector).on("change",function(){
+		var file = this.files[0];
+		var imageType = /image.*/;
+		if (file.type.match(imageType)) {
+		var reader = new FileReader();
+		reader.onload = function(){
+			$("#image-wrap").css({
+				"background":"url("+reader.result+") no-repeat",
+				"background-size":"100% 100%"
+			})
+
+		};
+		reader.readAsDataURL(file);
+		}else{
+		//alert(opts.errorMessage);
+		}
+	});
+	};
+})($);
+</script>
+</html>

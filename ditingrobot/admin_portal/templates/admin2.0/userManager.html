@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="/static/css/admin_layout.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/css/userManager.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/css/lib/page.css"/>
+		<script src="/static/js/lib/jquery-2.2.3.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+        <script src="/static/js/lib/page.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="top">
+			<ul id="topUl">
+				<li class="topLi">
+					<img src="/static/images/06.png"/>
+					<b>管理员姓名</b>
+				</li>
+				<a href=""><li class="topLi topLi0">账号设置</li></a>
+                <a href="/logout"><li id="logout" class="topLi topLi0">退出</li></a>
+			</ul>
+		</div>
+		<div class="nav">
+			<ul class="navUl">
+				<li class="navLi navLi_F"></li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/sy00.png) no-repeat 22px 18px;">首页</li>
+				<li class="navLi" id="navLi_zsk" >
+					<span style="display: block; background: url(/static/images/admin2.0/ck00.png) no-repeat 22px 18px;">知识库管理</span>
+					<ul class="ckUl">
+						<li class="ckLi" style="background: #999" id="zskLearn">知识库学习</li>
+						<li class="ckLi" id="high_p">高频问题</li>
+						<li class="ckLi">无效问题</li>
+					</ul>
+				</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/sj00.png) no-repeat 22px 18px;">数据管理</li>
+				<li class="navLi" style="background:#00C4C2 url(/static/images/admin2.0/yh00.png) no-repeat 22px 18px;">用户管理</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/dls00.png) no-repeat 22px 18px;">代理商管理</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/yy00.png) no-repeat 22px 18px;">应用管理</li>
+				<li class="navLi" id="navLi_ck" >
+					<span style="display: block; background: url(/static/images/admin2.0/ck00.png) no-repeat 22px 18px;">词库管理</span>
+					<ul class="ckUl">
+						<li class="ckLi" style="background: #999">敏感词</li>
+						<li class="ckLi">原生词库管理</li>
+						<li class="ckLi">同义词库管理</li>
+						<li class="ckLi">绝对替换管理</li>
+						<li class="ckLi">近义词替换管理</li>
+						<li class="ckLi">口语处理</li>
+						<li class="ckLi">新词管理</li>
+						<li class="ckLi">语义理解api</li>
+					</ul>
+				</li>
+				<li class="navLi" style="background: url(/static/images/admin2.0/sz00.png) no-repeat 22px 18px;">管理员设置</li>
+                <li class="navLi" style="background: url(/static/images/admin2.0/sz00.png) no-repeat 22px 18px;">意见反馈</li>
+			</ul>
+		</div>
+        <div class="wrapContent">
+            <div class="content">
+                <div class="conNav">
+                    <div class="searchD">
+                        <input id="companies_in" type="text" placeholder="可搜索手机号，公司名称，邀请码">
+                        <button id="" onclick="B_company(1)" style="width:40px;height: 24px;background: #EEF3FA url(/static/images/admin2.0/sousuo00.png) no-repeat;background-size: auto 100%;outline: none"></button>
+                    </div>
+                    <select id="timeOrDian" onchange="B_company(1)">
+                        <option value="0">注册时间</option>
+                        <option value="1">剩余点数</option>
+                    </select>
+                    <select id="level" onchange="B_company(1)">
+                        <option value="1">初级用户</option>
+                        <option value="2">中级用户</option>
+                    </select>
+                    <div class="dateGroup">
+                        <input class="dateInput" type="date" id="date1" onchange="giveTime()">
+                        <input class="dateInput" type="date" id="date2" onchange="giveTime()">
+                        <button id="search_B" onclick="" style="display: none"></button>
+                    </div>
+                </div>
+                <div class="mainTable">
+                    <table class="tit_table">
+                        <tr>
+                            <td class="tit0">序号</td>
+                            <td class="tit_ans">用户名</td>
+                            <td class="tit_name">所有者名称</td>
+                            <td class="kw">所属部门</td>
+                            <td class="kw">是否认证</td>
+                            <td class="kw">注册时间</td>
+                            <td class="kw">状态</td>
+                            <td class="kw">累计</td>
+                            <td  class="kw">余点</td>
+                            <td  class="kw">昨日使用</td>
+                            <td  class="kw">正确率</td>
+                            <td class="tit_control">操作</td>
+                        </tr>
+                    </table>
+                    <table class="tit_table" id="real_table">
+
+                    </table>
+                    <div class="footPage">
+                        <ul class="page" maxshowpageitem="6" pagelistcount="15"  id="page"></ul>
+                        <p class="pageCountW">共<span id="pageCount"></span>页</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="wrapEdits" class="wrapEdits" style="display:none;width: 100%; height: 100%; position: fixed; top:0; left: 0;z-index: 999; background: rgba(0,0,0,0.3);">
+            <div class="editsBox" style="background:white;width:520px;margin:120px auto 0;position: relative;height: 360px">
+                <div style="height:40px;background:#00C4C2;text-align: center">
+                    <span style="color:white;display:block;line-height:40px;">用户管理 编辑</span>
+                    <span style="display:none;float:right;font-size:24px;cursor: pointer;padding-right:6px;" onclick="closeEditBox()"> × </span>
+                </div>
+                <div>
+                    <ul style="display: flex;justify-content: space-around;margin-top: 10px">
+                        <li id="li_xiugai" style="border-bottom: 1px solid #00C4C2;color: #00C4C2">修改</li>
+                        <li id="li_xiugaiJl" style="border-bottom: 1px solid white;color: black">修改记录</li>
+                        <li id="li_chongzhi" style="border-bottom: 1px solid white;color: black">充值</li>
+                    </ul>
+                </div>
+                <div class="tabLi" id="xiugai" style="display: block;width:76%;margin-left:12%;margin-top: 20px">
+                    <div style="margin:10px 0">
+                        <label style="display:inline-block;width:100px;">用户名：</label><input id="xg_user" />
+                    </div>
+                    <div  style="margin:10px 0">
+                        <label style="display:inline-block;width:100px;">所有者名称：</label><input id="xg_owner" />
+                    </div>
+                    <div  style="margin:10px 0">
+                        <label style="display:inline-block;width:100px;">密码：</label><input id="xg_psd"/>
+                    </div>
+                    <div  style="margin:10px 0">
+                        <label style="display:inline-block;width:100px;float: left">修改原因：</label><textarea id="xg_why" style="width:173px;height:60px;resize:none;"></textarea>
+                    </div>
+                    <div style="height:40px;display: flex;justify-content: space-around;width: 80%;margin: 30px auto 0">
+                        <button id="xg_save" style="height:30px;width:80px;border:none;background:#00C4C2;border-radius:5px;color:white;" >保存</button>
+                        <button style="height:30px;width:80px;border:none;background:#CCC;border-radius:5px;color:white;" onclick="closeEditBox()">取消</button>
+                    </div>
+                </div>
+                <div class="tabLi" id="xiugaiJl" style="display: none">修改记录</div>
+                <div class="tabLi" id="chongzhi" style="display: none;width:76%;margin-left:12%;margin-top: 20px">
+                     <div style="margin:10px 0">
+                        <label style="display:inline-block;width:100px;">用户名：</label><span id="cz_user"></span>
+                    </div>
+                    <div style="margin:10px 0">
+                        <label style="display:inline-block;width:100px;">所有者名称：</label><span id="cz_owner"></span>
+                    </div>
+                    <div style="margin:10px 0">
+                        <label style="display:inline-block;width:100px;">剩余点数：</label><span id="cz_residue"></span>
+                    </div>
+                    <div style="margin:10px 0">
+                        <label style="display:inline-block;width:100px;float: left">充值原因：</label><textarea id="cz_why"  style="width:173px;height:60px;resize:none;"></textarea>
+                    </div>
+                    <div style="margin:10px 0">
+                        <label style="display:inline-block;width:100px;">充值点数：</label><input id="cz_count" />
+                    </div>
+                    <div style="height:40px;display: flex;justify-content: space-around;width: 80%;margin: 30px auto 0">
+                        <button id="cz_save" style="height:30px;width:80px;border:none;background:#00C4C2;border-radius:5px;color:white;" >保存</button>
+                        <button style="height:30px;width:80px;border:none;background:#CCC;border-radius:5px;color:white;" onclick="closeEditBox()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="/static/js/userManager.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/commonHt.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+            userManager(1);
+    </script>
+	</body>
+</html>

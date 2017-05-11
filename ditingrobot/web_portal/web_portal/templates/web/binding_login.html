@@ -1,0 +1,102 @@
+{% extends "web/layout.html" %}
+{% block style %}
+	<link rel="stylesheet" href="/static/css/lib/iconfont.css{{ _suffix_ }}" />
+    <link rel="stylesheet" type="text/css" href="/static/css/binding.css{{ _suffix_ }}"/>
+	<script type="text/javascript" src="/static/js/login.js{{ _suffix_ }}"></script>
+	<script type="text/javascript" src="/static/js/register.js{{ _suffix_ }}"></script>
+	<script type="text/javascript">
+		window.onload=function(){
+			textCode0( $('.code_send0'));
+			$('#binding_register00').click(function(){
+				$('#binding_register00').css("color","#169bd5").css("border-bottom-color","#169bd5");
+				$('#binding_login00').css("color","#000").css("border-bottom-color","#000");
+				$('#reg_input').css("display","block");
+				$('#loginbox').css("display","none")
+			});
+			$('#binding_login00').click(function(){
+				$('#binding_login00').css("color","#169bd5").css("border-bottom-color","#169bd5");
+				$('#binding_register00').css("color","#000").css("border-bottom-color","#000");
+				$('#reg_input').css("display","none");
+				$('#loginbox').css("display","block")
+			})
+
+		}
+	</script>
+{% endblock %}
+{% block main %}
+    <input id="open_id" type="text" hidden="hidden" value="{{wechatInfo.openId}}">
+    <input id="union_id" type="text" hidden="hidden" value="{{wechatInfo.unionId}}">
+<div id="binding_box" class="binding_box">
+
+	<div id="logo">
+		<a href="/"><img src="/static/images/logo3.png" /></a>	<h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+	</div>
+	<div class="binding_a">
+		<a id="binding_login00"  style="color: #169bd5;border-bottom: 1px solid #169bd5;cursor: pointer;"><i class="iconfont icon-bangding"></i>已有谛听账号，请绑定</a>
+		<a id="binding_register00"  style="border-bottom: 1px solid #000;cursor: pointer;"><i class="iconfont icon-zhuce"></i>没有谛听账号，请注册</a>
+		<div style="clear: both"></div>
+	</div>
+		<div class="login_input" id="loginbox">
+			<div class="_input">
+				<span >谛听账号</span>
+				<input type="text" placeholder="已注册的手机号" name="loginname" id="phone_login" maxlength="11">
+			</div>
+			<div class="_input password">
+				<span >输入密码</span>
+				<input type="password" placeholder="密码" name="password"  id="pwd_login" maxlength="16">
+			</div>
+			<div style="width: 335px; margin: auto;text-align: right;">
+				<span >
+					<a href="/password-reset">忘记密码？</a>
+
+				</span>
+			</div>
+			<br/>
+			<div class="_input" style="margin: auto;">
+				<input id="btn_go" style="width: 335px;background: #169bd5;color:#fff;font-size: 20px;cursor: pointer;" type="button" value="立即绑定" onclick="bindwechat()"/>
+			</div>
+		</div>
+	<div class="reg_input" id="reg_input" style="display: none;">
+		<div class="_input">
+			<span >谛听账号</span>
+			<input type="text" placeholder="手机号码" name="USERNAME" id="phone" value="" required="required"
+				   maxlength="11" onblur="oPhonetest()">
+			<i class="phone_i">请输入正确手机号</i>
+		</div>
+		<div class="_input password">
+			<span >输入密码</span>
+			<input type="password" placeholder="6~16位密码,区分大小写" name="PASSWORD" value="" id="pwd" required="required"
+				   maxlength="16">
+			<i class="pwd_i" >6~16位密码,区分大小写</i>
+		</div>
+		<div class="_input">
+			<span >确认密码</span>
+			<input type="password" placeholder="确认密码" name="requrePassword" value="" id="pwd2" required="required"
+				   maxlength="16">
+			<i class="pwd2_i">两次密码需要一致</i>
+		</div>
+		<div class="_input">
+			<span >验证码</span>
+			<input type="text" class="_input2" placeholder="验证码" value="" name="txcode" id="txcode"
+				   required="required" maxlength="4"> <input style="float: right;margin: 3px 5px 0 0;"  type="button" id="btnTxCode" class="code_send0" onclick="textCode0(this);"/>
+			<i class="txcode_i">请先正确填写验证码</i>
+		</div>
+		<div class="_input">
+			<span >短信验证码</span>
+			<input type="text" class="_input2" placeholder="短信验证码" value="" name="telcode" id="telcode"
+				   required="required" maxlength="20" > <input value="发送验证码" style="float: right;margin: 3px 5px 0 0;" type="button" id="btnCode" class="_send" onclick="code_if();"/>
+		</div>
+		<div style="width: 335px; margin: auto;text-align: left;">
+			<div class="protocol">
+				<input style="float: left;width: 14px;" type="checkbox" checked="checked" data="unselected" id="checkbox" alt="selected"/>
+				<span style="float: left;"> 同意相关<a href="/agreement" target="_blank" style="color: #169bd5;">协议</a>内容</span>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<br/>
+		<div class="_input" style="margin: auto;">
+			<input id="btn_reg0"  style="width: 335px;background: #169bd5;color:#fff;font-size: 20px;cursor: pointer;"  type="button" onclick="wechat_register()" value="立即注册"/>
+		</div>
+	</div>
+</div>
+{% endblock %}

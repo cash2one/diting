@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    {% block title %}
+    <title>谛听机器人开放平台——智联网的交互系统</title>
+    {% endblock %}
+    <meta name="baidu-site-verification" content="iPeIYTr58G" />
+    <meta name="keywords" content="谛听机器人,语义理解,开放平台,自动应答程序,客服机器人,聊天机器人,陪伴机器人,问答机器人,招聘机器人,恋爱机器人,平行人,转角爱,AI,人工智能,彭军辉,机器人柳柳,小谛机器人">
+    <meta name="description" content="谛听机器人开放平台能让每个用户通过注册获得自己的个性化问答机器人。该机器人可以捆绑在自己微信公众号，可以部署在WEB网站上，可以通过我们提供的API 进行二次开发接入各类软件或者APP。用户可以通过我们提供的管理后台增加和编辑机器人的问答知识，建设知识库，将机器人用于客服、销售、招聘等方面，机器人会自动按照用户添加的问题和答案回答FAQ提问。我们擅于做上下文处理，对语义的理解更加精准。">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+    <script type="text/javascript" src="/static/js/diting-common.js{{ _suffix_ }}"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/common-style.css{{ _suffix_ }}"/>
+    {% block style %}{% endblock %}
+
+</head>
+
+<body>
+{% block main %}{% endblock %}
+{% block mainnofooter %}
+<!--==footer==============================================-->
+<footer id="footer">
+    <div>
+        <div>
+            <ul>
+                <li><a href="/agreement" target="_blank">用户协议</a></li>
+                <li><a href="/cooperative_partner" target="_blank">合作伙伴</a></li>
+                <li><a href="/about" target="_blank">关于我们</a></li>
+                <li><a href="/contact_us" target="_blank">联系我们</a></li>
+                <li class="wxgzh"><a style="position: relative;">微信订阅号</a>
+                    <!--底部二维码-->
+                    <div class="WXerweima">
+                        <img src="/static/images/diting1.0/pc/dingyuehaoEVM4-19.jpg"/>
+                    </div>
+                </li>
+                <li class="wxgzh" style="border-left: 1px solid #999;">
+                    <a style="position: relative;">客服微信号
+                        <div class="WXerweima">
+                            <img src="/static/images/diting1.0/pc/kefuEVM4-19.jpg"/>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <p> Copyright ©2016 谛听机器人 All Rights Reserved 京ICP备16026036号-1<br/>增值电信业务经营许可证：京B2-20170408</p>
+    </div>
+</footer>
+{% endblock %}
+</body>
+
+
+</html>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <import resource="classpath*:META-INF/spring/context-cron.xml"/>
+
+    <bean id="staTask" class="com.diting.job.task.StaTask"/>
+    <bean id="calculateTask" class="com.diting.job.task.CalculateTask"/>
+    <bean id="chatStatisticsTask" class="com.diting.job.task.ChatStatisticsTask"/>
+
+    <bean id="staJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <ref bean="staTask"/>
+        </property>
+        <property name="targetMethod">
+            <value>execute</value>
+        </property>
+    </bean>
+
+    <bean id="calculateJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <ref bean="calculateTask"/>
+        </property>
+        <property name="targetMethod">
+            <value>execute</value>
+        </property>
+    </bean>
+
+    <bean id="chatStatisticsJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <ref bean="chatStatisticsTask"/>
+        </property>
+        <property name="targetMethod">
+            <value>execute</value>
+        </property>
+    </bean>
+
+    <bean id="staTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="staJobDetail"></property>
+        <property name="cronExpression" value="0 0 2 * * ?"></property>
+        <!-- excute At two o 'clock every day  -->
+    </bean>
+
+    <bean id="calculateTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="calculateJobDetail"></property>
+        <property name="cronExpression" value="0 0 1 * * ?"></property>
+        <!-- excute At one o 'clock every day  -->
+    </bean>
+
+    <bean id="chatStatisticsTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="chatStatisticsJobDetail"></property>
+        <property name="cronExpression" value="0 0 3 * * ?"></property>
+        <!-- excute At one o 'clock every day  -->
+    </bean>
+
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="staTrigger"/>
+                <ref bean="calculateTrigger"/>
+                <ref bean="paymentTrigger"/>
+                <ref bean="chatStatisticsTrigger"/>
+            </list>
+        </property>
+    </bean>
+
+
+</beans>

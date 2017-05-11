@@ -1,0 +1,179 @@
+{% extends "web/success_layout.html" %}
+{% block style %}
+<script type="text/javascript" src="/static/js/base_table.js{{ _suffix_ }}" ></script>
+{% endblock %}
+
+
+{% block main %}
+<menu class="left_menu">
+	<span>
+
+		<div id="_menu">
+			<ul class="menu">
+     			<li class="left_nav1_2" title="机器人基础设置">
+                    <a href="/robot-setting"><span>机器人设置</span></a>
+				</li>
+
+				<li class="knowledge_base" title="机器人知识库">
+					<a href="/learning/knowledge-base"><span>知识填写</span></a>
+				</li>
+
+				<li class="invalid_question" title="聊天中产生的无效问题">
+					<a href="/invalid-question/statistics"><span>无效问题</span></a>
+				</li>
+
+				<li class="Synonym" title="同义词替换">
+					<a href="/Synonym"><span>同义词库</span></a>
+				</li>
+
+				<li class="base_table" title="生成公司基础信息知识库" style="position: relative;">
+					<a href="/base_table"><span>基础库生成</span></a>
+                    <!--<span>基础库生成</span>-->
+                    <!--<div class="base_KU" >-->
+                        <!--<a href="/base_table">招聘机器人</a>-->
+                        <!--&lt;!&ndash;<a href="/base_table">XX机器人</a>&ndash;&gt;-->
+                    <!--</div>-->
+
+				</li>
+				<li class="api_external" title="提交自己开发的第三方应用" >
+					<a href="/api/external" ><span>应用提交</span></a>
+				</li>
+				<li class="api_external" title="管理自己提交的第三方应用" >
+					<a href="/api/externalAdmin" ><span>用户应用管理</span></a>
+				</li>
+			</ul>
+		</div>
+	</span>
+</menu>
+<!--==右侧内容区==============-->
+<div class="mains">
+	<form action="" name="userForm" id="userForm" method="post">
+		<div>
+			<input name="USERNAME" value="{{ loginInfo.userName }}" type="hidden">
+			<!--公司名称；公司网址；所在行业；融资状况？；公司规模；公司概况；热招职位？；工作时间；工作地点；-->
+			<div id="form" class="form" style="margin:40px;width:700px;">
+				<ul class="rob_txt" id="company_tab1" style="height: 509px;position: relative">
+					热招职位详细信息
+					<li id="allRecruitJob">
+
+					</li>
+
+					<li>
+						<input id="job_create" class="hot_add" type="button" value="+"  data-id="0"/>
+					</li>
+
+
+					<!--<li><span>产品介绍:</span>-->
+					<!--<span class="spanInput"><input id="product_suggest" value="" name="company_web" maxlength="240" type="text" /></span>-->
+					<!--</li>-->
+					<!--<li><span>技术优势:</span>-->
+					<!--<span class="spanInput"><input id="skill_well" value="" name="company_site" maxlength="240" type="text" /></span>-->
+					<!--</li>-->
+
+					<!--<li><span>发展前景:</span>-->
+					<!--<span class="spanInput"><input id="development" value="" name="company_tel" maxlength="240" type="text" /></span>-->
+					<!--</li>-->
+					<!--<li><span>企业文化:</span>-->
+					<!--<span class="spanInput"><input id="company_culture" value="" name="company_work" maxlength="240" type="text" /></span>-->
+					<!--</li>-->
+					<!--<li><span>上班时间:</span>-->
+					<!--<span class="spanInput"><input id="work_time"  value="" name="company_wx" maxlength="240" type="text" /></span>-->
+					<!--</li>-->
+					<!--<li><span>公司领导:</span>-->
+					<!--<span class="spanInput"><input id="company_leader"  value="" name="company_size" maxlength="240" type="text" /></span>-->
+					<!--</li>-->
+
+					<li style="position: absolute;bottom: 0px;">
+						<input id="company_next" type="button" value="下一页" style="width: 90px;border-radius: 15px;margin-left: 400px;"/>
+
+					</li>
+				</ul>
+
+				<ul class="rob_txt" id="company_tab2" style="display: none;height: 509px;">
+					<li><span>公司名称:</span>
+						<span class="spanInput"><input id="company_name" value="" name="company_name" maxlength="240" type="text" /></span>	</li>
+					<li><span>公司网址:</span>
+						<span class="spanInput"><input id="company_web"  value="" name="company_web" maxlength="240" type="text" /></span>
+					</li>
+					<li><span>所在行业:</span>
+						<span class="spanInput"><input id="now_industry" value="" name="company_bus" maxlength="240" type="text" /></span>
+					</li>
+					<li><span>融资情况:</span>
+						<span class="spanInput"><input id="morMoney" value="" name="morMoney" maxlength="240" type="text" /></span>
+					</li>
+					<li><span>公司规模:</span>
+						<span class="spanInput"><input id="company_size"  value="" name="company_size" maxlength="240" type="text" /></span>
+					</li>
+					<li><span>公司概况:</span>
+						<span class="spanInput"><input id="company_abstract" name="company_name" maxlength="240" value=""  type="text" /></span>	</li>
+					<li><span>热招职位:</span>
+						<span class="spanInput"><input id="hot_positions"  value="" name="hot_positions" maxlength="240" type="text" /></span>
+					</li>
+					<li><span>工作时间:</span>
+						<span class="spanInput"><input id="work_time"  value="" name="company_wx" maxlength="240" type="text" /></span>
+					</li>
+					<li><span>工作地址:</span>
+						<span class="spanInput"><input id="company_site"  value="" name="company_site" maxlength="240" type="text" /></span>
+					</li>
+					<!--<li><span>公交线路:</span>-->
+					<!--<span class="spanInput"><input id="company_bus"  value="" name="company_bus" maxlength="240" type="text" /></span>-->
+					<!--</li>-->
+					<!--<li><span>公司电话:</span>-->
+					<!--<span class="spanInput"><input id="company_tel"  value="" name="company_tel" maxlength="240" type="text" /></span>-->
+					<!--</li>-->
+					<!--<li><span>公司业务:</span>-->
+					<!--<span class="spanInput"><input id="company_work"  value="" name="company_work" maxlength="240" type="text" /></span>-->
+					<!--</li>-->
+					<!--<li><span>公司微信:</span>-->
+					<!--<span class="spanInput"><input id="company_wx" value="" name="company_wx" maxlength="240" type="text" /></span>-->
+					<!--</li>-->
+
+					<li>
+						<input type="button" id="company_upper" value="上一页" style="width: 90px;border-radius: 15px"/><input id="company_submit" onclick="save()" type="button" value="提交" />
+
+					</li>
+				</ul>
+
+
+
+			</div>
+		</div>
+	</form>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+	window.onload=function () {
+		csh_name_place()
+		csh_Base_T(); //初始化
+
+		$('#company_next').click(function(){
+			$('#company_tab1').css('display','none');
+			$('#company_tab2').css('display','block');
+		})
+		$('#company_upper').click(function(){
+			$('#company_tab1').css('display','block');
+			$('#company_tab2').css('display','none');
+		})
+
+//		点“+”弹出添加弹窗
+		$(".hot_add").click(function(){
+			add_jobTC();
+			$('#close_details').click(function(){
+				$('#tanchuang').html("");
+			});
+			$('#job_create').click(function(){
+				job_create()
+			});
+
+		})
+//		$('#allRecruitJob').html(111)
+
+
+	};
+
+</script>
+{% endblock %}

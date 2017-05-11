@@ -1,0 +1,113 @@
+body{
+	background: #182746;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+
+}
+/*======register==========================================*/
+.login_logo{
+	margin: 0 auto;
+    margin-top: 80px;
+    width: 312px;
+    height: 103px;
+}
+
+form{
+	display: block;
+}
+.reg_input {
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 362px;
+ 
+   
+}
+.reg_input ._input {
+    margin-top: 20px;
+    height: 36px;
+    background: url(/static/images/reg_input.png) no-repeat;
+}
+.reg_input input {
+    border: none;
+    background: none;
+    height: 100%;
+    width: 80%;
+    margin-left: 20px;
+    font-size: 16px;
+    color: #FFF;
+    outline: 0;  
+}
+.reg_input ._input2 {
+    width: 137px;
+    height: 36px;
+    background: url(/static/images/reg_imput_2.png) no-repeat;
+    padding-left: 46px;
+}
+.reg_input .dxCode,.reg_input .txCode{
+	margin-top: 20px; text-align: left; margin-left: -20px; height:36px;
+}
+.reg_input ._send {
+	margin-left: 23px;
+    width: 125px;
+    height: 34px;
+    background: #00c4c2;
+    border-radius: 17px;
+    vertical-align: middle;
+    cursor: pointer;
+    
+}
+.reg_input .code_send0 {
+    margin-left: 23px;
+    width: 125px;
+    height: 34px;
+    border-radius: 17px;
+    background:url(/static/images/code_bj.jpg) no-repeat;
+    background-size: 100% 100%;
+    vertical-align: middle;
+    cursor: pointer;
+
+}
+
+.reg_input ._send_disable {
+    width: 125px;
+    height: 34px;
+    background: url(/static/images/anniu_send_hui.png);
+    border: none;
+}
+.reg_input .protocol {
+    color: #b2bdc8;margin: 20px 0; text-align: left; height: 20px;cursor: pointer;float: left;
+}
+.reg_input .protocol a {
+    color: #7CFC00;
+    font-size: 16px;
+}
+
+#btn_reg0 {
+    width: 200px;
+    height: 56px;
+    position: relative;
+    left: -90px;
+    top: 0px;
+    background: #07A4A2;
+    border-radius: 28px;
+    font-size: 30px;
+    cursor: pointer;
+}
+.pwd_i,.pwd2_i,.phone_i,.txcode_i{
+    display: none;
+    line-height: 18px;
+    color: red;
+    font-style: inherit;
+}
+
+
+
+
+/*==footer=====================================================*/
+footer{
+	margin-top: 60px;
+}
+footer li a,footer #wxgzh{
+	 color: #fff;
+}

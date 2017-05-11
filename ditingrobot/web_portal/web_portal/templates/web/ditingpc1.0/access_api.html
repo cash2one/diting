@@ -1,0 +1,202 @@
+{% extends "web/ditingpc1.0/success_layout.html" %}
+{% block head %}
+<style>
+    .tabProduct>tbody>tr:hover{
+        background: #fafafa
+    }
+    .tabProduct {
+        font-size: 14px;
+        min-width: 1000px;width: 100%;
+    }
+    .tabProduct th{
+        background: #fff;
+        height: 60px;
+        text-align: center;
+
+    }
+    .tabProduct td{
+        text-align: center;font-size: 12px;max-height: 50px;overflow: hidden;
+        border-right:1px solid #fff;
+        word-break: break-all;
+    }
+
+    .tabProduct tr{
+        height:40px;	border-bottom: 1px solid #fafafa;
+    }
+</style>
+{% endblock %}
+
+{% block main %}
+<!--==右侧内容区==============-->
+<div style="background: #fff;padding: 0px 20px 20px;width: 100%;margin-bottom: 20px;">
+    <h3 style="line-height: 71px;font-size: 14px;border-bottom: 1px solid #fafafa;"><img src="/static/images/diting1.0/pc/icon_Api.png"  style="width: 30px;margin-top:20px;float:left;background: #fff;"/>&nbsp;&nbsp;开放的API</h3>
+    <div style=" padding:0 40px 20px; line-height: 24px;">
+        <p style="line-height: 46px;">1./api/chat/info</p>
+        <p> 功能：谛听机器人开放平台接口</p>
+        <p> 请求方法：POST | http://www.ditingai.com/api/chat/info</p>
+        <p style="line-height: 46px;">2.参数说明</p>
+        <table border="0" cellpadding="0" cellspacing="0" class="tabProduct">
+            <tbody>
+            <tr>
+                <th style="text-align: center;min-width: 100px;">参数</th>
+                <th style="text-align: center;min-width: 100px;" >必选</th>
+                <th style="text-align: center;min-width: 100px" >类型</th>
+                <th style="text-align: center;min-width: 300px">说明</th>
+
+            </tr>
+            <tr>
+                <td style="text-align: center;">uuid</td>
+                <td style="text-align: center;">yes</td>
+                <td style="text-align: center;">string</td>
+                <td style="text-align: center;">随机字符串，用于上下文处理</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">question</td>
+                <td style="text-align: center;">yes</td>
+                <td style="text-align: center;">string</td>
+                <td style="text-align: center;">问题</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">username</td>
+                <td style="text-align: center;">yes</td>
+                <td style="text-align: center;">string</td>
+                <td style="text-align: center;">平台注册的用户名</td>
+            </tr>
+            </tbody>
+        </table>
+        <p style="line-height: 46px;">3.返回值参数说明</p>
+
+        <table border="0" cellpadding="0" cellspacing="0" class="tabProduct">
+            <tbody>
+            <tr>
+                <th style="text-align: center;min-width: 100px;">参数</th>
+                <th style="text-align: center;min-width: 100px" >类型</th>
+                <th style="text-align: center;min-width: 300px">说明</th>
+
+            </tr>
+            <tr>
+                <td style="text-align: center;">message</td>
+                <td style="text-align: center;">string</td>
+                <td style="text-align: center;">返回状态</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">answer</td>
+                <td style="text-align: center;">string</td>
+                <td style="text-align: center;">答案</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">actionOption</td>
+                <td style="text-align: center;">string</td>
+                <td style="text-align: center;">动作指令(2016-11-15启用)</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">question</td>
+                <td style="text-align: center;">string</td>
+                <td style="text-align: center;">问题</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">username</td>
+                <td style="text-align: center;">string</td>
+                <td style="text-align: center;">用户账号</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">avaliable</td>
+                <td style="text-align: center;">string</td>
+                <td style="text-align: center;">0表示有效问题，1表示无效问题</td>
+            </tr>
+            </tbody>
+        </table>
+        <p style="line-height: 46px;">4.范例</p>
+        <div style="border: 1px solid #fafafa; padding: 20px;">
+
+            import java.io.BufferedReader;<br/>
+            import java.io.DataOutputStream;<br/>
+            import java.io.InputStreamReader;<br/>
+            import java.net.HttpURLConnection;<br/>
+            import java.net.URL;<br/>
+            <br/>
+            import org.json.JSONException;<br/>
+            import org.json.JSONObject;<br/>
+            <br/>
+            public class HttpUtils {<br/>
+            public static String sendRequestWithHttpURLConnection(String url, String json) {<br/>
+            String response = null;<br/>
+            try {<br/>
+            URL Url = new URL(url);<br/>
+            HttpURLConnection connection = (HttpURLConnection) Url.openConnection();<br/>
+            connection.setDoOutput(true);<br/>
+            connection.setDoInput(true);<br/>
+            connection.setRequestMethod("POST");<br/>
+            connection.setUseCaches(false);<br/>
+            connection.setInstanceFollowRedirects(true);<br/>
+            connection.setRequestProperty("Content-Type", "application/json");<br/>
+            connection.connect();<br/>
+            <br/>
+            // POST请求<br/>
+            DataOutputStream out = new DataOutputStream(connection.getOutputStream());<br/>
+            out.write(json.getBytes());<br/>
+            out.flush();<br/>
+            out.close();<br/>
+            <br/>
+            // 读取响应<br/>
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));<br/>
+            String lines;<br/>
+            StringBuffer sb = new StringBuffer("");<br/>
+            while ((lines = reader.readLine()) != null) {<br/>
+            lines = new String(lines.getBytes(), "utf-8");<br/>
+            sb.append(lines);<br/>
+            }<br/>
+            reader.close();<br/>
+            // 断开连接<br/>
+            connection.disconnect();<br/>
+            response = sb.toString();<br/>
+            } catch (Exception e) {<br/>
+            e.printStackTrace();<br/>
+            }<br/>
+            return response;<br/>
+            }<br/>
+            <br/>
+            public static void main(String[] args) {<br/>
+            JSONObject json = new JSONObject();<br/>
+            try {<br/>
+            json.put("uuid","ssdeesds");   //随机字符串 保证唯一即可<br/>
+            json.put("question","你好");<br/>
+            json.put("username","131****2845");   //换成自己注册的谛听开发平台账号<br/>
+            } catch (JSONException e) {<br/>
+            // TODO Auto-generated catch block<br/>
+            e.printStackTrace();<br/>
+            }<br/>
+            String s = HttpUtils.sendRequestWithHttpURLConnection("http://www.ditingai.com/remote/chat/info",json.toString());<br/>
+            if (s != null) {<br/>
+            try {<br/>
+            JSONObject jsonobject= new JSONObject(s.toString());<br/>
+            String answer = jsonobject.getString("answer");           //得到答案<br/>
+            StringactionOption=jsonobject.getJSONObject("action").getString("actionOption");     //得到动作<br/>
+            String question= jsonobject.getJSONObject("action").getString("question");     //得到问题<br/>
+            String username= jsonobject.getJSONObject("action").getString("username");     //账号<br/>
+            String avaliable= jsonobject.getJSONObject("action").getString("avaliable");     //得到动作<br/>
+            <br/>
+            System.out.println("answer:"+ answer);<br/>
+            } catch (JSONException e) {<br/>
+            // TODO Auto-generated catch block<br/>
+            e.printStackTrace();<br/>
+            }<br/>
+            }<br/>
+            }<br/>
+            <br/>
+            }<br/>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    window.onload = function () {
+
+    }
+</script>
+{% endblock %}

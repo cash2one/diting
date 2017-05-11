@@ -1,0 +1,118 @@
+.conNav{
+	width: 100%;
+	height: 40px;
+	background: white;
+	margin-top: 8px;
+}
+.conNav select{
+	background: rgb(238,243,250);
+	border: none;
+	outline: none;
+	float: left;
+	margin-top: 10px;
+	height: 24px;
+	margin-left: 10px;
+}
+.conTop{
+	background: white;
+    margin-top: 10px;
+    height: 34px;
+    padding-top: 10px;
+}
+.conTop input{
+	border: none;
+	margin-left: 12px;
+	text-indent: 22px;
+	outline: none;
+}
+
+
+.mainTable{
+	position: relative;
+	min-height: 400px;
+	font-size: 12px;
+}
+
+.btnGroup{
+	float: left;
+	margin-top: 10px;
+	margin-left: 20px;
+}
+.timeBtn{
+	color: #00C4C2;
+	border: 1px solid #00C4C2;
+	background: white;
+	border-radius: 2px;
+	padding: 2px 4px;
+	margin-right: 8px;
+}
+.dateGroup{
+	float: right;
+	margin: 8px 0 0;
+}
+.dateGroup button{
+	width:40px;
+	height: 24px;
+	background:  url(/static/images/admin2.0/sousuo00.png) no-repeat;
+	background-size: auto 100%;
+	outline: none;
+	border: none;
+	float: right;
+	margin-left: 10px;
+}
+.rSection{
+	float: right;
+	width: 200px;
+	margin-top: 40px;
+}
+.rSection p{
+	text-align: center;
+	line-height: 24px;
+}
+.r1_sec{
+	background: rgb(0,209,206);
+	height: 90px;
+	padding-top: 40px;
+	margin-bottom: 10px;
+    border-radius: 5px;
+}
+.r2_sec{
+	background: rgb(39,214,119);
+	height: 100px;
+	padding-top: 25px;
+	margin-bottom: 10px;
+    border-radius: 5px;
+}
+.r3_sec{
+	background: rgb(78,162,230);
+	height: 100px;
+	padding-top: 25px;
+	border-radius: 5px;
+}
+.r4_sec{
+	background: rgb(0,209,206);
+	height: 75px;
+	padding-top: 25px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+.r5_sec{
+	background: rgb(39,214,119);
+	height: 75px;
+	padding-top: 25px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+.r6_sec{
+	background: rgb(78,162,230);
+	height: 75px;
+	padding-top: 25px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+.r7_sec{
+	background: rgb(76,147,213);
+	height: 85px;
+	padding-top: 15px;
+	border-radius: 5px;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    {% block title %}
+    <title></title>
+    {% endblock %}
+    <meta name="keywords" content="谛听客服机器人,问答机器人">
+    <meta name="description" content="谛听客服机器人提供微信客服机器人，web客服机器人，让用户可以自建知识库。机器人可以按照设定好的问题和答案回答。支持一个问题的多种问法，支持语义场景和上下文处理。">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" type="text/css" href="/static/css/phone/common-style-phone.css{{ _suffix_ }}" />
+    <script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+    <script type="text/javascript" src="/static/js/phone-common.js{{ _suffix_ }}"></script>
+    <script type="text/javascript" src="/static/js/diting-common.js{{ _suffix_ }}"></script>
+
+    {% block style %}{% endblock %}
+
+</head>
+
+
+<body>
+
+{% block main %}{% endblock %}
+{% block mainnofooter %}
+
+{% endblock %}
+</body>
+
+
+</html>

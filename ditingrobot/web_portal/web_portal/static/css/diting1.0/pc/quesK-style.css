@@ -1,0 +1,55 @@
+label {
+	display: block;
+	font-size: inherit;
+	position: relative;
+	height: 30px;
+}
+
+a {
+	text-decoration: none;
+	color: #646464;
+	outline: none;
+	cursor: pointer;
+}
+
+
+.btns {
+	width: 100%;
+	margin-top: 30px;
+}
+
+.btns a {
+	display: block;
+	float: right;
+	width: 80px;
+	height: 31px;
+	border-radius: 5px;
+	background: #00c4c2;
+	line-height: 31px;
+	text-align: center;
+	margin: 15px 5% 0 0;
+	color: #fff;
+	cursor: pointer;
+}
+
+a:hover {
+	opacity: .9;text-decoration:none;
+}
+
+.btns .btn3 {
+	background: #999;
+}
+
+.layui-layer-btn .layui-layer-btn0 {
+	border-color: #00c4c2;
+	background-color: #00c4c2;
+	color: #fff;
+}
+.layui-layer-title {
+	background-color: #00c4c2;color: #fff;
+}
+
+
+
+
+

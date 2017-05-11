@@ -1,0 +1,105 @@
+{% extends "web/rank_layout.html" %}
+	{% block main %}
+	<div style="width: 1000px;margin: 0 auto;">	
+		<div class="header">
+			<div class="all_ques_logo">排行榜</div>	<h1 style="position: relative;left: -9999px;">谛听机器人</h1>
+			<div class="ques_menu">
+				<ul class="tabs">
+					<li>
+						<a href="/all_questions_rank" tab="tab1">价值排行</a>
+					</li>
+					<li>
+						<a href="/yesterday_questions" tab="tab2">问答量排行</a>
+					</li>
+					<li>
+						<a href="/activity_questions" tab="tab2"  style="color: #13CED7;">粉丝排行</a>
+						<!--<a href="http://www.hdb.com/party/p3c3b.html" target="_blank" style="line-height: 20px;font-size: 12px;color: #13CED7;">报名</a>-->
+					</li>
+				</ul>
+			</div>
+			<div style="    background: url(/static/images/search_input.png) no-repeat;width: 231px;height: 25px;float: right;background-size: 231px 25px;line-height: 24px;margin-top: -50px;font-size: 14px;">
+				<input id="cominput0" type="text" name="keywords" maxlength="20" value="" placeholder="可以搜索公司机器人哦！" style="height: 20px;border: none;width: 83%;background: none;padding-left: 8px;margin: 0;" />
+				<img src="/static/images/search_tip.png" style=" cursor: pointer;vertical-align: middle;display: initial;height: 20px;float:right;margin-right: 6px;margin-top: 2px;" onclick="search_allQues()">
+				<div class="search_bottom" style="max-height: 561px;">
+					<table style="width: 100%;text-align: left;" id="search_bottom" >
+
+					</table>
+				</div>
+			</div>
+		</div>
+	
+		<table style="width: 100%;text-align: right" class="ques_ranks">
+			<tbody id="activity_questions">
+
+
+			</tbody>
+		</table>
+	</div>
+	{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+
+	$.ajax({
+		type: "GET",
+		contentType: "application/json",
+		url: "/api/company/top/fifty/questions_rank"
+
+	}).done(function (data) {
+		var data = JSON.parse(data);
+		console.log(data);
+		var str = '<tr style="background-color: #13ced7;border: 1px solid white;color: white;height: 80px;"> <th style="width: 10%;">排名</th> <th style="width: 45%;">所有者</th> <th style="width: 30%;">机器人名称</th><th style="width: 15%;">粉丝</th></tr>';
+		for (var i = 0; i < data.length; i++) {
+			var n = (i + 1);
+			str += '<tr> <td style="width: 10%;">'+ n +'</td> <td style="width: 45%;"> <a class="comA" href="/robot-company/'+ data[i].app_key +'" target="_blank"> '+ data[i].companyName +' </a> </td><td style="width: 30%;"> <a href="/robot-company/'+ data[i].app_key +'" target="_blank"> '+ data[i].robotName +' </a> </td> <td style="width: 15%;"><b style="font-size: 20px;color: red;">❤</b>'+ data[i].num +' </td> </tr>';
+
+			$('#activity_questions').html(str)
+		}
+	}).fail(function (data) {
+		console.log(data);
+
+	});
+	document.onclick=function(){
+
+		$('#search_bottom').html("")
+	}
+
+	//回车键搜索功能
+
+	$("#cominput0").keydown(function entersearch_allQues(e){
+		e = e||event;
+		if(e.keyCode == 13) {
+			search_allQues();
+		}
+		return;
+	});
+	function search_allQues(){
+		$.ajax({
+			type: "GET",
+			contentType: "application/json",
+			url: "/api/company/search-for-keyword?keyword=" + encodeURI($('#cominput0').val())
+		}).done(function (data) {
+			var data = JSON.parse(data);
+			var str='';
+			if(data.length==0){
+				str += '<tr style="width: 100%;height: 20px;" class="trstate"><td style="width: 40%;text-align: right;"> <a style="font-size: 12px;display: block;text-decoration: none;color: orange;" href="/register" target="_blank" >啊！没搜索到！您可以点这里创建个！</a></td></tr>'
+				$('#search_bottom').html(str)
+			}else {
+				for (var i = 0; i < data.length; i++) {
+					str += '<tr style="width: 100%;height: 20px;" class="trstate"><td style="width: 40%;text-align: left;"> <a style="font-size: 13px;display: block;text-decoration: none;color: black;" href="/robot-company/'+ data[i].uniqueId +'" target="_blank">'+data[i].name+ '<br/><span style="background: url(/static/images/YearRankbj3.png) no-repeat;position: relative;top: 4px;background-size: 25px;width: 21px;height: 21px; display: -webkit-inline-box;"></span> '+ data[i].robotVal +'</a></td></tr>';
+					$('#search_bottom').html(str)
+				}
+			}
+
+		}).fail(function (data) {
+			console.log(data);
+
+		});
+	}
+
+
+
+
+</script>
+{% endblock %}
+

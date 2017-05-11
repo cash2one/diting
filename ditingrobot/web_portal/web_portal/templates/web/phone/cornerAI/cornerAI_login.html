@@ -1,0 +1,90 @@
+{% extends "web/phone/cornerAI/layout_phone.html" %}
+{% block style %}
+	<link rel="stylesheet" href="/static/css/lib/iconfont.css{{ _suffix_ }}" />
+	<link rel="stylesheet" type="text/css" href="/static/css/phone/login_phoneStyle.css{{ _suffix_ }}"/>
+
+    <style>
+    body{
+        width: 100%;
+        height: 74%;
+        padding-top: 50%;
+        background: url(/static/images/phone/lovebgq.png) no-repeat;
+        background-size: 100% 100%
+    }
+    html{
+        width: 100%;
+        height: 100%;
+        background: #333333;
+
+    }
+    input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; }
+    </style>
+	<script type="text/javascript">
+		window.onload=function(){
+			//动态改变页面宽度
+			document.documentElement.style.fontSize=document.documentElement.clientWidth/6.4+"px";
+			window.addEventListener("resize",fn,false);
+			function fn(){
+				document.documentElement.style.fontSize=document.documentElement.clientWidth/6.4+"px";
+			}
+		}
+		function cornerAi_save() {
+                var account = $("#phone").val();
+                var password = $("#pwd").val();
+                if (account == "" || account == null) {
+                    layer.msg('账号不能为空', {icon: 5})
+                } else if (password == "" || password == null) {
+                    layer.msg("密码不能为空", {icon: 5});
+                } else {
+
+                 $.ajax({
+                      type: "POST",
+                       contentType: "application/json",
+                       url: '/api/login',
+                      data: JSON.stringify({'userName': account, 'password': password})
+                    }).done(function (data) {
+                        localStorage.setItem("htzhzhht",account)
+                        localStorage.setItem("htmmmmht",password)
+                        window.location.href = "/m/indexPage"
+                 }).fail(function (data) {
+                    //var message = JSON.parse(data.responseText).message;
+                    //layer.msg(message, {icon: 5});
+                     tishi()
+                 });
+             }
+            }
+            function tishi() {
+                $("#tishi").css("display","block");
+                setTimeout(function () {
+                    $("#tishi").css("display","none");
+                },2000)
+            }
+	</script>
+{% endblock %}
+{% block mainnofooter %}
+
+<div class="binding_box" style="width: 100%;height: 70%;padding: 0;">
+		<div class="login_input" id="loginbox" style="margin-top: 30%">
+			<div class="_input" style="width: 70%; margin: 0.4rem auto;border-bottom:1px solid #999;padding: 0">
+				<span style=" width: 0.5rem; height: 0.5rem;display: inline-block;background: url(/static/images/phone/shouji03.png) no-repeat -9px 0rem; background-size: 0.6rem; margin: 0.1rem 0.1rem 0.1rem 0;"></span>
+				<input type="text" placeholder="请输入手机号" name="loginname" id="phone" maxlength="11" style=" width: 3.5rem; right: 0.2rem;border: 0;color: #000;text-align: left;font-size: 0.26rem;color:#999999;">
+			</div>
+			<div class="_input password"  style="width: 70%; margin: auto;border-bottom: 1px solid #999;padding: 0">
+				<span style=" width: 0.5rem; height: 0.5rem;display: inline-block;background: url(/static/images/phone/mima03.png) no-repeat -9px  0rem; background-size: 0.6rem; margin: 0.1rem 0.1rem 0.1rem 0;"></span>
+				<input type="password" placeholder="请输入密码" name="password"  id="pwd" maxlength="16"  style=" width: 3.5rem; right: 0.2rem;border: 0;color: #000;text-align: left;font-size: 0.26rem;color:#999999;">
+			</div>
+
+			<div style="width: 70%;margin:8% auto;">
+				<span >
+					<a href="/m/cornerAI_psdReset" style="font-size: 0.26rem;color: #666;">忘记密码？</a>
+					<a href="/m/newYearRegister" style="float:right;font-size: 0.26rem;color: #666;">注册账户</a>
+				</span>
+			</div>
+            <div style="margin: 0.65rem auto 0.4rem;width:70%; height: 0.8rem;">
+				<input id="btn_go" style="width: 100%; height: 100%; background: #4ab7fc; color: #fff; font-size: 0.32rem;border: 0;border-radius: 0.08rem;" type="button" value="登录" onclick="cornerAi_save()"/>
+			</div>
+		</div>
+    <span style="display: block;color: #999999;width: 100%;text-align: center">北京谛听机器人科技有限公司</span>
+    <div id="tishi" style="position: absolute;bottom: 1%; width: 40%;height: 40px;background: #6f6f6f;border-radius: 20px;position: absolute;bottom: 10%;left: 30%;line-height: 40px;text-align: center;color: white;display: none;font-size: 14px;">用户名或密码有误</div>
+</div>
+{% endblock %}

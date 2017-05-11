@@ -1,0 +1,181 @@
+{% extends "web/phone/layout_phone.html" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/lib/iconfont.css{{ _suffix_ }}" />
+<link rel="stylesheet" type="text/css" href="/static/css/phone/login_phoneStyle.css{{ _suffix_ }}"/>
+<script type="text/javascript" src="/static/js/register.js{{ _suffix_ }}"></script>
+<style>
+    ._input{
+        border: 0;
+    }
+</style>
+<script type="text/javascript">
+    window.onload = function () {
+        textCode0( $('.code_send0'));
+        // 然后调用getParameter 方法:
+        var temp = getParameter("yaoqingma");
+        $('#InvitationR').val(temp);
+        if( $('#InvitationR').val()!=""){
+            $('#InvitationK').css("display","block")
+        }else {
+            $('#InvitationK').css("display","none")
+        }
+
+    }
+</script>
+{% endblock %}
+{% block mainnofooter %}
+<div>
+
+    <header class="header1" >
+        <!--<a href="/m/login" style="display: block;position: absolute; left: 0.1rem;font-size: 0.22rem;padding: 0.1rem 0.05rem;color: #fff;">登录</a>-->
+        活动申请报名
+    </header>
+        <div>
+            <img src="/static/images/phone/register_phoneTwo_resdit.jpg" style="width: 6.4rem">
+        </div>
+
+        <div style="margin-top: 0.1rem;">
+            <a style="font-size: 0.2rem;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>谛听机器人</strong></a>
+        </div>
+        <div style="margin-top: 0.1rem; margin-bottom: 0.1rem">
+            <a style="font-size: 0.1rem">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017/2/21至2017/2/28</a>
+        </div>
+        <hr/>
+
+
+    <div class="reg_input black_reg" style="margin-top: 0.1rem;" >
+
+
+            <!--<div class="_input" style="margin: auto">-->
+                <!--<span class="i_W">姓名:</span>-->
+                <!--<input style="color: black" type="text" placeholder="请输入姓名" name="NAME" id="name" value="" required="required"-->
+                       <!--maxlength="11" onblur="oPhonetest()">-->
+                <!--<i class="phone_i">请输入正确的姓名</i>-->
+            <!--</div>-->
+
+
+            <!--<div class="_input" style="margin: auto">-->
+                <!--<span class="i_W">手机号:</span>-->
+                <!--<input style="color: black" type="text" placeholder="请输入手机号" name="USERNAME" id="phone" value="" required="required"-->
+                       <!--maxlength="11" onblur="oPhonetest()">-->
+                <!--<i class="phone_i">请输入正确手机号</i>-->
+            <!--</div>-->
+
+            <!--<div style="margin: 0.65rem auto 0.4rem;width: 6.4rem; height: 0.8rem;">-->
+                <!--<input id="btn_reg01"  style=" float:left; width: 3.2rem; height: 100%; background: #EDEDED; color: black; font-size: 0.32rem;border: 0;border-radius: 0.1rem;" type="button" onclick="saveTwo_resdit_cc()" value="注册我的机器人"/>-->
+                <!--<input id="btn_reg0"   style=" float:left; width: 3.2rem; height: 100%; background: #FF7A7B; color: #fff; font-size: 0.32rem;border: 0;border-radius: 0.1rem;" type="button" onclick="saveTwo_resdit()" value="我要报名"/>-->
+            <!--</div>-->
+
+            <div  style="margin: 0.65rem auto 0.4rem;width: 3.3rem; height: 0.8rem;">
+                <input id="btn_reg0"  style="width: 100%; height: 100%; background: #08bec2; color: #fff; font-size: 0.32rem;border: 0;border-radius: 0.1rem;" type="button" onclick="saveTwo_resdit()" value="我要报名"/>
+            </div>
+        </div>
+
+    <div style="height: auto">
+        <div style="margin-top: 0.1rem;">
+            <br/>
+            <a style="font-size: 0.3rem; margin-bottom: 102rem;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>活动介绍</strong></a>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    为了人工智能产业发展，谛听机器人开展机器人有奖培养活动，用户可以借鉴热门行业，或者使用自己的问题和答案，来培养您的机器人，我们将以机器人价值的百分之十作为奖励发放给您，当然了，除了奖励之外，您也可以通过官方交易群，寻找其他适合使用的用户，将您培养好的机器人出售，让您的劳动获得更高的价值。
+
+                </p>
+                <br/>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    二月份的尾巴，是小谛做活动，三月份的前奏，我们发奖金
+                    为了人工智能产业发展，谛听机器人开展机器人有奖培养活动，用户可以借鉴热门行业，或者使用自己的问题和答案，来培养您的机器人，我们将以机器人价值的百分之十作为奖励发放给您，当然了，除了奖励之外，您也可以通过官方交易群，寻找其他适合使用的用户，将您培养好的机器人出售，让您的劳动获得更高的价值。
+                </p>
+                <br/>
+                <a style="font-size: 0.3rem; margin-bottom: 102rem;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong> 活动内容</strong></a>
+
+                <br/>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    2017年2月20日-2月28日，谛听机器人对新用户的机器人进行价值评估，当机器人的价值≥500，活动期间前十名达到要求的用户给予机器人价值百分之十的奖励。（奖金最高可得1000元）
+                </p>
+
+                <br/>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    影响机器人价值的因素：知识库的知识量，知识库的调用次数，机器人粉丝数，机器人回答问题的正确率。
+                    （机器人知识库是根据特定行业建设的，比如“保险行业”，“医生”，“老师”，“化妆品 品牌“；机器人价值提升可通过丰富知识库问答数量，知识类别，满足来咨询的用户，可以满足的用户越多，关注您的用户越多，价值也会随之水涨船高；不能随便填写没有意义的知识库。总的来说，就是建立自己机器人的知识库，并让人关注并使用自己的机器人，知识库的正确率也必须保证，才能提升自己机器人的价值。）
+                </p>
+
+                <br/>
+                <a style="font-size: 0.3rem; margin-bottom: 102rem;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>参与方式：</strong></a>
+
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    1.报名：在网页（http://www.ditingai.com/m/register_phoneTwo_resdit）或在微信公众号ditingrobo点击“我要报名”参加。
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    2.报名成功后跳转到注册页面。
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    3.在平台「机器人定制」-「知识填写」教机器人知识。
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    4.找到你的用户，让他们使用机器人，可在使用中不断完善你的机器人知识库。
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    5.工作人员在活动结束后核算并发放奖金。（获奖用户机器价值≥500元）
+                </p>
+                <br/>
+                <a style="font-size: 0.3rem; margin-bottom: 102rem;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>常见问题：</strong></a>
+
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    1.没有机器人怎么办？
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    答：登录谛听机器人开放平台（http://www.ditingai.com/m/registerTwo）注册就可以获得一个问答机器人。
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    2.我可以参加吗？
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    答：活动时间内，在谛听机器人开放平台注册的用户即可参加
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    3.注册你们平台以后怎么操作？
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    答：只要给机器人添加问题和答案，就能让你的机器人按照你添加的问题答案进行回答。
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    4.你们支持多问一答吗？
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    答：支持的。比如“你们公司在哪里”“你们在哪里”“你公司在哪里”“贵公司在哪里”，这些我们机器人都认为是一个意思，只要添加其中一个问题就行。
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    5.你们支持上下文处理吗？
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    答：支持的。
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    6.我可以批量导入知识吗？
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    答：支持的。
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    7.你们机器人能用到哪里？
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    答：个人微信号（需要从我们合作伙伴那里获得一个程序）、微信公众号、网站；还可以通过我们API接入安卓客户端和硬件机器人。。
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    8.你们平台怎么收费的？
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    答：目前免费。
+                </p>
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    9.如何确定参与资格？
+                <p style="padding-left: 0.2rem; padding-right: 0.2rem; letter-spacing:2px; font-size: 15px; line-height:20px; text-indent: 2em;">
+                    答：所有参与人员必须在这里报名。随后我们工作人员会电话联系报名人员确认参赛资格。没有在这里报名或者电话联系后确认不具备资格的，都不能参加最终测评。
+                </p>
+                <br/><br/><br/>
+        </div>
+    </div>
+</div>
+<!--=============================================================================-->
+
+{% endblock %}

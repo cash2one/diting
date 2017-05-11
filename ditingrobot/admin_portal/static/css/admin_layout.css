@@ -1,0 +1,104 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	background: rgb(238,243,250);
+}
+li,ul{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	background: black;
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+.top{
+	height: 80px;
+	width: 100%;
+	background: white;
+	position: relative;
+}
+#topUl{
+	position: absolute;
+	right: 60px;
+	top:20px;
+	height: 42px;
+	width: 120px;
+	overflow: hidden;
+	background: white;
+	z-index: 99;
+}
+.topLi img{
+	float: left;
+	height: 36px;
+	width: 36px;
+	border: none;
+	border-radius: 100%;
+}
+.topLi b{
+	float: right;
+	font-size: 12px;
+}
+.topLi{
+	height: 44px;
+	line-height: 42px;
+	padding: 4px 5px;
+	cursor: pointer;
+}
+
+.nav{
+	height: 100%;
+	width: 180px;
+	position: absolute;
+	left: 10px;
+	top: 0;
+	z-index: 99;
+	background: rgb(50,50,50);
+}
+.navUl{
+	background: rgb(50,50,50);
+	padding-bottom: 140px;
+}
+.navLi{
+	height: 60px;
+	width: 100%;
+	line-height: 60px;
+	border-bottom: 1px solid #999;
+	color: white;
+	line-height: 60px;
+	text-indent: 50px;
+	cursor: pointer;
+}
+#navLi_zsk{
+	height: 60px;
+	overflow: hidden;
+}
+#navLi_ck{
+	height: 60px;
+	overflow: hidden;
+}
+.navUl .navLi_F{
+	background: url(/static/images/admin2.0/logo00.png) no-repeat 10px 14px;
+	background-size: auto 60%;
+	height: 80px;
+}
+.ckLi{
+	height: 40px;
+	line-height: 40px;
+}
+.content{
+	height: 100%;
+	width: 1080px;
+	float: right;
+}
+.wrapContent{
+	min-width: 1300px;
+	height: 520px;
+	width: 1200px;
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.RecruitMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.Recruit">
+        <id column="r_id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="details" property="details" jdbcType="VARCHAR"/>
+        <result column="salary" property="salary" jdbcType="BOOLEAN"/>
+        <result column="skills_required" property="skillsRequired" jdbcType="VARCHAR"/>
+        <result column="work_experience" property="workExperience" jdbcType="VARCHAR"/>
+        <result column="education_requirements" property="educationRequirements" jdbcType="VARCHAR"/>
+        <result column="account_id" property="accountId" jdbcType="INTEGER"/>
+        <result column="company_id" property="companyId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.Recruit">
+        INSERT
+        INTO recruit (name,
+        details,
+        salary,
+        skills_required,
+        work_experience,
+        education_requirements,
+        account_id,
+        company_id
+        )
+        VALUES (#{name},
+        #{details},
+        #{salary},
+        #{skillsRequired},
+        #{workExperience},
+        #{educationRequirements},
+        #{accountId},
+        #{companyId})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM recruit WHERE r_id=#{id}
+    </delete>
+
+    <update id="update" parameterType="com.diting.model.Recruit">
+         UPDATE recruit SET
+         name=#{name},
+         details=#{details},
+         salary=#{salary},
+         skills_required=#{skillsRequired},
+         work_experience= #{workExperience},
+         education_requirements= #{educationRequirements}
+         WHERE r_id=#{id}
+    </update>
+
+</mapper>

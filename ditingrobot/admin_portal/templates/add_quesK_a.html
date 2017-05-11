@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>添加问题弹窗内容</title>
+    <link rel="stylesheet" href="/static/css/quesK-style.css{{ _suffix_ }}"/>
+    <style>
+        .layui-layer-content{
+            background: #fff;
+            padding: 10px;
+            color: #000;
+            min-width: 200px;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <div >
+        <table>
+            <tbody>
+            <tr>
+                <td>问题:</td>
+                <td>
+                    <input type="text" class="" name="question" required="required" id="question" style="width:301px;" placeholder="最多60个汉字" maxlength="60">
+                </td>
+            </tr>
+            <tr>
+                <td>答案:</td>
+                <td>
+                    <textarea class="" placeholder="最多240个汉字" name="answer" required="required" id="answer" style="width: 297px; height: 30px; overflow-y: auto; resize: none;" rows="5" cols="37" maxlength="240"></textarea>
+                </td>
+            </tr>
+            <tr >
+                <td>图片<br>答案:</td>
+                <td>
+                    <form action="/upload/inputImage" name="userForm" id="userForm" method="post" enctype="multipart/form-data">
+                        <div >
+                            <input type="file" accept="image/gif,image/jpeg,image/png" id="inputImage" name="file" multiple  style="width: 253px"/>
+                            <input  type="button" value="确定" onclick="uploadImageAdd()"/>
+                            <div style="width: 140px;height: 76px;">
+                                <img id="img-yuLan" src="/static/images/yuLan.jpg" style="max-width: 140px;max-height: 76px;">
+                                <div style="display: none;"><input id="addImgUrl" type="text" /></div>
+                            </div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            <tr style="display: none">
+                <td>动作:</td>
+                <td>
+                    <div style="border: 1px solid rgb(169, 169, 169);width: 301px;">action_<input type="text" name="action_add" required="required" id="action_add" style="width:240px; outline: none;border:0;" placeholder="可以输入动作指令,例如:点头,跳舞" value="0" maxlength="10"/></div>
+                </td>
+            </tr>
+            <tr>
+                <td>场景:</td>
+                <td>
+                    <input type="text" name="scene" id="add_scene" required="required" maxlength="20" value="" title="场景" style="width:301px;" />
+                </td>
+            </tr>
+            <tr>
+                <td style="display: block;width: 43px;"></td>
+                <td class="btns" align="center">
+                    <a class="btn2" style="margin-left: 40%;">保存</a>
+                    <a class="btn3" style="cursor: pointer;">取消</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
+
+</body>
+<script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/static/js/diting-common.js{{ _suffix_ }}"></script>
+<script src="/static/js/lib/ajaxfileupload.js" type="text/javascript"></script>
+<script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+
+<script type="text/javascript">
+//    $("#action_add").change(function(){
+//        var fdStart = $("#action_add").val().indexOf("action_");
+//        if(fdStart == 0){
+////				表示是以action_开头；
+//            $("#action_add").css("color","green")
+//        }else if(fdStart == -1 || fdStart > 0){
+////				表示不是以action_开头||包含action_但不是开头
+//            $("#action_add").css("color","red")
+//            layer.msg("请以‘action_’为开头的格式填写")
+//        }
+//    });
+
+$('.btn2').click(function(){//保存
+    var question = $("#question").val().replace(/\</g, "&lt").replace(/\>/g,"&gt").replace(/\"/g,"'");
+    var answer = $("#answer").val().replace(/\</g, "&lt").replace(/\>/g,"&gt").replace(/\"/g,"'");
+    var addImgUrl = $('#addImgUrl').val();
+    var actionOption = "action_" + $("#action_add").val();
+    var add_scene = $("#add_scene").val()
+    var knows = {
+        question:question,
+        actionOption:actionOption,
+        answer:answer,
+        img_url:addImgUrl,
+        scene:add_scene
+    };
+    if(question !="" && answer !="" ){
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: '/api/knowledge/admin/save',
+            data: JSON.stringify(knows)
+        }).done(function (data) {
+            console.log(data)
+                layer.msg(data.message, {time:1000,icon: 6},function(){
+                    //关闭后的操作
+//                    parent.window.location.reload(false);
+                })
+
+
+        }).fail(function (data) {
+            console.log(data);
+            var message=JSON.parse(data.responseText).message;
+            layer.msg(message, {icon: 5})
+        });
+    }else {
+        layer.msg("问题和答案都是必填项哦！", {icon: 5})
+    }
+});
+
+
+    $('.btn3').click(function () {
+//			parent.window.location.reload(false);
+//			parent.history.go(0);//取消键刷新页面
+
+    })
+</script>
+
+</html>

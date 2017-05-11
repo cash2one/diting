@@ -1,0 +1,7 @@
+flask-cors
+tornado
+gunicorn
+redis
+requests
+pycrypto
+qiniu

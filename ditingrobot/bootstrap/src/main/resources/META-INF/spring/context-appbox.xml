@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <import resource="classpath*:META-INF/spring/context-db.xml"/>
+    <import resource="classpath*:META-INF/spring/context-mongo.xml"/>
+    <import resource="classpath*:META-INF/spring/context-rest.xml"/>
+    <import resource="classpath*:META-INF/spring/context-misc.xml"/>
+    <import resource="classpath*:META-INF/spring/context-notification.xml"/>
+    <import resource="classpath*:META-INF/spring/context-service.xml"/>
+    <import resource="classpath*:META-INF/spring/context-semantic-db.xml"/>
+    <import resource="classpath*:META-INF/spring/context-semantic-misc.xml"/>
+    <import resource="classpath*:META-INF/spring/context-semantic-rest.xml"/>
+    <import resource="classpath*:META-INF/spring/context-semantic-mongo.xml"/>
+    <import resource="classpath*:META-INF/spring/context-semantic-service.xml"/>
+    <import resource="classpath*:META-INF/spring/context-internal-db.xml"/>
+    <import resource="classpath*:META-INF/spring/context-internal-misc.xml"/>
+    <import resource="classpath*:META-INF/spring/context-internal-rest.xml"/>
+    <import resource="classpath*:META-INF/spring/context-internal-mongo.xml"/>
+    <import resource="classpath*:META-INF/spring/context-internal-service.xml"/>
+    <import resource="classpath*:META-INF/spring/context-external-db.xml"/>
+    <import resource="classpath*:META-INF/spring/context-external-misc.xml"/>
+    <import resource="classpath*:META-INF/spring/context-external-rest.xml"/>
+    <import resource="classpath*:META-INF/spring/context-external-mongo.xml"/>
+    <import resource="classpath*:META-INF/spring/context-external-service.xml"/>
+    <import resource="classpath*:META-INF/spring/context-segmentation-db.xml"/>
+    <import resource="classpath*:META-INF/spring/context-segmentation-misc.xml"/>
+    <import resource="classpath*:META-INF/spring/context-segmentation-rest.xml"/>
+    <import resource="classpath*:META-INF/spring/context-segmentation-mongo.xml"/>
+    <import resource="classpath*:META-INF/spring/context-segmentation-service.xml"/>
+
+</beans>

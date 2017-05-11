@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>添加同义词替换弹窗内容</title>
+
+		<link rel="stylesheet" href="/static/css/diting1.0/pc/quesK-style.css{{ _suffix_ }}" />
+	</head>
+	<body>
+		<form >
+			<div style="height: 192px">
+				<table>
+					<tbody>
+						<tr>
+							<td><span style="width:80px;text-align: center;padding-top: 1px;display: block;">被替换词:</span></td>
+							<td>
+								<textarea  name="interchange" required="required" id="interchange"  placeholder="(被替换词不能为空，可以添加多个被替换词，每个被替换词之间以“；”号隔开)" style="width:94%; height: 130px; overflow-y: auto; resize: none;border:1px solid #fafafa;line-height: 30px;font-size: 14px;outline: none;    margin: 5px 0;" maxlength="400"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td><span style="width:80px;text-align: center;padding-top: 1px;display: block;">标准词:</span></td>
+							<td>
+								<input type="text"  name="baseWord" required="required" id="baseWord"  placeholder="(标准词最好不要比替换词长！)" style="width:95%;border:1px solid #fafafa;height: 40px;line-height: 40px;font-size: 14px;outline: none;" maxlength="60"/>
+							</td>
+						</tr>
+						<tr>
+							<td ></td>
+							<td class="btns" align="center">
+								<a class="btn3">取消</a>
+								<a class="btn2">保存</a>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+		</form>
+	</body>
+	<script type="text/javascript" src="/static/js/lib/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript" src="/static/plugs/layer-v2.4/layer/layer.js"></script> <!--弹框插件-->
+	<script type="text/javascript">
+		$('.btn2').click(function(){ //保存
+			var word_old = $("#interchange").val();
+			var word_new = $("#baseWord").val();
+			var knowss = {
+				word_old:word_old,
+				word_new:word_new
+			};
+//			if(word_old !="" && word_new !="" && word_old.length >= word_new.length){
+			if(word_old !="" && word_new !=""){
+				$.ajax({
+					type: "POST",
+					contentType: "application/json",
+					url: '/api/customersynonym/save',
+					data: JSON.stringify(knowss)
+				}).done(function (data) {
+					layer.msg(data.message, {icon: 6}, function(){
+						//关闭后的操作
+						parent.window.location.reload(false);
+					});
+				}).fail(function (data) {
+					console.log(data);
+					var message=JSON.parse(data.responseText).message;
+					layer.msg(message, {icon: 5})
+				});
+
+			}else {
+				layer.msg("标准词和替换词不能为空！", {icon: 5})
+			}
+		});
+		$('.btn3').click(function(){
+			parent.window.location.reload(false);
+		})
+	</script>
+
+</html>

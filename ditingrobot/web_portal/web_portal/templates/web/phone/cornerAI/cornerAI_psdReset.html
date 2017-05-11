@@ -1,0 +1,171 @@
+{% extends "web/phone/cornerAI/layout_phone.html" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/lib/iconfont.css{{ _suffix_ }}" />
+    <style>
+    html,body{
+        height: 100%;
+        overflow: hidden;
+    }
+    input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; }
+        .binding_box{
+	width:6.40rem;
+	margin: 0 auto;
+	padding: 0.6rem 0;
+}
+.binding_a{
+	width:5.8rem;
+	margin: 0.10rem auto;
+
+}
+.binding_a a{
+	font-size: 0.22rem;
+	padding: 0.10rem 0.20rem;
+	display: block;
+	float: left;
+}
+._input{
+	width: 80%;
+	height: 36px;
+	margin:0 auto;
+	color: #cacccd;
+	position: relative;
+	margin-bottom: 20px;
+    border-bottom: 1px solid #f3f2f2;
+}
+._input span{
+	margin-left: 0.01rem;
+	font-weight: 900;
+	color: #fff;
+}
+._input .i_S{
+	color: #757371;
+	font-size: 0.26rem;
+	margin-left: 0.11rem;
+}
+._input .i_W{
+	font-size: 0.26rem;
+	margin-left: 0.11rem;
+	color: #ccc;
+}
+
+.black_reg ._input input[type=text],.black_reg ._input input[type=password]{
+	color: #fff;
+}
+._input input{
+	width: 4.3rem;
+	height: 80%;
+	border: none;
+	font-size: 14px;
+	background: none;
+	margin-left: 15%;
+	color: black;
+    margin-top: 1%;
+}
+
+._input ._input3{
+	width: 2.7rem;
+	left: 50px;
+}
+.reg_input .code_send0{
+	width: 1.5rem;
+	height: 60%;
+	font-size: 0.22rem;
+	border-radius: 5px;
+	background: #32ccfe;
+	cursor: pointer;
+	color: #fff;
+}
+.reg_input ._send {
+	color: #fff;
+	width: 30%;
+	height: 0.45rem;
+	border-radius: 0.225rem;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.reg_input ._send_disable{
+	color: #fff;
+	width: 1.5rem;
+	height: 0.45rem;
+	float: right;
+	border-radius: 0.225rem;
+}
+.protocol{
+	margin-left: 0.20rem;
+	font-size: 0.2rem;
+}
+.pwd_i,.pwd2_i,.phone_i,.txcode_i{
+	display: none;
+	line-height: 0.2rem;
+	color: red;
+	font-style: inherit;
+	font-size: 0.2rem;
+	text-align: center;
+}
+
+    .commominput{
+
+    }
+    </style>
+<script type="text/javascript" src="/static/js/loveRegister.js{{ _suffix_ }}"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        $('.code_send0').val(textCode0())
+        //动态改变页面宽度
+        document.documentElement.style.fontSize=document.documentElement.clientWidth/6.4+"px";
+        window.addEventListener("resize",fn,false);
+        function fn(){
+            document.documentElement.style.fontSize=document.documentElement.clientWidth/6.4+"px";
+        };
+        $("#back").click(function(){
+            window.history.back();
+        })
+
+    }
+             function tishi() {
+                $("#tishi").css("display","block");
+                setTimeout(function () {
+                    $("#tishi").css("display","none");
+                },2000)
+            }
+</script>
+{% endblock %}
+{% block mainnofooter %}
+    <div style="color: #999999;height: 44px;background: #333333;position: fixed;top: 0;left: 0;width: 100%">
+        <button id="back" style="border: none;height: 100%;width: 30px;position: absolute;left:0; background: url(/static/images/phone/loveback.png) no-repeat 5px 50%;background-size: 100%"></button>
+        <span style="display: block;height: 100%;line-height: 44px;font-size: 18px;text-align: center;">忘记密码</span>
+    </div>
+<div>
+        <div class="reg_input" style="width: 100%;margin-top: 60px">
+            <div class="_input" style="background:  url(/static/images/phone/shouji00.png) -4px 40% no-repeat;background-size: 10% 85%;">
+                <input style="width: 55%;color: black" type="text" placeholder="手机号码" name="USERNAME" id="phone" value="" required="required" maxlength="11" onblur="oPhonetest()">
+                <input style="float: right;color: #32ccfe;border-radius: 5px;margin-top:2%;margin-left: 0;" value="发送验证码" type="button" id="btnCode" class="_send" onclick="code_if_change();"/>
+                <i class="phone_i">请输入正确手机号</i>
+            </div>
+            <div class="_input" style="background:  url(/static/images/phone/yanzhengma01.png) 0px 40% no-repeat;background-size: 7% 74%;">
+                <input type="text" class="_input3" placeholder="校正码" value="" name="txcode" id="txcode"required="required" maxlength="4">
+				<input style="float: right;margin: 0.07rem 0.05rem 0 0;" type="button" id="btnTxCode" class="code_send0" onclick="textCode0(this);"/>
+                <i class="txcode_i">请先正确填写校正码</i>
+            </div>
+            <div class="_input" style="background:  url(/static/images/phone/yanzhengma00.png) -3px 40% no-repeat;background-size: 10% 80%;">
+                <input type="text" class="_input3" placeholder="验证码" value="" name="telcode" id="telcode" required="required" maxlength="20" >
+            </div>
+            <div class="_input password" style="background:  url(/static/images/phone/suo00.png) -4px 40% no-repeat;background-size: 10% 80%;">
+                <input type="password" placeholder="6~16位密码,区分大小写" name="PASSWORD" value="" id="pwd" required="required"
+                       maxlength="16">
+                <i class="pwd_i" >6~16位密码,区分大小写</i>
+            </div>
+            <div class="_input" style="background:  url(/static/images/phone/suo00.png) -4px 40% no-repeat;background-size: 10% 82%; ">
+                <input type="password" placeholder="两次密码需要一致" name="requrePassword" value="" id="pwd2" required="required"
+                       maxlength="16">
+                <i class="pwd2_i">两次密码需要一致</i>
+            </div>
+            <br/>
+            <div  style="margin: 20px auto;width:80%; height: 50px;">
+                <input id="btn_reg0" style="height: 46px;width: 100%;display: block; background: #32ccfe; border: none; color: white;line-height: 50px;font-size: 26px;margin: 40px auto;border-radius: 5px;font-size: 16px;"  type="button" onclick="save02()" value="确定"/>
+            </div>
+        </div>
+        <div id="tishi" style="width: 40%;height: 40px;background: #6f6f6f;border-radius: 20px;position: absolute;bottom: 10%;left: 30%;line-height: 40px;text-align: center;color: white;display: none;font-size: 14px;">信息填写有误</div>
+</div>
+
+{% endblock %}

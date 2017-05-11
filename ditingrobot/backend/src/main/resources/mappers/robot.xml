@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diting.dao.RobotMapper">
+    <resultMap id="defaultResultMap" type="com.diting.model.Robot">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner" property="owner" jdbcType="INTEGER"/>
+        <result column="owner_type" property="ownerType" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="welcomes" property="welcomes" jdbcType="VARCHAR"/>
+        <result column="token" property="token" jdbcType="VARCHAR"/>
+        <result column="unique_id" property="uniqueId" jdbcType="VARCHAR"/>
+        <result column="short_domain_name" property="shortDomainName" jdbcType="VARCHAR"/>
+        <result column="avatar_url" property="avatarUrl" jdbcType="VARCHAR"/>
+        <result column="enable" property="enable" jdbcType="BOOLEAN"/>
+        <result column="invoke_enable" property="invokeEnable" jdbcType="BOOLEAN"/>
+        <result column="profile" property="profile" jdbcType="VARCHAR"/>
+        <result column="answer1" property="invalidAnswer1" jdbcType="VARCHAR"/>
+        <result column="answer2" property="invalidAnswer2" jdbcType="VARCHAR"/>
+        <result column="answer3" property="invalidAnswer3" jdbcType="VARCHAR"/>
+        <result column="answer4" property="invalidAnswer4" jdbcType="VARCHAR"/>
+        <result column="answer5" property="invalidAnswer5" jdbcType="VARCHAR"/>
+        <result column="answer6" property="invalidAnswer6" jdbcType="VARCHAR"/>
+        <result column="answer7" property="invalidAnswer7" jdbcType="VARCHAR"/>
+        <result column="answer8" property="invalidAnswer8" jdbcType="VARCHAR"/>
+        <result column="answer9" property="invalidAnswer9" jdbcType="VARCHAR"/>
+        <result column="answer10" property="invalidAnswer10" jdbcType="VARCHAR"/>
+        <result column="account_id" property="accountId" jdbcType="INTEGER"/>
+        <result column="company_id" property="companyId" jdbcType="INTEGER"/>
+        <result column="charge_mode" property="chargeMode" jdbcType="VARCHAR"/>
+        <result column="intel_calendar" property="intel_calendar" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.diting.model.Robot">
+     INSERT
+        INTO robot (
+                      owner,
+                      owner_type,
+                      deleted,
+                      created_by,
+                      created_time,
+                      update_by,
+                      update_time,
+                      name,
+                      welcomes,
+                      token,
+                      unique_id,
+                      short_domain_name,
+                      avatar_url,
+                      enable,
+                      invoke_enable,
+                      profile,
+                      answer1,
+                      answer2,
+                      answer3,
+                      answer4,
+                      answer5,
+                      answer6,
+                      answer7,
+                      answer8,
+                      answer9,
+                      answer10,
+                      account_id,
+                      company_id,
+                      charge_mode,
+                      intel_calendar
+                    )
+        VALUES (#{owner},
+                  #{ownerType},
+                  #{deleted},
+                  #{createdBy},
+                  #{createdTime},
+                  #{updatedBy},
+                  #{updatedTime},
+                  #{name},
+                  #{welcomes},
+                  #{token},
+                  #{uniqueId},
+                  #{shortDomainName},
+                  #{avatarUrl},
+                  #{enable},
+                  #{invokeEnable},
+                  #{profile},
+                  #{invalidAnswer1},
+                  #{invalidAnswer2},
+                  #{invalidAnswer3},
+                  #{invalidAnswer4},
+                  #{invalidAnswer5},
+                  #{invalidAnswer6},
+                  #{invalidAnswer7},
+                  #{invalidAnswer8},
+                  #{invalidAnswer9},
+                  #{invalidAnswer10},
+                  #{accountId},
+                  #{companyId},
+                  #{chargeMode},
+                  #{intel_calendar})
+    </insert>
+
+    <update id="update" parameterType="com.diting.model.Robot">
+        UPDATE
+          robot
+        SET answer10 = #{invalidAnswer10}
+        <if test="deleted!=null and deleted!=''">
+           , deleted = #{deleted}
+        </if>
+        <if test="updatedBy!=null and updatedBy!=''">
+            , update_by = #{updatedBy}
+        </if>
+        <if test="updatedTime!=null and updatedTime!=''">
+            , update_time = #{updatedTime}
+        </if>
+
+        <if test="shortDomainName!=null and shortDomainName!=''">
+            , short_domain_name = #{shortDomainName}
+        </if>
+
+        <if test="name!=null and name!=''">
+            ,  name = #{name}
+        </if>
+
+        <if test="welcomes!=null and welcomes!=''">
+            , welcomes = #{welcomes}
+        </if>
+
+        <if test="avatarUrl!=null and avatarUrl!=''">
+            , avatar_url = #{avatarUrl}
+        </if>
+
+        <if test="enable!=null and( enable==0 or enable== 1)">
+            ,  enable = #{enable}
+        </if>
+
+        <if test="invokeEnable!=null and invokeEnable!=''">
+            , invoke_enable = #{invokeEnable}
+        </if>
+
+        <if test="profile!=null and profile!=''">
+            ,  profile = #{profile}
+        </if>
+
+        <if test="invalidAnswer1!=null and invalidAnswer1!=''">
+            , answer1 = #{invalidAnswer1}
+        </if>
+
+        <if test="invalidAnswer2!=null and invalidAnswer2!=''">
+            , answer2 = #{invalidAnswer2}
+        </if>
+
+        <if test="invalidAnswer3!=null and invalidAnswer3!=''">
+            , answer3 = #{invalidAnswer3}
+        </if>
+
+        <if test="invalidAnswer4!=null and invalidAnswer4!=''">
+            , answer4 = #{invalidAnswer4}
+        </if>
+
+        <if test="invalidAnswer5!=null and invalidAnswer5!=''">
+            , answer5 = #{invalidAnswer5}
+        </if>
+
+        <if test="invalidAnswer6!=null and invalidAnswer6!=''">
+            ,  answer6 = #{invalidAnswer6}
+        </if>
+
+        <if test="invalidAnswer7!=null and invalidAnswer7!=''">
+            , answer7 = #{invalidAnswer7}
+        </if>
+
+        <if test="invalidAnswer8!=null and invalidAnswer8!=''">
+            ,  answer8 = #{invalidAnswer8}
+        </if>
+
+        <if test="invalidAnswer9!=null and invalidAnswer9!=''">
+            , answer9 = #{invalidAnswer9}
+        </if>
+
+        <if test="chargeMode!=null and chargeMode!=''">
+            , charge_mode = #{chargeMode}
+        </if>
+        WHERE id = #{id}
+    </update>
+
+    <select id="get" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+          *
+        FROM
+          robot
+        WHERE id = #{robotId}
+        LIMIT 1
+    </select>
+
+    <select id="getByUserId" resultMap="defaultResultMap" parameterType="java.lang.Integer">
+        SELECT
+        *
+        FROM
+        robot
+        WHERE account_id = #{userId}
+        LIMIT 1
+    </select>
+
+    <select id="getByUniqueId" resultMap="defaultResultMap" parameterType="java.lang.String">
+        SELECT
+        *
+        FROM
+        robot
+        WHERE unique_id = #{unique_id}
+        LIMIT 1
+    </select>
+
+    <select id="getByDomainName" resultMap="defaultResultMap" parameterType="java.lang.String">
+        SELECT
+        *
+        FROM
+        robot
+        WHERE short_domain_name = #{domainName}
+        LIMIT 1
+    </select>
+
+    <select id="checkNameExists" resultType="boolean">
+        select exists(
+            select
+              1
+            from robot
+                where
+                    name = #{name}
+                    <if test="robotId != null">
+                        and id != #{robotId}
+                    </if>
+        )
+    </select>
+
+    <select id="checkDomainNameExists" resultType="boolean">
+        select exists(
+        select
+        1
+        from robot
+        where
+        short_domain_name = #{domainName}
+        <if test="robotId != null">
+            and id != #{robotId}
+        </if>
+        )
+    </select>
+
+    <select id="getByNameOrUniqueId" resultMap="defaultResultMap">
+        select
+        *
+        from robot
+        WHERE account_id IN (SELECT id FROM account WHERE claim_enable=1)
+        <if test="keyWord!=null and keyWord!=''">
+           AND  name LIKE CONCAT(CONCAT('%', #{keyWord}),'%')
+           OR profile LIKE CONCAT(CONCAT('%', #{keyWord}),'%')
+           OR created_by LIKE CONCAT(CONCAT('%', #{keyWord}),'%')
+        </if>
+        <if test="companyId != null">
+            AND company_id = #{companyId}
+        </if>
+    </select>
+
+    <select  id="getClaimRobots" resultMap="defaultResultMap">
+        SELECT
+          robot.*
+        FROM
+          robot,
+          account
+          JOIN
+            (SELECT
+              ROUND(RAND() *
+                (SELECT
+                  MAX(id)
+                FROM
+                  robot)) AS id) AS tmp
+        WHERE robot.id >= tmp.id
+          AND robot.account_id = account.id
+          AND account.claim_enable = 0
+        ORDER BY robot.id ASC
+        LIMIT 20
+    </select>
+
+    <update id="updateIntelCalendar" parameterType="java.lang.Integer">
+        UPDATE
+        robot
+        SET
+        intel_calendar = 1
+        WHERE id = #{robotId}
+    </update>
+    <select id="getByName" resultMap="defaultResultMap">
+        select
+        *
+        from robot
+        WHERE account_id IN (SELECT id FROM account WHERE claim_enable=1)
+            AND  name =#{name}
+    </select>
+
+    <select id="getByRobotName" resultMap="defaultResultMap">
+       select * from robot where name like CONCAT('%', #{name} ,'%') LIMIT 10
+    </select>
+
+    <select id="getTelByRobotName" resultMap="defaultResultMap">
+        select user_name name from account a where a.id = (
+
+        select r.account_id from robot r where r.name = #{name}
+
+        )
+    </select>
+
+
+    <select id="getTelByCompanyName" resultMap="defaultResultMap">
+        select user_name name from account a where a.company_id = (
+
+        select c.id from company c where c.name = #{name}
+
+        )
+    </select>
+</mapper>
